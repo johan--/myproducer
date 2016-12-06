@@ -111,6 +111,10 @@ function postController($http, AuthService){
     .then(function(data){
       vm.currentUser = data.data.user
       console.log(data.data.user)
+      $http.get('/api/productions')
+        .success(function(data){
+          vm.currentUser.productions = data
+        })
   })
   vm.addProduction = function(){
     var newProduction = {

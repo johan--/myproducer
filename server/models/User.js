@@ -6,10 +6,11 @@ var passportLocalMongoose = require('passport-local-mongoose')
 var User = new Schema({
   username: String,
   password: String,
+  role: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}]
 })
 
 User.plugin(passportLocalMongoose)
 
 
-module.exports = mongoose.model('users', User)
+module.exports = mongoose.model('User', User)

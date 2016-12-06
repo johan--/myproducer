@@ -7,4 +7,4 @@ var Production = new Schema({
   name: String
 })
 
-module.exports = mongoose.model('productions', Production)
+module.exports = mongoose.model('Production', Production)

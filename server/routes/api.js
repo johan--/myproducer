@@ -68,17 +68,13 @@ router.get('/status', function(req, res) {
 
 router.get('/productions', function(req, res){
   // need to find it by the user
-  Production.find({}, function(err, data){
+  User.findById(req.user._id).populate("productions").exec(function(err, user){
     if(err) return console.log(err)
-    res.json(data)
+    res.json(user.productions)
+    console.log("api/productions", data)
   })
 })
 
-router.get('/myproductions', function(req, res){
-  User.findById(req.user._id).populate("productions").exec(function(err, user){
-    res.json(user.productions)
-  })
-})
 
 router.post('/productions', function(req, res){
   // need to find it by the user
