@@ -1,11 +1,13 @@
 <div>
   <h1>Production View</h1>
-  <h2>{{ productionCtrl.title }}</h2>
 </div>
 
 <div class="production-view col-sm-5">
   <div>
-    <h3>Production Name: {{ productionCtrl.production.name || "Name Not Found" }}</h3>
+    <h3>Production Name</h3>
+  </div>
+  <div>
+    {{ productionCtrl.production.name || "Name Not Found" }}
   </div>
 </div>
 

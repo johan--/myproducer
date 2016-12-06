@@ -132,9 +132,10 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   }
 }
 
+// PRODUCTION CONTROLLER
+
 function productionController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
-  vm.title = "Production Controller Here"
 
   ProductionFactory.show($stateParams.id)
     .success(function(production) {
