@@ -74,11 +74,11 @@ router.get('/productions', function(req, res){
   })
 })
 
-// router.get('/myproductions', function(req, res){
-//   User.findById(req.user._id).populate("productions").exec(function(err, user){
-//     res.json(user.productions)
-//   })
-// })
+router.get('/myproductions', function(req, res){
+  User.findById(req.user._id).populate("productions").exec(function(err, user){
+    res.json(user.productions)
+  })
+})
 
 router.post('/productions', function(req, res){
   // need to find it by the user

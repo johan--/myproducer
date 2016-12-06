@@ -46,7 +46,7 @@ function loginController($state, AuthService) {
       .catch(function () {
         console.log("Whoops...")
         vm.error = true
-        vm.errorMessage = "Invalid username and/or password"
+        vm.errorMessage = "Invalid email and/or password"
         vm.disabled = false
         vm.loginForm = {}
       })
@@ -95,13 +95,16 @@ function registerController($state, AuthService) {
         vm.registerForm = {}
       })
   }
+  // vm.login = function() {
+  //   $state.go('login')
+  // }
 }
 
 // POST CONTROLLER:
 
 function postController($http, AuthService){
   var vm = this
-  vm.title = "Post Controller"
+  vm.title = "Post Controller is here"
   vm.currentUser = {}
   vm.currentUser.productions = []
   AuthService.getUserStatus()
@@ -109,15 +112,16 @@ function postController($http, AuthService){
       vm.currentUser = data.data.user
       console.log(data.data.user)
   })
-  $http.get('/api/productions')
-    .success(function(data){
-      vm.currentUser.productions = data
-    })
   vm.addProduction = function(){
-    $http.post('/api/productions', vm.newProduction)
+    var newProduction = {
+      by_ : vm.currentUser,
+      name: vm.newProduction.name
+    }
+    $http.post('/api/productions', newProduction)
       .success(function(data){
         console.log(vm.currentUser)
         vm.currentUser.productions.push(data)
+        vm.newProduction = {}
       })
   }
 }

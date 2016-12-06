@@ -3,8 +3,9 @@
   <div ng-show="registerCtrl.error" class="alert alert-danger">{{registerCtrl.errorMessage}}</div>
   <form class="form" ng-submit="registerCtrl.register()">
     <div class="form-group">
-      <label>Username</label>
-      <input type="text" class="form-control" name="username" ng-model="registerCtrl.registerForm.username" required>
+      <label>Email</label>
+      <input type="text" class="form-control" name="email"
+       ng-model="registerCtrl.registerForm.username" required>
     </div>
     <div class="form-group">
       <label>Password</label>

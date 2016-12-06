@@ -1,10 +1,15 @@
-<div class="col-md-4">
-  <h1>Login</h1>
+<div class="col-sm-6">
+  <h1>myproducer.io</h1>
+  <div>
+    <button class="btn btn-default" ng-click="loginCtrl.register()">Sign Up</button>
+  </div>
+</div>
+<div class="col-sm-6">
   <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
   <form class="form" ng-submit="loginCtrl.login()">
     <div class="form-group">
-      <label>Username</label>
-      <input type="text" class="form-control" name="username" ng-model="loginCtrl.loginForm.username" required>
+      <label>Email</label>
+      <input type="text" class="form-control" name="email" ng-model="loginCtrl.loginForm.username" required>
     </div>
     <div class="form-group">
       <label>Password</label>
@@ -14,7 +19,4 @@
         <button type="submit" class="btn btn-default" ng-disabled="loginCtrl.disabled">Login</button>
       </div>
   </form>
-  <div>
-    <button class="btn btn-default" ng-click="loginCtrl.register()">Sign Up</button>
-  </div>
 </div>

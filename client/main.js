@@ -7,8 +7,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'templates/home.html',
-      restricted: true
+      templateUrl: 'templates/home.html'
     })
     .state('login', {
       url: '/login',
@@ -17,6 +16,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('logout', {
       url: '/logout',
+      templateUrl: 'templates/logout.html',
+      restricted: true,
       controller: 'logoutController'
     })
     .state('register', {

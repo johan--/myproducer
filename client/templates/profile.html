@@ -1,15 +1,28 @@
 <div>
-  <h1>Current User: {{ main.currentUser.username }}</h1>
+  <h1>Current User: {{ postCtrl.currentUser.username }}</h1>
   <h2>{{ postCtrl.title }}</h2>
 </div>
-<div>
-  <form ng-submit="postCtrl.addProduction()">
-      <input ng-model="postCtrl.newProduction.name" type="text" placeholder="Production Name">
-    <button type="submit" name="button">Submit</button>
-  </form>
+
+<div class="production-view col-sm-5">
+  <div>
+    <h3>Productions</h3>
+    <form ng-submit="postCtrl.addProduction()">
+        <input ng-model="postCtrl.newProduction.name" type="text" placeholder="Production Name">
+      <button type="submit" name="button">Submit</button>
+    </form>
+  </div>
+  <div>
+    <ul>
+      <li ng-repeat="production in postCtrl.currentUser.productions">{{ production.name || "Stuff" }}</li>
+    </ul>
+  </div>
 </div>
-<div>
-  <ul>
-    <li ng-repeat="production in postCtrl.currentUser.productions">{{ production.name }}</li>
-  </ul>
+
+<div class="crew-view col-sm-7">
+  <div>
+    <h3>Crew</h3>
+    <ul>
+      <li ng-repeat="crew in postCtrl.currentUser.crew">{{ crew.name }}</li>
+    </ul>
+  </div>
 </div>
