@@ -29,10 +29,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       url: '/one',
       template: '<h1>This is page one!</h1>'
     })
-    .state('two', {
-      url: '/two',
-      template: '<h1>This is page two!</h1>',
-      restricted: true
+    .state('production', {
+      url: '/production/:id',
+      templateUrl: 'templates/production.html',
+      controller: 'productionController as productionCtrl',
+      // restricted: true /*TODO Comment this back in*/
     })
     .state('profile', {
       url: '/profile',

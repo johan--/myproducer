@@ -4,13 +4,15 @@ angular.module('myApp')
   .controller('logoutController', logoutController)
   .controller('registerController', registerController)
   .controller('postController', postController)
+  .controller('productionController', productionController)
 
 
   mainController.$inject = ['$rootScope', '$state', 'AuthService']
   loginController.$inject = ['$state', 'AuthService']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
-  postController.$inject = ['$http', 'AuthService']
+  postController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+  productionController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
 
 function mainController($rootScope, $state, AuthService) {
@@ -102,7 +104,7 @@ function registerController($state, AuthService) {
 
 // POST CONTROLLER:
 
-function postController($http, AuthService){
+function postController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
   vm.title = "Post Controller is here"
   vm.currentUser = {}
@@ -128,4 +130,15 @@ function postController($http, AuthService){
         vm.newProduction = {}
       })
   }
+}
+
+function productionController($http, $stateParams, $state, ProductionFactory, AuthService){
+  var vm = this
+  vm.title = "Production Controller Here"
+
+  ProductionFactory.show($stateParams.id)
+    .success(function(production) {
+      vm.production = production
+      console.log("Production from the Factory", vm.production)
+    })
 }

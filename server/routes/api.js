@@ -1,9 +1,15 @@
+// SETUP
+
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
 
+// MODELS
+
 var User = require('../models/User.js')
 var Production = require('../models/Production.js')
+
+// REGISTER ROUTES
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
@@ -20,6 +26,8 @@ router.post('/register', function(req, res) {
     })
   })
 })
+
+// LOGIN ROUTES
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
@@ -45,12 +53,16 @@ router.post('/login', function(req, res, next) {
   })(req, res, next)
 })
 
+// LOGOUT ROUTES
+
 router.get('/logout', function(req, res) {
   req.logout()
   res.status(200).json({
     status: 'Bye!'
   })
 })
+
+// STATUS ROUTES
 
 router.get('/status', function(req, res) {
   if (!req.isAuthenticated()) {
@@ -64,20 +76,20 @@ router.get('/status', function(req, res) {
   })
 })
 
-// Productions
+// PRODUCTION ROUTES
 
+// get a particular users productions
 router.get('/productions', function(req, res){
-  // need to find it by the user
+  // find it by the user
   User.findById(req.user._id).populate("productions").exec(function(err, user){
     if(err) return console.log(err)
     res.json(user.productions)
-    console.log("api/productions", data)
   })
 })
 
-
+// create a new production
 router.post('/productions', function(req, res){
-  // need to find it by the user
+  // find it by the user
   User.findById(req.user._id, function(err, user){
     if (err) return console.log(err)
     var newProduction = new Production(req.body)
@@ -90,5 +102,13 @@ router.post('/productions', function(req, res){
     })
   })
 })
+
+// see one specific production
+router.get('/productions/:id', function show(req, res){
+    Production.findById(req.params.id).populate('_by').exec(function(err, production) {
+      if(err) return console.log(err)
+      res.json(production)
+    })
+  })
 
 module.exports = router

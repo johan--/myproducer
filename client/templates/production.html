@@ -1,0 +1,19 @@
+<div>
+  <h1>Production View</h1>
+  <h2>{{ productionCtrl.title }}</h2>
+</div>
+
+<div class="production-view col-sm-5">
+  <div>
+    <h3>Production Name: {{ productionCtrl.production.name || "Name Not Found" }}</h3>
+  </div>
+</div>
+
+<div class="crew-view col-sm-7">
+  <div>
+    <h3>Pending Crew</h3>
+    <ul>
+      <li ng-repeat="crew in postCtrl.selectedProduction.pendingCrew">{{ crew.name }}</li>
+    </ul>
+  </div>
+</div>
