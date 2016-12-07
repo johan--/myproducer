@@ -1,9 +1,20 @@
-<div>
-  <h1>Current User: {{ postCtrl.currentUser.username }}</h1>
-  <h2>{{ postCtrl.title }}</h2>
+<div class="navbar">
+  <div class="navleft logo col-xs-2">
+    <img src="" alt="">
+  </div>
+  <div class="navright col-xs-10">
+    <div class="nav-currentuser">
+      <p>Hello, {{ postCtrl.currentUser.username }}</p>
+      <hr>
+    </div>
+    <div class="navigation-tabs">
+      <p><a ui-sref="profile">PROFILE</a> | <a ui-sref="crew-list">CREW LIST</a> | <a ui-sref="productions">PRODUCTIONS</a></p>
+    </div>
+  </div>
 </div>
 
-<div class="production-view col-sm-5">
+<!-- TODO This Div Belongs on the production view -->
+<!-- <div class="production-view col-sm-5">
   <div>
     <h3>Productions</h3>
     <form ng-submit="postCtrl.addProduction()">
@@ -16,13 +27,78 @@
       <li ng-repeat="production in postCtrl.currentUser.productions"><a ng-href="/#/production/{{production._id}}">{{ production.name || "Name Not Found" }}</a></li>
     </ul>
   </div>
+</div> -->
+
+<div class="profile-view col-sm-9">
+  <div="profile-view-content">
+    <div class="profile-view-left col-sm-3">
+      <div class="profile-picture">
+        <img src="" alt="">
+      </div>
+      <div class="profile-name">
+        <h3>{{ postCtrl.currentUser.name || "USER NAME" }}</h3>
+      </div>
+      <form ng-submit="postCtrl.editUser()">
+        <div class="form-group">
+          <label for="userLocation">Location</label>
+          <input ng-model="postCtrl.newUser.location" class="form-control" id="userLocation" placeholder="{{ postCtrl.currentUser.location || 'Location' }}">
+        </div>
+        <div class="form-group">
+          <label for="userTitle">Title</label>
+          <input ng-model="postCtrl.newUser.title" class="form-control" id="userTitle" placeholder="{{ postCtrl.currentUser.title || 'Title' }}">
+        </div>
+        <div class="form-group">
+          <label for="userEmail">Email Address</label>
+          <input ng-model="postCtrl.newUser.username" class="form-control" id="userEmail" placeholder="{{ postCtrl.currentUser.username || 'Email Address' }}">
+        </div>
+        <div class="form-group">
+          <label for="userPhone">Phone Number</label>
+          <input ng-model="postCtrl.newUser.phone" class="form-control" id="userPhone" placeholder="{{ postCtrl.currentUser.phone || 'Phone Number' }}"></input>
+        </div>
+        <div class="form-group">
+          <label for="userWebsite">Website</label>
+          <input ng-model="postCtrl.newUser.website" class="form-control" id="userWebsite" placeholder="{{ postCtrl.currentUser.website || 'Website' }}">
+        </div>
+    </form>
+    </div>
+    <div class="profile-view-right col-sm-9">
+      <div class="profile-bio">
+        <h4>Bio</h4>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+      <div class="profile-skills">
+        <h4>Skills</h4>
+        <hr>
+        <ul>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+        </ul>
+      </div>
+      <div class="profile-equipment">
+        <h4>Equipment</h4>
+        <hr>
+        <ul>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="crew-view col-sm-7">
-  <div>
-    <h3>Crew</h3>
-    <ul>
-      <li ng-repeat="crew in postCtrl.currentUser.crew">{{ crew.name }}</li>
-    </ul>
+<div class="production-quick-view col-sm-3">
+  <div class="productions-pending">
+
+  </div>
+  <div class="productions-current">
+
+  </div>
+  <div class="productions-past">
+
   </div>
 </div>

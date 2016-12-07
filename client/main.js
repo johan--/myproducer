@@ -38,7 +38,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('profile', {
       url: '/profile',
       templateUrl: 'templates/profile.html',
-      restricted: true,
+      // restricted: true, 
       controller: 'postController as postCtrl'
     })
 
