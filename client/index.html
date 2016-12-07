@@ -4,14 +4,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>my producer.io</title>
+  <title>myproducer.io</title>
   <!-- styles -->
   <link rel="stylesheet" href="./css/bootstrap.min.css" media="screen" title="no title">
   <link rel="stylesheet" href="./css/styles.css" media="screen" title="no title">
 </head>
 
   <div class="container" ng-controller="mainController as main">
-    <div ng-show="main.currentUser.username">Welcome: {{ main.currentUser.username }}</div>
+    <div  class="navbar">
+      <div class="navleft logo col-xs-3">
+        <img src="" alt=""><h2>💎myproducer.io</h2>
+      </div>
+      <div class="navright col-xs-9 text-right">
+        <div class="nav-currentuser">
+          <p>Hello, {{ main.currentUser.username }}</p>
+          <hr>
+        </div>
+        <div class="navigation-tabs">
+          <p><a ui-sref="profile">PROFILE</a> | <a ui-sref="crew-list">CREW LIST</a> | <a ui-sref="production-list">PRODUCTIONS</a></p>
+        </div>
+      </div>
+    </div>
     <div ui-view></div>
   </div>
 
