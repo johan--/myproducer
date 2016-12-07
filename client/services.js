@@ -1,4 +1,7 @@
 angular.module('myApp')
+
+// AUTHENTICATION Factory =====================================================
+
   .factory('AuthService',
   ['$q', '$timeout', '$http',
   function ($q, $timeout, $http) {
@@ -118,6 +121,9 @@ angular.module('myApp')
     }
 
 }])
+
+// PRODUCTION RESTFUL FACTORY =================================================
+
 .factory('ProductionFactory', ['$http', ProductionFactory])
 
 function ProductionFactory($http) {
