@@ -142,4 +142,12 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       vm.production = production
       console.log("Production from the Factory", vm.production)
     })
+
+    vm.editProduction = function(){
+      ProductionFactory.update($stateParams.id, vm.newProduction)
+        .success(function(data) {
+          vm.editing = false
+          $state.go('production')
+        })
+    }
 }

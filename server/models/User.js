@@ -6,7 +6,14 @@ var passportLocalMongoose = require('passport-local-mongoose')
 var User = new Schema({
   username: String,
   password: String,
-  role: String,
+  role: [String],
+  equipment: [String],
+  skills: [String],
+  location: String,
+  title: String,
+  phone: Number,
+  website: String,
+  bio: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}]
 })
 

@@ -5,8 +5,7 @@ var Schema = mongoose.Schema
 var Production = new Schema({
   by_: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   name: String,
-  location: String,
-  location2: String,
+  location: [],
   weather: String,
   hospital: String,
   parking: String,
