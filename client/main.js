@@ -25,9 +25,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'templates/register.html',
       controller: 'registerController as registerCtrl'
     })
-    .state('one', {
-      url: '/one',
-      template: '<h1>This is page one!</h1>'
+    .state('crew-list', {
+      url: '/crewlist',
+      templateUrl: 'templates/crewList.html'
     })
     .state('production', {
       url: '/production/:id',
@@ -35,10 +35,15 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'productionController as productionCtrl',
       // restricted: true /*TODO Comment this back in*/
     })
+    .state('production-list', {
+      url: '/productions',
+      templateUrl: 'templates/productionList.html',
+      controller: 'productionController as productionCtrl',
+    })
     .state('profile', {
       url: '/profile',
       templateUrl: 'templates/profile.html',
-      // restricted: true, 
+      // restricted: true,
       controller: 'postController as postCtrl'
     })
 

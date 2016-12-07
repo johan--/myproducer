@@ -2,7 +2,7 @@
   <div class="navleft logo col-xs-2">
     <img src="" alt="">
   </div>
-  <div class="navright col-xs-10">
+  <div class="navright col-xs-10 text-right">
     <div class="nav-currentuser">
       <p>Hello, {{ postCtrl.currentUser.username }}</p>
       <hr>
@@ -29,11 +29,11 @@
   </div>
 </div> -->
 
-<div class="profile-view col-sm-9">
+<div class="profile-view col-sm-8">
   <div="profile-view-content">
     <div class="profile-view-left col-sm-3">
       <div class="profile-picture">
-        <img src="" alt="">
+        <p>PIC</p><img src="" alt="">
       </div>
       <div class="profile-name">
         <h3>{{ postCtrl.currentUser.name || "USER NAME" }}</h3>
@@ -91,14 +91,31 @@
   </div>
 </div>
 
-<div class="production-quick-view col-sm-3">
+<div class="production-quick-view col-sm-4">
   <div class="productions-pending">
-
+    <h4>Pending Productions</h4>
+    <ul>
+      <li>mm/dd/yyyy  <a>Review</a></li>
+      <li>mm/dd/yyyy  <a>Review</a></li>
+      <li>mm/dd/yyyy  <a>Review</a></li>
+    </ul>
   </div>
   <div class="productions-current">
-
+    <h4>Current Productions</h4>
+    <ul>
+      <li>mm/dd/yyyy  <a>View</a></li>
+      <li>mm/dd/yyyy  <a>View</a></li>
+      <li>mm/dd/yyyy  <a>View</a></li>
+    </ul>
   </div>
   <div class="productions-past">
-
+  <div class="productions-past">
+    <h4>Past Productions</h4>
+    <ul>
+      <li>mm/dd/yyyy  <a>View</a></li>
+      <li>mm/dd/yyyy  <a>View</a></li>
+      <li>mm/dd/yyyy  <a>View</a></li>
+      <li>mm/dd/yyyy  <a>View</a></li>
+    </ul>
   </div>
 </div>

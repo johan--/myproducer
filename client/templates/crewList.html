@@ -1,0 +1,62 @@
+<div class="navbar">
+  <div class="navleft logo col-xs-2">
+    <img src="" alt="">
+  </div>
+  <div class="navright col-xs-10 text-right">
+    <div class="nav-currentuser">
+      <p>Hello, {{ postCtrl.currentUser.username }}</p>
+      <hr>
+    </div>
+    <div class="navigation-tabs">
+      <p><a ui-sref="profile">PROFILE</a> | <a ui-sref="crew-list">CREW LIST</a> | <a ui-sref="productions">PRODUCTIONS</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="approved-crew-view col-sm-8">
+  <div class="">
+    <h4>Approved Crew</h4>
+  </div>
+  <div class="list-group">
+    <div class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
+      <div class="row">
+        <div class="col-xs-1 text-left">
+          <p>PIC</p><img ui-sref="" ng-src="">
+        </div>
+        <div class="col-xs-3">
+          <p>Approved Name</p>
+        </div>
+        <div class="col-xs-2">
+          <p>Role</p>
+        </div>
+        <div class="col-xs-3">
+          <p>Location</p>
+        </div>
+        <div class="col-xs-3">
+          <p><button ng-click="" class="btn btn-info">View</button>
+          <button ng-click="" class="btn btn-primary">+ Add To</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="pending-crew-view col-sm-4">
+  <div class="">
+    <h4>Pending Crew</h4>
+  </div>
+  <div class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
+    <div class="row">
+      <div class="col-xs-3 text-left">
+        <p>PIC</p><img ui-sref="" ng-src="">
+      </div>
+      <div class="col-xs-5">
+        <p>Approved Name</p>
+      </div>
+      <div class="col-xs-4">
+        <button ng-click="" class="btn btn-info">Review</button>
+      </div>
+    </div>
+  </div>
+</div>
