@@ -1,0 +1,65 @@
+<div class="navbar">
+  <div class="navleft logo col-xs-2">
+    <img src="" alt="">
+  </div>
+  <div class="navright col-xs-10 text-right">
+    <div class="nav-currentuser">
+      <p>Hello, {{ postCtrl.currentUser.username }}</p>
+      <hr>
+    </div>
+    <div class="navigation-tabs">
+      <p><a ui-sref="profile">PROFILE</a> | <a ui-sref="crew-list">CREW LIST</a> | <a ui-sref="production-list">PRODUCTIONS</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="productions-view">
+  <div class="">
+    <h4>Productions</h4>
+  </div>
+  <div class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
+    <div class="row">
+      <div class="col-xs-2 start-date">
+        <p>mm/dd/yyyy</p>
+      </div>
+      <div class="col-xs-2 end-date">
+        <p>mm/dd/yyyy</p>
+      </div>
+      <div class="col-xs-2">
+        <p>Title</p>
+      </div>
+      <div class="col-xs-3">
+        <p>Location</p>
+      </div>
+      <div class="col-xs-3 text-right">
+        <p><button ng-click="" class="btn btn-info">View</button>
+        <button ng-click="" class="btn btn-primary">Edit</button></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="past-productions-view">
+  <div class="">
+    <h4>Past Productions</h4>
+  </div>
+  <div class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
+    <div class="row">
+      <div class="col-xs-2 start-date">
+        <p>mm/dd/yyyy</p>
+      </div>
+      <div class="col-xs-2 end-date">
+        <p>mm/dd/yyyy</p>
+      </div>
+      <div class="col-xs-2">
+        <p>Title</p>
+      </div>
+      <div class="col-xs-3">
+        <p>Location</p>
+      </div>
+      <div class="col-xs-3 text-right">
+        <p><button ng-click="" class="btn btn-info">View</button>
+      </div>
+    </div>
+  </div>
+</div>
