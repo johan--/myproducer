@@ -38,7 +38,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('production-list', {
       url: '/productions',
       templateUrl: 'templates/productionList.html',
-      controller: 'productionController as productionCtrl',
+      controller: 'postController as postCtrl',
     })
     .state('profile', {
       url: '/profile',

@@ -1,21 +1,79 @@
-<div>
-  <h1>Production View</h1>
+<div class="production-view col-sm-3">
+  <div>
+    <h3>PRODUCTION</h3>
+    <p>Monday, August 31st, 2017</p>
+    <hr>
+  </div>
+  <div class="profile-name">
+    <h4>{{ productionCtrl.production.name || "NAME" }}</h4>
+  </div>
+    <form ng-submit="productionCtrl.editProduction()">
+      <div class="form-group">
+        <label for="production1Location">Location</label>
+        <input ng-model="productionCtrl.newProduction.location[0]" class="form-control" id="production1Location" placeholder="{{ productionCtrl.production.location[0] || 'Location' }}">
+      </div>
+      <div class="form-group">
+        <label for="production2Location">Location #2</label>
+        <input ng-model="productionCtrl.newProduction.location[1]" class="form-control" id="production2Location" placeholder="{{ productionCtrl.production.location[1] || 'Location' }}">
+      </div>
+      <div class="form-group">
+        <label for="productionWeather">Weather</label>
+        <input ng-model="productionCtrl.newProduction.weather" class="form-control" id="productionWeather" placeholder="{{ productionCtrl.production.weather || 'Weather' }}">
+      </div>
+      <div class="form-group">
+        <label for="productionHospital">Hospital</label>
+        <input ng-model="productionCtrl.newProduction.hospital" class="form-control" id="productionHospital" placeholder="{{ productionCtrl.production.hospital || 'Hospital' }}">
+      </div>
+      <div class="form-group">
+        <label for="productionParking">Parking</label>
+        <input ng-model="productionCtrl.newProduction.parking" class="form-control" id="productionParking" placeholder="{{ productionCtrl.production.parking || 'Parking' }}"></input>
+      </div>
+      <div class="form-group">
+        <label for="productionNotes">Notes:</label>
+        <textarea ng-model="productionCtrl.newProduction.notes" class="form-control" id="productionNotes" placeholder="{{ productionCtrl.production.notes || 'Notes' }}"></textarea>
+      </div>
+      <div class="">
+        <a ng-click="productionCtrl.destroyProduction(production)" class="btn btn-danger">Delete</a>
+        <button type="submit" class="btn btn-default">Update</button>
+      </div>
+  </form>
 </div>
 
-<div class="production-view col-sm-5">
+<div class="crew-view col-sm-9">
   <div>
-    <h3>Production Name</h3>
-  </div>
-  <div>
-    {{ productionCtrl.production.name || "Name Not Found" }}
-  </div>
-</div>
-
-<div class="crew-view col-sm-7">
-  <div>
-    <h3>Pending Crew</h3>
-    <ul>
-      <li ng-repeat="crew in postCtrl.selectedProduction.pendingCrew">{{ crew.name }}</li>
-    </ul>
+    <h3>CREW LIST</h3>
+    <div class="crew-list">
+      <div class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
+        <div class="row">
+          <div class="col-xs-1 text-left">
+            <p>PIC</p><img ui-sref="" ng-src="">
+          </div>
+          <div class="col-xs-2">
+            <p>Crew Name</p>
+          </div>
+          <div class="col-xs-3 dropdown">
+            <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
+            <select>
+              <option value="Director of Photography">Director of Photography</option>
+              <option value="Sound Mixer">Sound Mixer</option>
+              <option value="Boom Operator">Boom Operator</option>
+            </select>
+          </div>
+          <div class="col-xs-2">
+            <div class="form-group">
+              <input placeholder="Rate"></input>
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <div class="form-group">
+              <input placeholder="Rate"></input>
+            </div>
+          </div>
+          <div class="col-xs-2 text-right">
+            <button ng-click="" class="btn btn-info">Hire</button>  <a>x</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
