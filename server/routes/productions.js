@@ -42,4 +42,21 @@ router.get('/productions/:id', function show(req, res){
   })
 })
 
+// update one specific production
+router.patch('/productions/:id', function show(req, res){
+  Production.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, production) {
+    if(err) return console.log(err)
+    res.json(production)
+  })
+})
+
+// delete one specific production
+router.patch('/productions/:id', function show(req, res){
+  Production.findByIdAndRemove(req.params.id, function(err, production) {
+    if(err) return console.log(err)
+    res.json(production)
+    // TODO: res.json({ success: true })
+  })
+})
+
 module.exports = router
