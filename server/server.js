@@ -26,7 +26,8 @@ var User = require('./models/User.js')
 var app = express()
 
 // require routes
-var routes = require('./routes/api.js')
+var authRoutes = require('./routes/auth.js') // register, login, logout, status
+var productionRoutes = require('./routes/productions.js')
 
 // define middleware
 app.use(express.static(path.join(__dirname, '../client')))
@@ -44,8 +45,8 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // routes
-app.use('/user/', routes)
-app.use('/api/', routes)
+app.use('/user/', authRoutes)
+app.use('/api/', productionRoutes)
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'))
