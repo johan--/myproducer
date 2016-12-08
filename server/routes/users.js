@@ -46,3 +46,5 @@ router.delete('/:id', function(req, res){
     res.json(user)
   })
 })
+
+module.exports = router
