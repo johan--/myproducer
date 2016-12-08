@@ -1,4 +1,4 @@
-// SETUP
+// NPM PACKAGES
 
 var express = require('express')
 var router = express.Router()
@@ -7,7 +7,6 @@ var passport = require('passport')
 // MODELS
 
 var User = require('../models/User.js')
-var Production = require('../models/Production.js')
 
 // REGISTER ROUTES
 
@@ -75,40 +74,5 @@ router.get('/status', function(req, res) {
     user: req.user
   })
 })
-
-// PRODUCTION ROUTES
-
-// get a particular users productions
-router.get('/productions', function(req, res){
-  // find it by the user
-  User.findById(req.user._id).populate("productions").exec(function(err, user){
-    if(err) return console.log(err)
-    res.json(user.productions)
-  })
-})
-
-// create a new production
-router.post('/productions', function(req, res){
-  // find it by the user
-  User.findById(req.user._id, function(err, user){
-    if (err) return console.log(err)
-    var newProduction = new Production(req.body)
-    newProduction.by_ = user
-    newProduction.save(function(err, production){
-      user.productions.push(production)
-      user.save(function(err, user){
-        res.json(production)
-      })
-    })
-  })
-})
-
-// see one specific production
-router.get('/productions/:id', function show(req, res){
-    Production.findById(req.params.id).populate('_by').exec(function(err, production) {
-      if(err) return console.log(err)
-      res.json(production)
-    })
-  })
 
 module.exports = router
