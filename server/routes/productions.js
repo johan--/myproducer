@@ -10,7 +10,7 @@ var Production = require('../models/Production.js')
 // PRODUCTION ROUTES
 
 // get a particular users productions
-router.get('/productions', function(req, res){
+router.get('/', function(req, res){
   // find it by the user
   User.findById(req.user._id).populate("productions").exec(function(err, user){
     if(err) return console.log(err)
@@ -19,7 +19,7 @@ router.get('/productions', function(req, res){
 })
 
 // create a new production
-router.post('/productions', function(req, res){
+router.post('/', function(req, res){
   // find it by the user
   User.findById(req.user._id, function(err, user){
     if (err) return console.log(err)
@@ -35,7 +35,7 @@ router.post('/productions', function(req, res){
 })
 
 // see one specific production
-router.get('/productions/:id', function show(req, res){
+router.get('/:id', function show(req, res){
   Production.findById(req.params.id).populate('_by').exec(function(err, production) {
     if(err) return console.log(err)
     res.json(production)
@@ -43,7 +43,7 @@ router.get('/productions/:id', function show(req, res){
 })
 
 // update one specific production
-router.patch('/productions/:id', function show(req, res){
+router.patch('/:id', function show(req, res){
   Production.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, production) {
     if(err) return console.log(err)
     res.json(production)
@@ -51,7 +51,7 @@ router.patch('/productions/:id', function show(req, res){
 })
 
 // delete one specific production
-router.patch('/productions/:id', function show(req, res){
+router.patch('/:id', function show(req, res){
   Production.findByIdAndRemove(req.params.id, function(err, production) {
     if(err) return console.log(err)
     res.json(production)
