@@ -7,6 +7,7 @@ var router = express.Router()
 
 var User = require('../models/User.js')
 
+// get list of all users
 router.get('/', function(req, res){
   User.find({}, function(err, users){
     if(err) return console.log(err)
@@ -14,6 +15,7 @@ router.get('/', function(req, res){
   })
 })
 
+// post a new user
 router.post('/', function(req, res){
   User.create(req.body, function(err, user){
     if(err) return console.log(err)
@@ -21,6 +23,7 @@ router.post('/', function(req, res){
   })
 })
 
+// get a single user
 router.get('/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
     if(err) return console.log(err)
@@ -28,6 +31,7 @@ router.get('/:id', function(req, res){
   })
 })
 
+// update a single user
 router.patch('/:id', function(req, res){
   User.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, user){
     if(err) return console.log(err)
@@ -35,6 +39,7 @@ router.patch('/:id', function(req, res){
   })
 })
 
+// delete a single user
 router.delete('/:id', function(req, res){
   User.findByIdAndRemove(req.params.id, function(err, user){
     if(err) return console.log(err)
