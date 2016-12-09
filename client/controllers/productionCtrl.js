@@ -14,19 +14,15 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       console.log("Production from the Factory", vm.production)
     })
 
+    vm.newProduction = {}
+    vm.newProduction.location = []
+
     vm.editProduction = function(){
-      var newProduction = {
-          location: vm.newProduction.location,
-          weather: vm.newProduction.weather,
-          hospital: vm.newProduction.hospital,
-          parking: vm.newProduction.parking,
-          notes: vm.newProduction.notes
-        }
-        $http.patch('/api/productions/' + $stateParams.id, newProduction)
-          .success(function(data) {
-            vm.editing = false
-            $state.reload();
-          })
+      $http.patch('/api/productions/' + $stateParams.id, vm.newProduction)
+        .success(function(data) {
+          vm.editing = false
+          $state.reload();
+        })
     }
 
     vm.deleteProduction = function(){
