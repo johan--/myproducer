@@ -17,6 +17,7 @@
 
 <div class="profile-view col-sm-8">
   <div="profile-view-content">
+  <form ng-submit="postCtrl.editUser()">
     <div class="profile-view-left col-sm-3">
       <div class="profile-picture">
         <p>PIC</p><img src="" alt="">
@@ -24,7 +25,6 @@
       <div class="profile-name">
         <h3>{{ postCtrl.currentUser.name || "USER NAME" }}</h3>
       </div>
-      <form ng-submit="postCtrl.editUser()">
         <div class="form-group">
           <label for="userLocation">Location</label>
           <input ng-model="postCtrl.newUser.location" class="form-control" id="userLocation" placeholder="{{ postCtrl.currentUser.location || 'Location' }}">
@@ -48,35 +48,35 @@
         <div class="form-group">
           <button type="submit" class="btn btn-default">Update</button>
         </div>
+      </div>
+      <div class="profile-view-right col-sm-9">
+        <div class="profile-bio form-group">
+          <h4>Bio</h4>
+          <hr>
+          <textarea ng-model="postCtrl.newUser.bio" class="form-control" id="userBio" placeholder="{{ postCtrl.currentUser.bio || 'No bio for this user yet' }}"></textarea>
+        </div>
+        <div class="profile-skills form-group">
+          <h4>Skills</h4>
+          <hr>
+          <ul>
+            <input ng-model="postCtrl.newUser.skills[0]" class="form-control" id="userSkill1" placeholder="{{ postCtrl.currentUser.skills[0] || 'Add a skill' }}">
+            <input ng-model="postCtrl.newUser.skills[1]" class="form-control" id="userSkill2" placeholder="{{ postCtrl.currentUser.skills[1] || 'Add a skill' }}">
+            <input ng-model="postCtrl.newUser.skills[2]" class="form-control" id="userSkill3" placeholder="{{ postCtrl.currentUser.skills[2] || 'Add a skill' }}">
+            <input ng-model="postCtrl.newUser.skills[3]" class="form-control" id="userSkill4" placeholder="{{ postCtrl.currentUser.skills[3] || 'Add a skill' }}">
+          </ul>
+        </div>
+        <div class="profile-equipment form-group">
+          <h4>Equipment</h4>
+          <hr>
+          <ul>
+            <input ng-model="postCtrl.newUser.equipment[0]" class="form-control" id="userEquipment1" placeholder="{{ postCtrl.currentUser.equipment[0] || 'Add equipment' }}">
+            <input ng-model="postCtrl.newUser.equipment[1]" class="form-control" id="userEquipment2" placeholder="{{ postCtrl.currentUser.equipment[1] || 'Add equipment' }}">
+            <input ng-model="postCtrl.newUser.equipment[2]" class="form-control" id="userEquipment3" placeholder="{{ postCtrl.currentUser.equipment[2] || 'Add equipment' }}">
+            <input ng-model="postCtrl.newUser.equipment[3]" class="form-control" id="userEquipment4" placeholder="{{ postCtrl.currentUser.equipment[3] || 'Add equipment' }}">
+          </ul>
+        </div>
+      </div>
     </form>
-    </div>
-    <div class="profile-view-right col-sm-9">
-      <div class="profile-bio">
-        <h4>Bio</h4>
-        <hr>
-        <p>{{postCtrl.currentUser.bio || 'No bio yet...'}}</p>
-      </div>
-      <div class="profile-skills">
-        <h4>Skills</h4>
-        <hr>
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-        </ul>
-      </div>
-      <div class="profile-equipment">
-        <h4>Equipment</h4>
-        <hr>
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </div>
 
