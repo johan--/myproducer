@@ -7,6 +7,7 @@ var router = express.Router()
 var Offer = require('../models/Offer.js')
 var User = require('../models/User.js')
 var Production = require('../models/Production.js')
+var Message = require('../models/Message.js')
 
 router.get('/', function(req, res){
   Offer.find({active: true}, function(err, offers){
@@ -68,6 +69,24 @@ router.get('/:id', function(req, res){
     if(err) return console.log(err)
 
     res.json(offer)
+  })
+})
+
+router.post('/:id/message', function(req, res){
+  Offer.findById(req.params.id, function(err, offer){
+    if(err) return console.log(err)
+
+    var message = new Message();
+    message._by = req.user._id
+    message.content = req.body.content
+
+    offer.messages.push(message)
+
+    offer.save(function(err, newOffer){
+      if(err) return console.log(err)
+
+      res.json(newOffer)
+    })
   })
 })
 
