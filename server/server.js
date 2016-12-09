@@ -29,6 +29,7 @@ var app = express()
 var authRoutes = require('./routes/auth.js') // register, login, logout, status
 var userRoutes = require('./routes/users.js')
 var productionRoutes = require('./routes/productions.js')
+var offerRoutes = require('./routes/offers.js')
 
 // define middleware
 app.use(express.static(path.join(__dirname, '../client')))
@@ -49,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/user/', authRoutes) // TODO: Change to api/auth?
 app.use('/api/users', userRoutes)
 app.use('/api/productions', productionRoutes)
+app.use('/api/offers', offerRoutes)
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'))
