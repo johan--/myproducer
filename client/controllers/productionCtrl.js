@@ -22,10 +22,17 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
           parking: vm.newProduction.parking,
           notes: vm.newProduction.notes
         }
-        $http.patch('/api/productions/'+$stateParams.id, newProduction)
+        $http.patch('/api/productions/' + $stateParams.id, newProduction)
+          .success(function(data) {
+            vm.editing = false
+            $state.reload();
+          })
+    }
+
+    vm.deleteProduction = function(){
+      $http.delete('/api/productions/' + $stateParams.id)
         .success(function(data) {
-          vm.editing = false
-          $state.go('production')
+          $state.go('production-list')
         })
     }
 }

@@ -51,7 +51,7 @@ router.patch('/:id', function show(req, res){
 })
 
 // delete one specific production
-router.patch('/:id', function show(req, res){
+router.delete('/:id', function show(req, res){
   Production.findByIdAndRemove(req.params.id, function(err, production) {
     if(err) return console.log(err)
     res.json(production)

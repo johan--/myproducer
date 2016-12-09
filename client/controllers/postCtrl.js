@@ -40,7 +40,7 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
     var newUser = {
       location: vm.newUser.location,
       title: vm.newUser.title,
-      email: vm.newUser.email,
+      username: vm.newUser.username, //check for real email
       phone: vm.newUser.phone,
       website: vm.newUser.website,
       bio: vm.newUser.bio,
@@ -49,9 +49,15 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
     }
     $http.patch('/api/users/'+ vm.currentUser._id, newUser)
       .success(function(data) {
-        $state.go('profile')
+        $state.reload();
       })
   }
-}
 
 // ADD USER TO CONTACTS
+
+  vm.addContact = function() {
+    var newContact = {
+
+    }
+  }
+}
