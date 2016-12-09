@@ -10,7 +10,7 @@ var Offer = mongoose.Schema({
   hours: Number,
   dateFrom: Date,
   dateTo: Date,
-  TODO: message: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}],
+  message: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}],
   active: Boolean,
 }, { timestamps: true })
 
