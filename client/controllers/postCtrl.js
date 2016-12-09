@@ -35,19 +35,12 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   }
 
 // EDIT USER
+  vm.newUser = {}
+  vm.newUser.skills = []
+  vm.newUser.equipment = []
 
   vm.editUser = function() {
-    var newUser = {
-      location: vm.newUser.location,
-      title: vm.newUser.title,
-      username: vm.newUser.username, //check for real email
-      phone: vm.newUser.phone,
-      website: vm.newUser.website,
-      bio: vm.newUser.bio,
-      skills: vm.newUser.skills,
-      equipment: vm.newUser.equipment
-    }
-    $http.patch('/api/users/'+ vm.currentUser._id, newUser)
+    $http.patch('/api/users/'+ vm.currentUser._id, vm.newUser)
       .success(function(data) {
         $state.reload();
       })
