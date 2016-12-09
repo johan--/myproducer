@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var offerSchema = mongoose.Schema({
+var Offer = mongoose.Schema({
   from: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   to: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   production: {type: mongoose.Schema.Types.ObjectId, ref: 'Production'},
@@ -11,4 +11,6 @@ var offerSchema = mongoose.Schema({
   dateFrom: Date,
   dateTo: Date,
   // TODO: message: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}]
-}, { timestamps: true });
+}, { timestamps: true })
+
+module.exports = mongoose.model('Offer', Offer)
