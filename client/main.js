@@ -27,7 +27,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('crew-list', {
       url: '/crewlist',
-      templateUrl: 'templates/crewList.html'
+      templateUrl: 'templates/crewList.html',
+      controller: 'postController as postCtrl'
     })
     .state('production', {
       url: '/production/:id',

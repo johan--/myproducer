@@ -15,7 +15,14 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
     })
 
     vm.editProduction = function(){
-      ProductionFactory.update($stateParams.id, vm.newProduction)
+      var newProduction = {
+          location: vm.newProduction.location,
+          weather: vm.newProduction.weather,
+          hospital: vm.newProduction.hospital,
+          parking: vm.newProduction.parking,
+          notes: vm.newProduction.notes
+        }
+        $http.patch('/api/productions/'+$stateParams.id, newProduction)
         .success(function(data) {
           vm.editing = false
           $state.go('production')

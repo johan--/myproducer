@@ -3,7 +3,7 @@ angular.module('myApp')
 
 postController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
-// POST CONTROLLER:
+// PRODUCTIONS
 
 function postController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
@@ -29,6 +29,29 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
         console.log(vm.currentUser)
         vm.currentUser.productions.push(data)
         vm.newProduction = {}
+        // redirect them to production view
+        // $state.go('production')
+      })
+  }
+
+// EDIT USER
+
+  vm.editUser = function() {
+    var newUser = {
+      location: vm.newUser.location,
+      title: vm.newUser.title,
+      email: vm.newUser.email,
+      phone: vm.newUser.phone,
+      website: vm.newUser.website,
+      bio: vm.newUser.bio,
+      skills: vm.newUser.skills,
+      equipment: vm.newUser.equipment
+    }
+    $http.patch('/api/users/'+ vm.currentUser._id, newUser)
+      .success(function(data) {
+        $state.go('profile')
       })
   }
 }
+
+// ADD USER TO CONTACTS
