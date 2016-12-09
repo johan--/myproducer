@@ -23,6 +23,21 @@ router.post('/', function(req, res){
   })
 })
 
+// add a new user to logged in user's contact list
+router.post('/addcontact', function(req, res){
+  User.findById(req.user._id, function(err, user){ // find logged in user from database
+    if(err) return console.log(err)
+
+    var contactId = req.body.contactId  // grab new contact id through req.body
+    user.contacts.push(contactId) // add new contact id to logged in user's contact list
+
+    user.save(function(err){ // save updated logged in user
+      if(err) return console.log(err)
+      res.json({success: true})
+    })
+  })
+})
+
 // get a single user
 router.get('/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
