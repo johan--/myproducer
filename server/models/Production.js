@@ -12,6 +12,7 @@ var Production = new Schema({
   notes: String,
   pendingCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   approvedCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  offers: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
   active: Boolean,
 }, {timestamps: true})
 

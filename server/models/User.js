@@ -15,6 +15,8 @@ var User = new Schema({
   website: String,
   bio: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}],
+  offersSent: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
+  offersReceived: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
   contacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
   active: Boolean,
 }, {timestamps: true})
