@@ -20,7 +20,7 @@ var User = new Schema({
   offersSent: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
   offersReceived: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
   contacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
-  active: Boolean,
+  active: {type: Boolean, default: true},
 }, {timestamps: true})
 
 User.plugin(passportLocalMongoose)

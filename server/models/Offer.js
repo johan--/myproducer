@@ -11,7 +11,7 @@ var Offer = mongoose.Schema({
   dateFrom: Date,
   dateTo: Date,
   message: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}],
-  active: Boolean,
+  active: {type: Boolean, default: true},
 }, { timestamps: true })
 
 module.exports = mongoose.model('Offer', Offer)

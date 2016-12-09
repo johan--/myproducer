@@ -13,7 +13,7 @@ var Production = new Schema({
   pendingCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   approvedCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   offers: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
-  active: Boolean,
+  active: {type: Boolean, default: true},
 }, {timestamps: true})
 
 module.exports = mongoose.model('Production', Production)
