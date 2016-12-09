@@ -15,7 +15,7 @@ var User = new Schema({
   website: String,
   bio: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}]
-})
+}, {timestamps: true})
 
 User.plugin(passportLocalMongoose)
 

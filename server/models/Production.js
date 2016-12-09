@@ -12,6 +12,6 @@ var Production = new Schema({
   notes: String,
   pendingCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   approvedCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Production', Production)
