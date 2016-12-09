@@ -8,7 +8,7 @@ var Offer = require('../models/Offer.js')
 var User = require('../models/User.js')
 var Production = require('../models/Production.js')
 
-router.get('/', function(req, res){
+router.post('/', function(req, res){
 
   // Create offer from req.body
   Offer.create(req.body, function(err, offer){
@@ -49,8 +49,10 @@ router.get('/', function(req, res){
               })
             })
           })
-        }
+        })
       })
     })
   })
 })
+
+module.exports = router
