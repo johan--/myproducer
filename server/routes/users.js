@@ -57,7 +57,7 @@ router.patch('/:id', function(req, res){
 
 // delete a single user
 router.delete('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, { active: false }, { new: true } function(err, user){
+  User.findByIdAndUpdate(req.params.id, { active: false }, { new: true }, function(err, user){
     if(err) return console.log(err)
     res.json({ sucess: true })
   })
