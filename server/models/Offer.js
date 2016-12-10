@@ -4,7 +4,7 @@ var Offer = mongoose.Schema({
   from: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   to: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   production: {type: mongoose.Schema.Types.ObjectId, ref: 'Production'},
-  status: String,
+  status: {type: String, default: 'Pending'},
   position: String,
   rate: Number,
   hours: Number,
