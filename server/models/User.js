@@ -5,6 +5,8 @@ var passportLocalMongoose = require('passport-local-mongoose')
 
 var User = new Schema({
   username: String,
+  first_name: String,
+  last_name: String,
   password: String,
   role: [String],
   equipment: [String],
@@ -15,8 +17,10 @@ var User = new Schema({
   website: String,
   bio: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}],
+  offersSent: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
+  offersReceived: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
   contacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
-  active: Boolean,
+  active: {type: Boolean, default: true},
 }, {timestamps: true})
 
 User.plugin(passportLocalMongoose)

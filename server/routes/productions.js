@@ -52,10 +52,10 @@ router.patch('/:id', function show(req, res){
 
 // delete one specific production
 router.delete('/:id', function show(req, res){
-  Production.findByIdAndRemove(req.params.id, function(err, production) {
+  Production.findByIdAndUpdate(req.params.id, { active: false }, { new: true }, function(err, production) {
     if(err) return console.log(err)
-    res.json(production)
-    // TODO: res.json({ success: true })
+
+    res.json({ success: true })
   })
 })
 
