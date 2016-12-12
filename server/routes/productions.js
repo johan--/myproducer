@@ -12,7 +12,7 @@ var Production = require('../models/Production.js')
 // get a particular users productions
 router.get('/', function(req, res){
   // find it by the user
-  User.findById(req.user._id).populate({path: 'productions', populate: {path: 'crew'}}).exec(function(err, user){
+  User.findById(req.user._id).populate("productions").exec(function(err, user){
     if(err) return console.log(err)
     res.json(user.productions)
   })
@@ -36,7 +36,7 @@ router.post('/', function(req, res){
 
 // see one specific production
 router.get('/:id', function show(req, res){
-  Production.findById(req.params.id).populate('_by offers').exec(function(err, production) {
+  Production.findById(req.params.id).populate({path: '_by offers', populate: {path: 'crew'}}).exec(function(err, production) {
     if(err) return console.log(err)
     res.json(production)
   })
