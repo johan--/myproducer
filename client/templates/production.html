@@ -44,14 +44,14 @@
   <div>
     <h3>CREW LIST</h3>
     <div class="crew-list">
-      <div class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
+      <div ng-repeat="crew in productionCtrl.production.crew" class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
         <div class="row">
           <div class="col-xs-1 text-left">
             <p>PIC</p>
             <!-- <img ui-sref="" ng-src=""> -->
           </div>
           <div class="col-xs-2">
-            <p>Crew Name</p>
+            <p>{{crew.to.username || 'Crew Name'}}</p>
           </div>
           <div class="col-xs-3 dropdown">
             <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
