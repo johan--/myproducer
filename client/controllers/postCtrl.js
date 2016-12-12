@@ -44,19 +44,19 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
 
 // ADD USER TO CONTACTS
 
-  vm.newContact = function() {
+  vm.addContact = function() {
     // search for existing user here
-    $http.patch('/api/users/addcontact', vm.newContact.username)
+    $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
         console.log("contact added", data);
         $state.reload();
       })
     }
 
-  vm.addContact = function() {
-    $http.patch('/api/users/addcontact', vm.newContact.id)
-      .success(function(data) {
-        $state.reload();
-      })
-  }
+  // vm.addContact = function() {
+  //   $http.patch('/api/users/addcontact', vm.newContact.id)
+  //     .success(function(data) {
+  //       $state.reload();
+  //     })
+  // }
 }
