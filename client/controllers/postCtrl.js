@@ -9,14 +9,15 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   var vm = this
   vm.title = "Post Controller is here"
   vm.currentUser = {}
-  vm.currentUser.productions = []
+  // vm.currentUser.productions = []
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
-      console.log(data.data.user)
-      $http.get('/api/productions')
+      // console.log(data.data.user)
+      $http.get('/api/users/' + vm.currentUser._id)
         .success(function(data){
-          vm.currentUser.productions = data
+          vm.currentUser = data
+          console.log(data);
         })
   })
   vm.addProduction = function(){
