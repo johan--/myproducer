@@ -48,15 +48,19 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
 
 // ADD USER TO CONTACTS
 
-  vm.newContact = function() {
-    $http.post('/api/users/', vm.newUser)
-      .success(function(data) {
-        $http.patch('/api/users/addcontact', vm.newContact.id)
-          .success(function (data) {
-            $state.reload();
-          })
-      })
-  }
+  // vm.newContact = function() {
+  //   $http.post('/api/users/', vm.newUser)
+  //     .success(function(data) {
+  //       console.log("user posted", data);
+  //       // TODO Not working
+  //       // CastError: Cast to ObjectId failed for value "addcontact" at path "_id"
+  //       $http.patch('/api/users/addcontact', vm.newContact.id)
+  //         .success(function (data) {
+  //           console.log("contact added", data);
+  //           $state.reload();
+  //         })
+  //     })
+  // }
 
   vm.addContact = function() {
     $http.patch('/api/users/addcontact', vm.newContact.id)

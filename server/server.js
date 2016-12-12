@@ -14,7 +14,9 @@ var passport = require('passport')
 var passportConfig = require('./config/passport.js')
 
 // mongoose
-mongoose.connect('mongodb://localhost/myproducer', function(err) {
+// var mongoConnectionString = process.env.MONGO_URL
+
+mongoose.connect('mongodb://alex:password@ds133328.mlab.com:33328/myproducer', function(err) {
   if(err) return console.log(err)
   console.log("Connected to MongoDB (myproducer)")
 })
