@@ -98,6 +98,13 @@ DELETE /api/users/:id
 }
 ```
 
+##### Auth
+```
+POST 	/user/register
+POST	/user/login
+GET 	/user/logout
+GET 	/user/status
+```
 
 ##### Productions
 ```
@@ -108,3 +115,12 @@ PATCH	/api/productions/:id	=> Update single production
 DELTE	/api/productions/:id	=> Delete single production
 ```
 
+##### Offers
+```
+GET		/api/offers/			=> All offers
+POST	/api/offers/			=> New offer
+GET		/api/offers/:id			=> Single offer
+PATCH	/api/offers/:id			=> Update single offer
+DELETE	/api/offers/:id			=> Delete single offer
+POST	/api/offers/:id/message	=> Add message to offer
+```
