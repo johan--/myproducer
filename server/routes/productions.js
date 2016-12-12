@@ -36,7 +36,7 @@ router.post('/', function(req, res){
 
 // see one specific production
 router.get('/:id', function show(req, res){
-  Production.findById(req.params.id).populate('_by').exec(function(err, production) {
+  Production.findById(req.params.id).populate('_by offers').exec(function(err, production) {
     if(err) return console.log(err)
     res.json(production)
   })
