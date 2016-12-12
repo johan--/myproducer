@@ -24,7 +24,7 @@ router.post('/', function(req, res){
     if(err) return console.log(err)
 
     // Find user who submitted the crew
-    User.findById(crew.from, function(err, user){
+    User.findById(req.user._id, function(err, user){
       if(err) return console.log(err)
       // Add crew to user's sent crew list
       user.offersSent.push(crew)
