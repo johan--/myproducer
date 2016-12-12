@@ -12,11 +12,12 @@ var hash = require('bcrypt-nodejs')
 var path = require('path')
 var passport = require('passport')
 var passportConfig = require('./config/passport.js')
+var dotenv = require('dotenv').load({silent: true})
 
 // mongoose
-// var mongoConnectionString = process.env.MONGO_URL
+var mongoConnectionString = process.env.MONGO_URL
 
-mongoose.connect('mongodb://alex:password@ds133328.mlab.com:33328/myproducer', function(err) {
+mongoose.connect(mongoConnectionString, function(err) {
   if(err) return console.log(err)
   console.log("Connected to MongoDB (myproducer)")
 })
