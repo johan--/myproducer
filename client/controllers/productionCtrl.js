@@ -14,11 +14,8 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       console.log("Production from the Factory", vm.production)
     })
 
-    vm.newProduction = {}
-    vm.newProduction.location = []
-
     vm.editProduction = function(){
-      $http.patch('/api/productions/' + $stateParams.id, vm.newProduction)
+      $http.patch('/api/productions/' + $stateParams.id, vm.production)
         .success(function(data) {
           vm.editing = false
           $state.reload();

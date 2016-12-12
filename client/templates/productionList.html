@@ -10,16 +10,16 @@
   <div class="list-group-item" ng-repeat="production in postCtrl.currentUser.productions">
     <div class="row">
       <div class="col-xs-2 start-date">
-        <p>mm/dd/yyyy</p>
+        <p>{{production.dateFrom | date:'shortDate' || 'mm/dd/yyyy'}}</p>
       </div>
       <div class="col-xs-2 end-date">
-        <p>mm/dd/yyyy</p>
+        <p>{{production.dateTo | date:'shortDate' || 'mm/dd/yyyy'}}</p>
       </div>
       <div class="col-xs-2">
         <p>{{ production.name || "Name Not Found" }}</p>
       </div>
       <div class="col-xs-3">
-        <p>Location</p>
+        <p>{{ production.location[0] || 'No Location'}}</p>
       </div>
       <div class="col-xs-3 text-right">
         <p><a ng-href="/#/production/{{production._id}}" class="btn btn-info">View</a>

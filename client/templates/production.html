@@ -7,32 +7,40 @@
   <form ng-submit="productionCtrl.editProduction()">
     <div class="production-name form-group">
       <label for="productionName">Title</label>
-      <input ng-model="productionCtrl.newProduction.name" class="form-control" id="productionName" placeholder="{{ productionCtrl.production.name || 'Name' }}">
+      <input ng-model="productionCtrl.production.name" class="form-control" id="productionName">
     </div>
     <div class="form-group">
       <label for="production1Location">Location</label>
-      <input ng-model="productionCtrl.newProduction.location[0]" class="form-control" id="production1Location" placeholder="{{ productionCtrl.production.location[0] || 'Location' }}">
+      <input ng-model="productionCtrl.production.location[0]" class="form-control" id="production1Location">
     </div>
     <div class="form-group">
       <label for="production2Location">Location #2</label>
-      <input ng-model="productionCtrl.newProduction.location[1]" class="form-control" id="production2Location" placeholder="{{ productionCtrl.production.location[1] || 'Location' }}">
+      <input ng-model="productionCtrl.production.location[1]" class="form-control" id="production2Location">
     </div>
     <div class="form-group">
       <label for="productionWeather">Weather</label>
-      <input ng-model="productionCtrl.newProduction.weather" class="form-control" id="productionWeather" placeholder="{{ productionCtrl.production.weather || 'Weather' }}">
+      <input ng-model="productionCtrl.production.weather" class="form-control" id="productionWeather">
     </div>
     <div class="form-group">
       <label for="productionHospital">Hospital</label>
-      <input ng-model="productionCtrl.newProduction.hospital" class="form-control" id="productionHospital" placeholder="{{ productionCtrl.production.hospital || 'Hospital' }}">
+      <input ng-model="productionCtrl.production.hospital" class="form-control" id="productionHospital">
     </div>
     <div class="form-group">
       <label for="productionParking">Parking</label>
-      <input ng-model="productionCtrl.newProduction.parking" class="form-control" id="productionParking" placeholder="{{ productionCtrl.production.parking || 'Parking' }}"></input>
+      <input ng-model="productionCtrl.production.parking" class="form-control" id="productionParking"></input>
     </div>
     <div class="form-group">
       <label for="productionNotes">Notes:</label>
-      <textarea ng-model="productionCtrl.newProduction.notes" class="form-control" id="productionNotes" placeholder="{{ productionCtrl.production.notes || 'Notes' }}"></textarea>
+      <textarea ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes"></textarea>
     </div>
+    <!-- <div class="form-group">
+      <label for="productionStart">Start:</label>
+      <input ng-model="productionCtrl.production.dateFrom" class="form-control" id="productionStart" type="date"></input>
+    </div>
+    <div class="form-group">
+      <label for="productionEnd">End:</label>
+      <input ng-model="productionCtrl.production.dateTo" class="form-control" id="productionEnd" type="date"></input>
+    </div> -->
     <div class="">
       <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Delete</a>
       <button type="submit" class="btn btn-default">Update</button>
