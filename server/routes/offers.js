@@ -98,14 +98,6 @@ router.post('/:id/message', function(req, res){
   })
 })
 
-router.patch('/:id', function(req, res){
-  Offer.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, offer){
-    if(err) return console.log(err)
-
-    res.json(offer)
-  })
-})
-
 router.delete('/:id', function(req, res){
   Offer.findByIdAndUpdate(req.params.id, { active: false }, { new: true },function(err, offer){
     if(err) return console.log(err)
