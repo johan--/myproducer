@@ -29,12 +29,16 @@ router.post('/addcontact', function(req, res){
   User.findById(req.user._id, function(err, user){ // find logged in user from database
     if(err) return console.log(err)
 
-    var contactId = new mongoose.mongo.ObjectId(req.body.contactId)  // grab new contact id through req.body
-    user.contacts.push(contactId) // add new contact id to logged in user's contact list
-
-    user.save(function(err){ // save updated logged in user
+    User.find({username: req.body.email}, function(err, contact){
       if(err) return console.log(err)
-      res.json({success: true})
+
+      var contactId = new mongoose.mongo.ObjectId(contact._id)  // grab new contact id through req.body
+      user.contacts.push(contactId) // add new contact id to logged in user's contact list
+
+      user.save(function(err){ // save updated logged in user
+        if(err) return console.log(err)
+        res.json({success: true})
+      })
     })
   })
 })
