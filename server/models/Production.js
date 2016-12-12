@@ -10,9 +10,9 @@ var Production = new Schema({
   hospital: String,
   parking: String,
   notes: String,
-  pendingCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-  approvedCrew: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-  offers: [{type: mongoose.Schema.Types.ObjectId, ref:'Offer'}],
+  dateFrom: Date,
+  dateTo: Date,
+  crew: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   active: {type: Boolean, default: true},
 }, {timestamps: true})
 
