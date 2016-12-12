@@ -116,7 +116,7 @@ PATCH	/api/productions/:id	=> Update single production
 DELTE	/api/productions/:id	=> Delete single production
 ```
 
-##### Offers
+##### Crews
 ```
 GET		/api/offers/			=> All offers
 POST	/api/offers/			=> New offer
