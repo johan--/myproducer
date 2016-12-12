@@ -13,6 +13,7 @@ var path = require('path')
 var passport = require('passport')
 var passportConfig = require('./config/passport.js')
 var dotenv = require('dotenv').load({silent: true})
+var MongoStore = require('connect-mongo')(expressSession)
 
 // mongoose
 var mongoConnectionString = process.env.MONGO_URL
@@ -43,7 +44,8 @@ app.use(cookieParser())
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({url: mongoConnectionString})
 }))
 app.use(passport.initialize())
 app.use(passport.session())
