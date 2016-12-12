@@ -29,11 +29,10 @@ router.post('/addcontact', function(req, res){
   User.findById(req.user._id, function(err, user){ // find logged in user from database
     if(err) return console.log(err)
 
-    User.find({username: req.body.email}, function(err, contact){
+    User.findOne({username: req.body.email}, function(err, contact){
       if(err) return console.log(err)
 
-      var contactId = new mongoose.mongo.ObjectId(contact._id)  // grab new contact id through req.body
-      user.contacts.push(contactId) // add new contact id to logged in user's contact list
+      user.contacts.push(contact._id) // add new contact id to logged in user's contact list
 
       user.save(function(err){ // save updated logged in user
         if(err) return console.log(err)
