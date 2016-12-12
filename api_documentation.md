@@ -101,6 +101,7 @@ DELETE /api/users/:id
 ##### Auth
 ```
 POST 	/user/register
+POST 	/user/register?addTo=:id
 POST	/user/login
 GET 	/user/logout
 GET 	/user/status
