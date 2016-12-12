@@ -65,7 +65,7 @@ router.post('/', function(req, res){
 })
 
 router.get('/:id', function(req, res){
-  Offer.findById(req.params.id, function(err, offer){
+  Offer.findById(req.params.id).populate('from to production message').exec(function(err, offer){
     if(err) return console.log(err)
 
     res.json(offer)
@@ -95,14 +95,6 @@ router.post('/:id/message', function(req, res){
 
       res.json(newOffer)
     })
-  })
-})
-
-router.patch('/:id', function(req, res){
-  Offer.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, offer){
-    if(err) return console.log(err)
-
-    res.json(offer)
   })
 })
 

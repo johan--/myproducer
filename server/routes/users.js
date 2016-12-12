@@ -41,7 +41,7 @@ router.post('/addcontact', function(req, res){
 
 // get a single user
 router.get('/:id', function(req, res){
-  User.findById(req.params.id).populate('contacts').exec(function(err, user){
+  User.findById(req.params.id).populate('contacts productions').exec(function(err, user){
     if(err) return console.log(err)
     res.json(user)
   })

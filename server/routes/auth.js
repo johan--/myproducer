@@ -18,6 +18,18 @@ router.post('/register', function(req, res) {
         err: err
       })
     }
+
+    // Add to newly registered user to another user's contact list
+    if(req.params.addTo){
+      User.findById(req.params.addTo, function(err, user){
+        user.contacts.push(account)
+
+        user.save(function(err){
+          if (err) console.log(err);
+        })
+      })
+    }
+
     passport.authenticate('local')(req, res, function () {
       return res.status(200).json({
         status: 'Registration successful!'
