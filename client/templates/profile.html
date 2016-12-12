@@ -27,23 +27,23 @@
       </div>
         <div class="form-group">
           <label for="userLocation">Location</label>
-          <input ng-model="postCtrl.newUser.location" class="form-control" id="userLocation" placeholder="{{ postCtrl.currentUser.location || 'Location' }}">
+          <input ng-model="postCtrl.currentUser.location" class="form-control" id="userLocation">
         </div>
         <div class="form-group">
           <label for="userTitle">Title</label>
-          <input ng-model="postCtrl.newUser.title" class="form-control" id="userTitle" placeholder="{{ postCtrl.currentUser.title || 'Title' }}">
+          <input ng-model="postCtrl.currentUser.title" class="form-control" id="userTitle">
         </div>
         <div class="form-group">
           <label for="userEmail">Email Address</label>
-          <input ng-model="postCtrl.newUser.username" class="form-control" id="userEmail" placeholder="{{ postCtrl.currentUser.username || 'Email Address' }}">
+          <input ng-model="postCtrl.currentUser.username" class="form-control" id="userEmail">
         </div>
         <div class="form-group">
           <label for="userPhone">Phone Number</label>
-          <input ng-model="postCtrl.newUser.phone" class="form-control" id="userPhone" placeholder="{{ postCtrl.currentUser.phone || 'Phone Number' }}"></input>
+          <input ng-model="postCtrl.currentUser.phone" class="form-control" id="userPhone"></input>
         </div>
         <div class="form-group">
           <label for="userWebsite">Website</label>
-          <input ng-model="postCtrl.newUser.website" class="form-control" id="userWebsite" placeholder="{{ postCtrl.currentUser.website || 'Website' }}">
+          <input ng-model="postCtrl.currentUser.website" class="form-control" id="userWebsite">
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-default">Update</button>
@@ -53,26 +53,26 @@
         <div class="profile-bio form-group">
           <h4>Bio</h4>
           <hr>
-          <textarea ng-model="postCtrl.newUser.bio" class="form-control" id="userBio" placeholder="{{ postCtrl.currentUser.bio || 'No bio for this user yet' }}"></textarea>
+          <textarea ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
         </div>
         <div class="profile-skills form-group">
           <h4>Skills</h4>
           <hr>
           <ul>
-            <input ng-model="postCtrl.newUser.skills[0]" class="form-control" id="userSkill1" placeholder="{{ postCtrl.currentUser.skills[0] || 'Add a skill' }}">
-            <input ng-model="postCtrl.newUser.skills[1]" class="form-control" id="userSkill2" placeholder="{{ postCtrl.currentUser.skills[1] || 'Add a skill' }}">
-            <input ng-model="postCtrl.newUser.skills[2]" class="form-control" id="userSkill3" placeholder="{{ postCtrl.currentUser.skills[2] || 'Add a skill' }}">
-            <input ng-model="postCtrl.newUser.skills[3]" class="form-control" id="userSkill4" placeholder="{{ postCtrl.currentUser.skills[3] || 'Add a skill' }}">
+            <input ng-model="postCtrl.currentUser.skills[0]" class="form-control" id="userSkill1">
+            <input ng-model="postCtrl.currentUser.skills[1]" class="form-control" id="userSkill2">
+            <input ng-model="postCtrl.currentUser.skills[2]" class="form-control" id="userSkill3">
+            <input ng-model="postCtrl.currentUser.skills[3]" class="form-control" id="userSkill4">
           </ul>
         </div>
         <div class="profile-equipment form-group">
           <h4>Equipment</h4>
           <hr>
           <ul>
-            <input ng-model="postCtrl.newUser.equipment[0]" class="form-control" id="userEquipment1" placeholder="{{ postCtrl.currentUser.equipment[0] || 'Add equipment' }}">
-            <input ng-model="postCtrl.newUser.equipment[1]" class="form-control" id="userEquipment2" placeholder="{{ postCtrl.currentUser.equipment[1] || 'Add equipment' }}">
-            <input ng-model="postCtrl.newUser.equipment[2]" class="form-control" id="userEquipment3" placeholder="{{ postCtrl.currentUser.equipment[2] || 'Add equipment' }}">
-            <input ng-model="postCtrl.newUser.equipment[3]" class="form-control" id="userEquipment4" placeholder="{{ postCtrl.currentUser.equipment[3] || 'Add equipment' }}">
+            <input ng-model="postCtrl.currentUser.equipment[0]" class="form-control" id="userEquipment1">
+            <input ng-model="postCtrl.currentUser.equipment[1]" class="form-control" id="userEquipment2">
+            <input ng-model="postCtrl.currentUser.equipment[2]" class="form-control" id="userEquipment3">
+            <input ng-model="postCtrl.currentUser.equipment[3]" class="form-control" id="userEquipment4">
           </ul>
         </div>
       </div>
