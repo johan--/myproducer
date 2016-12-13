@@ -9,12 +9,16 @@ function offerController($http, $stateParams, $state, ProductionFactory) {
   $http.get('/api/crew/' + $stateParams.id)
     .success(function(crew) {
       vm.crew = crew
+      console.log("Crew from get", vm.crew)
     })
 
   vm.addMessage = function() {
-    $http.post('/api/crew/' + crew._id + '/message', vm.message)
+    vm.message = {
+        content : vm.newMessage
+    }
+    $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
       .success(function(data) {
-        console.log(data)
+        $state.reload()
       })
   }
 }

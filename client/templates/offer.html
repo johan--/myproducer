@@ -6,7 +6,7 @@
 <p>Status: {{offerCtrl.crew.offer.status}}</p>
 
 <div class="list-group">
-  <div class="list-group-item" ng-repeat="messages in offerCtrl.crew.message">
+  <div class="list-group-item" ng-repeat="message in offerCtrl.crew.message">
     <div class="row">
       <div class="col-xs-2">
         <p>{{message._by}}</p>
@@ -17,7 +17,7 @@
     </div>
   </div>
 </div>
-<form ng-submit="offerCtrl.addMessage()">
-  <input ng-model="offerCtrl.message" type="text">
-  <button type="submit" name="button">Send</button>
+<form>
+  <input ng-model="offerCtrl.newMessage" type="text" placeholder="Message"></input>
+  <button ng-click="offerCtrl.addMessage()" class"btn btn-info" type="submit" name="button">Send</button>
 </form>

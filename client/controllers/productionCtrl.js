@@ -41,7 +41,6 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       // TODO this patches the offer, but somehow that doesn't reflect within the production object? Do we need to save the production as well on this patch?
       $http.patch('api/crew/' + id, vm.offer)
         .success(function(data) {
-          // $state.go('offer')
           console.log("data after patch", data)
         })
     }

@@ -88,7 +88,7 @@ router.post('/:id/message', function(req, res){
     message._by = req.user._id
     message.content = req.body.content
 
-    crew.messages.push(message)
+    crew.message.push(message)
 
     crew.save(function(err, newCrew){
       if(err) return console.log(err)
