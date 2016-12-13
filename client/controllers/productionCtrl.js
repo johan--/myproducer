@@ -8,6 +8,18 @@ productionController.$inject = ['$http', '$stateParams', '$state', 'ProductionFa
 function productionController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
 
+  vm.currentUser = {}
+  AuthService.getUserStatus()
+    .then(function(data){
+      vm.currentUser = data.data.user
+      // console.log(data.data.user)
+      $http.get('/api/users/' + vm.currentUser._id)
+        .success(function(data){
+          vm.currentUser = data
+          console.log(data);
+        })
+  })
+
   ProductionFactory.show($stateParams.id)
     .success(function(production) {
       vm.production = production
