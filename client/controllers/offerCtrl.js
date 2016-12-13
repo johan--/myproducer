@@ -19,6 +19,8 @@ function offerController($http, $stateParams, $state, ProductionFactory) {
     $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
       .success(function(data) {
         $state.reload()
+        // Not exact
+        // TODO: vm.crew.message = data.messages
       })
   }
 }
