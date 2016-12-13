@@ -1,11 +1,14 @@
 angular.module('myApp')
   .controller('registerController', registerController)
 
-registerController.$inject = ['$state', 'AuthService']
+registerController.$inject = ['$state', '$stateParams', 'AuthService']
 
 // REGISTER CONTROLLER:
-function registerController($state, AuthService) {
+function registerController($state, $stateParams, AuthService) {
   var vm = this
+
+  console.log($stateParams.p)
+
   vm.register = function () {
 
     // initial values
@@ -13,7 +16,7 @@ function registerController($state, AuthService) {
     vm.disabled = true
 
     // call register from service
-    AuthService.register(vm.registerForm.username, vm.registerForm.password)
+    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams.p)
       // handle success
       .then(function () {
         $state.go('profile')
