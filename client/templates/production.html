@@ -52,7 +52,7 @@
   <div>
     <h3>CREW LIST</h3>
     <div class="crew-list">
-      <div ng-repeat="crew in productionCtrl.production.crew" class="list-group-item"><!-- ng-repeat="crew in productionCtrl.pendingCrew" -->
+      <div ng-repeat="crew in productionCtrl.production.crew" class="list-group-item">
         <div class="row">
           <div class="col-xs-1 text-left">
             <p>PIC</p>
@@ -63,7 +63,7 @@
           </div>
           <div class="col-xs-3 dropdown">
             <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
-            <select>
+            <select ng-model="productionCtrl.production.offer.position">
               <option value="Director of Photography">Director of Photography</option>
               <option value="Sound Mixer">Sound Mixer</option>
               <option value="Boom Operator">Boom Operator</option>
@@ -71,16 +71,16 @@
           </div>
           <div class="col-xs-2">
             <div class="form-group">
-              <input placeholder="Rate"></input>
+              <input ng-model="productionCtrl.production.offer.rate" placeholder="Rate"></input>
             </div>
           </div>
           <div class="col-xs-2">
             <div class="form-group">
-              <input placeholder="Rate"></input>
+              <input ng-model="productionCtrl.production.offer.hours" placeholder="Hours"></input>
             </div>
           </div>
           <div class="col-xs-2 text-right">
-            <button ng-click="" class="btn btn-info">Hire</button>  <a>x</a>
+            <button ng-click="productionCtrl.makeOffer(crew._id)" class="btn btn-info">Hire</button>  <a>x</a>
           </div>
         </div>
       </div>
