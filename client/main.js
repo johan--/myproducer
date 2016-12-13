@@ -21,7 +21,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'logoutController'
     })
     .state('register', {
-      url: '/register',
+      url: '/register?p',
       templateUrl: 'templates/register.html',
       controller: 'registerController as registerCtrl'
     })

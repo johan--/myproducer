@@ -19,9 +19,16 @@ router.post('/register', function(req, res) {
       })
     }
 
+    console.log(req.query.addTo)
+
     // Add to newly registered user to another user's contact list
-    if(req.params.addTo){
-      User.findById(req.params.addTo, function(err, user){
+    if(req.query.addTo){
+
+      User.findById(req.query.addTo, function(err, user){
+        if (err) return console.log(err)
+
+        console.log(user)
+
         user.contacts.push(account)
 
         user.save(function(err){
