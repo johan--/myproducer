@@ -42,7 +42,6 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       $http.patch('api/crew/' + id, vm.offer)
         .success(function(data) {
           // $state.go('offer')
-          $state.reload()
           console.log("data after patch", data)
         })
     }
