@@ -56,4 +56,16 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
           console.log("data after patch", data)
         })
     }
+
+    vm.addToCrew = function(id) {
+      offer = {
+        "to": id,
+        "production": $stateParams.id,
+      }
+      console.log(offer)
+      $http.post('/api/crew/', offer)
+        .success(function(data) {
+          $state.reload()
+        })
+    }
 }
