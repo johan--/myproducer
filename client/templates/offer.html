@@ -1,0 +1,23 @@
+<h1>Offer Summary</h1>
+
+<p>Position: {{offerCtrl.crew.offer.position}}</p>
+<p>Rate: {{offerCtrl.crew.offer.rate}}</p>
+<p>Hours: {{offerCtrl.crew.offer.hours}}</p>
+<p>Status: {{offerCtrl.crew.offer.status}}</p>
+
+<div class="list-group">
+  <div class="list-group-item" ng-repeat="messages in offerCtrl.crew.message">
+    <div class="row">
+      <div class="col-xs-2">
+        <p>{{message._by}}</p>
+      </div>
+      <div class="col-xs-10">
+        <p>{{message.content}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<form ng-submit="offerCtrl.addMessage()">
+  <input type="text" name="" value="">
+  <button type="submit" name="button">Send</button>
+</form>

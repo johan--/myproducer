@@ -47,6 +47,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       // restricted: true,
       controller: 'postController as postCtrl'
     })
+    .state('offer', {
+      url: '/offer/:id',
+      templateUrl: 'templates/offer.html',
+      controller: 'offerController as offerCtrl'
+    })
 
 })
 
