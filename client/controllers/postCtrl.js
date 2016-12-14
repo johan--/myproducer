@@ -62,6 +62,11 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   //     })
   // }
 
+  vm.closeModal = function() {
+    vm.selectedUserId = undefined;
+    vm.showModal = false;
+  }
+
   vm.handleAddToButton = function(id) {
     vm.selectedUserId = id;
     console.log(vm.selectedUserId);

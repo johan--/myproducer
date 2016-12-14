@@ -2,3 +2,43 @@
   background-color: #0A0A0A;
   color: #FFFFFF;
 }*/
+
+#modal-root{
+  display: table;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#modal-container{
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#modal{
+  color: #FFF;
+  width: 800px;
+  height: 500px;
+  margin: 0 auto;
+  background: black;
+  float: none;
+  padding: 40px;
+}
+
+.close-modal{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+}

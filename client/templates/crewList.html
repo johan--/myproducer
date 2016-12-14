@@ -58,8 +58,17 @@
     </div>
   </div>
 </div>
-<div class="col-sm-12" ng-show="postCtrl.showModal">
-  <div class="" ng-repeat="production in postCtrl.currentUser.productions" ng-click="postCtrl.addCrewToProduction(production._id)">
-    {{ production.name }}
+<div id="modal-root" ng-show="postCtrl.showModal">
+  <div id="modal-container">
+    <div id="modal" class="col-sm-12">
+      <div class="" ng-repeat="production in postCtrl.currentUser.productions" ng-click="postCtrl.addCrewToProduction(production._id)">
+        <p>{{ production.name }}</p>
+      </div>
+      <div class="close-modal" ng-click="postCtrl.closeModal()">
+        X
+      </div>
+    </div>
+
   </div>
+
 </div>
