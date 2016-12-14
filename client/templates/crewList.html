@@ -21,7 +21,7 @@
         </div>
         <div class="col-xs-3">
           <p><button ng-click="" class="btn btn-default">View</button>
-          <button ng-click="" class="btn btn-info">+ Add To</button></p>
+          <button ng-click="postCtrl.handleAddToButton(crew._id)" class="btn btn-info">+ Add To</button></p>
         </div>
       </div>
     </div>
@@ -57,4 +57,18 @@
       </div>
     </div>
   </div>
+</div>
+<div id="modal-root" ng-show="postCtrl.showModal">
+  <div id="modal-container">
+    <div id="modal" class="col-sm-12">
+      <div class="" ng-repeat="production in postCtrl.currentUser.productions" ng-click="postCtrl.addCrewToProduction(production._id)">
+        <p>{{ production.name }}</p>
+      </div>
+      <div class="close-modal" ng-click="postCtrl.closeModal()">
+        X
+      </div>
+    </div>
+
+  </div>
+
 </div>
