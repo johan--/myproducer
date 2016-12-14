@@ -9,6 +9,7 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   var vm = this
   vm.title = "Post Controller is here"
   vm.currentUser = {}
+  vm.showModal = false;
   // vm.currentUser.productions = []
   AuthService.getUserStatus()
     .then(function(data){
@@ -60,4 +61,22 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   //       $state.reload();
   //     })
   // }
+
+  vm.handleAddToButton = function(id) {
+    vm.selectedUserId = id;
+    console.log(vm.selectedUserId);
+    vm.showModal = true;
+  }
+
+  vm.addCrewToProduction = function(productionId) {
+    var offer = {
+      to: vm.selectedUserId,
+      production: productionId
+    }
+    console.log(offer);
+    $http.post('/api/crew/', offer)
+     .success(function(data) {
+       $state.reload()
+     })
+  }
 }
