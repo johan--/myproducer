@@ -2,9 +2,19 @@
 <div class="approved-crew-view col-sm-8">
   <div class="">
     <h4>Approved Crew</h4>
+    <form  class="">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Filter Crew" ng-model="crewFilter">
+        <div class="input-group-btn">
+          <button ng-click="crewFilter = ''" ng-disabled="!crewFilter" class="btn btn-default" type="button">
+            <span>X</span>
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="list-group">
-    <div class="list-group-item" ng-repeat="crew in postCtrl.currentUser.contacts">
+    <div class="list-group-item" ng-repeat="crew in postCtrl.currentUser.contacts | filter:crewFilter">
       <div class="row">
         <div class="col-xs-1 text-left">
           <p>PIC</p>

@@ -33,6 +33,7 @@
       <label for="productionNotes">Notes:</label>
       <textarea ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes"></textarea>
     </div>
+    <!-- TODO Works for Entering Info, not Displaying -->
     <!-- <div class="form-group">
       <label for="productionStart">Start:</label>
       <input ng-model="productionCtrl.production.dateFrom" class="form-control" id="productionStart" type="date"></input>
@@ -50,7 +51,9 @@
 
 <div class="crew-view col-sm-9">
   <div class="crew-list">
-    <h3>CREW LIST</h3>
+    <div class="row">
+      <h3>CREW LIST</h3>
+    </div>
     <div class="crew-list">
       <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="list-group-item">
         <div class="row">
@@ -94,9 +97,19 @@
   <div class="contact-list">
     <div class="">
       <h3>Approved Crew</h3>
+      <form  class="">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Filter Crew" ng-model="crewFilter">
+          <div class="input-group-btn">
+            <button ng-click="crewFilter = ''" ng-disabled="!crewFilter" class="btn btn-default" type="button">
+              <span>X</span>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
     <div class="list-group">
-      <div class="list-group-item" ng-repeat="crew in productionCtrl.currentUser.contacts">
+      <div class="list-group-item" ng-repeat="crew in productionCtrl.currentUser.contacts | filter: crewFilter">
         <div class="row">
           <div class="col-xs-1 text-left">
             <p>PIC</p>
