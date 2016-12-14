@@ -2,7 +2,8 @@
 <div class="approved-crew-view col-sm-8">
   <div class="">
     <h4>Approved Crew</h4>
-    <form  class="">
+    <!-- TODO This filter breaks your beautiful modal -->
+    <!-- <form  class="">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Filter Crew" ng-model="crewFilter">
         <div class="input-group-btn">
@@ -11,7 +12,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
   </div>
   <div class="list-group">
     <div class="list-group-item" ng-repeat="crew in postCtrl.currentUser.contacts | filter:crewFilter">
@@ -24,10 +25,10 @@
           <p>{{crew.username}}</p>
         </div>
         <div class="col-xs-2">
-          <p>Role</p>
+          <p>{{crew.role[0] || 'Role'}}</p>
         </div>
         <div class="col-xs-3">
-          <p>Location</p>
+          <p>{{crew.location || 'Location'}}</p>
         </div>
         <div class="col-xs-3">
           <p><button ng-click="" class="btn btn-default">View</button>

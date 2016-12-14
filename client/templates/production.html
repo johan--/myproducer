@@ -119,10 +119,10 @@
             <p>{{crew.username}}</p>
           </div>
           <div class="col-xs-2">
-            <p>Role</p>
+            <p>{{crew.role[0] || 'Role'}}</p>
           </div>
           <div class="col-xs-3">
-            <p>Location</p>
+            <p>{{crew.location || 'Location'}}</p>
           </div>
           <div class="col-xs-3">
             <p><button class="btn btn-default">View</button>
