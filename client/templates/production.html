@@ -52,7 +52,7 @@
   <div class="crew-list">
     <h3>CREW LIST</h3>
     <div class="crew-list">
-      <div ng-repeat="crew in productionCtrl.production.crew" class="list-group-item">
+      <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="list-group-item">
         <div class="row">
           <div class="col-xs-1 text-left">
             <p>PIC</p>
@@ -63,24 +63,28 @@
           </div>
           <div class="col-xs-3 dropdown">
             <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
-            <select ng-model="productionCtrl.production.offer.position">
+            <select ng-hide="crew.offer.position" ng-model="productionCtrl.production.offer.position">
               <option value="Director of Photography">Director of Photography</option>
               <option value="Sound Mixer">Sound Mixer</option>
               <option value="Boom Operator">Boom Operator</option>
             </select>
+            <p ng-show="crew.offer.position"> {{crew.offer.position}} </p>
           </div>
           <div class="col-xs-2">
             <div class="form-group">
-              <input ng-model="productionCtrl.production.offer.rate" placeholder="Rate"></input>
+              <input ng-hide="crew.offer.rate" ng-model="productionCtrl.production.offer.rate" placeholder="Rate"></input>
+              <p ng-show="crew.offer.rate"> {{ crew.offer.rate | currency:"$":0}} </p>
             </div>
           </div>
           <div class="col-xs-2">
             <div class="form-group">
-              <input ng-model="productionCtrl.production.offer.hours" placeholder="Hours"></input>
+              <input ng-hide="crew.offer.hours" ng-model="productionCtrl.production.offer.hours" placeholder="Hours"></input>
+              <p ng-show="crew.offer.hours"> {{ crew.offer.hours }} hours </p>
             </div>
           </div>
           <div class="col-xs-2 text-right">
-            <a ng-click="productionCtrl.makeOffer(crew._id)" href="/#/offer/{{crew._id}}"class="btn btn-info">Hire</a>  <a>x</a>
+            <a ng-hide="crew.offer.hours" ng-click="productionCtrl.makeOffer(crew._id)" class="btn btn-info">Hire</a>
+            <a ng-show="crew.offer.hours" href="/#/offer/{{crew._id}}"class="btn btn-default">Chat</a>  <a>x</a>
           </div>
         </div>
       </div>
