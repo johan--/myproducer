@@ -23,4 +23,16 @@ function offerController($http, $stateParams, $state, ProductionFactory) {
         // TODO: vm.crew.message = data.messages
       })
   }
+
+  vm.updateOfferStatus = function(status) {
+    vm.offerUpdate = Object.assign({}, vm.crew)
+    vm.offerUpdate.offer.status = status
+
+    // console.log($stateParams.id)
+
+    $http.patch('/api/crew/' + $stateParams.id, vm.offerUpdate)
+      .then(function(data){
+        $state.reload()
+      })
+  }
 }
