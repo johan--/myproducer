@@ -57,10 +57,11 @@
   </form>
 </div>
 
-<div class="crew-view col-sm-9">
+<div class="crew-view col-sm-9" ng-init="showModal=false">
   <div class="crew-list">
     <div class="row">
       <h3>CREW LIST</h3>
+      <a class="btn btn-default" ng-click="showModal=!showModal">+ Add Crew</a>
     </div>
     <div class="crew-list">
       <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="list-group-item">
@@ -102,7 +103,7 @@
     </div>
   </div>
   <!-- TODO Hide this div in a fancy lightbox -->
-  <div class="contact-list">
+  <div class="contact-list" ng-show="showModal">
     <div class="">
       <h3>Approved Crew</h3>
       <form  class="">
