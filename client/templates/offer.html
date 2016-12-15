@@ -1,5 +1,10 @@
 <h1>Offer Summary</h1>
 
+<p>
+  <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Accepted')">Accept</a>
+  <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
+</p>
+
 <p>Position: {{offerCtrl.crew.offer.position}}</p>
 <p>Rate: {{offerCtrl.crew.offer.rate}}</p>
 <p>Hours: {{offerCtrl.crew.offer.hours}}</p>
