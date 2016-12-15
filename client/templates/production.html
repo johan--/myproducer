@@ -134,7 +134,7 @@
             <p>{{crew.location || 'Location'}}</p>
           </div>
           <div class="col-xs-3">
-            <p><button class="btn btn-default">View</button>
+            <p><a ng-href="/#/profile/{{crew._id}}" class="btn btn-default">View</a>
             <button ng-click="productionCtrl.addToCrew(crew._id)" class="btn btn-info">+ Add To</button></p>
           </div>
         </div>
