@@ -92,9 +92,7 @@
   <div class="productions-pending">
     <h4>Pending Productions</h4>
     <ul>
-      <li>mm/dd/yyyy  <a>Review</a></li>
-      <li>mm/dd/yyyy  <a>Review</a></li>
-      <li>mm/dd/yyyy  <a>Review</a></li>
+      <li ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-show="offer.offer.status != 'None'">{{ offer.offer.position }} <a>View</a></li>
     </ul>
   </div>
   <div class="productions-current">
