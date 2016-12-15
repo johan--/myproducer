@@ -32,12 +32,21 @@ router.post('/addcontact', function(req, res){
     User.findOne({username: req.body.email}, function(err, contact){
       if(err) return console.log(err)
 
-      user.contacts.push(contact._id) // add new contact id to logged in user's contact list
+      if(!contact){ // if user does not exist
+        var email = req.body.email
+        var producerId = req.user._id
+        var registrationURL = 'http://myproducer.io/#/register?p=' + producerId
+        // send email
+        console.log("Sending email to " + email + " with registration URL: " + registrationURL)
+        
+      } else { // if user exists
+        user.contacts.push(contact._id) // add new contact id to logged in user's contact list
 
-      user.save(function(err){ // save updated logged in user
-        if(err) return console.log(err)
-        res.json({success: true})
-      })
+        user.save(function(err){ // save updated logged in user
+          if(err) return console.log(err)
+          res.json({success: true})
+        })
+      }
     })
   })
 })
