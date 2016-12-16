@@ -3,6 +3,7 @@
 var express = require('express')
 var router = express.Router()
 var mongoose = require('mongoose')
+var mailer = require('../nodemailer/mailer.js')
 
 // MODELS
 
@@ -34,11 +35,22 @@ router.post('/addcontact', function(req, res){
 
       if(!contact){ // if user does not exist
         var email = req.body.email
-        var producerId = req.user._id
+        var producerId = user._id
         var registrationURL = 'http://myproducer.io/#/register?p=' + producerId
         // send email
-        console.log("Sending email to " + email + " with registration URL: " + registrationURL)
-        
+        mailer.send(
+          'invitation',
+          {
+            email: email,
+            registrationURL: registrationURL,
+            producer: user.username
+          },
+          {
+            to: email,
+            subject: 'Invitation to join myproducer.io'
+          }
+        )
+
       } else { // if user exists
         user.contacts.push(contact._id) // add new contact id to logged in user's contact list
 
