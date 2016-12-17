@@ -1,44 +1,62 @@
-/*body{
-  background-color: #0A0A0A;
-  color: #FFFFFF;
-}*/
+.section {
+  background-color: #333333; }
 
-#modal-root{
+.line-item {
+  background-color: #595959; }
+
+.default-btn {
+  background-color: #888888;
+  color: #FFFFFF; }
+
+.main-btn {
+  background-color: #0072BC;
+  color: #FFFFFF; }
+  .main-btn:hover {
+    background-color: #00AEEF;
+    color: #FFFFFF; }
+
+.approval-btn {
+  background-color: #00937D;
+  color: #FFFFFF; }
+
+.error-btn {
+  background-color: #FF584B;
+  color: #FFFFFF; }
+
+#modal-root {
   display: table;
   min-width: 100%;
   min-height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
-}
+  left: 0; }
 
-#modal-container{
+#modal-container {
   min-width: 100%;
   min-height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   top: 0;
   left: 0;
   display: table-cell;
-  vertical-align: middle;
-}
+  vertical-align: middle; }
 
-#modal{
+#modal {
   color: #FFF;
   width: 800px;
   height: 500px;
   margin: 0 auto;
-  background: black;
+  background: #333333;
   float: none;
-  padding: 40px;
-}
+  padding: 40px; }
 
-.close-modal{
+.close-modal {
   position: absolute;
   top: 0;
   right: 0;
-  background: red;
+  background: #FF584B;
   height: 40px;
   width: 40px;
   text-align: center;
-  line-height: 40px;
-}
+  line-height: 40px; }
+
+/*# sourceMappingURL=styles.css.map */

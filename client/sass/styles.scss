@@ -1,0 +1,98 @@
+// SASS Variables ------------------------------------
+
+// colors
+$background : #0A0A0A;
+$section: #333333;
+$line-item: #595959;
+$button: #888888;
+$text: #FFFFFF;
+$main: #0072BC;
+$highlight: #00AEEF;
+$approval: #00937D;
+$error: #FF584B;
+
+// dimensions
+
+
+
+// fonts
+$font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// STYLES --------------------------------------------
+
+// body {
+//   font: $font-stack;
+//   background-color: $background;
+//   color: $text;
+// }
+
+.section {
+  background-color: $section;
+}
+
+.line-item {
+  background-color: $line-item;
+}
+
+.default-btn{
+  background-color: $button;
+  color: $text;
+}
+.main-btn{
+  background-color: $main;
+  color: $text;
+  &:hover {
+    background-color: $highlight;
+    color: $text;
+  }
+}
+.approval-btn{
+  background-color: $approval;
+  color: $text;
+}
+.error-btn{
+  background-color: $error;
+  color: $text;
+}
+
+// EXISTING CSS
+
+#modal-root{
+  display: table;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#modal-container{
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#modal{
+  color: #FFF;
+  width: 800px;
+  height: 500px;
+  margin: 0 auto;
+  background: $section;
+  float: none;
+  padding: 40px;
+}
+
+.close-modal{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $error;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+}
