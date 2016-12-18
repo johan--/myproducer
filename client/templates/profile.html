@@ -98,18 +98,16 @@
   <div class="productions-current">
     <h4>Current Productions</h4>
     <ul>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
+      <!-- If they're a producer show their productions -->
+      <li ng-repeat=" production in postCtrl.currentUser.productions" ng-show="production.active">{{ production.name }} <a ui-sref="production({id: production._id})">View</a></li>
+      <!-- If they're crew show their accepted productions -->
+      <li ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-show="offer.offer.status != 'Accepted'">{{ offer.offer.position }} <a ui-sref="offer({id: offer._id})">View</a></li>
     </ul>
   </div>
   <div class="productions-past">
     <h4>Past Productions</h4>
     <ul>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
+      <li ng-repeat=" production in postCtrl.currentUser.productions" ng-show="!production.active">{{ production.name }} <a ui-sref="production({id: production._id})">View</a></li>
     </ul>
   </div>
 </div>
