@@ -1,10 +1,10 @@
 <div class="">
   <div class="col-centered">
     <h1>Offer From {{ '[Producer]' }}</h1>
-    <h4>for {{ offerCtrl.production.name }}</h4>
+    <h4>for {{ offerCtrl.crew.production.name }}</h4>
 
-    <p>Date: {{offerCtrl.production.dateFrom}}</p>
-    <p>Location: {{offerCtrl.production.location[0]}}</p>
+    <p>Date: {{offerCtrl.crew.production.dateFrom}}</p>
+    <p>Location: {{offerCtrl.crew.production.location[0]}}</p>
     <p>Title: {{offerCtrl.crew.offer.position}}</p>
     <p>Rate: {{offerCtrl.crew.offer.rate | currency:"$":0}}</p>
     <p>Hours: {{offerCtrl.crew.offer.hours}} /day</p>
