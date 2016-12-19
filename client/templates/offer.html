@@ -1,6 +1,6 @@
 <div class="">
   <div class="col-centered">
-    <h1>Offer From {{ '[Producer]' }}</h1>
+    <h1>Offer Summary</h1>
     <h4>for {{ offerCtrl.crew.production.name }}</h4>
 
     <p>Date: {{offerCtrl.crew.production.dateFrom}}</p>
@@ -19,7 +19,7 @@
       <div class="list-group-item" ng-repeat="message in offerCtrl.crew.message">
         <div class="row">
           <div class="col-xs-2">
-            <p>{{message._by}}</p>
+            <p>{{message._by.username}}</p>
           </div>
           <div class="col-xs-10">
             <p>{{message.content}}</p>
