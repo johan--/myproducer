@@ -4,7 +4,7 @@
   <form ng-submit="otherProfileCtrl.editUser()">
     <div class="profile-view-left col-sm-3">
       <div class="profile-picture">
-        <p>PIC</p><img src="" alt="">
+        <img class="img-responsive" ng-src="./img/profile_default.png">
       </div>
       <div class="profile-name" ng-init="editingState = false">
         <h3>{{ otherProfileCtrl.user.name || "USER NAME" }}</h3>
