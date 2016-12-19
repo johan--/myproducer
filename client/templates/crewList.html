@@ -52,17 +52,17 @@
     <h4>Pending Crew</h4>
   </div>
   <div class="list-group">
-    <div class="list-group-item">
+    <div class="list-group-item" ng-repeat="pendingContact in postCtrl.currentUser.pendingContacts">
       <div class="row">
         <div class="col-xs-3 text-left">
           <p>PIC</p>
           <!-- <img ui-sref="" ng-src=""> -->
         </div>
         <div class="col-xs-5">
-          <p>Approved Name</p>
+          <p>{{ pendingContact.username }}</p>
         </div>
         <div class="col-xs-4">
-          <button ng-click="" class="btn btn-info">Review</button>
+          <a ui-sref="otherProfile({id: pendingContact._id})"><button class="btn btn-info">Review</button></a>
         </div>
       </div>
     </div>
