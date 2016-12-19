@@ -8,10 +8,10 @@
       </div>
       <div class="profile-name" ng-init="editingState = false">
         <h3 ng-hide="editingState">{{ otherProfileCtrl.user.first_name || "FIRST" }}</h3>
-        <label for="userFirstName">First</label>
+        <label ng-show="editingState" for="userFirstName">First</label>
         <input ng-show="editingState" ng-model="otherProfileCtrl.user.first_name" class="form-control" id="userFirstName">
         <h3 ng-hide="editingState">{{ otherProfileCtrl.user.last_name || "LAST" }}</h3>
-        <label for="userLastName">Location</label>
+        <label ng-show="editingState" for="userLastName">LAST</label>
         <input ng-show="editingState" ng-model="otherProfileCtrl.user.last_name" class="form-control" id="userName">
       </div>
         <!-- <div class="form-group">
