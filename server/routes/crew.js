@@ -8,6 +8,7 @@ var Crew = require('../models/Crew.js')
 var User = require('../models/User.js')
 var Production = require('../models/Production.js')
 var Message = require('../models/Message.js')
+var mailer = require('../nodemailer/mailer.js')
 
 router.get('/', function(req, res){
   Crew.find({active: true}, function(err, crew){
@@ -84,6 +85,13 @@ router.post('/:id/message', function(req, res){
   Crew.findById(req.params.id, function(err, crew){
     if(err) return console.log(err)
 
+    // console.log(crew)
+    // console.log(req)
+
+    // variables for NODEMAILER
+    var fromEmail = req.user.username
+    var messageContent = req.body.content
+
     var message = new Message();
     message._by = req.user._id
     message.content = req.body.content
@@ -94,6 +102,22 @@ router.post('/:id/message', function(req, res){
       crew.save(function(err, newCrew){
         if(err) return console.log(err)
 
+        console.log(newCrew)
+        var offerId = newCrew._id
+        var offerURL = 'http://myproducer.io/#/offer/' + offerId
+        mailer.send(
+          'message',
+          {
+            recipient: 'Alex', // TODO
+            sender: fromEmail,
+            message: messageContent,
+            offerURL: offerURL
+          },
+          {
+            to: 'alex.karevoll@gmail.com', // TODO
+            subject: 'New message from myproducer.io'
+          }
+        )
         res.json(newCrew)
       })
     })
