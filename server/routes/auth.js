@@ -19,7 +19,7 @@ router.post('/register', function(req, res) {
       })
     }
 
-    console.log(req.query.addTo)
+    console.log(req.query)
 
     // Add to newly registered user to another user's contact list
     if(req.query.addTo){
@@ -30,6 +30,20 @@ router.post('/register', function(req, res) {
         console.log(user)
 
         user.contacts.push(account)
+
+        user.save(function(err){
+          if (err) console.log(err);
+        })
+      })
+    } else if(req.query.requestTo){
+      // Add to newly registered user to another user's pending contact list
+
+      User.findById(req.query.requestTo, function(err, user){
+        if (err) return console.log(err)
+
+        console.log(user)
+
+        user.pendingContacts.push(account)
 
         user.save(function(err){
           if (err) console.log(err);
