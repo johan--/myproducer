@@ -20,6 +20,7 @@ var User = new Schema({
   offersSent: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   offersReceived: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   contacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
+  pendingContacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
   active: {type: Boolean, default: true},
 }, {timestamps: true})
 

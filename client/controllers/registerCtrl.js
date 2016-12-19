@@ -7,7 +7,7 @@ registerController.$inject = ['$state', '$stateParams', 'AuthService']
 function registerController($state, $stateParams, AuthService) {
   var vm = this
 
-  console.log($stateParams.p)
+  console.log($stateParams)
 
   vm.register = function () {
 
@@ -16,7 +16,7 @@ function registerController($state, $stateParams, AuthService) {
     vm.disabled = true
 
     // call register from service
-    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams.p)
+    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams)
       // handle success
       .then(function () {
         $state.go('profile')
