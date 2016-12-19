@@ -90,5 +90,19 @@
 </div>
 
 <div class="production-quick-view col-sm-4">
-  <h3>Applicant Review</h3>
+  <div ng-show="otherProfileCtrl.isPending">
+    <h3>Applicant Review</h3>
+    <div>
+      <a href="#">
+        <div class="btn btn-default">
+          Approve
+        </div>
+      </a>
+      <a href="#">
+        <div class="btn btn-default">
+          Decline
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
