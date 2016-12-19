@@ -23,6 +23,10 @@
   background-color: #FF584B;
   color: #FFFFFF; }
 
+.col-centered {
+  float: none;
+  margin: 0 auto; }
+
 #modal-root {
   display: table;
   min-width: 100%;
