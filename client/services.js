@@ -94,13 +94,21 @@ angular.module('myApp')
 
     }
 
-    function register(username, password, producerId) {
+    function register(username, password, params) {
 
       // create a new instance of deferred
       var deferred = $q.defer()
 
       // if producerId is provided, append it to register api path
-      var path = producerId ? '/user/register?addTo=' + producerId : '/user/register'
+      if(params.p) {
+        var path = '/user/register?addTo=' + params.p
+      } else if(params.r) {
+        var path = '/user/register?requestTo=' + params.r
+      } else {
+        var path = '/user/register'
+      }
+
+      console.log(path);
 
       // send a post request to the server
       $http.post(path,
