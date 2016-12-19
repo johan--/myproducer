@@ -4,10 +4,11 @@
   <form ng-submit="otherProfileCtrl.editUser()">
     <div class="profile-view-left col-sm-3">
       <div class="profile-picture">
-        <p>PIC</p><img src="" alt="">
+        <img class="img-responsive" ng-src="./img/profile_default.png">
       </div>
       <div class="profile-name" ng-init="editingState = false">
-        <h3>{{ otherProfileCtrl.user.name || "USER NAME" }}</h3>
+        <h3 ng-hide="editingState">{{ otherProfileCtrl.user.first_name || "FIRST" }}</h3>
+        <h3 ng-hide="editingState">{{ otherProfileCtrl.user.last_name || "LAST" }}</h3>
       </div>
         <!-- <div class="form-group">
           <label for="userRole">Role</label>
@@ -89,29 +90,5 @@
 </div>
 
 <div class="production-quick-view col-sm-4">
-  <div class="productions-pending">
-    <h4>Pending Productions</h4>
-    <ul>
-      <li>mm/dd/yyyy  <a>Review</a></li>
-      <li>mm/dd/yyyy  <a>Review</a></li>
-      <li>mm/dd/yyyy  <a>Review</a></li>
-    </ul>
-  </div>
-  <div class="productions-current">
-    <h4>Current Productions</h4>
-    <ul>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-    </ul>
-  </div>
-  <div class="productions-past">
-    <h4>Past Productions</h4>
-    <ul>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-    </ul>
-  </div>
+  <h3>Applicant Review</h3>
 </div>

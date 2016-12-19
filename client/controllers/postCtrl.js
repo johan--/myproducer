@@ -7,7 +7,7 @@ postController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory'
 
 function postController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
-  vm.title = "Post Controller is here"
+  vm.today = new Date();
   vm.currentUser = {}
   vm.showModal = false;
   // vm.currentUser.productions = []

@@ -1,28 +1,35 @@
-<h1>Offer Summary</h1>
+<div class="">
+  <div class="col-centered">
+    <h1>Offer Summary</h1>
+    <h4>for {{ offerCtrl.crew.production.name }}</h4>
 
-<p>
-  <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Accepted')">Accept</a>
-  <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
-</p>
+    <p>Date: {{offerCtrl.crew.production.dateFrom}}</p>
+    <p>Location: {{offerCtrl.crew.production.location[0]}}</p>
+    <p>Title: {{offerCtrl.crew.offer.position}}</p>
+    <p>Rate: {{offerCtrl.crew.offer.rate | currency:"$":0}}</p>
+    <p>Hours: {{offerCtrl.crew.offer.hours}} /day</p>
+    <p>Status: {{offerCtrl.crew.offer.status}}</p>
 
-<p>Position: {{offerCtrl.crew.offer.position}}</p>
-<p>Rate: {{offerCtrl.crew.offer.rate}}</p>
-<p>Hours: {{offerCtrl.crew.offer.hours}}</p>
-<p>Status: {{offerCtrl.crew.offer.status}}</p>
+    <p>
+      <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Accepted')">Accept</a>
+      <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
+    </p>
 
-<div class="list-group">
-  <div class="list-group-item" ng-repeat="message in offerCtrl.crew.message">
-    <div class="row">
-      <div class="col-xs-2">
-        <p>{{message._by}}</p>
-      </div>
-      <div class="col-xs-10">
-        <p>{{message.content}}</p>
+    <div class="list-group">
+      <div class="list-group-item" ng-repeat="message in offerCtrl.crew.message">
+        <div class="row">
+          <div class="col-xs-2">
+            <p>{{message._by.username}}</p>
+          </div>
+          <div class="col-xs-10">
+            <p>{{message.content}}</p>
+          </div>
+        </div>
       </div>
     </div>
+    <form>
+      <input ng-model="offerCtrl.newMessage" type="text" placeholder="Message"></input>
+      <button ng-click="offerCtrl.addMessage()" class"btn btn-info" type="submit" name="button">Send</button>
+    </form>
   </div>
 </div>
-<form>
-  <input ng-model="offerCtrl.newMessage" type="text" placeholder="Message"></input>
-  <button ng-click="offerCtrl.addMessage()" class"btn btn-info" type="submit" name="button">Send</button>
-</form>

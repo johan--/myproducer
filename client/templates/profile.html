@@ -4,10 +4,15 @@
   <form ng-submit="postCtrl.editUser()">
     <div class="profile-view-left col-sm-3">
       <div class="profile-picture">
-        <p>PIC</p><img src="" alt="">
+        <img class="img-responsive" ng-src="./img/profile_default.png">
       </div>
       <div class="profile-name" ng-init="editingState = false">
-        <h3>{{ postCtrl.currentUser.name || "USER NAME" }}</h3>
+        <h3 ng-hide="editingState">{{ otherProfileCtrl.user.first_name || "FIRST" }}</h3>
+        <label ng-show="editingState" for="userFirstName">First</label>
+        <input ng-show="editingState" ng-model="otherProfileCtrl.user.first_name" class="form-control" id="userFirstName">
+        <h3 ng-hide="editingState">{{ otherProfileCtrl.user.last_name || "LAST" }}</h3>
+        <label ng-show="editingState" for="userLastName">LAST</label>
+        <input ng-show="editingState" ng-model="otherProfileCtrl.user.last_name" class="form-control" id="userName">
       </div>
         <!-- <div class="form-group">
           <label for="userRole">Role</label>
@@ -98,18 +103,16 @@
   <div class="productions-current">
     <h4>Current Productions</h4>
     <ul>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
+      <!-- If they're a producer show their productions -->
+      <li ng-repeat=" production in postCtrl.currentUser.productions" ng-show="production.active">{{ production.name }} <a ui-sref="production({id: production._id})">View</a></li>
+      <!-- If they're crew show their accepted productions -->
+      <li ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-show="offer.offer.status != 'Accepted'">{{ offer.offer.position }} <a ui-sref="offer({id: offer._id})">View</a></li>
     </ul>
   </div>
   <div class="productions-past">
     <h4>Past Productions</h4>
     <ul>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
-      <li>mm/dd/yyyy  <a>View</a></li>
+      <li ng-repeat=" production in postCtrl.currentUser.productions" ng-show="!production.active">{{ production.name }} <a ui-sref="production({id: production._id})">View</a></li>
     </ul>
   </div>
 </div>

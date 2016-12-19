@@ -11,12 +11,13 @@ function offerController($http, $stateParams, $state, ProductionFactory) {
       // populate crew for this offer
       vm.crew = crew
       console.log("Crew from get", vm.crew)
-      $http.get('/api/productions/' + vm.crew.production._id)
-        .success(function(production) {
-          //populate production it pertains to
-          vm.production = production
-          console.log("Production from get", vm.production)
-        })
+      // Not needed, production is populated in crew GET
+      // $http.get('/api/productions/' + vm.crew.production._id)
+      //   .success(function(production) {
+      //     //populate production it pertains to
+      //     vm.production = production
+      //     console.log("Production from get", vm.production)
+      //   })
     })
 
   vm.addMessage = function() {
