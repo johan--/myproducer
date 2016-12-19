@@ -3,16 +3,16 @@
   <div class="">
     <h4>Approved Crew</h4>
     <!-- TODO This filter breaks your beautiful modal -->
-    <form  class="">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Filter Crew" ng-model="crewFilter">
-        <div class="input-group-btn">
+    <!-- <form  class=""> -->
+      <div class="">
+        <input type="text" class="" placeholder="Filter Crew" ng-model="crewFilter">
+        <!-- <div class="input-group-btn"> -->
           <button ng-click="crewFilter = ''" ng-disabled="!crewFilter" class="btn btn-default" type="button">
             <span>X</span>
           </button>
-        </div>
+        <!-- </div> -->
       </div>
-    </form>
+    <!-- </form> -->
   </div>
   <div class="list-group">
     <div class="list-group-item" ng-repeat="crew in postCtrl.currentUser.contacts | filter:crewFilter">
