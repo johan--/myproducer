@@ -65,7 +65,7 @@ router.post('/', function(req, res){
 })
 
 router.get('/:id', function(req, res){
-  Crew.findById(req.params.id).populate('from to production message').exec(function(err, crew){
+  Crew.findById(req.params.id).populate({path: 'from to production message', populate: {path: '_by'}}).exec(function(err, crew){
     if(err) return console.log(err)
 
     res.json(crew)
