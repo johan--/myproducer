@@ -9,16 +9,33 @@
       <button type="submit" class="btn btn-default">+ Create New</button>
     </form>
   </div>
-  <div ng-show="production.active" class="list-group-item" ng-repeat="production in postCtrl.currentUser.productions">
-    <div class="row">
-      <div class="col-xs-2 start-date">
-        <p>{{production.dateFrom | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+  <div class="list-group">
+    <div class="row list-group-item">
+      <div class="col-xs-2">
+        <p>Date</p>
       </div>
-      <div class="col-xs-2 end-date">
-        <p>{{production.dateTo | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+      <div class="col-xs-2">
+        <p>Name</p>
+      </div>
+      <div class="col-xs-2">
+        <p></p>
+      </div>
+      <div class="col-xs-3">
+        <p>Location</p>
+      </div>
+      <div class="col-xs-3 text-right">
+        <p>Actions</p>
+      </div>
+    </div>
+    <div ng-show="production.active" class="row list-group-item" ng-repeat="production in postCtrl.currentUser.productions | orderBy: 'name'">
+      <div class="col-xs-2 start-date">
+        <p>{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
       </div>
       <div class="col-xs-2">
         <p>{{ production.name || "Name Not Found" }}</p>
+      </div>
+      <div class="col-xs-2 end-date">
+        <p>{{ production.productionDay ? "Day " + production.productionDay : ''}}</p>
       </div>
       <div class="col-xs-3">
         <p>{{ production.location[0] || 'No Location'}}</p>
