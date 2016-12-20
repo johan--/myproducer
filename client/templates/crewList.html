@@ -15,7 +15,7 @@
     <!-- </form> -->
   </div>
   <div class="list-group">
-    <div class="list-group-item" ng-repeat="crew in postCtrl.currentUser.contacts | filter:crewFilter">
+    <div class="list-group-item" ng-repeat="crew in crewListCtrl.currentUser.contacts | filter:crewFilter">
       <div class="row">
         <div class="col-xs-1 text-left">
           <img class="img-responsive" ng-src="./img/profile_default.png">
@@ -31,15 +31,15 @@
         </div>
         <div class="col-xs-3">
           <p><a ng-href="/#/profile/{{crew._id}}" class="btn btn-default">View</a>
-          <button ng-click="postCtrl.handleAddToButton(crew._id)" class="btn btn-info">+ Add To</button></p>
+          <button ng-click="crewListCtrl.handleAddToButton(crew._id)" class="btn btn-info">+ Add To</button></p>
         </div>
       </div>
     </div>
   </div>
   <div class="add-contact text-left">
-      <form ng-submit="postCtrl.addContact()">
+      <form ng-submit="crewListCtrl.addContact()">
         <div class="form-group">
-          <input class="form-control" ng-model="postCtrl.newContact.email" type="text" placeholder="Crew Email">
+          <input class="form-control" ng-model="crewListCtrl.newContact.email" type="text" placeholder="Crew Email">
           <button type"submit" class="btn btn-info">Add New Contact</button>
         </div>
       </form>
@@ -52,7 +52,7 @@
     <h4>Pending Crew</h4>
   </div>
   <div class="list-group">
-    <div class="list-group-item" ng-repeat="pendingContact in postCtrl.currentUser.pendingContacts">
+    <div class="list-group-item" ng-repeat="pendingContact in crewListCtrl.currentUser.pendingContacts">
       <div class="row">
         <div class="col-xs-3 text-left">
           <p>PIC</p>
@@ -68,13 +68,13 @@
     </div>
   </div>
 </div>
-<div id="modal-root" ng-show="postCtrl.showModal">
+<div id="modal-root" ng-show="crewListCtrl.showModal">
   <div id="modal-container">
     <div id="modal" class="col-sm-12">
-      <div class="" ng-repeat="production in postCtrl.currentUser.productions" ng-click="postCtrl.addCrewToProduction(production._id)">
+      <div class="" ng-repeat="production in crewListCtrl.currentUser.productions" ng-click="crewListCtrl.addCrewToProduction(production._id)">
         <p>{{ production.name }}</p>
       </div>
-      <div class="close-modal" ng-click="postCtrl.closeModal()">
+      <div class="close-modal" ng-click="crewListCtrl.closeModal()">
         X
       </div>
     </div>
