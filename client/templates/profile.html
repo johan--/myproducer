@@ -96,8 +96,9 @@
 <div class="production-quick-view col-sm-4">
   <div class="productions-pending">
     <h4>Pending Productions</h4>
+    <!-- <p>{{ postCtrl.currentUser.offersReceived }}</p> -->
     <ul>
-      <li ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-show="offer.offer.status != 'None'">{{ offer.offer.position }} <a ui-sref="offer({id: offer._id})">View</a></li>
+      <li ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-show="offer.offer.status == 'Pending'">{{ offer.production.name }} <a ui-sref="offer({id: offer._id})">View</a></li>
     </ul>
   </div>
   <div class="productions-current">
