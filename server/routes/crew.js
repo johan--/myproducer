@@ -1,6 +1,7 @@
 // NPM PACKAGES
 
 var express = require('express')
+var mongoose = require('mongoose')
 var router = express.Router()
 
 // MODELS
@@ -21,7 +22,11 @@ router.get('/', function(req, res){
 router.post('/', function(req, res){
 
   // Create crew from req.body
-  Crew.create(req.body, function(err, crew){
+  var newCrew = new Crew()
+  newCrew.to = req.body.to
+  newCrew.production = new mongoose.mongo.ObjectId(req.body.production)
+
+  newCrew.save(function(err, crew){
     if(err) return console.log(err)
 
     // Find user who submitted the crew
@@ -66,7 +71,7 @@ router.post('/', function(req, res){
 })
 
 router.get('/:id', function(req, res){
-  Crew.findById(req.params.id).populate({path: 'from to production message', populate: {path: '_by'}}).exec(function(err, crew){
+  Crew.findById(req.params.id).populate({path: 'from to production message', populate: {path: '_by by_'}}).exec(function(err, crew){
     if(err) return console.log(err)
 
     res.json(crew)

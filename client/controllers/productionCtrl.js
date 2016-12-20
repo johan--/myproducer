@@ -7,7 +7,7 @@ productionController.$inject = ['$http', '$stateParams', '$state', 'ProductionFa
 
 function productionController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
-
+  vm.offers = []
   vm.currentUser = {}
   AuthService.getUserStatus()
     .then(function(data){
@@ -41,16 +41,19 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
         })
     }
 
-    vm.makeOffer = function(id) {
+    vm.makeOffer = function(id, $index) {
+      var newOffer = vm.offers[$index]
+
       vm.offer = {
         offer : {
           status : 'Pending',
-          position : vm.production.offer.position,
-          rate : vm.production.offer.rate,
-          hours : vm.production.offer.hours
+          position : newOffer.position,
+          rate : newOffer.rate,
+          hours : newOffer.hours
         }
       }
       // TODO this patches the offer, but somehow that doesn't reflect within the production object? Do we need to save the production as well on this patch?
+      // TODO: Please confirm if the issue above has been fixed. -Kevin
       $http.patch('api/crew/' + id, vm.offer)
         .success(function(data) {
           console.log("data after patch", data)
