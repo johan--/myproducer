@@ -75,7 +75,7 @@
           </div>
           <div class="col-xs-3 dropdown">
             <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
-            <select ng-hide="crew.offer.position" ng-model="productionCtrl.production.offer.position">
+            <select ng-hide="crew.offer.position" ng-model="productionCtrl.offers[$index].position">
               <option value="Director of Photography">Director of Photography</option>
               <option value="Sound Mixer">Sound Mixer</option>
               <option value="Boom Operator">Boom Operator</option>
@@ -84,18 +84,18 @@
           </div>
           <div class="col-xs-2">
             <div class="form-group">
-              <input ng-hide="crew.offer.rate" ng-model="productionCtrl.production.offer.rate" placeholder="Rate" style="width:100px;"></input>
+              <input ng-hide="crew.offer.rate" ng-model="productionCtrl.offers[$index].rate" placeholder="Rate" style="width:100px;"></input>
               <p ng-show="crew.offer.rate"> {{ crew.offer.rate | currency:"$":0}} </p>
             </div>
           </div>
           <div class="col-xs-2">
             <div class="form-group">
-              <input ng-hide="crew.offer.hours" ng-model="productionCtrl.production.offer.hours" placeholder="Hours" style="width:100px;"></input>
+              <input ng-hide="crew.offer.hours" ng-model="productionCtrl.offers[$index].hours" placeholder="Hours" style="width:100px;"></input>
               <p ng-show="crew.offer.hours"> {{ crew.offer.hours }} hours </p>
             </div>
           </div>
           <div class="col-xs-2 text-right">
-            <a ng-hide="crew.offer.hours" ng-click="productionCtrl.makeOffer(crew._id)" class="btn btn-info">Hire</a>
+            <a ng-hide="crew.offer.hours" ng-click="productionCtrl.makeOffer(crew._id, $index)" class="btn btn-info">Hire</a>
             <a ng-show="crew.offer.hours" href="/#/offer/{{crew._id}}"class="btn btn-default">Chat</a>  <a>x</a>
           </div>
         </div>
