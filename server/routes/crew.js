@@ -82,15 +82,26 @@ router.patch('/:id', function(req, res){
 })
 
 router.post('/:id/message', function(req, res){
+  console.log(req.params.id)
   Crew.findById(req.params.id, function(err, crew){
     if(err) return console.log(err)
 
-    // console.log(crew)
-    // console.log(req)
-
     // variables for NODEMAILER
+
+    // the email the message is from
     var fromEmail = req.user.username
+    // the message content
     var messageContent = req.body.content
+
+    // if the sender is not the crew
+    if (fromEmail !=req.query.crew) {
+      // the receiving email is the crew's in params
+      var toEmail = req.query.crew
+    }
+    else {
+      // otherwise the receiving email is the producer's in params
+        var toEmail = req.query.producer
+    }
 
     var message = new Message();
     message._by = req.user._id
@@ -102,22 +113,24 @@ router.post('/:id/message', function(req, res){
       crew.save(function(err, newCrew){
         if(err) return console.log(err)
 
-        console.log(newCrew)
+        console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
+
         var offerId = newCrew._id
         var offerURL = 'http://myproducer.io/#/offer/' + offerId
-        mailer.send(
-          'message',
-          {
-            recipient: 'Alex', // TODO
-            sender: fromEmail,
-            message: messageContent,
-            offerURL: offerURL
-          },
-          {
-            to: 'alex.karevoll@gmail.com', // TODO
-            subject: 'New message from myproducer.io'
-          }
-        )
+        // TODO WONT SEND ACTUAL MAIL UNTIL COMMENTED IN
+        // mailer.send(
+        //   'message',
+        //   {
+        //     recipient: toEmail,
+        //     sender: fromEmail,
+        //     message: messageContent,
+        //     offerURL: offerURL
+        //   },
+        //   {
+        //     to: toEmail,
+        //     subject: 'New message from myproducer.io'
+        //   }
+        // )
         res.json(newCrew)
       })
     })

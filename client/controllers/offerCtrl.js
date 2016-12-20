@@ -24,7 +24,7 @@ function offerController($http, $stateParams, $state, ProductionFactory) {
     vm.message = {
         content : vm.newMessage
     }
-    $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
+    $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
       .success(function(data) {
         $state.reload()
         // Not exact
