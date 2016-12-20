@@ -2,6 +2,7 @@
 
 var express = require('express')
 var router = express.Router()
+var moment = require('moment')
 
 // MODELS
 
@@ -23,12 +24,42 @@ router.post('/', function(req, res){
   // find it by the user
   User.findById(req.user._id, function(err, user){
     if (err) return console.log(err)
-    var newProduction = new Production(req.body)
-    newProduction.by_ = user
-    newProduction.save(function(err, production){
-      user.productions.push(production)
-      user.save(function(err, user){
-        res.json(production)
+
+    var to = req.body.to  // prod start date (user input)
+    var from = req.body.from // prod end date (user input)
+    var days = moment(to).diff(moment(from), 'days') + 1 // number of prod days
+
+    var productions = [] // init a array for mongo batch create
+
+    var counter = 0 // loop counter
+    while(counter < days) {
+      // production day element
+      productions.push({
+        date: moment(from).add(counter, 'days').format(),
+        by_: req.user._id,
+        name: req.body.name,
+        productionDay: counter + 1
+      })
+      counter += 1
+    }
+
+    // console.log(productions);
+    // console.log(productions.length);
+
+    Production.create(productions, function(err, savedProductions) {
+      if (err) return console.log(err)
+
+      savedProductions.forEach(function(p) {
+        user.productions.push(p)
+      })
+
+      user.save(function(err){
+        if(err) return console.log(err)
+
+        // console.log(typeof arguments);
+        // console.log(arguments);
+
+        res.json(arguments)
       })
     })
   })

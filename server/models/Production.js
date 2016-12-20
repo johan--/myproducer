@@ -10,8 +10,8 @@ var Production = new Schema({
   hospital: String,
   parking: String,
   notes: String,
-  dateFrom: Date,
-  dateTo: Date,
+  date: Date,
+  productionDay: Number,
   crew: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   active: {type: Boolean, default: true},
 }, {timestamps: true})

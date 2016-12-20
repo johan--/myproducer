@@ -4,6 +4,8 @@
     <div class="text-left"><h4>Productions</h4></div>
     <form class="text-right" ng-submit="postCtrl.addProduction()">
         <input ng-model="postCtrl.newProduction.name" type="text" placeholder="Production Name">
+        <input id="prod-date-from" type="date" ng-model="postCtrl.dateFrom" ng-change="postCtrl.updateMinDateTo()" min="{{ postCtrl.minDateFrom }}">
+        <input id="prod-date-to" type="date" ng-model="postCtrl.dateTo">
       <button type="submit" class="btn btn-default">+ Create New</button>
     </form>
   </div>
