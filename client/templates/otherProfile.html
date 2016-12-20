@@ -93,16 +93,16 @@
   <div ng-show="otherProfileCtrl.isPending">
     <h3>Applicant Review</h3>
     <div>
-      <a href="#">
-        <div class="btn btn-default">
+      <!-- <a href="#"> -->
+        <div class="btn btn-default" ng-click="otherProfileCtrl.updateStatus('approve')">
           Approve
         </div>
-      </a>
-      <a href="#">
-        <div class="btn btn-default">
+      <!-- </a> -->
+      <!-- <a href="#"> -->
+        <div class="btn btn-default" ng-click="otherProfileCtrl.updateStatus('decline')">
           Decline
         </div>
-      </a>
+      <!-- </a> -->
     </div>
   </div>
 </div>

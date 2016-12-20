@@ -29,4 +29,12 @@ function otherProfileController($http, $stateParams, $state, ProductionFactory, 
             })
         })
   })
+
+  vm.updateStatus = function(status) {
+    // console.log(status, vm.user._id);
+    $http.patch('/api/users/updateContact?status=' + status + '&of=' + vm.user._id)
+      .then(function(data){
+        console.log(data);
+      })
+  }
 }

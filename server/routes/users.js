@@ -63,6 +63,30 @@ router.post('/addcontact', function(req, res){
   })
 })
 
+router.patch('/updateContact', function(req, res){
+  User.findById(req.user._id, function(err, user){ // find logged in user from database
+    if(err) return console.log(err)
+
+    if(req.query.status && req.query.of){
+      var index = user.pendingContacts.indexOf(req.query.of)
+
+      if(req.query.status == 'approve') {
+        user.contacts.push(user.pendingContacts[index])
+      }
+
+      user.pendingContacts.splice(index, 1)
+
+      user.save(function(err) {
+        if(err) return console.log(err)
+
+        return res.json({success: true})
+      })
+    } else {
+      res.json({success: false})
+    }
+  })
+})
+
 // get a single user
 router.get('/:id', function(req, res){
   User.findById(req.params.id).populate('contacts pendingContacts productions offersReceived').exec(function(err, user){
