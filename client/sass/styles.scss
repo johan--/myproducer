@@ -20,18 +20,53 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 // STYLES --------------------------------------------
 
-// body {
-//   font: $font-stack;
-//   background-color: $background;
-//   color: $text;
-// }
+body {
+  font-family: $font-stack;
+  background-color: $background;
+  color: $text;
+  letter-spacing: 0.5px;
+}
+
+a, a:hover, a:link{
+  text-decoration: none;
+}
 
 .section {
   background-color: $section;
+  overflow: auto;
+  padding: 0;
+  margin-bottom: 15px;
+
+  .title{
+    padding: 15px;
+    margin: 0;
+  }
+
+  .sub-title{
+    padding-bottom: 5px;
+    border-bottom: solid $line-item 2px;
+  }
 }
 
 .line-item {
   background-color: $line-item;
+  padding: 10px;
+  overflow: auto;
+  margin-bottom: 5px;
+
+  p{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
+.line-item:last-of-type {
+  margin-bottom: 0px;
+}
+
+.btn{
+  padding: 2px 10px;
+  font-size: 11px;
 }
 
 .default-btn{
@@ -60,6 +95,141 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     margin: 0 auto;
 }
 
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
+
+.bottom-padding{
+  padding-bottom: 25px;
+}
+
+.x-padding{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.y-padding{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.padding5{
+  padding: 5px;
+  height: 35px;
+}
+
+.no-margin{
+  margin: 0;
+}
+
+.no-padding{
+  padding: 0;
+}
+
+.no-padding-right{
+  padding-right: 0;
+}
+
+.strong{
+  font-weight: 500;
+  letter-spacing: 0.75px;
+}
+
+.form-control, .disabled-form-control{
+  background-color: $line-item;
+  border: 0;
+  border-radius: 1px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: $text;
+  padding: 5px;
+  height: 24px;
+}
+
+.field-title{
+  margin-bottom: 2px;
+}
+
+.bottom-border{
+  border-bottom: solid $line-item 2px;
+}
+
+.right-border{
+  border-right: solid $line-item 2px;
+}
+
+.subtle-border{
+  border: solid $line-item 2px;
+}
+
+.subtle-border-2{
+  padding: 15px;
+  border: solid $section 2px;
+}
+
+.padding15{
+  padding: 15px;
+}
+
+select.subtle-border-2{
+  height: 34px;
+}
+
+.navbar{
+  font-size: 18px;
+
+  .nav-currentuser{
+
+    p{
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .navigation-tabs{
+    p{
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      a{
+        margin-left: 20px;
+        color: $text;
+        font-weight: bold;
+        padding-bottom: 5px;
+      }
+
+      a.active{
+        border-bottom: 5px solid $highlight
+      }
+    }
+  }
+}
+
+.title-field-right{
+  margin-top: 10px;
+  margin-right: 7px;
+  min-height: 29px;
+  width: 200px;
+  float: right;
+}
+
+img.thumb{
+  max-height: 32px;
+  max-width: 32px;
+}
+
+.bg-transparent{
+  background-color: transparent;
+}
+
+.padding20{
+  padding: 20px;
+}
+
 // EXISTING CSS
 
 #modal-root{
@@ -83,12 +253,11 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 #modal{
   color: #FFF;
-  width: 800px;
+  width: 850px;
   height: 500px;
   margin: 0 auto;
-  background: $background;
+  background: $section;
   float: none;
-  padding: 40px;
 }
 
 .close-modal{

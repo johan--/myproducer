@@ -13,7 +13,7 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
     .then(function(data){
       // vm.currentUser = data.data.user
       // console.log(data.data.user)
-      $http.get('/api/users/' + data.data.user._id)
+      $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
           console.log(data);
@@ -31,15 +31,21 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
       })
   }
 
-  vm.closeModal = function() {
-    vm.selectedUserId = undefined;
-    vm.showModal = false;
+  vm.closeModal = function(evt) {
+    if(evt.target.getAttribute('id') === 'modal-container'){
+      vm.selectedUserId = undefined;
+      vm.showModal = false;
+    }
+  }
+
+  vm.openModal = function() {
+    vm.showModal = true;
   }
 
   vm.handleAddToButton = function(id) {
     vm.selectedUserId = id;
     console.log(vm.selectedUserId);
-    vm.showModal = true;
+    vm.openModal()
   }
 
   vm.addCrewToProduction = function(productionId) {

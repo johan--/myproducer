@@ -13,7 +13,7 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
     .then(function(data){
       vm.currentUser = data.data.user
       // console.log(data.data.user)
-      $http.get('/api/users/' + vm.currentUser._id)
+      $http.get('/api/users/' + vm.currentUser._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
           console.log(data);
@@ -70,5 +70,16 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
         .success(function(data) {
           $state.reload()
         })
+    }
+
+    vm.closeModal = function(evt) {
+      if(evt.target.getAttribute('id') === 'modal-container'){
+        vm.selectedUserId = undefined;
+        vm.showModal = false;
+      }
+    }
+
+    vm.openModal = function() {
+      vm.showModal = true;
     }
 }
