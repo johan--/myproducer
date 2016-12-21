@@ -82,6 +82,29 @@ router.patch('/:id', function(req, res){
   Crew.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, crew){
     if(err) return console.log(err)
 
+    // variables for NODEMAILER
+    var offerURL = 'http://http://myproducer.io/#/offer/' + crew._id
+    var fromEmail =req.user.username
+    User.findById(crew.to).exec(function(err, user){
+      var toEmail = user.username
+
+      console.log(offerURL, fromEmail, toEmail) //mail test
+
+      // send mail TODO Wont send until commented in!
+      //   mailer.send(
+      //     'offer',
+      //     {
+      //       recipient: toEmail,
+      //       sender: fromEmail,
+      //       offerURL: offerURL
+      //     },
+      //     {
+      //       to: toEmail,
+      //       subject: 'New offer from myproducer.io'
+      //     }
+      //   )
+      })
+
     res.json(crew)
   })
 })
