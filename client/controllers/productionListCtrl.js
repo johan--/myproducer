@@ -12,7 +12,7 @@ function productionListController($http, $stateParams, $state, ProductionFactory
     .then(function(data){
       // vm.currentUser = data.data.user
       // console.log(data.data.user)
-      $http.get('/api/users/' + data.data.user._id)
+      $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
           console.log(data);

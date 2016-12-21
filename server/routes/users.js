@@ -87,9 +87,30 @@ router.patch('/updateContact', function(req, res){
   })
 })
 
+router.get('/:id/profile', function(req, res){
+  User.findById(req.params.id).populate({path: 'productions offersReceived', select: '-createdAt -updatedAt -__v', populate: {path: 'production'}}).exec(function(err, user){
+    if(err) return console.log(err)
+    res.json(user)
+  })
+})
+
+router.get('/:id/contacts', function(req, res){
+  User.findById(req.params.id).populate({path: 'contacts pendingContacts', select: '-createdAt -updatedAt -__v'}).exec(function(err, user){
+    if(err) return console.log(err)
+    res.json(user)
+  })
+})
+
+router.get('/:id/productions', function(req, res){
+  User.findById(req.params.id).populate({path: 'productions', select: '-createdAt -updatedAt -__v'}).exec(function(err, user){
+    if(err) return console.log(err)
+    res.json(user)
+  })
+})
+
 // get a single user
 router.get('/:id', function(req, res){
-  User.findById(req.params.id).populate({path: 'contacts pendingContacts productions offersReceived', populate: {path: 'production'}}).exec(function(err, user){
+  User.findById(req.params.id).populate('').exec(function(err, user){
     if(err) return console.log(err)
     res.json(user)
   })
