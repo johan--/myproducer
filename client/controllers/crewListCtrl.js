@@ -31,15 +31,21 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
       })
   }
 
-  vm.closeModal = function() {
-    vm.selectedUserId = undefined;
-    vm.showModal = false;
+  vm.closeModal = function(evt) {
+    if(evt.target.getAttribute('id') === 'modal-container'){
+      vm.selectedUserId = undefined;
+      vm.showModal = false;
+    }
+  }
+
+  vm.openModal = function() {
+    vm.showModal = true;
   }
 
   vm.handleAddToButton = function(id) {
     vm.selectedUserId = id;
     console.log(vm.selectedUserId);
-    vm.showModal = true;
+    vm.openModal()
   }
 
   vm.addCrewToProduction = function(productionId) {

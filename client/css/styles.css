@@ -23,7 +23,7 @@ a, a:hover, a:link {
   background-color: #595959;
   padding: 10px;
   overflow: auto;
-  margin-bottom: 3px; }
+  margin-bottom: 5px; }
   .line-item p {
     padding-top: 5px;
     padding-bottom: 5px; }
@@ -31,11 +31,13 @@ a, a:hover, a:link {
 .line-item:last-of-type {
   margin-bottom: 0px; }
 
-.default-btn {
-  background-color: #888888;
-  color: #FFFFFF;
+.btn {
   padding: 2px 10px;
   font-size: 11px; }
+
+.default-btn {
+  background-color: #888888;
+  color: #FFFFFF; }
 
 .main-btn {
   background-color: #0072BC;
@@ -69,11 +71,22 @@ a, a:hover, a:link {
   padding-left: 15px;
   padding-right: 15px; }
 
+.y-padding {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
 .no-margin {
   margin: 0; }
 
+.no-padding {
+  padding: 0; }
+
+.no-padding-right {
+  padding-right: 0; }
+
 .strong {
-  font-weight: bold; }
+  font-weight: 500;
+  letter-spacing: 0.75px; }
 
 .form-control, .disabled-form-control {
   background-color: #595959;
@@ -94,6 +107,9 @@ a, a:hover, a:link {
 .right-border {
   border-right: solid #595959 2px; }
 
+.subtle-border {
+  border: solid #595959 2px; }
+
 .navbar {
   font-size: 18px; }
   .navbar .nav-currentuser p {
@@ -109,6 +125,23 @@ a, a:hover, a:link {
       padding-bottom: 5px; }
     .navbar .navigation-tabs p a.active {
       border-bottom: 5px solid #00AEEF; }
+
+.title-field-right {
+  margin-top: 7px;
+  margin-right: 7px;
+  min-height: 29px;
+  width: 200px;
+  float: right; }
+
+img.thumb {
+  max-height: 32px;
+  max-width: 32px; }
+
+.bg-transparent {
+  background-color: transparent; }
+
+.padding20 {
+  padding: 20px; }
 
 #modal-root {
   display: table;
@@ -129,12 +162,11 @@ a, a:hover, a:link {
 
 #modal {
   color: #FFF;
-  width: 800px;
+  width: 850px;
   height: 500px;
   margin: 0 auto;
-  background: #0A0A0A;
-  float: none;
-  padding: 40px; }
+  background: #333333;
+  float: none; }
 
 .close-modal {
   position: absolute;
