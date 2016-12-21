@@ -51,6 +51,8 @@ router.post('/addcontact', function(req, res){
           }
         )
 
+        res.json({success: true})
+
       } else { // if user exists
         user.contacts.push(contact._id) // add new contact id to logged in user's contact list
 
