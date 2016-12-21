@@ -75,6 +75,10 @@ a, a:hover, a:link {
   padding-top: 20px;
   padding-bottom: 20px; }
 
+.padding5 {
+  padding: 5px;
+  height: 35px; }
+
 .no-margin {
   margin: 0; }
 

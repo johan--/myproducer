@@ -61,4 +61,10 @@ function productionListController($http, $stateParams, $state, ProductionFactory
         // // $state.go('production')
       })
   }
+
+  vm.compareDate = function(date){
+    date = new Date(date)
+    date.setDate(date.getDate() + 1)
+    return new Date() > date
+  }
 }

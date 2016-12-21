@@ -1,47 +1,49 @@
 
-<div class="productions-view">
+<div class="productions-view col-sm-12 section">
   <div class="header-row">
-    <div class="text-left"><h4>Productions</h4></div>
-    <form class="text-right" ng-submit="productionListCtrl.addProduction()">
-        <input ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name">
-        <input id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}">
-        <input id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo">
-      <button type="submit" class="btn btn-default">+ Create New</button>
-    </form>
+    <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
+    <div class="col-sm-9">
+      <form class="text-right" ng-submit="productionListCtrl.addProduction()">
+          <input class="bg-transparent subtle-border padding5" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name">
+          <input class="bg-transparent subtle-border padding5" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}">
+          <input class="bg-transparent subtle-border padding5" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo">
+        <button type="submit" class="btn default-btn">+ Create New</button>
+      </form>
+    </div>
   </div>
-  <div class="list-group">
-    <div class="row list-group-item">
+  <div class="col-sm-12 no-padding">
+    <div class="line-item">
       <div class="col-xs-2">
-        <p>Date</p>
+        <p class="no-margin strong">Date</p>
       </div>
       <div class="col-xs-2">
-        <p>Name</p>
+        <p class="no-margin strong">Name</p>
       </div>
       <div class="col-xs-2">
-        <p></p>
+        <p class="no-margin strong"></p>
       </div>
       <div class="col-xs-3">
-        <p>Location</p>
+        <p class="no-margin strong">Location</p>
       </div>
       <div class="col-xs-3 text-right">
-        <p>Actions</p>
+        <p class="no-margin strong">Actions</p>
       </div>
     </div>
-    <div ng-show="production.active" class="row list-group-item" ng-repeat="production in productionListCtrl.currentUser.productions | orderBy: 'name'">
+    <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.productions | orderBy: 'name'">
       <div class="col-xs-2 start-date">
-        <p>{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+        <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
       </div>
       <div class="col-xs-2">
-        <p>{{ production.name || "Name Not Found" }}</p>
+        <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
       </div>
       <div class="col-xs-2 end-date">
-        <p>{{ production.productionDay ? "Day " + production.productionDay : ''}}</p>
+        <p class="no-margin">{{ production.productionDay ? "Day " + production.productionDay : ''}}</p>
       </div>
       <div class="col-xs-3">
-        <p>{{ production.location[0] || 'No Location'}}</p>
+        <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
       </div>
       <div class="col-xs-3 text-right">
-        <p><a ng-href="/#/production/{{production._id}}" class="btn default-btn">View</a>
+        <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn default-btn">View</a>
         <button ng-click="" class="btn main-btn">Edit</button></p>
       </div>
     </div>
@@ -69,14 +71,14 @@
   </div>
 </div>
 
-<div class="past-productions-view">
+<div class="past-productions-view col-sm-12 section">
   <div class="">
-    <h4>Past Productions</h4>
+    <div class="col-sm-12"><h4>Past Productions</h4></div>
   </div>
-  <div ng-show="!production.active" class="list-group-item" ng-repeat="production in productionListCtrl.currentUser.productions">
-    <div class="row">
+  <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.productions">
+    <div class="">
       <div class="col-xs-2 start-date">
-        <p>{{production.dateFrom | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+        <p>{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
       </div>
       <div class="col-xs-2 end-date">
         <p>{{production.dateTo | date:'shortDate' || 'mm/dd/yyyy'}}</p>
