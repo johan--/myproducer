@@ -17,12 +17,13 @@
         <img src="" alt=""><h3>💎myproducer.io</h3>
       </div>
       <div class="navright col-xs-9 text-right">
-        <div class="nav-currentuser">
-          <p>Hello, {{ main.currentUser.username }}<a ui-sref="logout">[x]</a></p>
-          <hr>
+        <div class="nav-currentuser bottom-border">
+          <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.username }}
+            <a ui-sref="logout">[x]</a>
+          </p>
         </div>
         <div class="navigation-tabs">
-          <p><a ui-sref="profile">PROFILE</a> | <a ui-sref="crew-list">CREW LIST</a> | <a ui-sref="production-list">PRODUCTIONS</a></p>
+          <p class="no-margin"><a class="active" ui-sref="profile">PROFILE</a><a ui-sref="crew-list">CREW LIST</a><a ui-sref="production-list">PRODUCTIONS</a></p>
         </div>
       </div>
     </div>

@@ -27,6 +27,10 @@ body {
   letter-spacing: 0.5px;
 }
 
+a, a:hover, a:link{
+  text-decoration: none;
+}
+
 .section {
   background-color: $section;
   overflow: auto;
@@ -128,8 +132,42 @@ body {
   margin-bottom: 2px;
 }
 
+.bottom-border{
+  border-bottom: solid $line-item 2px;
+}
+
 .right-border{
   border-right: solid $line-item 2px;
+}
+
+.navbar{
+  font-size: 18px;
+
+  .nav-currentuser{
+
+    p{
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .navigation-tabs{
+    p{
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      a{
+        margin-left: 20px;
+        color: $text;
+        font-weight: bold;
+        padding-bottom: 5px;
+      }
+
+      a.active{
+        border-bottom: 5px solid $highlight
+      }
+    }
+  }
 }
 
 // EXISTING CSS

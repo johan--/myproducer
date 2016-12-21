@@ -4,6 +4,9 @@ body {
   color: #FFFFFF;
   letter-spacing: 0.5px; }
 
+a, a:hover, a:link {
+  text-decoration: none; }
+
 .section {
   background-color: #333333;
   overflow: auto;
@@ -85,8 +88,27 @@ body {
 .field-title {
   margin-bottom: 2px; }
 
+.bottom-border {
+  border-bottom: solid #595959 2px; }
+
 .right-border {
   border-right: solid #595959 2px; }
+
+.navbar {
+  font-size: 18px; }
+  .navbar .nav-currentuser p {
+    padding-top: 10px;
+    padding-bottom: 10px; }
+  .navbar .navigation-tabs p {
+    padding-top: 10px;
+    padding-bottom: 10px; }
+    .navbar .navigation-tabs p a {
+      margin-left: 20px;
+      color: #FFFFFF;
+      font-weight: bold;
+      padding-bottom: 5px; }
+    .navbar .navigation-tabs p a.active {
+      border-bottom: 5px solid #00AEEF; }
 
 #modal-root {
   display: table;
