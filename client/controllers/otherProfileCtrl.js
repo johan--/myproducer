@@ -19,7 +19,7 @@ function otherProfileController($http, $stateParams, $state, ProductionFactory, 
           console.log(data);
 
 
-          $http.get('/api/users/' + $stateParams.id)
+          $http.get('/api/users/' + $stateParams.id + '/profile')
             .then(function(data){
               vm.user = data.data
 
@@ -30,11 +30,12 @@ function otherProfileController($http, $stateParams, $state, ProductionFactory, 
         })
   })
 
-  vm.updateStatus = function(status) {
-    // console.log(status, vm.user._id);
-    $http.patch('/api/users/updateContact?status=' + status + '&of=' + vm.user._id)
-      .then(function(data){
-        console.log(data);
-      })
+  vm.compareDate = function(date){
+    date = new Date(date)
+    date.setDate(date.getDate() + 1)
+    if(!date){
+      return false
+    }
+    return new Date() < date
   }
 }

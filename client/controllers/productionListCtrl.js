@@ -65,6 +65,9 @@ function productionListController($http, $stateParams, $state, ProductionFactory
   vm.compareDate = function(date){
     date = new Date(date)
     date.setDate(date.getDate() + 1)
-    return new Date() > date
+    if(!date){
+      return false
+    }
+    return new Date() < date
   }
 }

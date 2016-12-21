@@ -29,7 +29,7 @@
         <p class="no-margin strong">Actions</p>
       </div>
     </div>
-    <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.productions | orderBy: 'name'">
+    <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.productions | orderBy: 'name'">
       <div class="col-xs-2 start-date">
         <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
       </div>
@@ -75,7 +75,7 @@
   <div class="">
     <div class="col-sm-12"><h4>Past Productions</h4></div>
   </div>
-  <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.productions">
+  <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.productions">
     <div class="">
       <div class="col-xs-2 start-date">
         <p>{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
