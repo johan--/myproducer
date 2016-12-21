@@ -90,7 +90,7 @@ router.patch('/:id', function(req, res){
 
       console.log(offerURL, fromEmail, toEmail) //mail test
 
-      // send mail TODO Wont send until commented in!
+      // send mail TODO Wont send email until commented in!
       //   mailer.send(
       //     'offer',
       //     {
@@ -145,7 +145,7 @@ router.post('/:id/message', function(req, res){
 
         var offerId = newCrew._id
         var offerURL = 'http://myproducer.io/#/offer/' + offerId
-        // TODO WONT SEND ACTUAL MAIL UNTIL COMMENTED IN
+        // TODO WONT SEND EMAIL UNTIL COMMENTED IN
         // mailer.send(
         //   'message',
         //   {
