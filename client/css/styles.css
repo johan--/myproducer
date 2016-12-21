@@ -100,7 +100,7 @@ a, a:hover, a:link {
   line-height: 1.2;
   color: #FFFFFF;
   padding: 5px;
-  min-height: 24px; }
+  height: 24px; }
 
 .field-title {
   margin-bottom: 2px; }
@@ -113,6 +113,16 @@ a, a:hover, a:link {
 
 .subtle-border {
   border: solid #595959 2px; }
+
+.subtle-border-2 {
+  padding: 15px;
+  border: solid #333333 2px; }
+
+.padding15 {
+  padding: 15px; }
+
+select.subtle-border-2 {
+  height: 34px; }
 
 .navbar {
   font-size: 18px; }
@@ -131,7 +141,7 @@ a, a:hover, a:link {
       border-bottom: 5px solid #00AEEF; }
 
 .title-field-right {
-  margin-top: 7px;
+  margin-top: 10px;
   margin-right: 7px;
   min-height: 29px;
   width: 200px;
