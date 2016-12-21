@@ -1,35 +1,64 @@
-<div class="">
-  <div class="col-centered">
-    <h1>Offer Summary</h1>
+<div class="section bottom-padding">
+  <div class="col-sm-6 col-centered">
+    <h3>OFFER FROM {{offerCtrl.crew.production.by_.username | uppercase}}</h3>
     <h4>for {{ offerCtrl.crew.production.name }}</h4>
 
-    <p>Date: {{offerCtrl.crew.production.dateFrom}}</p>
-    <p>Location: {{offerCtrl.crew.production.location[0]}}</p>
-    <p>Title: {{offerCtrl.crew.offer.position}}</p>
-    <p>Rate: {{offerCtrl.crew.offer.rate | currency:"$":0}}</p>
-    <p>Hours: {{offerCtrl.crew.offer.hours}} /day</p>
-    <p>Status: {{offerCtrl.crew.offer.status}}</p>
+    <div class="line-item">
+      <div class="form-group">
+        <h5 class="field-title"><label>Date</label></h5>
+        <p class="disabled-form-control-2">{{offerCtrl.crew.production.date | date: 'shortDate'}}</p>
+      </div>
+      <div class="form-group">
+        <h5 class="field-title"><label>Location</label></h5>
+        <p class="disabled-form-control-2">{{offerCtrl.crew.production.location[0]}}</p>
+      </div>
+      <div class="form-group">
+        <h5 class="field-title"><label>Title</label></h5>
+        <p class="disabled-form-control-2">{{offerCtrl.crew.offer.position}}</p>
+      </div>
 
-    <p>
-      <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Accepted')">Accept</a>
-      <a class="btn btn-default" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
-    </p>
+      <div class="form-group col-sm-6 no-padding">
+        <h5 class="field-title"><label>Rate</label></h5>
+        <p class="disabled-form-control-2">{{offerCtrl.crew.offer.rate | currency:"$":0}}</p>
+      </div>
 
-    <div class="list-group">
-      <div class="list-group-item" ng-repeat="message in offerCtrl.crew.message">
-        <div class="row">
-          <div class="col-xs-2">
-            <p>{{message._by.username}}</p>
-          </div>
-          <div class="col-xs-10">
-            <p>{{message.content}}</p>
-          </div>
-        </div>
+      <div class="form-group col-sm-6 no-padding-right">
+        <h5 class="field-title"><label>Hours</label></h5>
+        <p class="disabled-form-control-2">{{offerCtrl.crew.offer.hours}}</p>
       </div>
     </div>
-    <form>
-      <input ng-model="offerCtrl.newMessage" type="text" placeholder="Message"></input>
-      <button ng-click="offerCtrl.addMessage()" class"btn btn-info" type="submit" name="button">Send</button>
-    </form>
+
+    <div class="col-sm-12 padding20">
+      <div class="col-sm-6 text-right">
+        <a class="btn default-btn x-padding" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
+      </div>
+      <div class="col-sm-6 text-left">
+        <a class="btn approval-btn x-padding" ng-click="offerCtrl.updateOfferStatus('Accepted')">Accept</a>
+      </div>
+    </div>
+
+    <div class="col-sm-12 no-padding">
+      <div class="group line-item">
+        <div class="message" ng-repeat="message in offerCtrl.crew.message">
+            <div class="avatar">
+              <img class="thumb" ng-src="./img/profile_default.png">
+            </div>
+            <div class="chat">
+              <span class="strong">{{message._by.username}}</span>
+              <span class="meta"><small>{{ message.createdAt | date:'medium' }}</small></span>
+              <p class="content no-margin">{{message.content}}</p>
+            </div>
+        </div>
+      </div>
+
+      <form>
+        <p>
+          <textarea class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message"></textarea>
+        </p>
+        <p>
+          <a ng-click="offerCtrl.addMessage()" class="btn default-btn x-padding">Send</a>
+        </p>
+      </form>
+    </div>
   </div>
 </div>

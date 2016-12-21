@@ -92,7 +92,7 @@ a, a:hover, a:link {
   font-weight: 500;
   letter-spacing: 0.75px; }
 
-.form-control, .disabled-form-control {
+.form-control, .disabled-form-control, .disabled-form-control-2 {
   background-color: #595959;
   border: 0;
   border-radius: 1px;
@@ -101,6 +101,10 @@ a, a:hover, a:link {
   color: #FFFFFF;
   padding: 5px;
   height: 24px; }
+
+.disabled-form-control-2 {
+  background-color: #333333;
+  border: 1px solid #222; }
 
 .field-title {
   margin-bottom: 2px; }
@@ -156,6 +160,25 @@ img.thumb {
 
 .padding20 {
   padding: 20px; }
+
+.avatar img.thumb {
+  max-width: 50px;
+  max-height: 50px;
+  float: left; }
+
+.message .chat {
+  margin-left: 60px; }
+
+.message .chat .content {
+  font-size: 12px; }
+
+.message {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.chat .meta {
+  font-style: italic;
+  color: #888888; }
 
 #modal-root {
   display: table;

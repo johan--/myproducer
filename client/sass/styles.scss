@@ -139,7 +139,7 @@ a, a:hover, a:link{
   letter-spacing: 0.75px;
 }
 
-.form-control, .disabled-form-control{
+.form-control, .disabled-form-control, .disabled-form-control-2{
   background-color: $line-item;
   border: 0;
   border-radius: 1px;
@@ -148,6 +148,11 @@ a, a:hover, a:link{
   color: $text;
   padding: 5px;
   height: 24px;
+}
+
+.disabled-form-control-2{
+  background-color: $section;
+  border: 1px solid #222;
 }
 
 .field-title{
@@ -229,6 +234,31 @@ img.thumb{
 .padding20{
   padding: 20px;
 }
+
+.avatar img.thumb{
+  max-width: 50px;
+  max-height: 50px;
+  float: left;
+}
+
+.message .chat{
+  margin-left: 60px;
+}
+
+.message .chat .content{
+  font-size: 12px;
+}
+
+.message {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.chat .meta{
+  font-style: italic;
+  color: $button;
+}
+
 
 // EXISTING CSS
 
