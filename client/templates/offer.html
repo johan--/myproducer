@@ -28,12 +28,18 @@
       </div>
     </div>
 
-    <div class="col-sm-12 padding20">
+    <div class="col-sm-12 padding20" ng-if="offerCtrl.isCrew">
       <div class="col-sm-6 text-right">
         <a class="btn default-btn x-padding" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
       </div>
       <div class="col-sm-6 text-left">
         <a class="btn approval-btn x-padding" ng-click="offerCtrl.updateOfferStatus('Accepted')">Accept</a>
+      </div>
+    </div>
+
+    <div class="col-sm-12 padding20" ng-if="offerCtrl.isProducer">
+      <div class="text-center">
+        <a class="btn approval-btn x-padding"> {{ offerCtrl.crew.offer.status }} </a>
       </div>
     </div>
 

@@ -1,23 +1,27 @@
 angular.module('myApp')
   .controller('offerController', offerController)
 
-offerController.$inject = ['$http', '$stateParams', '$state']
+offerController.$inject = ['AuthService', '$http', '$stateParams', '$state']
 
-function offerController($http, $stateParams, $state, ProductionFactory) {
+function offerController(AuthService, $http, $stateParams, $state, ProductionFactory) {
   var vm = this
 
-  $http.get('/api/crew/' + $stateParams.id)
-    .success(function(crew) {
-      // populate crew for this offer
-      vm.crew = crew
-      console.log("Crew from get", vm.crew)
-      // Not needed, production is populated in crew GET
-      // $http.get('/api/productions/' + vm.crew.production._id)
-      //   .success(function(production) {
-      //     //populate production it pertains to
-      //     vm.production = production
-      //     console.log("Production from get", vm.production)
-      //   })
+  vm.currentUser = {}
+  AuthService.getUserStatus()
+    .then(function(data){
+      vm.currentUser = data.data.user
+      $http.get('/api/users/' + vm.currentUser._id)
+        .success(function(data){
+          vm.currentUser = data
+
+          $http.get('/api/crew/' + $stateParams.id)
+            .success(function(crew) {
+              vm.crew = crew
+              vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
+              vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
+              console.log("Crew from get", vm.crew)
+            })
+        })
     })
 
   vm.addMessage = function() {
