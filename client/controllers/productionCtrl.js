@@ -9,6 +9,11 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
   var vm = this
   vm.offers = []
   vm.currentUser = {}
+
+  vm.notifModal = {}
+
+  vm.editingState = false
+
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
@@ -29,8 +34,20 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
     vm.editProduction = function(){
       $http.patch('/api/productions/' + $stateParams.id, vm.production)
         .success(function(data) {
-          vm.editing = false
-          $state.reload()
+          vm.editingState = false
+          console.log(data);
+          data.crew = vm.production.crew
+          vm.production = data
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully updated your profile.'
+        })
+        .error(function(data) {
+          console.log(data);
+          vm.notifModal.isFailure = false
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
         })
     }
 
@@ -68,7 +85,19 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       }
       $http.post('/api/crew/', crewOffer)
         .success(function(data) {
-          $state.reload()
+          console.log(data);
+          vm.production.crew = data
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully added a new crew member.'
+        })
+        .error(function(data) {
+          console.log(data);
+          vm.notifModal.isFailure = false
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.showModal = false
+          vm.openNotifModal()
         })
     }
 
@@ -81,5 +110,13 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
 
     vm.openModal = function() {
       vm.showModal = true;
+    }
+
+    vm.openNotifModal = function() {
+      vm.notifModal.show = true
+    }
+
+    vm.closeNotifModal = function() {
+      vm.notifModal.show = false
     }
 }

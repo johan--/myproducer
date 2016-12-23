@@ -55,11 +55,15 @@ router.post('/', function(req, res){
               production.crew.push(crew);
 
               // Save production
-              production.save(function(err){
+              production.save(function(err, newProduction){
                 if(err) return console.log(err)
 
-                // Return crew created
-                res.json(crew)
+                Production.populate(newProduction, {path: 'crew', populate: {path: 'to'}}, function(err, populatedProduction){
+                  if(err) return console.log(err)
+
+                  // / Return updated crew list
+                  res.json(populatedProduction.crew)
+                })
               })
             })
           })

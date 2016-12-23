@@ -5,41 +5,41 @@
         PRODUCTION
       </h3>
       <p class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}}</p>
-      <form ng-submit="productionCtrl.editProduction()" ng-init="editingState = false">
+      <form ng-submit="productionCtrl.editProduction()">
         <div class="production-name form-group">
           <label for="productionName">Title</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.name" class="form-control" id="productionName">
-          <p class="disabled-form-control" ng-hide="editingState"> {{productionCtrl.production.name}} </p>
+          <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.name" class="form-control" id="productionName">
+          <p class="disabled-form-control" ng-hide="productionCtrl.editingState"> {{productionCtrl.production.name}} </p>
         </div>
         <div class="form-group">
           <label for="production1Location">Location</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.location[0]" class="form-control" id="production1Location">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.location[0]}} </p>
+          <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.location[0]" class="form-control" id="production1Location">
+          <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.location[0]}} </p>
         </div>
         <div class="form-group">
           <label for="production2Location">Location #2</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.location[1]" class="form-control" id="production2Location">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.location[1]}} </p>
+          <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.location[1]" class="form-control" id="production2Location">
+          <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.location[1]}} </p>
         </div>
         <div class="form-group">
           <label for="productionWeather">Weather</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.weather" class="form-control" id="productionWeather">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.weather}} </p>
+          <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.weather" class="form-control" id="productionWeather">
+          <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.weather}} </p>
         </div>
         <div class="form-group">
           <label for="productionHospital">Hospital</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.hospital" class="form-control" id="productionHospital">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.hostpital}} </p>
+          <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.hospital" class="form-control" id="productionHospital">
+          <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.hostpital}} </p>
         </div>
         <div class="form-group">
           <label for="productionParking">Parking</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.parking" class="form-control" id="productionParking"></input>
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.parking}} </p>
+          <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.parking" class="form-control" id="productionParking"></input>
+          <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.parking}} </p>
         </div>
         <div class="form-group">
           <label for="productionNotes">Notes:</label>
-          <textarea ng-show="editingState" ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes"></textarea>
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.notes}} </p>
+          <textarea ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes"></textarea>
+          <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.notes}} </p>
         </div>
         <!-- TODO Works for Entering Info, not Displaying -->
         <!-- <div class="form-group">
@@ -52,8 +52,8 @@
         </div> -->
         <div class="">
           <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a>
-          <button ng-show="editingState" type="submit" class="btn btn-default">Update</button>
-          <a ng-hide="editingState" ng-click="editingState = !editingState" class="btn btn-default">Edit</a>
+          <button ng-show="productionCtrl.editingState" type="submit" class="btn btn-default">Update</button>
+          <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn btn-default">Edit</a>
         </div>
       </form>
     </div>
@@ -147,6 +147,19 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionCtrl.notifModal.show">
+  <div id="modal-container" ng-click="productionCtrl.closeNotifModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i ng-if="productionCtrl.notifModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
+        <h1><i ng-if="productionCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
+        <p>{{ productionCtrl.notifModal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>
   </div>
