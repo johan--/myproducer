@@ -290,13 +290,11 @@ img.thumb{
   float: none;
 }
 
-.close-modal{
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: $error;
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  line-height: 40px;
+#modal-sm{
+  color: #FFF;
+  width: 450px;
+  height: 200px;
+  margin: 0 auto;
+  background: $section;
+  float: none;
 }

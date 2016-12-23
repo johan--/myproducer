@@ -91,7 +91,20 @@
 </div>
 
 <div class="production-quick-view col-sm-4">
-  <div class="section">
+  <div class="section" ng-if="otherProfileCtrl.isPending">
+    <div class="productions-current">
+      <h4 class="title">Applicant Review</h4>
+      <div class="col-sm-12 padding20">
+        <div class="col-sm-6 text-right">
+          <a class="btn default-btn x-padding" ng-click="otherProfileCtrl.updateContactStatus('decline')">Decline</a>
+        </div>
+        <div class="col-sm-6 text-left">
+          <a class="btn approval-btn x-padding" ng-click="otherProfileCtrl.updateContactStatus('approve')">Accept</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" ng-if="!otherProfileCtrl.isPending">
     <div class="productions-current">
       <h4 class="title">Current Productions</h4>
       <div class="group">
@@ -105,7 +118,7 @@
       </div>
     </div>
   </div>
-  <div class="section">
+  <div class="section" ng-if="!otherProfileCtrl.isPending">
     <div class="productions-past">
       <h4 class="title">Past Productions</h4>
       <div>
@@ -113,6 +126,18 @@
           <p class="float-left no-margin strong">{{ production.name }}</p>
           <p class="float-right no-margin"><a class="btn default-btn" ui-sref="production({id: production._id})">View</a></p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-show="otherProfileCtrl.modal.show">
+  <div id="modal-container" ng-click="otherProfileCtrl.closeModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-check"></i></h1>
+        <p>{{ otherProfileCtrl.modal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>
   </div>

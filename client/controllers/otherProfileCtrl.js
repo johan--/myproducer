@@ -7,6 +7,8 @@ otherProfileController.$inject = ['$http', '$stateParams', '$state', 'Production
 
 function otherProfileController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this;
+  vm.modal = {}
+  vm.modal.show = false;
 
   vm.currentUser = {}
   AuthService.getUserStatus()
@@ -24,11 +26,25 @@ function otherProfileController($http, $stateParams, $state, ProductionFactory, 
               vm.user = data.data
 
               vm.isPending = vm.currentUser.pendingContacts.find(function(pc) {
-                return pc._id === vm.user._id
+                return pc === vm.user._id
               })
             })
         })
   })
+
+  vm.updateContactStatus = function(status) {
+    console.log(status);
+    console.log($stateParams.id);
+
+    $http.patch('/api/users/updateContact?of=' + $stateParams.id + '&status=' + status)
+      .then(function success(data){
+        vm.modal.content = 'You have ' + status + 'd offer to join your crew list.'
+        vm.showModal()
+      }, function failure() {
+        vm.modal.content = 'An error has occurred. Please try again.'
+        vm.showModal()
+      })
+  }
 
   vm.compareDate = function(date){
     date = new Date(date)
@@ -37,5 +53,13 @@ function otherProfileController($http, $stateParams, $state, ProductionFactory, 
       return false
     }
     return new Date() < date
+  }
+
+  vm.showModal = function(){
+    vm.modal.show = true
+  }
+
+  vm.closeModal = function(){
+    vm.modal.show = false
   }
 }

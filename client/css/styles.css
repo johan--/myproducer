@@ -205,14 +205,12 @@ img.thumb {
   background: #333333;
   float: none; }
 
-.close-modal {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: #FF584B;
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  line-height: 40px; }
+#modal-sm {
+  color: #FFF;
+  width: 450px;
+  height: 200px;
+  margin: 0 auto;
+  background: #333333;
+  float: none; }
 
 /*# sourceMappingURL=styles.css.map */
