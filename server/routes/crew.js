@@ -103,7 +103,11 @@ router.post('/:id/message', function(req, res){
       crew.save(function(err, newCrew){
         if(err) return console.log(err)
 
-        res.json(newCrew)
+        Crew.populate(newCrew, {path: 'message', populate: {path: '_by'}}, function(err, populatedCrew) {
+          if(err) return console.log(err)
+
+          res.json(populatedCrew.message)
+        })
       })
     })
   })

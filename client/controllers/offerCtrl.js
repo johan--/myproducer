@@ -30,9 +30,8 @@ function offerController(AuthService, $http, $stateParams, $state, ProductionFac
     }
     $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
       .success(function(data) {
-        $state.reload()
-        // Not exact
-        // TODO: vm.crew.message = data.messages
+        vm.crew.message = data
+        vm.newMessage = ''
       })
   }
 
