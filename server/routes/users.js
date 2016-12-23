@@ -58,7 +58,7 @@ router.post('/addcontact', function(req, res){
 
         user.save(function(err){ // save updated logged in user
           if(err) return console.log(err)
-          res.json({success: true})
+          res.json({success: true, data: contact})
         })
       }
     })

@@ -8,6 +8,7 @@ crewListController.$inject = ['$http', '$stateParams', '$state', 'ProductionFact
 function crewListController($http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
   vm.showModal = false;
+  vm.notifModal = {}
 
   AuthService.getUserStatus()
     .then(function(data){
@@ -26,8 +27,23 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
     // search for existing user here
     $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
-        console.log("contact added", data);
-        $state.reload();
+        vm.newContact.email = ''
+
+        vm.notifModal.isSuccess = true
+
+        if(data.data) {
+          var username = data.data.username
+          vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
+        } else {
+          vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + ' to  be part of your crew list.'
+        }
+      })
+      .error(function(data) {
+        vm.notifModal.isFailure = true
+        vm.notifModal.content = 'An error has occurred. Please try again.'
+      })
+      .finally(function() {
+        vm.openNotifModal()
       })
   }
 
@@ -58,5 +74,13 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
      .success(function(data) {
        $state.reload()
      })
+  }
+
+  vm.openNotifModal = function() {
+    vm.notifModal.show = true
+  }
+
+  vm.closeNotifModal = function() {
+    vm.notifModal.show = false
   }
 }
