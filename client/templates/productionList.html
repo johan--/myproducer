@@ -81,10 +81,10 @@
         <p>{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
       </div>
       <div class="col-xs-2 end-date">
-        <p>{{production.dateTo | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+        <p>{{ production.name || "Name Not Found" }}</p>
       </div>
       <div class="col-xs-2">
-        <p>{{ production.name || "Name Not Found" }}</p>
+        <p>{{ 'Day ' + production.productionDay}}</p>
       </div>
       <div class="col-xs-3">
         <p>{{ production.location[0] || 'No Location'}}</p>
