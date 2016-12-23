@@ -85,18 +85,37 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       }
       $http.post('/api/crew/', crewOffer)
         .success(function(data) {
-          console.log(data);
           vm.production.crew = data
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully added a new crew member.'
         })
         .error(function(data) {
-          console.log(data);
           vm.notifModal.isFailure = false
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
         .finally(function() {
           vm.showModal = false
+          vm.openNotifModal()
+        })
+    }
+
+    vm.removeFromCrew = function(id, index) {
+      $http.delete('/api/crew/' + id)
+        .then(function(data) {
+          if(data.data.success){
+            vm.notifModal.isSuccess = true
+            vm.notifModal.content = 'You have successfully removed a crew member.'
+            vm.production.crew.splice(index, 1)
+          } else {
+            vm.notifModal.isFailure = false
+            vm.notifModal.content = 'An error has occurred. Please try again.'
+          }
+        })
+        .catch(function(data) {
+          vm.notifModal.isFailure = false
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
           vm.openNotifModal()
         })
     }

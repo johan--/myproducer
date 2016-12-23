@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="crew-list col-sm-12 no-padding">
-        <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item">
+        <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active">
           <div class="col-xs-1 text-left">
             <img class="thumb" ng-src="./img/profile_default.png">
             <!-- <img ui-sref="" ng-src=""> -->
@@ -103,7 +103,7 @@
           </div>
           <div class="col-xs-1 no-padding text-right">
             <a ng-hide="crew.offer.hours" ng-click="productionCtrl.makeOffer(crew._id, $index)" class="btn main-btn">Hire</a>
-            <a ng-show="crew.offer.hours" href="/#/offer/{{crew._id}}"class="btn default-btn">Chat</a> <a><i class="fa fa-times"></i></a>
+            <a ng-show="crew.offer.hours" href="/#/offer/{{crew._id}}" class="btn default-btn">Chat</a> <a ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
           </div>
         </div>
       </div>
