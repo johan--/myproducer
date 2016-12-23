@@ -43,7 +43,7 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
         })
         .error(function(data) {
           console.log(data);
-          vm.notifModal.isFailure = false
+          vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
         .finally(function() {
@@ -73,8 +73,21 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       // TODO: Please confirm if the issue above has been fixed. -Kevin
       $http.patch('api/crew/' + id, vm.offer)
         .success(function(data) {
-          console.log("data after patch", data)
-          $state.reload()
+          console.log(data);
+          vm.production.crew[$index].offer.hours = data.offer.hours
+          vm.production.crew[$index].offer.position = data.offer.position
+          vm.production.crew[$index].offer.rate = data.offer.rate
+          vm.production.crew[$index].offer.status = data.offer.status
+
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully sent on offer to ' + vm.production.crew[$index].to.username + '.'
+        })
+        .error(function(data) {
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
         })
     }
 
@@ -90,7 +103,7 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
           vm.notifModal.content = 'You have successfully added a new crew member.'
         })
         .error(function(data) {
-          vm.notifModal.isFailure = false
+          vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
         .finally(function() {
@@ -112,7 +125,7 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
           }
         })
         .catch(function(data) {
-          vm.notifModal.isFailure = false
+          vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
         .finally(function() {
