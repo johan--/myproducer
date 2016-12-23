@@ -58,13 +58,14 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
     vm.showModal = true;
   }
 
-  vm.handleAddToButton = function(id) {
+  vm.handleAddToButton = function(id, username) {
     vm.selectedUserId = id;
+    vm.selectedUsername = username;
     console.log(vm.selectedUserId);
     vm.openModal()
   }
 
-  vm.addCrewToProduction = function(productionId) {
+  vm.addCrewToProduction = function(productionId, productionName) {
     var offer = {
       to: vm.selectedUserId,
       production: productionId
@@ -72,7 +73,19 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
     console.log(offer);
     $http.post('/api/crew/', offer)
      .success(function(data) {
-       $state.reload()
+       console.log(data);
+
+       vm.notifModal.isSuccess = true
+       vm.notifModal.content = 'You have successfully added ' + vm.selectedUsername + ' to ' + productionName + '.'
+     })
+     .error(function(data) {
+       console.log(data);
+
+       vm.notifModal.isFailure = true
+       vm.notifModal.content = 'An error has occurred. Please try again.'
+     })
+     .finally(function() {
+       vm.openNotifModal()
      })
   }
 
