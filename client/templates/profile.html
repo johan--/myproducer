@@ -10,84 +10,84 @@
           <div class="profile-picture">
             <img class="img-responsive" ng-src="./img/profile_default.png">
           </div>
-          <div class="profile-name" ng-init="editingState = false">
+          <div class="profile-name">
             <h3 class="sub-title">{{ postCtrl.currentUser.username | uppercase }}</h3>
-            <!-- <h3 ng-hide="editingState">{{ otherProfileCtrl.user.first_name || "FIRST" }}</h3>
-            <label ng-show="editingState" for="userFirstName">First</label>
-            <input ng-show="editingState" ng-model="otherProfileCtrl.user.first_name" class="form-control" id="userFirstName">
-            <h3 ng-hide="editingState">{{ otherProfileCtrl.user.last_name || "LAST" }}</h3>
-            <label ng-show="editingState" for="userLastName">LAST</label>
-            <input ng-show="editingState" ng-model="otherProfileCtrl.user.last_name" class="form-control" id="userName"> -->
+            <!-- <h3 ng-hide="postCtrl.editingState">{{ otherProfileCtrl.user.first_name || "FIRST" }}</h3>
+            <label ng-show="postCtrl.editingState" for="userFirstName">First</label>
+            <input ng-show="postCtrl.editingState" ng-model="otherProfileCtrl.user.first_name" class="form-control" id="userFirstName">
+            <h3 ng-hide="postCtrl.editingState">{{ otherProfileCtrl.user.last_name || "LAST" }}</h3>
+            <label ng-show="postCtrl.editingState" for="userLastName">LAST</label>
+            <input ng-show="postCtrl.editingState" ng-model="otherProfileCtrl.user.last_name" class="form-control" id="userName"> -->
           </div>
           <!-- <div class="form-group">
             <label for="userRole">Role</label>
-            <input ng-show="editingState" ng-model="postCtrl.currentUser.role[0]" class="form-control" id="userRole">
-            <p ng-hide="editingState"> {{postCtrl.currentUser.role[0] || 'Role'}} </p>
+            <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.role[0]" class="form-control" id="userRole">
+            <p ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.role[0] || 'Role'}} </p>
           </div> -->
           <div class="form-group">
             <h5 class="field-title"><label for="userLocation">Location</label></h4>
-            <input ng-show="editingState" ng-model="postCtrl.currentUser.location" class="form-control" id="userLocation">
-            <p class="disabled-form-control" ng-hide="editingState"> {{postCtrl.currentUser.location || 'Location'}} </p>
+            <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.location" class="form-control" id="userLocation">
+            <p class="disabled-form-control" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.location || 'Location'}} </p>
           </div>
           <div class="form-group">
             <h5 class="field-title"><label for="userTitle">Title</label></h4>
-            <input ng-show="editingState" ng-model="postCtrl.currentUser.title" class="form-control" id="userTitle">
-            <p class="disabled-form-control" ng-hide="editingState"> {{postCtrl.currentUser.title}} </p>
+            <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.title" class="form-control" id="userTitle">
+            <p class="disabled-form-control" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.title}} </p>
           </div>
           <div class="form-group">
             <h5 class="field-title"><label for="userTitle">Email Address</label></h4>
-            <input ng-show="editingState" ng-model="postCtrl.currentUser.username" class="form-control" id="userEmail">
-            <p class="disabled-form-control" ng-hide="editingState"> {{postCtrl.currentUser.username}} </p>
+            <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.username" class="form-control" id="userEmail">
+            <p class="disabled-form-control" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.username}} </p>
           </div>
           <div class="form-group">
             <h5 class="field-title"><label for="userPhone">Phone Number</label></h4>
-            <input ng-show="editingState" ng-model="postCtrl.currentUser.phone" class="form-control" id="userPhone"></input>
-            <p class="disabled-form-control" ng-hide="editingState"> {{postCtrl.currentUser.phone}} </p>
+            <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.phone" class="form-control" id="userPhone"></input>
+            <p class="disabled-form-control" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.phone}} </p>
           </div>
           <div class="form-group">
             <h5 class="field-title"><label for="userWebsite">Website</label></h4>
-            <input ng-show="editingState" ng-model="postCtrl.currentUser.website" class="form-control" id="userWebsite">
-            <p class="disabled-form-control" ng-hide="editingState"> {{postCtrl.currentUser.website}} </p>
+            <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.website" class="form-control" id="userWebsite">
+            <p class="disabled-form-control" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.website}} </p>
           </div>
           <div class="form-group">
-            <button ng-show="editingState" type="submit" class="btn default-btn">Update</button>
-            <a ng-hide="editingState" ng-click="editingState = !editingState" class="btn default-btn">Edit</a>
+            <button ng-show="postCtrl.editingState" type="submit" class="btn default-btn">Update</button>
+            <a ng-hide="postCtrl.editingState" ng-click="postCtrl.editingState = true" class="btn default-btn">Edit</a>
           </div>
         </div>
         <div class="profile-view-right col-sm-8">
           <div class="profile-bio form-group">
             <h4 class="sub-title">Bio</h4>
-            <textarea ng-show="editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
-            <p ng-hide="editingState" >{{postCtrl.currentUser.bio || 'Write a bio...'}}</p>
+            <textarea ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
+            <p ng-hide="postCtrl.editingState || !postCtrl.currentUser.bio" >{{postCtrl.currentUser.bio}}</p>
           </div>
           <div class="profile-skills form-group">
             <h4 class="sub-title">Skills</h4>
-            <div ng-show="editingState">
+            <div ng-show="postCtrl.editingState">
               <p><input ng-model="postCtrl.currentUser.skills[0]" class="form-control" id="userSkill1"></p>
               <p><input ng-model="postCtrl.currentUser.skills[1]" class="form-control" id="userSkill2"></p>
               <p><input ng-model="postCtrl.currentUser.skills[2]" class="form-control" id="userSkill3"></p>
               <p><input ng-model="postCtrl.currentUser.skills[3]" class="form-control" id="userSkill4"></p>
             </div>
-            <ul ng-hide="editingState">
-              <li>{{postCtrl.currentUser.skills[0] || 'Add a Skill'}}</li>
-              <li>{{postCtrl.currentUser.skills[1] || 'Add a Skill'}}</li>
-              <li>{{postCtrl.currentUser.skills[2] || 'Add a Skill'}}</li>
-              <li>{{postCtrl.currentUser.skills[3] || 'Add a Skill'}}</li>
+            <ul ng-hide="postCtrl.editingState">
+              <li ng-if="postCtrl.currentUser.skills[0]">{{postCtrl.currentUser.skills[0]}}</li>
+              <li ng-if="postCtrl.currentUser.skills[1]">{{postCtrl.currentUser.skills[1]}}</li>
+              <li ng-if="postCtrl.currentUser.skills[2]">{{postCtrl.currentUser.skills[2]}}</li>
+              <li ng-if="postCtrl.currentUser.skills[3]">{{postCtrl.currentUser.skills[3]}}</li>
             </ul>
           </div>
           <div class="profile-equipment form-group">
             <h4 class="sub-title">Equipment</h4>
-            <div ng-show="editingState">
+            <div ng-show="postCtrl.editingState">
               <p><input ng-model="postCtrl.currentUser.equipment[0]" class="form-control" id="userEquipment1"></p>
               <p><input ng-model="postCtrl.currentUser.equipment[1]" class="form-control" id="userEquipment2"></p>
               <p><input ng-model="postCtrl.currentUser.equipment[2]" class="form-control" id="userEquipment3"></p>
               <p><input ng-model="postCtrl.currentUser.equipment[3]" class="form-control" id="userEquipment4"></p>
             </div>
-            <ul ng-hide="editingState">
-              <li>{{postCtrl.currentUser.equipment[0] || 'Add Equipment'}}</li>
-              <li>{{postCtrl.currentUser.equipment[1] || 'Add Equipment'}}</li>
-              <li>{{postCtrl.currentUser.equipment[2] || 'Add Equipment'}}</li>
-              <li>{{postCtrl.currentUser.equipment[3] || 'Add Equipment'}}</li>
+            <ul ng-hide="postCtrl.editingState">
+              <li ng-if="postCtrl.currentUser.equipment[0]">{{postCtrl.currentUser.equipment[0]}}</li>
+              <li ng-if="postCtrl.currentUser.equipment[1]">{{postCtrl.currentUser.equipment[1]}}</li>
+              <li ng-if="postCtrl.currentUser.equipment[2]">{{postCtrl.currentUser.equipment[2]}}</li>
+              <li ng-if="postCtrl.currentUser.equipment[3]">{{postCtrl.currentUser.equipment[3]}}</li>
             </ul>
           </div>
         </div>
@@ -131,6 +131,19 @@
           <p class="float-left no-margin strong">{{ production.name }}</p>
           <p class="float-right no-margin"><a class="btn default-btn" ui-sref="production({id: production._id})">View</a></p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="postCtrl.modal.show">
+  <div id="modal-container" ng-click="postCtrl.closeModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i ng-if="postCtrl.modal.isSuccess" class="fa fa-check-circle-o"></i></h1>
+        <h1><i ng-if="postCtrl.modal.isFailure" class="fa fa-times-circle-o"></i></h1>
+        <p>{{ postCtrl.modal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>
   </div>

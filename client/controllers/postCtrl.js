@@ -9,6 +9,11 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   var vm = this
   vm.currentUser = {}
 
+  vm.editingState = false;
+
+  vm.modal = {}
+  vm.modal.show = false;
+
   // vm.currentUser.productions = []
   AuthService.getUserStatus()
     .then(function(data){
@@ -25,7 +30,27 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
   vm.editUser = function() {
     $http.patch('/api/users/'+ vm.currentUser._id, vm.currentUser)
       .success(function(data) {
-        $state.reload();
+        data.productions = vm.currentUser.productions
+        data.offersReceived = vm.currentUser.offersReceived
+        vm.currentUser = data
+        vm.modal.isSuccess = true
+        vm.modal.content = 'You have successfully updated your profile.'
       })
+      .error(function(data) {
+        vm.modal.isFailure = true
+        vm.modal.content = 'An error has occurred. Please try again.'
+      })
+      .finally(function() {
+        vm.editingState = false
+        vm.openModal()
+      })
+  }
+
+  vm.openModal = function() {
+    vm.modal.show = true
+  }
+
+  vm.closeModal = function() {
+    vm.modal.show = false
   }
 }
