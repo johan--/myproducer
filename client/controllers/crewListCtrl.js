@@ -17,6 +17,7 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
       $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
+          vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id
           console.log(data);
         })
   })
