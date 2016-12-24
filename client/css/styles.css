@@ -180,6 +180,9 @@ img.thumb {
   font-style: italic;
   color: #888888; }
 
+.top-margin5 {
+  margin-top: 5px; }
+
 #modal-root {
   display: table;
   min-width: 100%;
