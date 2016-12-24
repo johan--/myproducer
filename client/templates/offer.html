@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="col-sm-12 padding20" ng-if="offerCtrl.isCrew">
+    <div class="col-sm-12 padding20" ng-if="offerCtrl.isCrew && offerCtrl.crew.offer.status == 'Pending'">
       <div class="col-sm-6 text-right">
         <a class="btn default-btn x-padding" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
       </div>
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="col-sm-12 padding20" ng-if="offerCtrl.isProducer">
+    <div class="col-sm-12 padding20" ng-if="offerCtrl.isProducer || offerCtrl.crew.offer.status != 'Pending'">
       <div class="text-center">
         <a class="btn approval-btn x-padding"> {{ offerCtrl.crew.offer.status }} </a>
       </div>

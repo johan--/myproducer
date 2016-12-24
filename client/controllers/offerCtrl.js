@@ -24,9 +24,9 @@ function offerController(AuthService, $http, $stateParams, $state, ProductionFac
         })
     })
 
-  vm.addMessage = function() {
+  vm.addMessage = function(message) {
     vm.message = {
-        content : vm.newMessage
+        content : message || vm.newMessage
     }
     $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
       .success(function(data) {
@@ -39,11 +39,18 @@ function offerController(AuthService, $http, $stateParams, $state, ProductionFac
     vm.offerUpdate = Object.assign({}, vm.crew)
     vm.offerUpdate.offer.status = status
 
-    // console.log($stateParams.id)
-
     $http.patch('/api/crew/' + $stateParams.id, vm.offerUpdate)
       .then(function(data){
-        $state.reload()
+
+        var message = ''
+
+        if (status == 'Accepted') {
+          message = 'I accept your offer to work with you on ' + vm.crew.production.name + '.'
+          vm.addMessage(message)
+        } else if (status  == 'Declined') {
+          message = 'I respectfully decline your offer to work with you on ' + vm.crew.production.name + '.'
+          vm.addMessage(message)
+        }
       })
   }
 }
