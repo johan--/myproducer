@@ -158,4 +158,13 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
     vm.closeNotifModal = function() {
       vm.notifModal.show = false
     }
+
+    vm.compareDate = function(date){
+      date = new Date(date)
+      date.setDate(date.getDate() + 1)
+      if(!date){
+        return false
+      }
+      return new Date() < date
+    }
 }

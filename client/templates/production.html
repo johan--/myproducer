@@ -51,10 +51,10 @@
             <label for="productionEnd">End:</label>
             <input ng-model="productionCtrl.production.dateTo" class="form-control" id="productionEnd" type="date"></input>
           </div> -->
-          <div ng-if="productionCtrl.isProducer">
+          <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)">
             <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a>
-            <button ng-show="productionCtrl.editingState" type="submit" class="btn btn-default">Update</button>
-            <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn btn-default">Edit</a>
+            <button ng-show="productionCtrl.editingState" type="submit" class="btn default-btn">Update</button>
+            <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn default-btn">Edit</a>
           </div>
         </form>
       </div>
@@ -68,12 +68,12 @@
           <h3 class="title">CREW LIST</h3>
         </div>
         <div class="col-sm-6 no-padding">
-          <div ng-if="productionCtrl.isProducer" class="text-right title">
+          <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="text-right title">
             <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add Crew</a>
           </div>
         </div>
         <div class="crew-list col-sm-12 no-padding">
-          <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && (productionCtrl.isProducer || crew.offer.position)">
+          <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && ((productionCtrl.isProducer &&  productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
             <div class="col-xs-1 text-left">
               <img class="thumb" ng-src="./img/profile_default.png">
               <!-- <img ui-sref="" ng-src=""> -->
