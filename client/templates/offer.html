@@ -2,7 +2,7 @@
   <div class="section bottom-padding">
     <div class="col-sm-6 col-centered">
       <h3>OFFER FROM {{offerCtrl.crew.production.by_.username | uppercase}}</h3>
-      <h4>for {{ offerCtrl.crew.production.name }}</h4>
+      <h4>for <a ui-sref="production({id: offerCtrl.crew.production._id})">{{ offerCtrl.crew.production.name }}</a></h4>
 
       <div class="line-item">
         <div class="form-group">
