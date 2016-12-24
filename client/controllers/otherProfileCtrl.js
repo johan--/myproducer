@@ -31,6 +31,8 @@ function otherProfileController($rootScope, $http, $stateParams, $state, Product
               vm.isPending = vm.currentUser.pendingContacts.find(function(pc) {
                 return pc === vm.user._id
               })
+
+              vm.ready = true
             })
         })
   })

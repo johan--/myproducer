@@ -21,6 +21,7 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
         .success(function(data){
           vm.currentUser = data
           vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id
+          vm.ready = true
           console.log(data);
         })
   })

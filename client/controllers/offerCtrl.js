@@ -22,6 +22,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, P
               vm.crew = crew
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
               vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
+              vm.ready = true
               console.log("Crew from get", vm.crew)
             })
         })

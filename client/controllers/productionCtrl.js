@@ -32,6 +32,7 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
     .success(function(production) {
       vm.production = production
       console.log("Production from the Factory", vm.production)
+      vm.ready = true
     })
 
     vm.editProduction = function(){

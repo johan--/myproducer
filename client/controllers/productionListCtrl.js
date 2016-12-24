@@ -18,6 +18,8 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
+          vm.ready = true
+          vm.updateMinDateTo()
           console.log(data);
         })
   })
@@ -43,8 +45,6 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
       alert('Invalid date')
     }
   }
-
-  vm.updateMinDateTo()
 
   vm.addProduction = function(){
     var newProduction = {

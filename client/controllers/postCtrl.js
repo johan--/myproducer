@@ -25,6 +25,7 @@ function postController($rootScope, $http, $stateParams, $state, ProductionFacto
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data){
           vm.currentUser = data
+          vm.ready = true
           console.log(data);
         })
   })
