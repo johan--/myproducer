@@ -88,6 +88,17 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
 
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully sent on offer to ' + vm.production.crew[$index].to.username + '.'
+
+          vm.message = {
+              content : 'I would like to invite you to be part of my production team.'
+          }
+
+          if(vm.message.content){
+            $http.post('/api/crew/' + id + '/message', vm.message)
+              .success(function(data) {
+                console.log(data);
+              })
+          }
         })
         .error(function(data) {
           vm.notifModal.isFailure = true
