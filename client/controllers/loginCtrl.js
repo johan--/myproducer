@@ -1,11 +1,14 @@
 angular.module('myApp')
   .controller('loginController', loginController)
 
-loginController.$inject = ['$state', 'AuthService']
+loginController.$inject = ['$rootScope', '$state', 'AuthService']
 
 // LOGIN CONTROLLER:
-function loginController($state, AuthService) {
+function loginController($rootScope, $state, AuthService) {
   var vm = this
+
+  $rootScope.activeTab = {}
+
   vm.login = function () {
 
     // initial values

@@ -1,11 +1,14 @@
 angular.module('myApp')
   .controller('logoutController', logoutController)
 
-logoutController.$inject = ['$state', 'AuthService']
+logoutController.$inject = ['$rootScope', '$state', 'AuthService']
 
 // LOGOUT CONTROLLER:
-function logoutController($state, AuthService) {
+function logoutController($rootScope, $state, AuthService) {
   var vm = this
+
+  $rootScope.activeTab = {}
+
   vm.logout = function () {
 
     // call logout from service

@@ -127,7 +127,7 @@
       </div>
 
       <div class="group">
-        <div class="line-item" ng-repeat="crew in productionCtrl.currentUser.contacts | filter: crewFilter">
+        <div class="line-item" ng-repeat="crew in productionCtrl.currentUser.contacts | filter: crewFilter track by $index">
           <div class="row">
             <div class="col-xs-1 text-left">
               <img class="thumb" ng-src="./img/profile_default.png">

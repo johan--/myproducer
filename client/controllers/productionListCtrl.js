@@ -1,12 +1,15 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
 
-productionListController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
 // PRODUCTIONS
 
-function productionListController($http, $stateParams, $state, ProductionFactory, AuthService){
+function productionListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
+
+  $rootScope.activeTab = {}
+  $rootScope.activeTab.production = true
 
   AuthService.getUserStatus()
     .then(function(data){

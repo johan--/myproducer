@@ -1,12 +1,15 @@
 angular.module('myApp')
   .controller('offerController', offerController)
 
-offerController.$inject = ['AuthService', '$http', '$stateParams', '$state']
+offerController.$inject = ['$rootScope', 'AuthService', '$http', '$stateParams', '$state']
 
-function offerController(AuthService, $http, $stateParams, $state, ProductionFactory) {
+function offerController($rootScope, AuthService, $http, $stateParams, $state, ProductionFactory) {
   var vm = this
 
   vm.currentUser = {}
+
+  $rootScope.activeTab = {}
+
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user

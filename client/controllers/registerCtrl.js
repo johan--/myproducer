@@ -1,11 +1,13 @@
 angular.module('myApp')
   .controller('registerController', registerController)
 
-registerController.$inject = ['$state', '$stateParams', 'AuthService']
+registerController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService']
 
 // REGISTER CONTROLLER:
-function registerController($state, $stateParams, AuthService) {
+function registerController($rootScope, $state, $stateParams, AuthService) {
   var vm = this
+
+  $rootScope.activeTab = {}
 
   console.log($stateParams)
 

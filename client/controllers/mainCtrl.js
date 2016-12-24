@@ -5,6 +5,9 @@ mainController.$inject = ['$rootScope', '$state', 'AuthService']
 
 function mainController($rootScope, $state, AuthService) {
   var vm = this
+
+  $rootScope.activeTab = {}
+
   $rootScope.$on('$stateChangeStart', function (event) {
     AuthService.getUserStatus()
       .then(function(data){

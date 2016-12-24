@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('postController', postController)
 
-postController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
 // PRODUCTIONS
 
-function postController($http, $stateParams, $state, ProductionFactory, AuthService){
+function postController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
   vm.currentUser = {}
 
@@ -13,6 +13,9 @@ function postController($http, $stateParams, $state, ProductionFactory, AuthServ
 
   vm.modal = {}
   vm.modal.show = false;
+
+  $rootScope.activeTab = {}
+  $rootScope.activeTab.profile = true
 
   // vm.currentUser.productions = []
   AuthService.getUserStatus()
