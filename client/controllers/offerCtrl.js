@@ -28,11 +28,14 @@ function offerController(AuthService, $http, $stateParams, $state, ProductionFac
     vm.message = {
         content : message || vm.newMessage
     }
-    $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
-      .success(function(data) {
-        vm.crew.message = data
-        vm.newMessage = ''
-      })
+
+    if(vm.message.content){
+      $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
+        .success(function(data) {
+          vm.crew.message = data
+          vm.newMessage = ''
+        })
+    }
   }
 
   vm.updateOfferStatus = function(status) {
