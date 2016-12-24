@@ -25,15 +25,18 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
         .success(function(data){
           vm.currentUser = data
           console.log(data);
+
+          ProductionFactory.show($stateParams.id)
+            .success(function(production) {
+              vm.production = production
+              console.log("Production from the Factory", vm.production)
+
+              vm.isProducer = vm.production.by_ === vm.currentUser._id
+
+              vm.ready = true
+            })
         })
   })
-
-  ProductionFactory.show($stateParams.id)
-    .success(function(production) {
-      vm.production = production
-      console.log("Production from the Factory", vm.production)
-      vm.ready = true
-    })
 
     vm.editProduction = function(){
       $http.patch('/api/productions/' + $stateParams.id, vm.production)
