@@ -31,7 +31,7 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
               vm.production = production
               console.log("Production from the Factory", vm.production)
 
-              vm.isProducer = vm.production.by_ === vm.currentUser._id
+              vm.isProducer = vm.production.by_._id === vm.currentUser._id
 
               vm.ready = true
             })
