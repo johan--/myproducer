@@ -18,9 +18,21 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
+
+          // get all productions where I am a crew member
+          var otherProductions = []
+          data.offersReceived.forEach(function(crew) {
+            if(crew.offer.status === 'Accepted') {
+              otherProductions.push(crew.production)
+            }
+          })
+
+          // combine my productions and other productions where I am crew member
+          vm.currentUser.allProductions = data.productions.concat(otherProductions)
           vm.ready = true
           vm.updateMinDateTo()
-          console.log(data);
+          console.log(vm.currentUser);
+          console.log(vm.currentUser.allProductions);
         })
   })
 
