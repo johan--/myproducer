@@ -103,9 +103,12 @@
               <!-- </div> -->
             </div>
             <div ng-if="productionCtrl.isProducer" class="col-xs-1 no-padding text-right top-margin5">
-              <a ng-hide="crew.offer.hours" ng-click="productionCtrl.makeOffer(crew._id, $index)"
+              <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)"
                class="btn main-btn">Hire</a>
-              <a ng-show="crew.offer.hours" href="/#/offer/{{crew._id}}" class="btn default-btn">Chat</a> <a ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
+              <a ng-if="crew.offer.status === 'Pending'" href="/#/offer/{{crew._id}}" class="btn default-btn">Chat</a>
+              <a ng-if="crew.offer.status ===
+              'Accepted'" class="btn approval-btn">Hired</a>
+              <a ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
             </div>
           </div>
         </div>
