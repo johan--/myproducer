@@ -60,4 +60,13 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, P
         }
       })
   }
+
+  vm.compareDate = function(date){
+    date = new Date(date)
+    date.setDate(date.getDate() + 1)
+    if(!date){
+      return false
+    }
+    return new Date() < date
+  }
 }
