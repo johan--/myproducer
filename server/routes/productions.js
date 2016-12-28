@@ -59,7 +59,7 @@ router.post('/', function(req, res){
         // console.log(typeof arguments);
         // console.log(arguments);
 
-        res.json(arguments)
+        res.json(savedProductions)
       })
     })
   })

@@ -33,7 +33,7 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
           vm.ready = true
 
           if (vm.currentUser.role === 'producer') {
-            vm.updateMinDateTo()
+            // vm.updateMinDateTo()
           }
         })
   })
@@ -71,6 +71,7 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
     // console.log(newProduction);
     $http.post('/api/productions', newProduction)
       .success(function(data){
+        vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
         // console.log(vm.currentUser)
         // vm.currentUser.productions.push(data)
         // vm.newProduction = {}
