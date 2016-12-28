@@ -20,6 +20,11 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
       $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
+
+          if (vm.currentUser.role === 'crew') {
+            $state.go('profile')
+          }
+
           vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id
           vm.ready = true
           console.log(data);
