@@ -9,6 +9,7 @@ var Crew = require('../models/Crew.js')
 var User = require('../models/User.js')
 var Production = require('../models/Production.js')
 var Message = require('../models/Message.js')
+var mailer = require('../nodemailer/mailer.js')
 
 router.get('/', function(req, res){
   Crew.find({active: true}, function(err, crew){
@@ -85,13 +86,54 @@ router.patch('/:id', function(req, res){
   Crew.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, crew){
     if(err) return console.log(err)
 
+    // variables for NODEMAILER
+    var offerURL = 'http://myproducer.io/#/offer/' + crew._id
+    var fromEmail =req.user.username
+    User.findById(crew.to).exec(function(err, user){
+      var toEmail = user.username
+
+      console.log(offerURL, fromEmail, toEmail) //mail test
+
+      // send mail TODO Wont send email until commented in!
+      //   mailer.send(
+      //     'offer',
+      //     {
+      //       recipient: toEmail,
+      //       sender: fromEmail,
+      //       offerURL: offerURL
+      //     },
+      //     {
+      //       to: toEmail,
+      //       subject: 'New offer from myproducer.io'
+      //     }
+      //   )
+      })
+
     res.json(crew)
   })
 })
 
 router.post('/:id/message', function(req, res){
+  console.log(req.params.id)
   Crew.findById(req.params.id, function(err, crew){
     if(err) return console.log(err)
+
+    // variables for NODEMAILER
+
+    // the email the message is from
+    var fromEmail = req.user.username
+    // the message content
+    var messageContent = req.body.content
+
+    // if the sender is not the crew
+    if (fromEmail !=req.query.crew) {
+      // the receiving email is the crew's in params
+      var toEmail = req.query.crew
+    }
+    else {
+      // otherwise the receiving email is the producer's in params
+        var toEmail = req.query.producer
+    }
 
     var message = new Message();
     message._by = req.user._id
@@ -102,6 +144,25 @@ router.post('/:id/message', function(req, res){
 
       crew.save(function(err, newCrew){
         if(err) return console.log(err)
+
+        console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
+
+        var offerId = newCrew._id
+        var offerURL = 'http://myproducer.io/#/offer/' + offerId
+        // TODO WONT SEND EMAIL UNTIL COMMENTED IN
+        // mailer.send(
+        //   'message',
+        //   {
+        //     recipient: toEmail,
+        //     sender: fromEmail,
+        //     message: messageContent,
+        //     offerURL: offerURL
+        //   },
+        //   {
+        //     to: toEmail,
+        //     subject: 'New message from myproducer.io'
+        //   }
+        // )
 
         Crew.populate(newCrew, {path: 'message', populate: {path: '_by'}}, function(err, populatedCrew) {
           if(err) return console.log(err)
