@@ -15,6 +15,7 @@ function logoutController($rootScope, $state, AuthService) {
     AuthService.logout()
       .then(function () {
         $state.go('login')
+        $rootScope.isLoggedIn = false
       })
   }
 }
