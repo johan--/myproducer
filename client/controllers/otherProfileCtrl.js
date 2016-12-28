@@ -1,14 +1,19 @@
 angular.module('myApp')
   .controller('otherProfileController', otherProfileController)
 
-otherProfileController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+otherProfileController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
 // OTHER PROFILE
 
-function otherProfileController($http, $stateParams, $state, ProductionFactory, AuthService){
+function otherProfileController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this;
+  vm.modal = {}
+  vm.modal.show = false;
 
   vm.currentUser = {}
+
+  $rootScope.activeTab = {}
+
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
@@ -24,11 +29,27 @@ function otherProfileController($http, $stateParams, $state, ProductionFactory, 
               vm.user = data.data
 
               vm.isPending = vm.currentUser.pendingContacts.find(function(pc) {
-                return pc._id === vm.user._id
+                return pc === vm.user._id
               })
+
+              vm.ready = true
             })
         })
   })
+
+  vm.updateContactStatus = function(status) {
+    console.log(status);
+    console.log($stateParams.id);
+
+    $http.patch('/api/users/updateContact?of=' + $stateParams.id + '&status=' + status)
+      .then(function success(data){
+        vm.modal.content = 'You have ' + status + 'd offer to join your crew list.'
+        vm.showModal()
+      }, function failure() {
+        vm.modal.content = 'An error has occurred. Please try again.'
+        vm.showModal()
+      })
+  }
 
   vm.compareDate = function(date){
     date = new Date(date)
@@ -37,5 +58,13 @@ function otherProfileController($http, $stateParams, $state, ProductionFactory, 
       return false
     }
     return new Date() < date
+  }
+
+  vm.showModal = function(){
+    vm.modal.show = true
+  }
+
+  vm.closeModal = function(){
+    vm.modal.show = false
   }
 }

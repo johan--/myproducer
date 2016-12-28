@@ -59,7 +59,7 @@ router.post('/', function(req, res){
         // console.log(typeof arguments);
         // console.log(arguments);
 
-        res.json(arguments)
+        res.json(savedProductions)
       })
     })
   })
@@ -67,7 +67,7 @@ router.post('/', function(req, res){
 
 // see one specific production
 router.get('/:id', function show(req, res){
-  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).exec(function(err, production) {
+  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'by_', select: 'username'}).exec(function(err, production) {
     if(err) return console.log(err)
     res.json(production)
   })

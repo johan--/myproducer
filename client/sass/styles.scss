@@ -67,6 +67,7 @@ a, a:hover, a:link{
 .btn{
   padding: 2px 10px;
   font-size: 11px;
+  min-width: 50px;
 }
 
 .default-btn{
@@ -139,7 +140,7 @@ a, a:hover, a:link{
   letter-spacing: 0.75px;
 }
 
-.form-control, .disabled-form-control{
+.form-control, .disabled-form-control, .disabled-form-control-2{
   background-color: $line-item;
   border: 0;
   border-radius: 1px;
@@ -148,6 +149,11 @@ a, a:hover, a:link{
   color: $text;
   padding: 5px;
   height: 24px;
+}
+
+.disabled-form-control-2{
+  background-color: $section;
+  border: 1px solid #222;
 }
 
 .field-title{
@@ -230,13 +236,42 @@ img.thumb{
   padding: 20px;
 }
 
+.avatar img.thumb{
+  max-width: 50px;
+  max-height: 50px;
+  float: left;
+}
+
+.message .chat{
+  margin-left: 60px;
+}
+
+.message .chat .content{
+  font-size: 12px;
+}
+
+.message {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.chat .meta{
+  font-style: italic;
+  color: $button;
+}
+
+.top-margin5{
+  margin-top: 5px;
+}
+
+
 // EXISTING CSS
 
 #modal-root{
   display: table;
   min-width: 100%;
   min-height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 }
@@ -260,13 +295,11 @@ img.thumb{
   float: none;
 }
 
-.close-modal{
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: $error;
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  line-height: 40px;
+#modal-sm{
+  color: #FFF;
+  width: 450px;
+  height: 200px;
+  margin: 0 auto;
+  background: $section;
+  float: none;
 }

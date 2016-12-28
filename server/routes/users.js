@@ -51,12 +51,14 @@ router.post('/addcontact', function(req, res){
           }
         )
 
+        res.json({success: true})
+
       } else { // if user exists
         user.contacts.push(contact._id) // add new contact id to logged in user's contact list
 
         user.save(function(err){ // save updated logged in user
           if(err) return console.log(err)
-          res.json({success: true})
+          res.json({success: true, data: contact})
         })
       }
     })
@@ -102,7 +104,7 @@ router.get('/:id/contacts', function(req, res){
 })
 
 router.get('/:id/productions', function(req, res){
-  User.findById(req.params.id).populate({path: 'productions', select: '-createdAt -updatedAt -__v'}).exec(function(err, user){
+  User.findById(req.params.id).populate({path: 'productions', select: '-createdAt -updatedAt -__v'}).populate({path: 'offersReceived', populate: {path: 'production'}}).exec(function(err, user){
     if(err) return console.log(err)
     res.json(user)
   })

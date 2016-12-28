@@ -9,27 +9,6 @@
   <link rel="stylesheet" href="./css/bootstrap.min.css" media="screen" title="no title">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/styles.css" media="screen" title="no title">
-</head>
-
-  <div class="container-fluid" ng-controller="mainController as main">
-    <!-- TODO ng-show="main.currentUser.username" -->
-    <div  class="navbar">
-      <div class="navleft logo col-xs-3">
-        <img src="" alt=""><h3>💎myproducer.io</h3>
-      </div>
-      <div class="navright col-xs-9 text-right">
-        <div class="nav-currentuser bottom-border">
-          <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.username }}
-            <a ui-sref="logout">[x]</a>
-          </p>
-        </div>
-        <div class="navigation-tabs">
-          <p class="no-margin"><a class="active" ui-sref="profile">PROFILE</a><a ui-sref="crew-list">CREW LIST</a><a ui-sref="production-list">PRODUCTIONS</a></p>
-        </div>
-      </div>
-    </div>
-    <div ui-view></div>
-  </div>
 
   <!-- scripts -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js"></script>
@@ -46,6 +25,33 @@
   <script src="./controllers/otherProfileCtrl.js" charset="utf-8"></script>
   <script src="./controllers/productionListCtrl.js" charset="utf-8"></script>
   <script src="./controllers/crewListCtrl.js" charset="utf-8"></script>
+</head>
+
+  <div class="container-fluid" ng-controller="mainController as main">
+    <!-- TODO ng-show="main.currentUser.username" -->
+    <div  class="navbar" ng-if=isLoggedIn>
+      <div class="navleft logo col-xs-3">
+        <img src="" alt=""><h3>💎myproducer.io</h3>
+      </div>
+      <div class="navright col-xs-9 text-right">
+        <div class="nav-currentuser bottom-border">
+          <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.username }}
+            <a ui-sref="logout"><i class="fa fa-cog"></i></a>
+          </p>
+        </div>
+        <div class="navigation-tabs">
+          <p class="no-margin"><a ng-class="{active: activeTab.profile}" ui-sref="profile">PROFILE</a><a ng-if="main.currentUser.role === 'producer'" ng-class="{active: activeTab.crewList}" ui-sref="crew-list">CREW LIST</a><a ng-class="{active: activeTab.production}" ui-sref="production-list">PRODUCTIONS</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div  class="navbar" ng-if=!isLoggedIn>
+      <div class="navleft logo text-center">
+        <img src="" alt=""><h3>💎myproducer.io</h3>
+      </div>
+    </div>
+    <div ui-view></div>
+  </div>
 
 </body>
 </html>

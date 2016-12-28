@@ -1,13 +1,17 @@
 angular.module('myApp')
   .controller('registerController', registerController)
 
-registerController.$inject = ['$state', '$stateParams', 'AuthService']
+registerController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService']
 
 // REGISTER CONTROLLER:
-function registerController($state, $stateParams, AuthService) {
+function registerController($rootScope, $state, $stateParams, AuthService) {
   var vm = this
 
-  console.log($stateParams)
+  $rootScope.activeTab = {}
+
+  if ($stateParams.ur === undefined) {
+    $state.go('home')
+  }
 
   vm.register = function () {
 
@@ -16,7 +20,7 @@ function registerController($state, $stateParams, AuthService) {
     vm.disabled = true
 
     // call register from service
-    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams)
+    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams.ur, $stateParams)
       // handle success
       .then(function () {
         $state.go('profile')

@@ -1,13 +1,17 @@
 angular.module('myApp')
   .controller('crewListController', crewListController)
 
-crewListController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
 // PRODUCTIONS
 
-function crewListController($http, $stateParams, $state, ProductionFactory, AuthService){
+function crewListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
   vm.showModal = false;
+  vm.notifModal = {}
+
+  $rootScope.activeTab = {}
+  $rootScope.activeTab.crewList = true
 
   AuthService.getUserStatus()
     .then(function(data){
@@ -16,6 +20,13 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
       $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
+
+          if (vm.currentUser.role === 'crew') {
+            $state.go('profile')
+          }
+
+          vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id
+          vm.ready = true
           console.log(data);
         })
   })
@@ -26,8 +37,25 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
     // search for existing user here
     $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
-        console.log("contact added", data);
-        $state.reload();
+        vm.newContact.email = ''
+        console.log(data.data);
+
+        vm.notifModal.isSuccess = true
+
+        if(data.data) {
+          var username = data.data.username
+          vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
+          vm.currentUser.contacts.push(data.data)
+        } else {
+          vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + ' to  be part of your crew list.'
+        }
+      })
+      .error(function(data) {
+        vm.notifModal.isFailure = true
+        vm.notifModal.content = 'An error has occurred. Please try again.'
+      })
+      .finally(function() {
+        vm.openNotifModal()
       })
   }
 
@@ -42,13 +70,14 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
     vm.showModal = true;
   }
 
-  vm.handleAddToButton = function(id) {
+  vm.handleAddToButton = function(id, username) {
     vm.selectedUserId = id;
+    vm.selectedUsername = username;
     console.log(vm.selectedUserId);
     vm.openModal()
   }
 
-  vm.addCrewToProduction = function(productionId) {
+  vm.addCrewToProduction = function(productionId, productionName) {
     var offer = {
       to: vm.selectedUserId,
       production: productionId
@@ -56,7 +85,27 @@ function crewListController($http, $stateParams, $state, ProductionFactory, Auth
     console.log(offer);
     $http.post('/api/crew/', offer)
      .success(function(data) {
-       $state.reload()
+       console.log(data);
+
+       vm.notifModal.isSuccess = true
+       vm.notifModal.content = 'You have successfully added ' + vm.selectedUsername + ' to ' + productionName + '.'
      })
+     .error(function(data) {
+       console.log(data);
+
+       vm.notifModal.isFailure = true
+       vm.notifModal.content = 'An error has occurred. Please try again.'
+     })
+     .finally(function() {
+       vm.openNotifModal()
+     })
+  }
+
+  vm.openNotifModal = function() {
+    vm.notifModal.show = true
+  }
+
+  vm.closeNotifModal = function() {
+    vm.notifModal.show = false
   }
 }

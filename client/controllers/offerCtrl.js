@@ -1,46 +1,72 @@
 angular.module('myApp')
   .controller('offerController', offerController)
 
-offerController.$inject = ['$http', '$stateParams', '$state']
+offerController.$inject = ['$rootScope', 'AuthService', '$http', '$stateParams', '$state']
 
-function offerController($http, $stateParams, $state, ProductionFactory) {
+function offerController($rootScope, AuthService, $http, $stateParams, $state, ProductionFactory) {
   var vm = this
 
-  $http.get('/api/crew/' + $stateParams.id)
-    .success(function(crew) {
-      // populate crew for this offer
-      vm.crew = crew
-      console.log("Crew from get", vm.crew)
-      // Not needed, production is populated in crew GET
-      // $http.get('/api/productions/' + vm.crew.production._id)
-      //   .success(function(production) {
-      //     //populate production it pertains to
-      //     vm.production = production
-      //     console.log("Production from get", vm.production)
-      //   })
+  vm.currentUser = {}
+
+  $rootScope.activeTab = {}
+
+  AuthService.getUserStatus()
+    .then(function(data){
+      vm.currentUser = data.data.user
+      $http.get('/api/users/' + vm.currentUser._id)
+        .success(function(data){
+          vm.currentUser = data
+
+          $http.get('/api/crew/' + $stateParams.id)
+            .success(function(crew) {
+              vm.crew = crew
+              vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
+              vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
+              vm.ready = true
+              console.log("Crew from get", vm.crew)
+            })
+        })
     })
 
-  vm.addMessage = function() {
+  vm.addMessage = function(message) {
     vm.message = {
-        content : vm.newMessage
+        content : message || vm.newMessage
     }
-    $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
-      .success(function(data) {
-        $state.reload()
-        // Not exact
-        // TODO: vm.crew.message = data.messages
-      })
+
+    if(vm.message.content){
+      $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
+        .success(function(data) {
+          vm.crew.message = data
+          vm.newMessage = ''
+        })
+    }
   }
 
   vm.updateOfferStatus = function(status) {
     vm.offerUpdate = Object.assign({}, vm.crew)
     vm.offerUpdate.offer.status = status
 
-    // console.log($stateParams.id)
-
     $http.patch('/api/crew/' + $stateParams.id, vm.offerUpdate)
       .then(function(data){
-        $state.reload()
+
+        var message = ''
+
+        if (status == 'Accepted') {
+          message = 'I accept your offer to work with you on ' + vm.crew.production.name + '.'
+          vm.addMessage(message)
+        } else if (status  == 'Declined') {
+          message = 'I respectfully decline your offer to work with you on ' + vm.crew.production.name + '.'
+          vm.addMessage(message)
+        }
       })
+  }
+
+  vm.compareDate = function(date){
+    date = new Date(date)
+    date.setDate(date.getDate() + 1)
+    if(!date){
+      return false
+    }
+    return new Date() < date
   }
 }

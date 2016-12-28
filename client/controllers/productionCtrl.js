@@ -1,14 +1,22 @@
 angular.module('myApp')
   .controller('productionController', productionController)
 
-productionController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
 // PRODUCTION CONTROLLER
 
-function productionController($http, $stateParams, $state, ProductionFactory, AuthService){
+function productionController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
   vm.offers = []
   vm.currentUser = {}
+
+  $rootScope.activeTab = {}
+  $rootScope.activeTab.production = true
+
+  vm.notifModal = {}
+
+  vm.editingState = false
+
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
@@ -17,20 +25,36 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
         .success(function(data){
           vm.currentUser = data
           console.log(data);
+
+          ProductionFactory.show($stateParams.id)
+            .success(function(production) {
+              vm.production = production
+              console.log("Production from the Factory", vm.production)
+
+              vm.isProducer = vm.production.by_._id === vm.currentUser._id
+
+              vm.ready = true
+            })
         })
   })
-
-  ProductionFactory.show($stateParams.id)
-    .success(function(production) {
-      vm.production = production
-      console.log("Production from the Factory", vm.production)
-    })
 
     vm.editProduction = function(){
       $http.patch('/api/productions/' + $stateParams.id, vm.production)
         .success(function(data) {
-          vm.editing = false
-          $state.reload()
+          vm.editingState = false
+          console.log(data);
+          data.crew = vm.production.crew
+          vm.production = data
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully updated your profile.'
+        })
+        .error(function(data) {
+          console.log(data);
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
         })
     }
 
@@ -56,8 +80,32 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       // TODO: Please confirm if the issue above has been fixed. -Kevin
       $http.patch('api/crew/' + id, vm.offer)
         .success(function(data) {
-          console.log("data after patch", data)
-          $state.reload()
+          console.log(data);
+          vm.production.crew[$index].offer.hours = data.offer.hours
+          vm.production.crew[$index].offer.position = data.offer.position
+          vm.production.crew[$index].offer.rate = data.offer.rate
+          vm.production.crew[$index].offer.status = data.offer.status
+
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully sent on offer to ' + vm.production.crew[$index].to.username + '.'
+
+          vm.message = {
+              content : 'I would like to invite you to be part of my production team.'
+          }
+
+          if(vm.message.content){
+            $http.post('/api/crew/' + id + '/message', vm.message)
+              .success(function(data) {
+                console.log(data);
+              })
+          }
+        })
+        .error(function(data) {
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
         })
     }
 
@@ -68,7 +116,38 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
       }
       $http.post('/api/crew/', crewOffer)
         .success(function(data) {
-          $state.reload()
+          vm.production.crew = data
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully added a new crew member.'
+        })
+        .error(function(data) {
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.showModal = false
+          vm.openNotifModal()
+        })
+    }
+
+    vm.removeFromCrew = function(id, index) {
+      $http.delete('/api/crew/' + id)
+        .then(function(data) {
+          if(data.data.success){
+            vm.notifModal.isSuccess = true
+            vm.notifModal.content = 'You have successfully removed a crew member.'
+            vm.production.crew.splice(index, 1)
+          } else {
+            vm.notifModal.isFailure = false
+            vm.notifModal.content = 'An error has occurred. Please try again.'
+          }
+        })
+        .catch(function(data) {
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
         })
     }
 
@@ -81,5 +160,22 @@ function productionController($http, $stateParams, $state, ProductionFactory, Au
 
     vm.openModal = function() {
       vm.showModal = true;
+    }
+
+    vm.openNotifModal = function() {
+      vm.notifModal.show = true
+    }
+
+    vm.closeNotifModal = function() {
+      vm.notifModal.show = false
+    }
+
+    vm.compareDate = function(date){
+      date = new Date(date)
+      date.setDate(date.getDate() + 1)
+      if(!date){
+        return false
+      }
+      return new Date() < date
     }
 }

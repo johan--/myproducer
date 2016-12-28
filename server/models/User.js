@@ -8,7 +8,7 @@ var User = new Schema({
   first_name: String,
   last_name: String,
   password: String,
-  role: [String],
+  role: String,
   equipment: [String],
   skills: [String],
   location: String,

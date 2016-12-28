@@ -1,11 +1,15 @@
 angular.module('myApp')
   .controller('loginController', loginController)
 
-loginController.$inject = ['$state', 'AuthService']
+loginController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService']
 
 // LOGIN CONTROLLER:
-function loginController($state, AuthService) {
+function loginController($rootScope, $state, $stateParams, AuthService) {
   var vm = this
+
+  $rootScope.activeTab = {}
+  vm.userRole = $stateParams.ur
+
   vm.login = function () {
 
     // initial values
@@ -29,8 +33,5 @@ function loginController($state, AuthService) {
         vm.disabled = false
         vm.loginForm = {}
       })
-  }
-  vm.register = function() {
-    $state.go('register')
   }
 }

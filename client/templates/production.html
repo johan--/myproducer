@@ -1,109 +1,119 @@
-<div class="production-view col-sm-3">
-  <div class="section">
-    <div class="col-sm-12 title">
-      <h3 class="no-margin">
-        PRODUCTION
-      </h3>
-      <p class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}}</p>
-      <form ng-submit="productionCtrl.editProduction()" ng-init="editingState = false">
-        <div class="production-name form-group">
-          <label for="productionName">Title</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.name" class="form-control" id="productionName">
-          <p class="disabled-form-control" ng-hide="editingState"> {{productionCtrl.production.name}} </p>
-        </div>
-        <div class="form-group">
-          <label for="production1Location">Location</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.location[0]" class="form-control" id="production1Location">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.location[0]}} </p>
-        </div>
-        <div class="form-group">
-          <label for="production2Location">Location #2</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.location[1]" class="form-control" id="production2Location">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.location[1]}} </p>
-        </div>
-        <div class="form-group">
-          <label for="productionWeather">Weather</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.weather" class="form-control" id="productionWeather">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.weather}} </p>
-        </div>
-        <div class="form-group">
-          <label for="productionHospital">Hospital</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.hospital" class="form-control" id="productionHospital">
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.hostpital}} </p>
-        </div>
-        <div class="form-group">
-          <label for="productionParking">Parking</label>
-          <input ng-show="editingState" ng-model="productionCtrl.production.parking" class="form-control" id="productionParking"></input>
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.parking}} </p>
-        </div>
-        <div class="form-group">
-          <label for="productionNotes">Notes:</label>
-          <textarea ng-show="editingState" ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes"></textarea>
-          <p class="disabled-form-control"  ng-hide="editingState"> {{productionCtrl.production.notes}} </p>
-        </div>
-        <!-- TODO Works for Entering Info, not Displaying -->
-        <!-- <div class="form-group">
-          <label for="productionStart">Start:</label>
-          <input ng-model="productionCtrl.production.dateFrom" class="form-control" id="productionStart" type="date"></input>
-        </div>
-        <div class="form-group">
-          <label for="productionEnd">End:</label>
-          <input ng-model="productionCtrl.production.dateTo" class="form-control" id="productionEnd" type="date"></input>
-        </div> -->
-        <div class="">
-          <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a>
-          <button ng-show="editingState" type="submit" class="btn btn-default">Update</button>
-          <a ng-hide="editingState" ng-click="editingState = !editingState" class="btn btn-default">Edit</a>
-        </div>
-      </form>
+<div ng-if="productionCtrl.ready">
+  <div class="production-view col-sm-3">
+    <div class="section">
+      <div class="col-sm-12 title">
+        <h3 class="no-margin">
+          PRODUCTION
+        </h3>
+        <p class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}}</p>
+        <form ng-submit="productionCtrl.editProduction()">
+          <div class="production-name form-group">
+            <label for="productionName">Title</label>
+            <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.name" class="form-control" id="productionName">
+            <p class="disabled-form-control" ng-hide="productionCtrl.editingState"> {{productionCtrl.production.name}} </p>
+          </div>
+          <div class="production-name form-group">
+            <label for="productionProducer">Producer</label>
+            <p class="disabled-form-control"> {{productionCtrl.production.by_.username}} </p>
+          </div>
+          <div class="form-group">
+            <label for="production1Location">Location</label>
+            <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.location[0]" class="form-control" id="production1Location">
+            <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.location[0]}} </p>
+          </div>
+          <div class="form-group">
+            <label for="production2Location">Location #2</label>
+            <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.location[1]" class="form-control" id="production2Location">
+            <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.location[1]}} </p>
+          </div>
+          <div class="form-group">
+            <label for="productionWeather">Weather</label>
+            <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.weather" class="form-control" id="productionWeather">
+            <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.weather}} </p>
+          </div>
+          <div class="form-group">
+            <label for="productionHospital">Hospital</label>
+            <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.hospital" class="form-control" id="productionHospital">
+            <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.hostpital}} </p>
+          </div>
+          <div class="form-group">
+            <label for="productionParking">Parking</label>
+            <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.parking" class="form-control" id="productionParking"></input>
+            <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.parking}} </p>
+          </div>
+          <div class="form-group">
+            <label for="productionNotes">Notes:</label>
+            <textarea ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes"></textarea>
+            <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.notes}} </p>
+          </div>
+          <!-- TODO Works for Entering Info, not Displaying -->
+          <!-- <div class="form-group">
+            <label for="productionStart">Start:</label>
+            <input ng-model="productionCtrl.production.dateFrom" class="form-control" id="productionStart" type="date"></input>
+          </div>
+          <div class="form-group">
+            <label for="productionEnd">End:</label>
+            <input ng-model="productionCtrl.production.dateTo" class="form-control" id="productionEnd" type="date"></input>
+          </div> -->
+          <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)">
+            <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a>
+            <button ng-show="productionCtrl.editingState" type="submit" class="btn default-btn">Update</button>
+            <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn default-btn">Edit</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="crew-view col-sm-9" ng-init="showModal=false">
-  <div class="section">
-    <div class="crew-list">
-      <div class="col-sm-6 no-padding">
-        <h3 class="title">CREW LIST</h3>
-      </div>
-      <div class="col-sm-6 no-padding">
-        <div class="text-right title">
-          <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add Crew</a>
+  <div class="crew-view col-sm-9" ng-init="showModal=false">
+    <div class="section">
+      <div class="crew-list">
+        <div class="col-sm-6 no-padding">
+          <h3 class="title">CREW LIST</h3>
         </div>
-      </div>
-      <div class="crew-list col-sm-12 no-padding">
-        <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item">
-          <div class="col-xs-1 text-left">
-            <img class="thumb" ng-src="./img/profile_default.png">
-            <!-- <img ui-sref="" ng-src=""> -->
+        <div class="col-sm-6 no-padding">
+          <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="text-right title">
+            <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add Crew</a>
           </div>
-          <div class="col-xs-3">
-            <p class="no-margin">{{crew.to.username || 'Crew Name'}}</p>
-          </div>
-          <div class="col-xs-3 dropdown">
-            <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
-            <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2" ng-model="productionCtrl.offers[$index].position">
-              <option value="Director of Photography">Director of Photography</option>
-              <option value="Sound Mixer">Sound Mixer</option>
-              <option value="Boom Operator">Boom Operator</option>
-            </select>
-            <p class="no-margin" ng-show="crew.offer.position"> {{crew.offer.position}} </p>
-          </div>
-          <div class="col-xs-2">
-            <!-- <div class="form-group"> -->
-              <input ng-hide="crew.offer.rate" class="form-control bg-transparent subtle-border-2" ng-model="productionCtrl.offers[$index].rate" placeholder="Rate"></input>
-              <p class="no-margin" ng-show="crew.offer.rate"> {{ crew.offer.rate | currency:"$":0}} </p>
-            <!-- </div> -->
-          </div>
-          <div class="col-xs-2">
-            <!-- <div class="form-group"> -->
-              <input ng-hide="crew.offer.hours" class="form-control bg-transparent subtle-border-2" ng-model="productionCtrl.offers[$index].hours" placeholder="Hours"></input>
-              <p class="no-margin" ng-show="crew.offer.hours"> {{ crew.offer.hours }} hours </p>
-            <!-- </div> -->
-          </div>
-          <div class="col-xs-1 no-padding text-right">
-            <a ng-hide="crew.offer.hours" ng-click="productionCtrl.makeOffer(crew._id, $index)" class="btn main-btn">Hire</a>
-            <a ng-show="crew.offer.hours" href="/#/offer/{{crew._id}}"class="btn default-btn">Chat</a> <a><i class="fa fa-times"></i></a>
+        </div>
+        <div class="crew-list col-sm-12 no-padding">
+          <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && ((productionCtrl.isProducer &&  productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
+            <div class="col-xs-1 text-left">
+              <img class="thumb" ng-src="./img/profile_default.png">
+              <!-- <img ui-sref="" ng-src=""> -->
+            </div>
+            <div class="col-xs-3">
+              <p class="no-margin">{{crew.to.username || 'Crew Name'}}</p>
+            </div>
+            <div class="{{ productionCtrl.isProducer ? 'col-xs-3' : 'col-xs-4' }} dropdown">
+              <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
+              <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2" ng-model="productionCtrl.offers[$index].position">
+                <option value="Director of Photography">Director of Photography</option>
+                <option value="Sound Mixer">Sound Mixer</option>
+                <option value="Boom Operator">Boom Operator</option>
+              </select>
+              <p class="no-margin" ng-show="crew.offer.position"> {{crew.offer.position}} </p>
+            </div>
+            <div ng-if="productionCtrl.isProducer" class="col-xs-2">
+              <!-- <div class="form-group"> -->
+                <input ng-hide="crew.offer.rate" class="form-control bg-transparent subtle-border-2" ng-model="productionCtrl.offers[$index].rate" placeholder="Rate"></input>
+                <p class="no-margin" ng-show="crew.offer.rate"> {{ crew.offer.rate | currency:"$":0}} </p>
+              <!-- </div> -->
+            </div>
+            <div class="{{ productionCtrl.isProducer ? 'col-xs-2' : 'col-xs-4' }}">
+              <!-- <div class="form-group"> -->
+                <input ng-hide="crew.offer.hours" class="form-control bg-transparent subtle-border-2" ng-model="productionCtrl.offers[$index].hours" placeholder="Hours"></input>
+                <p class="no-margin" ng-show="crew.offer.hours"> {{ crew.offer.hours }} hour<span ng-if="crew.offer.hours != 1">s</span> </p>
+              <!-- </div> -->
+            </div>
+            <div ng-if="productionCtrl.isProducer" class="col-xs-1 no-padding text-right top-margin5">
+              <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)"
+               class="btn main-btn">Hire</a>
+              <a ng-if="crew.offer.status === 'Pending'" href="/#/offer/{{crew._id}}" class="btn default-btn">Chat</a>
+              <a ng-if="crew.offer.status ===
+              'Accepted'" class="btn approval-btn">Hired</a>
+              <a ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
+            </div>
           </div>
         </div>
       </div>
@@ -127,7 +137,7 @@
       </div>
 
       <div class="group">
-        <div class="line-item" ng-repeat="crew in productionCtrl.currentUser.contacts | filter: crewFilter">
+        <div class="line-item" ng-repeat="crew in productionCtrl.currentUser.contacts | filter: crewFilter track by $index">
           <div class="row">
             <div class="col-xs-1 text-left">
               <img class="thumb" ng-src="./img/profile_default.png">
@@ -147,6 +157,19 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionCtrl.notifModal.show">
+  <div id="modal-container" ng-click="productionCtrl.closeNotifModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i ng-if="productionCtrl.notifModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
+        <h1><i ng-if="productionCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
+        <p>{{ productionCtrl.notifModal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>
   </div>

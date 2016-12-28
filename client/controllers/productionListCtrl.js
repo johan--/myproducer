@@ -1,12 +1,15 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
 
-productionListController.$inject = ['$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
 
 // PRODUCTIONS
 
-function productionListController($http, $stateParams, $state, ProductionFactory, AuthService){
+function productionListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
+
+  $rootScope.activeTab = {}
+  $rootScope.activeTab.production = true
 
   AuthService.getUserStatus()
     .then(function(data){
@@ -15,7 +18,23 @@ function productionListController($http, $stateParams, $state, ProductionFactory
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
-          console.log(data);
+
+          // get all productions where I am a crew member
+          var otherProductions = []
+          data.offersReceived.forEach(function(crew) {
+            if(crew.offer.status === 'Accepted') {
+              otherProductions.push(crew.production)
+            }
+          })
+
+          // combine my productions and other productions where I am crew member
+          vm.currentUser.allProductions = data.productions.concat(otherProductions)
+
+          vm.ready = true
+
+          if (vm.currentUser.role === 'producer') {
+            // vm.updateMinDateTo()
+          }
         })
   })
 
@@ -41,8 +60,6 @@ function productionListController($http, $stateParams, $state, ProductionFactory
     }
   }
 
-  vm.updateMinDateTo()
-
   vm.addProduction = function(){
     var newProduction = {
       from: new Date(vm.dateFrom),
@@ -54,6 +71,7 @@ function productionListController($http, $stateParams, $state, ProductionFactory
     // console.log(newProduction);
     $http.post('/api/productions', newProduction)
       .success(function(data){
+        vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
         // console.log(vm.currentUser)
         // vm.currentUser.productions.push(data)
         // vm.newProduction = {}

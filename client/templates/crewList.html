@@ -1,77 +1,83 @@
+<div ng-if="crewListCtrl.ready">
+  <div class="approved-crew-view col-sm-8">
+    <div class="section">
+      <div class="col-sm-12 no-padding">
+        <div class="col-sm-6 no-padding">
+          <h4 class="title">Approved Crew</h4>
+        </div>
 
-<div class="approved-crew-view col-sm-8">
-  <div class="section">
-    <div class="col-sm-12 no-padding">
-      <div class="col-sm-6 no-padding">
-        <h4 class="title">Approved Crew</h4>
+        <div class="col-sm-6 no-padding">
+          <input type="text" class="form-control title-field-right bg-transparent subtle-border" placeholder="Filter Crew" ng-model="crewFilter">
+            <!-- <button ng-click="crewFilter = ''" ng-disabled="!crewFilter" class="btn btn-default" type="button">
+              <span>X</span>
+            </button> -->
+        </div>
       </div>
+      <div class="group">
+        <div class="line-item y-padding" ng-repeat="crew in crewListCtrl.currentUser.contacts | filter:crewFilter">
+          <div class="col-xs-1 text-left">
+            <img class="thumb" ng-src="./img/profile_default.png">
+          </div>
+          <div class="col-xs-3">
+            <p class="strong no-margin">{{crew.username}}</p>
+          </div>
+          <div class="col-xs-3">
+            <p class="no-margin">{{crew.title || 'Role'}}</p>
+          </div>
+          <div class="col-xs-2">
+            <p class="no-margin">{{crew.location || 'Location'}}</p>
+          </div>
+          <div class="col-xs-3 text-right">
+            <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
+            <button ng-click="crewListCtrl.handleAddToButton(crew._id, crew.username)" class="btn main-btn">+ Add To</button></p>
+          </div>
+        </div>
 
-      <div class="col-sm-6 no-padding">
-        <input type="text" class="form-control title-field-right bg-transparent subtle-border" placeholder="Filter Crew" ng-model="crewFilter">
-          <!-- <button ng-click="crewFilter = ''" ng-disabled="!crewFilter" class="btn btn-default" type="button">
-            <span>X</span>
-          </button> -->
+        <div class="line-item y-padding bg-transparent">
+          <form ng-submit="crewListCtrl.addContact()">
+            <div class="col-xs-10">
+              <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.email" type="text" placeholder="Crew Email"></p>
+            </div>
+
+            <div class="col-xs-2 text-right">
+              <p class="no-margin"><button type"submit" class="btn main-btn">Add New Contact</button></p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    <div class="group">
-      <div class="line-item y-padding" ng-repeat="crew in crewListCtrl.currentUser.contacts | filter:crewFilter">
-        <div class="col-xs-1 text-left">
-          <img class="thumb" ng-src="./img/profile_default.png">
-        </div>
-        <div class="col-xs-3">
-          <p class="strong no-margin">{{crew.username}}</p>
-        </div>
-        <div class="col-xs-3">
-          <p class="no-margin">{{crew.title || 'Role'}}</p>
-        </div>
-        <div class="col-xs-2">
-          <p class="no-margin">{{crew.location || 'Location'}}</p>
-        </div>
-        <div class="col-xs-3 text-right">
-          <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
-          <button ng-click="crewListCtrl.handleAddToButton(crew._id)" class="btn main-btn">+ Add To</button></p>
-        </div>
+  </div>
+
+
+  <div class="pending-crew-view col-sm-4">
+    <div class="section">
+      <div class="col-sm-12 no-padding">
+        <h4 class="title">Pending Crew</h4>
       </div>
-
-      <div class="line-item y-padding bg-transparent">
-        <form ng-submit="crewListCtrl.addContact()">
-          <div class="col-xs-10">
-            <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.email" type="text" placeholder="Crew Email"></p>
+      <div class="group">
+        <div class="line-item y-padding" ng-repeat="pendingContact in crewListCtrl.currentUser.pendingContacts">
+          <div class="col-xs-2 text-left">
+            <img class="thumb" ng-src="./img/profile_default.png">
+            <!-- <img ui-sref="" ng-src=""> -->
           </div>
-
-          <div class="col-xs-2 text-right">
-            <p class="no-margin"><button type"submit" class="btn main-btn">Add New Contact</button></p>
+          <div class="col-xs-6">
+            <p class="no-margin">{{ pendingContact.username }}</p>
           </div>
-        </form>
+          <div class="col-xs-4 text-right">
+            <p class="no-margin">
+              <a class="btn main-btn" ui-sref="otherProfile({id: pendingContact._id})">Review</a>
+            </p>
+          </div>
+        </div>
+        <div class="line-item">
+          <p class="no-margin">Invite users to your crew list:</p>
+          <input class="form-control" ng-model="crewListCtrl.inviteUrl">
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-
-<div class="pending-crew-view col-sm-4">
-  <div class="section">
-    <div class="col-sm-12">
-      <h4 class="title">Pending Crew</h4>
-    </div>
-    <div class="group">
-      <div class="line-item y-padding" ng-repeat="pendingContact in crewListCtrl.currentUser.pendingContacts">
-        <div class="col-xs-3 text-left">
-          <img class="thumb" ng-src="./img/profile_default.png">
-          <!-- <img ui-sref="" ng-src=""> -->
-        </div>
-        <div class="col-xs-5">
-          <p class="no-margin">{{ pendingContact.username }}</p>
-        </div>
-        <div class="col-xs-4 text-right">
-          <p class="no-margin">
-            <a class="btn main-btn" ui-sref="otherProfile({id: pendingContact._id})">Review</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <div id="modal-root" ng-show="crewListCtrl.showModal">
   <div id="modal-container" ng-click="crewListCtrl.closeModal($event)">
     <div id="modal" class="section">
@@ -97,7 +103,7 @@
         <div class="col-sm-3 text-right">
           <p class="no-margin">
             <a class="btn default-btn" ui-sref="production({id:production._id})">View</a>
-            <a class="btn main-btn" ng-click="crewListCtrl.addCrewToProduction(production._id)">Add</a>
+            <a class="btn main-btn" ng-click="crewListCtrl.addCrewToProduction(production._id, production.name)">Add</a>
           </p>
         </div>
       </div>
@@ -108,6 +114,19 @@
       <!-- <div class="close-modal" ng-click="crewListCtrl.closeModal()">
         X
       </div> -->
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="crewListCtrl.notifModal.show">
+  <div id="modal-container" ng-click="crewListCtrl.closeNotifModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i ng-if="crewListCtrl.notifModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
+        <h1><i ng-if="crewListCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
+        <p>{{ crewListCtrl.notifModal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
+      </div>
     </div>
   </div>
 </div>

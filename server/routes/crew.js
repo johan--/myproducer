@@ -56,11 +56,15 @@ router.post('/', function(req, res){
               production.crew.push(crew);
 
               // Save production
-              production.save(function(err){
+              production.save(function(err, newProduction){
                 if(err) return console.log(err)
 
-                // Return crew created
-                res.json(crew)
+                Production.populate(newProduction, {path: 'crew', populate: {path: 'to'}}, function(err, populatedProduction){
+                  if(err) return console.log(err)
+
+                  // / Return updated crew list
+                  res.json(populatedProduction.crew)
+                })
               })
             })
           })
@@ -71,7 +75,7 @@ router.post('/', function(req, res){
 })
 
 router.get('/:id', function(req, res){
-  Crew.findById(req.params.id).populate({path: 'message', populate: {path: '_by', select: 'username'}}).populate('production').exec(function(err, crew){
+  Crew.findById(req.params.id).populate({path: 'message', populate: {path: '_by', select: 'username'}}).populate({path: 'production', populate: {path: 'by_'}}).populate({path: 'to'}).exec(function(err, crew){
     if(err) return console.log(err)
     console.log(crew.message);
     res.json(crew)
@@ -159,7 +163,12 @@ router.post('/:id/message', function(req, res){
         //     subject: 'New message from myproducer.io'
         //   }
         // )
-        res.json(newCrew)
+
+        Crew.populate(newCrew, {path: 'message', populate: {path: '_by'}}, function(err, populatedCrew) {
+          if(err) return console.log(err)
+
+          res.json(populatedCrew.message)
+        })
       })
     })
   })
