@@ -178,4 +178,11 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
       }
       return new Date() < date
     }
+
+    vm.notifyCrew = function() {
+      $http.get('/api/productions/' + $stateParams.id + '/notify')
+        .success(function(data) {
+          vm.statusMessage = data.message
+        })
+    }
 }

@@ -59,6 +59,7 @@
             <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a>
             <button ng-show="productionCtrl.editingState" type="submit" class="btn default-btn">Update</button>
             <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn default-btn">Edit</a>
+            <a ng-click="productionCtrl.notifyCrew()" class="btn approval-btn">Notify Crew</a>
           </div>
         </form>
       </div>

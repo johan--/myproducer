@@ -3,6 +3,7 @@
 var express = require('express')
 var router = express.Router()
 var moment = require('moment')
+var mailer = require('../nodemailer/mailer.js')
 
 // MODELS
 
@@ -87,6 +88,36 @@ router.delete('/:id', function show(req, res){
     if(err) return console.log(err)
 
     res.json({ success: true })
+  })
+})
+
+// notify crew of production status
+router.get('/:id/notify', function show(req, res){
+  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).exec(function(err, production) {
+    if(err) return console.log(err)
+    var productionURL = 'http://myproducer.io/#/production/' + production._id
+    var fromEmail = req.user.username
+    var fromName = req.user.first_name
+    // build an array of users in crew
+    var crewArray  = production.crew
+    // loop through users in crew building the toEmail string
+    for(var i = 0; i < crewArray.length; i+=1){
+      toEmail = crewArray[i].to.username
+      fromName = crewArray[i].to.first_name
+      mailer.send(
+        'productionChange',
+        {
+          sender: fromName,
+          recipient: fromName,
+          productionURL: productionURL
+        },
+        {
+          to: toEmail,
+          subject: 'Production update from myproducer.io'
+        }
+      )
+    }
+  res.json({"message" : "success"})
   })
 })
 
