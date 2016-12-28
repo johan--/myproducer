@@ -38,12 +38,14 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
     $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
         vm.newContact.email = ''
+        console.log(data.data);
 
         vm.notifModal.isSuccess = true
 
         if(data.data) {
           var username = data.data.username
           vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
+          vm.currentUser.contacts.push(data.data)
         } else {
           vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + ' to  be part of your crew list.'
         }
