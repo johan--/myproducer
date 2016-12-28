@@ -10,7 +10,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'templates/home.html'
     })
     .state('login', {
-      url: '/login',
+      url: '/login?ur',
       templateUrl: 'templates/login.html',
       controller: 'loginController as loginCtrl'
     })
@@ -21,7 +21,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'logoutController'
     })
     .state('register', {
-      url: '/register?p&r',
+      url: '/register?p&r&ur',
       templateUrl: 'templates/register.html',
       controller: 'registerController as registerCtrl'
     })

@@ -9,7 +9,9 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
 
   $rootScope.activeTab = {}
 
-  console.log($stateParams)
+  if ($stateParams.ur === undefined) {
+    $state.go('home')
+  }
 
   vm.register = function () {
 
@@ -18,7 +20,7 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
     vm.disabled = true
 
     // call register from service
-    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams)
+    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams.ur, $stateParams)
       // handle success
       .then(function () {
         $state.go('profile')
