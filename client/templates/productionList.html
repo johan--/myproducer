@@ -2,7 +2,7 @@
   <div class="productions-view col-sm-12 section">
     <div class="header-row">
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
-      <div class="col-sm-9">
+      <div class="col-sm-9" ng-if="productionListCtrl.currentUser.role === 'producer'">
         <form class="text-right" ng-submit="productionListCtrl.addProduction()">
             <input class="bg-transparent subtle-border padding5" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name">
             <input class="bg-transparent subtle-border padding5" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}">

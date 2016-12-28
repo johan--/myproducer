@@ -29,10 +29,12 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
+
           vm.ready = true
-          vm.updateMinDateTo()
-          console.log(vm.currentUser);
-          console.log(vm.currentUser.allProductions);
+
+          if (vm.currentUser.role === 'producer') {
+            vm.updateMinDateTo()
+          }
         })
   })
 
