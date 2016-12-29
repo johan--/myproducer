@@ -56,7 +56,7 @@
             <input ng-model="productionCtrl.production.dateTo" class="form-control" id="productionEnd" type="date"></input>
           </div> -->
           <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)">
-            <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a>
+            <!-- <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a> -->
             <button ng-show="productionCtrl.editingState" type="submit" class="btn default-btn">Update</button>
             <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn default-btn">Edit</a>
           </div>
