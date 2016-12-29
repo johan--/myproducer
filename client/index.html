@@ -31,7 +31,9 @@
     <!-- TODO ng-show="main.currentUser.username" -->
     <div  class="navbar" ng-if=isLoggedIn>
       <div class="navleft logo col-xs-3">
-        <img src="" alt=""><h3>💎myproducer.io</h3>
+        <a ui-sref="profile">
+          <img src="" alt=""><h3>💎 myproducer.io</h3>
+        </a>
       </div>
       <div class="navright col-xs-9 text-right">
         <div class="nav-currentuser bottom-border">
@@ -47,7 +49,9 @@
 
     <div  class="navbar" ng-if=!isLoggedIn>
       <div class="navleft logo text-center">
-        <img src="" alt=""><h3>💎myproducer.io</h3>
+        <a ui-sref="home">
+          <img src="" alt=""><h3>💎 myproducer.io</h3>
+        </a>
       </div>
     </div>
     <div ui-view></div>
