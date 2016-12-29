@@ -54,12 +54,25 @@ router.post('/addcontact', function(req, res){
         res.json({success: true})
 
       } else { // if user exists
-        user.contacts.push(contact._id) // add new contact id to logged in user's contact list
 
-        user.save(function(err){ // save updated logged in user
-          if(err) return console.log(err)
-          res.json({success: true, data: contact})
+        var found = user.contacts.find(function(c) {
+          console.log(c, contact._id);
+          return c == contact._id.toString()
         })
+
+        if(found) {
+
+          res.json({success: false, message: 'This person is already on your crew list.'})
+        } else if(req.body.email === req.user.username) {
+          res.json({success: false, message: 'You can not add yourself to your crew list.'})
+        } else {
+          user.contacts.push(contact._id) // add new contact id to logged in user's contact list
+
+          user.save(function(err){ // save updated logged in user
+            if(err) return console.log(err)
+            res.json({success: true, data: contact})
+          })
+        }
       }
     })
   })
