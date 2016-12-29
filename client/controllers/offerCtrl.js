@@ -34,7 +34,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, P
     }
 
     if(vm.message.content){
-      $http.post('/api/crew/' + vm.crew._id + '/message', vm.message)
+      $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
         .success(function(data) {
           vm.crew.message = data
           vm.newMessage = ''

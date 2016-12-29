@@ -148,7 +148,7 @@ router.post('/:id/message', function(req, res){
       crew.save(function(err, newCrew){
         if(err) return console.log(err)
 
-        console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
+        // console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
 
         var offerId = newCrew._id
         var offerURL = 'http://myproducer.io/#/offer/' + offerId
