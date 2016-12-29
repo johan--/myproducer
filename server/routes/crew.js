@@ -94,19 +94,19 @@ router.patch('/:id', function(req, res){
 
       console.log(offerURL, fromEmail, toEmail) //mail test
 
-      // send mail TODO Wont send email until commented in!
-      //   mailer.send(
-      //     'offer',
-      //     {
-      //       recipient: toEmail,
-      //       sender: fromEmail,
-      //       offerURL: offerURL
-      //     },
-      //     {
-      //       to: toEmail,
-      //       subject: 'New offer from myproducer.io'
-      //     }
-      //   )
+      // send mail
+        mailer.send(
+          'offer',
+          {
+            recipient: toEmail,
+            sender: fromEmail,
+            offerURL: offerURL
+          },
+          {
+            to: toEmail,
+            subject: 'New offer from myproducer.io'
+          }
+        )
       })
 
     res.json(crew)
@@ -149,20 +149,20 @@ router.post('/:id/message', function(req, res){
 
         var offerId = newCrew._id
         var offerURL = 'http://myproducer.io/#/offer/' + offerId
-        // TODO WONT SEND EMAIL UNTIL COMMENTED IN
-        // mailer.send(
-        //   'message',
-        //   {
-        //     recipient: toEmail,
-        //     sender: fromEmail,
-        //     message: messageContent,
-        //     offerURL: offerURL
-        //   },
-        //   {
-        //     to: toEmail,
-        //     subject: 'New message from myproducer.io'
-        //   }
-        // )
+
+        mailer.send(
+          'message',
+          {
+            recipient: toEmail,
+            sender: fromEmail,
+            message: messageContent,
+            offerURL: offerURL
+          },
+          {
+            to: toEmail,
+            subject: 'New message from myproducer.io'
+          }
+        )
 
         Crew.populate(newCrew, {path: 'message', populate: {path: '_by'}}, function(err, populatedCrew) {
           if(err) return console.log(err)
