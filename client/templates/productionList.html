@@ -1,4 +1,4 @@
-<div ng-show="productionListCtrl.ready">
+ class="no-margin"<div ng-show="productionListCtrl.ready">
   <div class="productions-view col-sm-12 section">
     <div class="header-row">
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
@@ -43,7 +43,7 @@
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
         <div class="col-xs-3 text-right">
-          <p><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
+          <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
         </div>
       </div>
     </div>
@@ -76,19 +76,19 @@
     <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.allProductions">
       <div class="">
         <div class="col-xs-2 start-date">
-          <p>{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+          <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
         <div class="col-xs-2 end-date">
-          <p>{{ production.name || "Name Not Found" }}</p>
+          <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
         </div>
         <div class="col-xs-2">
-          <p>{{ 'Day ' + production.productionDay}}</p>
+          <p class="no-margin">{{ 'Day ' + production.productionDay}}</p>
         </div>
         <div class="col-xs-3">
-          <p>{{ production.location[0] || 'No Location'}}</p>
+          <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
         <div class="col-xs-3 text-right">
-          <p><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
+          <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
         </div>
       </div>
     </div>
