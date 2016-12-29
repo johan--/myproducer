@@ -125,11 +125,8 @@
   <div id="modal-container" ng-click="productionCtrl.closeModal($event)">
     <div id="modal" class="section">
       <div class="col-sm-12 padding20">
-        <div class="col-sm-4 no-padding">
-          <h3 class="title">Approved Crew</h3>
-        </div>
-        <div class="col-sm-4 no-padding">
-          <p class="title"><input type="text" class="form-control bg-transparent subtle-border padding15" placeholder="Search" ng-model="prodFilter"></p>
+        <div class="col-sm-8 no-padding">
+          <h3 class="title">APPROVED CREW</h3>
         </div>
         <div class="col-sm-4 no-padding">
           <p class="title"><input type="text" class="form-control bg-transparent subtle-border padding15" placeholder="Search" ng-model="crewFilter"></p>
@@ -143,16 +140,16 @@
               <img class="thumb" ng-src="./img/profile_default.png">
             </div>
             <div class="col-xs-3">
-              <p>{{crew.username}}</p>
+              <p class="no-margin">{{crew.first_name + ' ' + crew.last_name}}</p>
             </div>
             <div class="col-xs-2">
-              <p>{{crew.role[0] || 'Role'}}</p>
+              <p class="no-margin">{{crew.title}}</p>
             </div>
             <div class="col-xs-3">
-              <p>{{crew.location || 'Location'}}</p>
+              <p class="no-margin">{{crew.location}}</p>
             </div>
             <div class="col-xs-3 text-right">
-              <p><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
+              <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
               <a ng-click="productionCtrl.addToCrew(crew._id)" class="btn main-btn">Add</a></p>
             </div>
           </div>
