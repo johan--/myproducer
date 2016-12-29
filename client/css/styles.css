@@ -45,6 +45,12 @@ a, a:hover, a:link {
   font-size: 11px;
   min-width: 50px; }
 
+.btn.full-width {
+  width: 100%;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
 .default-btn {
   background-color: #888888;
   color: #FFFFFF; }
@@ -111,6 +117,10 @@ a, a:hover, a:link {
   color: #FFFFFF;
   padding: 5px;
   height: 24px; }
+
+.form-control.out {
+  height: 40px;
+  font-size: 16px; }
 
 .disabled-form-control-2 {
   background-color: #333333;
@@ -192,6 +202,13 @@ img.thumb {
 
 .top-margin5 {
   margin-top: 5px; }
+
+.top-padding50 {
+  padding-top: 50px; }
+
+.y-padding30 {
+  padding-top: 30px;
+  padding-bottom: 30px; }
 
 #modal-root {
   display: table;
