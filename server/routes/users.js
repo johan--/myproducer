@@ -103,7 +103,7 @@ router.patch('/updateContact', function(req, res){
 })
 
 router.get('/:id/profile', function(req, res){
-  User.findById(req.params.id).populate({path: 'productions offersReceived', select: '-createdAt -updatedAt -__v', populate: {path: 'production'}}).exec(function(err, user){
+  User.findById(req.params.id).populate({path: 'offersReceived', select: '-createdAt -updatedAt -__v', populate: {path: 'production'}}).populate('productions').exec(function(err, user){
     if(err) return console.log(err)
     res.json(user)
   })
