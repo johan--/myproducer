@@ -4,6 +4,9 @@ body {
   color: #FFFFFF;
   letter-spacing: 0.5px; }
 
+body.bottom-padding {
+  padding-bottom: 50px; }
+
 a, a:hover, a:link {
   text-decoration: none; }
 
