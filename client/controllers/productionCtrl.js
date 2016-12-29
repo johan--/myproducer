@@ -168,6 +168,8 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
 
     vm.closeNotifModal = function() {
       vm.notifModal.show = false
+      vm.notifModal.isSuccess = false
+      vm.notifModal.isFailure = false
     }
 
     vm.compareDate = function(date){
