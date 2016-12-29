@@ -14,7 +14,7 @@
           </div>
           <div class="production-name form-group">
             <label for="productionProducer">Producer</label>
-            <p class="disabled-form-control"> {{productionCtrl.production.by_.username}} </p>
+            <p class="disabled-form-control"> {{productionCtrl.production.by_.first_name + ' ' + productionCtrl.production.by_.last_name}} </p>
           </div>
           <div class="form-group">
             <label for="production1Location">Location</label>
@@ -83,7 +83,7 @@
               <!-- <img ui-sref="" ng-src=""> -->
             </div>
             <div class="col-xs-3">
-              <p class="no-margin">{{crew.to.username || 'Crew Name'}}</p>
+              <p class="no-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</p>
             </div>
             <div class="{{ productionCtrl.isProducer ? 'col-xs-3' : 'col-xs-4' }} dropdown">
               <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->

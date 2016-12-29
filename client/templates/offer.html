@@ -1,8 +1,8 @@
 <div ng-if="offerCtrl.ready">
   <div class="section bottom-padding">
     <div class="col-sm-6 col-centered">
-      <h3 ng-if="offerCtrl.isProducer">OFFER TO {{offerCtrl.crew.to.username | uppercase}}</h3>
-      <h3 ng-if="offerCtrl.isCrew">OFFER FROM {{offerCtrl.crew.production.by_.username | uppercase}}</h3>
+      <h3 ng-if="offerCtrl.isProducer">OFFER TO {{offerCtrl.crew.to.first_name + ' ' + offerCtrl.crew.to.last_name | uppercase}}</h3>
+      <h3 ng-if="offerCtrl.isCrew">OFFER FROM {{offerCtrl.crew.production.by_.first_name + ' ' + offerCtrl.crew.production.by_.last_name | uppercase}}</h3>
       <h4>for <a ui-sref="production({id: offerCtrl.crew.production._id})">{{ offerCtrl.crew.production.name }}</a></h4>
 
       <div class="line-item">
@@ -52,7 +52,7 @@
                 <img class="thumb" ng-src="./img/profile_default.png">
               </div>
               <div class="chat">
-                <span class="strong">{{message._by.username}}</span>
+                <span class="strong">{{message._by.first_name + ' ' + message._by.last_name}}</span>
                 <span class="meta"><small>{{ message.createdAt | date:'medium' }}</small></span>
                 <p class="content no-margin">{{message.content}}</p>
               </div>
