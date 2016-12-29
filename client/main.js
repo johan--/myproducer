@@ -17,8 +17,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('logout', {
       url: '/logout',
       templateUrl: 'templates/logout.html',
-      restricted: true,
-      controller: 'logoutController'
+      controller: 'logoutController',
+      restricted: true
     })
     .state('register', {
       url: '/register?p&r&ur',
@@ -28,35 +28,38 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('crew-list', {
       url: '/crewlist',
       templateUrl: 'templates/crewList.html',
-      controller: 'crewListController as crewListCtrl'
+      controller: 'crewListController as crewListCtrl',
+      restricted: true
     })
     .state('production', {
       url: '/production/:id',
       templateUrl: 'templates/production.html',
       controller: 'productionController as productionCtrl',
-      // restricted: true /*TODO Comment this back in*/
+      restricted: true
     })
     .state('production-list', {
       url: '/productions',
       templateUrl: 'templates/productionList.html',
       controller: 'productionListController as productionListCtrl',
+      restricted: true
     })
     .state('profile', {
       url: '/profile',
       templateUrl: 'templates/profile.html',
-      // restricted: true,
-      controller: 'postController as postCtrl'
+      controller: 'postController as postCtrl',
+      restricted: true
     })
     .state('otherProfile', {
       url: '/profile/:id',
       templateUrl: 'templates/otherProfile.html',
-      // restricted: true,
-      controller: 'otherProfileController as otherProfileCtrl'
+      controller: 'otherProfileController as otherProfileCtrl',
+      restricted: true
     })
     .state('offer', {
       url: '/offer/:id',
       templateUrl: 'templates/offer.html',
-      controller: 'offerController as offerCtrl'
+      controller: 'offerController as offerCtrl',
+      restricted: true
     })
 
 })
