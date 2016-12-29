@@ -89,8 +89,10 @@ router.patch('/:id', function(req, res){
     // variables for NODEMAILER
     var offerURL = 'http://myproducer.io/#/offer/' + crew._id
     var fromEmail =req.user.username
+    var fromName = req.user.first_name + ' ' + req.user.last_name
     User.findById(crew.to).exec(function(err, user){
       var toEmail = user.username
+      var toName = user.first_name
 
       console.log(offerURL, fromEmail, toEmail) //mail test
 
@@ -98,8 +100,8 @@ router.patch('/:id', function(req, res){
         mailer.send(
           'offer',
           {
-            recipient: toEmail,
-            sender: fromEmail,
+            recipient: toName,
+            sender: fromName,
             offerURL: offerURL
           },
           {
@@ -122,6 +124,7 @@ router.post('/:id/message', function(req, res){
 
     // the email the message is from
     var fromEmail = req.user.username
+    var fromName = req.user.first_name + ' ' + req.user.last_name
     // the message content
     var messageContent = req.body.content
 
@@ -154,7 +157,7 @@ router.post('/:id/message', function(req, res){
           'message',
           {
             recipient: toEmail,
-            sender: fromEmail,
+            sender: fromName,
             message: messageContent,
             offerURL: offerURL
           },

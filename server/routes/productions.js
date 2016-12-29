@@ -97,18 +97,18 @@ router.get('/:id/notify', function show(req, res){
     if(err) return console.log(err)
     var productionURL = 'http://myproducer.io/#/production/' + production._id
     var fromEmail = req.user.username
-    var fromName = req.user.first_name
+    var fromName = req.user.first_name + ' ' + req.user.last_name
     // build an array of users in crew
     var crewArray  = production.crew
     // loop through users in crew building the toEmail string
     for(var i = 0; i < crewArray.length; i+=1){
       toEmail = crewArray[i].to.username
-      fromName = crewArray[i].to.first_name
+      toName = crewArray[i].to.first_name
       mailer.send(
         'productionChange',
         {
           sender: fromName,
-          recipient: fromName,
+          recipient: toName,
           productionURL: productionURL
         },
         {

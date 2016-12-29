@@ -43,7 +43,7 @@ router.post('/addcontact', function(req, res){
           {
             email: email,
             registrationURL: registrationURL,
-            producer: user.username
+            producer: user.first_name + ' ' + user.last_name
           },
           {
             to: email,
