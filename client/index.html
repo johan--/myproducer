@@ -30,12 +30,12 @@
   <div class="container-fluid" ng-controller="mainController as main">
     <!-- TODO ng-show="main.currentUser.username" -->
     <div  class="navbar" ng-if=isLoggedIn>
-      <div class="navleft logo col-xs-3">
+      <div class="navleft logo">
         <a ui-sref="profile">
-          <img src="" alt=""><h3>💎 myproducer.io</h3>
+          <img ng-src="./img/mpio-logo.png" alt="">
         </a>
       </div>
-      <div class="navright col-xs-9 text-right">
+      <div class="navright text-right">
         <div class="nav-currentuser bottom-border">
           <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.username }}
             <a ui-sref="logout"><i class="fa fa-cog"></i></a>
@@ -50,7 +50,7 @@
     <div  class="navbar" ng-if=!isLoggedIn>
       <div class="navleft logo text-center">
         <a ui-sref="home">
-          <img src="" alt=""><h3>💎 myproducer.io</h3>
+          <img ng-src="./img/mpio-logo.png" alt="">
         </a>
       </div>
     </div>
