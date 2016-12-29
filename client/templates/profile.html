@@ -102,8 +102,8 @@
         <h4 class="title">Pending Productions</h4>
         <!-- <p>{{ postCtrl.currentUser.offersReceived }}</p> -->
         <div class="group">
-          <div class="line-item" ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-if="offer.offer.status == 'Pending'">
-            <p class="float-left no-margin strong">{{ offer.production.name }}</p>
+          <div class="line-item" ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-if="offer.offer.status == 'Pending' && postCtrl.compareDate(offer.production.date)">
+            <p class="float-left no-margin strong">{{ offer.production.name + '  - ' }} {{ offer.production.date | date:'shortDate' }}</p>
             <p class="float-right no-margin"><a class="btn default-btn" ui-sref="offer({id: offer._id})">View</a></p>
             </div>
         </div>
