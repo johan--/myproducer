@@ -112,7 +112,7 @@
               <a ng-if="crew.offer.status === 'Pending'" href="/#/offer/{{crew._id}}" class="btn default-btn">Chat</a>
               <a ng-if="crew.offer.status ===
               'Accepted'" class="btn approval-btn">Hired</a>
-              <a ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
+              <a ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
             </div>
           </div>
         </div>
