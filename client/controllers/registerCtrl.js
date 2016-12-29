@@ -20,7 +20,7 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
     vm.disabled = true
 
     // call register from service
-    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams.ur, $stateParams)
+    AuthService.register(vm.registerForm, $stateParams.ur, $stateParams)
       // handle success
       .then(function () {
         $state.go('profile')
@@ -32,7 +32,8 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
         vm.error = true
         vm.errorMessage = "Something went wrong!"
         vm.disabled = false
-        vm.registerForm = {}
+        vm.registerForm.username = ''
+        vm.registerForm.password = ''
       })
   }
   // vm.login = function() {

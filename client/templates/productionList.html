@@ -1,18 +1,18 @@
-<div ng-show="productionListCtrl.ready">
+ <div ng-show="productionListCtrl.ready">
   <div class="productions-view col-sm-12 section">
     <div class="header-row">
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
-      <div class="col-sm-9" ng-if="productionListCtrl.currentUser.role === 'producer'">
+      <div class="col-sm-9" ng-show="productionListCtrl.currentUser.role === 'producer'">
         <form class="text-right" ng-submit="productionListCtrl.addProduction()">
-            <input class="bg-transparent subtle-border padding5" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name">
-            <input class="bg-transparent subtle-border padding5" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}">
-            <input class="bg-transparent subtle-border padding5" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo">
+            <input class="bg-transparent subtle-border padding5" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name" required>
+            <input class="bg-transparent subtle-border padding5" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
+            <input class="bg-transparent subtle-border padding5" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
           <button type="submit" class="btn default-btn">+ Create New</button>
         </form>
       </div>
     </div>
     <div class="col-sm-12 no-padding">
-      <div class="line-item">
+      <!-- <div class="line-item">
         <div class="col-xs-2">
           <p class="no-margin strong">Date</p>
         </div>
@@ -28,7 +28,7 @@
         <div class="col-xs-3 text-right">
           <p class="no-margin strong">Actions</p>
         </div>
-      </div>
+      </div> -->
       <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'">
         <div class="col-xs-2 start-date">
           <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
@@ -43,8 +43,7 @@
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
         <div class="col-xs-3 text-right">
-          <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn default-btn">View</a>
-          <button ng-click="" class="btn main-btn">Edit</button></p>
+          <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
         </div>
       </div>
     </div>
@@ -64,8 +63,7 @@
           <p>Location</p>
         </div>
         <div class="col-xs-3 text-right">
-          <p><a ng-href="/#/production/{{production._id}}" class="btn btn-info">View</a>
-          <button ng-click="" class="btn btn-primary">Edit</button></p>
+          <p><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
         </div>
       </div>
     </div>
@@ -78,21 +76,33 @@
     <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.allProductions">
       <div class="">
         <div class="col-xs-2 start-date">
-          <p>{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+          <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
         <div class="col-xs-2 end-date">
-          <p>{{ production.name || "Name Not Found" }}</p>
+          <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
         </div>
         <div class="col-xs-2">
-          <p>{{ 'Day ' + production.productionDay}}</p>
+          <p class="no-margin">{{ 'Day ' + production.productionDay}}</p>
         </div>
         <div class="col-xs-3">
-          <p>{{ production.location[0] || 'No Location'}}</p>
+          <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
         <div class="col-xs-3 text-right">
-          <p><a ng-href="/#/production/{{production._id}}" class="btn default-btn">View</a>
-          <button ng-click="" class="btn main-btn">Edit</button></p>
+          <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionListCtrl.notifModal.show">
+  <div id="modal-container" ng-click="productionListCtrl.closeNotifModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i ng-if="productionListCtrl.notifModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
+        <h1><i ng-if="productionListCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
+        <p>{{ productionListCtrl.notifModal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>
   </div>

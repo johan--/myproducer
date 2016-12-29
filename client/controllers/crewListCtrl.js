@@ -38,15 +38,20 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
     $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
         vm.newContact.email = ''
-        console.log(data.data);
+        console.log(data);
 
-        vm.notifModal.isSuccess = true
-
-        if(data.data) {
-          var username = data.data.username
-          vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
-          vm.currentUser.contacts.push(data.data)
+        if(data) {
+          if(data.success) {
+            vm.notifModal.isSuccess = true
+            var username = data.data.username
+            vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
+            vm.currentUser.contacts.push(data.data)
+          } else {
+            vm.notifModal.isFailure = true
+            vm.notifModal.content = data.message
+          }
         } else {
+          vm.notifModal.isSuccess = true
           vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + ' to  be part of your crew list.'
         }
       })
@@ -107,5 +112,7 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
 
   vm.closeNotifModal = function() {
     vm.notifModal.show = false
+    vm.notifModal.isSuccess = false
+    vm.notifModal.isFaiure = false
   }
 }

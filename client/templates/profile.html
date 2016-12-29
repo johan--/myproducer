@@ -11,7 +11,7 @@
               <img class="img-responsive" ng-src="./img/profile_default.png">
             </div>
             <div class="profile-name">
-              <h3 class="sub-title">{{ postCtrl.currentUser.username | uppercase }}</h3>
+              <h3 class="sub-title">{{ postCtrl.currentUser.first_name + ' ' + postCtrl.currentUser.last_name | uppercase }}</h3>
               <!-- <h3 ng-hide="postCtrl.editingState">{{ otherProfileCtrl.user.first_name || "FIRST" }}</h3>
               <label ng-show="postCtrl.editingState" for="userFirstName">First</label>
               <input ng-show="postCtrl.editingState" ng-model="otherProfileCtrl.user.first_name" class="form-control" id="userFirstName">
@@ -102,8 +102,8 @@
         <h4 class="title">Pending Productions</h4>
         <!-- <p>{{ postCtrl.currentUser.offersReceived }}</p> -->
         <div class="group">
-          <div class="line-item" ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-if="offer.offer.status == 'Pending'">
-            <p class="float-left no-margin strong">{{ offer.production.name }}</p>
+          <div class="line-item" ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-if="offer.offer.status == 'Pending' && postCtrl.compareDate(offer.production.date)">
+            <p class="float-left no-margin strong">{{ offer.production.name + '  - ' }} {{ offer.production.date | date:'shortDate' }}</p>
             <p class="float-right no-margin"><a class="btn default-btn" ui-sref="offer({id: offer._id})">View</a></p>
             </div>
         </div>
@@ -114,8 +114,8 @@
         <h4 class="title">Current Productions</h4>
         <div class="group">
           <!-- If they're a producer show their productions -->
-          <div class="line-item" ng-repeat="production in postCtrl.currentUser.productions" ng-if="production.active && postCtrl.compareDate(production.date)">
-            <p class="float-left no-margin strong">{{ production.name }}</p>
+          <div class="line-item" ng-repeat="production in postCtrl.currentUser.allProductions" ng-if="production.active && postCtrl.compareDate(production.date)">
+            <p class="float-left no-margin strong">{{ production.name + ' - ' }} {{ production.date | date:'shortDate' }}</p>
             <p class="float-right no-margin"><a class="btn default-btn" ui-sref="production({id: production._id})">View</a></p>
           </div>
           <!-- If they're crew show their accepted productions -->
@@ -127,8 +127,8 @@
       <div class="productions-past">
         <h4 class="title">Past Productions</h4>
         <div>
-          <div class="line-item" ng-repeat=" production in postCtrl.currentUser.productions" ng-if="production.active && !postCtrl.compareDate(production.date)">
-            <p class="float-left no-margin strong">{{ production.name }}</p>
+          <div class="line-item" ng-repeat=" production in postCtrl.currentUser.allProductions" ng-if="production.active && !postCtrl.compareDate(production.date)">
+            <p class="float-left no-margin strong">{{ production.name + ' - ' }} {{ production.date | date:'shortDate' }}</p>
             <p class="float-right no-margin"><a class="btn default-btn" ui-sref="production({id: production._id})">View</a></p>
           </div>
         </div>

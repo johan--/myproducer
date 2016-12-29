@@ -19,7 +19,7 @@
             <img class="thumb" ng-src="./img/profile_default.png">
           </div>
           <div class="col-xs-3">
-            <p class="strong no-margin">{{crew.username}}</p>
+            <p class="strong no-margin">{{crew.first_name + ' ' + crew.last_name}}</p>
           </div>
           <div class="col-xs-3">
             <p class="no-margin">{{crew.title || 'Role'}}</p>
@@ -61,7 +61,7 @@
             <!-- <img ui-sref="" ng-src=""> -->
           </div>
           <div class="col-xs-6">
-            <p class="no-margin">{{ pendingContact.username }}</p>
+            <p class="no-margin">{{ pendingContact.first_name + ' ' + pendingContact.last_name }}</p>
           </div>
           <div class="col-xs-4 text-right">
             <p class="no-margin">
@@ -109,7 +109,9 @@
       </div>
 
       <div class="line-item padding20" ng-click="">
-        <p class="text-center no-margin strong">+ Create A New Production</p>
+        <a ui-sref="production-list">
+          <p class="text-center no-margin strong">+ Create A New Production</p>
+        </a>
       </div>
       <!-- <div class="close-modal" ng-click="crewListCtrl.closeModal()">
         X

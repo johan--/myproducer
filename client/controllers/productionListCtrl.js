@@ -7,7 +7,7 @@ productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$sta
 
 function productionListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
   var vm = this
-
+  vm.notifModal = {}
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
 
@@ -33,7 +33,7 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
           vm.ready = true
 
           if (vm.currentUser.role === 'producer') {
-            // vm.updateMinDateTo()
+            vm.updateMinDateTo()
           }
         })
   })
@@ -55,8 +55,9 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
 
     if((new Date(vm.dateFrom)) > (new Date(vm.dateTo))){
       vm.dateTo = undefined
-      // TODO: Fix warning message - Kevin
-      alert('Invalid date')
+      vm.notifModal.isFailure = true
+      vm.notifModal.content = 'Please check date!'
+      vm.notifModal.show = true
     }
   }
 
@@ -78,6 +79,14 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
         // // redirect them to production view
         // // $state.go('production')
       })
+  }
+
+  vm.openNotifModal = function() {
+    vm.notifModal.show = true
+  }
+
+  vm.closeNotifModal = function() {
+    vm.notifModal.show = false
   }
 
   vm.compareDate = function(date){
