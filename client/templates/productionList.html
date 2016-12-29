@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="col-sm-12 no-padding">
-      <div class="line-item">
+      <!-- <div class="line-item">
         <div class="col-xs-2">
           <p class="no-margin strong">Date</p>
         </div>
@@ -28,7 +28,7 @@
         <div class="col-xs-3 text-right">
           <p class="no-margin strong">Actions</p>
         </div>
-      </div>
+      </div> -->
       <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'">
         <div class="col-xs-2 start-date">
           <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
