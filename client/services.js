@@ -94,7 +94,7 @@ angular.module('myApp')
 
     }
 
-    function register(username, password, role, params) {
+    function register(user, role, params) {
 
       // create a new instance of deferred
       var deferred = $q.defer()
@@ -112,7 +112,7 @@ angular.module('myApp')
 
       // send a post request to the server
       $http.post(path,
-        {username: username, password: password, role: role})
+        {username: user.username, first_name: user.first_name, last_name: user.last_name, password: user.password, role: role})
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){

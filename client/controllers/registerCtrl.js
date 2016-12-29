@@ -20,7 +20,7 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
     vm.disabled = true
 
     // call register from service
-    AuthService.register(vm.registerForm.username, vm.registerForm.password, $stateParams.ur, $stateParams)
+    AuthService.register(vm.registerForm, $stateParams.ur, $stateParams)
       // handle success
       .then(function () {
         $state.go('profile')
