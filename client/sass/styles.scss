@@ -336,3 +336,13 @@ img.thumb{
   background: $section;
   float: none;
 }
+
+.alert{
+  padding: 10px;
+  background-color: transparent;
+  text-align: center;
+}
+
+.alert-danger{
+  border-color: #a94442;
+}

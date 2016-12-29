@@ -6,7 +6,7 @@
         <a ui-sref="register({ur: loginCtrl.userRole})"><button class="btn btn-default">Create A New Account</button></a>
       </div>
     </div> -->
-      <!-- <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div> -->
+      <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
     <form class="form" ng-submit="loginCtrl.login()">
       <div class="form-group">
         <input type="text" class="form-control out" name="email" ng-model="loginCtrl.loginForm.username" placeholder="Email" required>

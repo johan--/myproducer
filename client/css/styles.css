@@ -243,4 +243,12 @@ img.thumb {
   background: #333333;
   float: none; }
 
+.alert {
+  padding: 10px;
+  background-color: transparent;
+  text-align: center; }
+
+.alert-danger {
+  border-color: #a94442; }
+
 /*# sourceMappingURL=styles.css.map */

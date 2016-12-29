@@ -32,7 +32,8 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
         vm.error = true
         vm.errorMessage = "Something went wrong!"
         vm.disabled = false
-        vm.registerForm = {}
+        vm.registerForm.username = ''
+        vm.registerForm.password = ''
       })
   }
   // vm.login = function() {
