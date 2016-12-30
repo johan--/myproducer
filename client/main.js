@@ -6,8 +6,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
 
   $stateProvider
     .state('home', {
-      url: '/',
-      templateUrl: 'templates/home.html'
+      url: '/?reg',
+      templateUrl: 'templates/home.html',
+      controller: 'homeController as homeCtrl'
     })
     .state('login', {
       url: '/login?ur',

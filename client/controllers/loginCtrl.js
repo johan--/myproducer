@@ -10,6 +10,11 @@ function loginController($rootScope, $state, $stateParams, AuthService) {
   $rootScope.activeTab = {}
   vm.userRole = $stateParams.ur
 
+  if($rootScope.isLoggedIn) {
+    console.log('go to proile');
+    $state.go('profile')
+  }
+
   vm.login = function () {
 
     // initial values

@@ -81,12 +81,33 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
       })
   }
 
+  vm.deleteProduction = function(name, id, index) {
+    $http.patch('/api/productions/' + id, {active: false})
+      .success(function(data) {
+        console.log(data);
+        vm.currentUser.allProductions.splice(index, 0)
+
+        vm.notifModal.isSuccess = true
+        vm.notifModal.content = 'You have successfully deleted ' + name
+      })
+      .error(function(data) {
+        console.log(data);
+        vm.notifModal.isFailure = true
+        vm.notifModal.content = 'An error has occurred. Please try again.'
+      })
+      .finally(function() {
+        vm.openNotifModal()
+      })
+  }
+
   vm.openNotifModal = function() {
     vm.notifModal.show = true
   }
 
   vm.closeNotifModal = function() {
     vm.notifModal.show = false
+    vm.notifModal.isSuccess = false
+    vm.notifModal.isFailure = false
   }
 
   vm.compareDate = function(date){

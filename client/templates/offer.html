@@ -59,13 +59,12 @@
           </div>
         </div>
 
-        <form>
+        <form ng-submit="offerCtrl.addMessage()">
           <p>
-            <textarea class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message"></textarea>
+            <input type="text" class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message">
           </p>
-          <p>
-            <a ng-click="offerCtrl.addMessage()" class="btn default-btn x-padding">Send</a>
-          </p>
+
+          <button type="submit" class="btn default-btn x-padding">Send</a>
         </form>
       </div>
     </div>

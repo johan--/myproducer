@@ -184,7 +184,10 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
     vm.notifyCrew = function() {
       $http.get('/api/productions/' + $stateParams.id + '/notify')
         .success(function(data) {
-          vm.statusMessage = data.message
+          console.log(data);
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully sent an email notification to your crew members.'
+          vm.openNotifModal()
         })
     }
 }
