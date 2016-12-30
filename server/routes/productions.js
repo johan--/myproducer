@@ -117,7 +117,7 @@ router.get('/:id/notify', function show(req, res){
         }
       )
     }
-  res.json({"message" : "success"})
+  res.json({success : true})
   })
 })
 
