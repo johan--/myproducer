@@ -13,7 +13,7 @@ var User = new Schema({
   skills: [String],
   location: String,
   title: String,
-  phone: Number,
+  phone: String,
   website: String,
   bio: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}],
