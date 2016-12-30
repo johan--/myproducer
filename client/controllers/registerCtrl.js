@@ -13,7 +13,7 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
     console.log('go to proile');
     $state.go('profile')
   } else if ($stateParams.ur === undefined) {
-    $state.go('home')
+    $state.go('home', {reg: true})
   }
 
   vm.register = function () {
