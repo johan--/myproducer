@@ -35,6 +35,14 @@ a, a:hover, a:link{
   text-decoration: none;
 }
 
+.fff-text{
+  color: #fff;
+}
+
+.lg-hover:hover{
+  background-color: $button;
+}
+
 .section {
   background-color: $section;
   overflow: auto;
