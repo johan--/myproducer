@@ -42,8 +42,11 @@
         <div class="col-xs-3">
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
-        <div class="col-xs-3 text-right">
-          <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
+        <div class="col-xs-3 text-right no-padding">
+          <p class="no-margin">
+            <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
+            <a ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+          </p>
         </div>
       </div>
     </div>
@@ -87,8 +90,11 @@
         <div class="col-xs-3">
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
-        <div class="col-xs-3 text-right">
-          <p class="no-margin"><a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a></p>
+        <div class="col-xs-3 text-right no-padding">
+          <p class="no-margin">
+            <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
+            <a ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+          </p>
         </div>
       </div>
     </div>
