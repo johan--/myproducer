@@ -46,7 +46,7 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
           data.crew = vm.production.crew
           vm.production = data
           vm.notifModal.isSuccess = true
-          vm.notifModal.content = 'You have successfully updated your profile.'
+          vm.notifModal.content = 'You have successfully updated your production.'
         })
         .error(function(data) {
           console.log(data);
