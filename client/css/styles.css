@@ -10,6 +10,12 @@ body.bottom-padding {
 a, a:hover, a:link {
   text-decoration: none; }
 
+.fff-text {
+  color: #fff; }
+
+.lg-hover:hover {
+  background-color: #888888; }
+
 .section {
   background-color: #333333;
   overflow: auto;
