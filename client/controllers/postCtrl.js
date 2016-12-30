@@ -68,6 +68,8 @@ function postController($rootScope, $http, $stateParams, $state, ProductionFacto
 
   vm.closeModal = function() {
     vm.modal.show = false
+    vm.modal.isSuccess = false
+    vm.modal.isFailure = false
   }
 
   vm.compareDate = function(date){
