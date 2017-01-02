@@ -130,15 +130,19 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.showModal = false
           vm.openNotifModal()
         })
-    } 
+    }
 
     vm.removeFromCrew = function(id, index) {
       $http.delete('/api/crew/' + id)
         .then(function(data) {
           if(data.data.success){
+            vm.production.crew = vm.production.crew.filter(function(c) {
+              return c._id.toString() != id
+            })
+
             vm.notifModal.isSuccess = true
             vm.notifModal.content = 'You have successfully removed a crew member.'
-            vm.production.crew.splice(index, 1)
+            // vm.production.crew.splice(index, 1)
           } else {
             vm.notifModal.isFailure = false
             vm.notifModal.content = 'An error has occurred. Please try again.'
