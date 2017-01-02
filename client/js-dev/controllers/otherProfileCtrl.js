@@ -21,7 +21,7 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
       $http.get('/api/users/' + vm.currentUser._id)
         .success(function(data){
           vm.currentUser = data
-          console.log(data);
+          // console.log(data);
 
 
           $http.get('/api/users/' + $stateParams.id + '/profile')
@@ -38,8 +38,8 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
   })
 
   vm.updateContactStatus = function(status) {
-    console.log(status);
-    console.log($stateParams.id);
+    // console.log(status);
+    // console.log($stateParams.id);
 
     $http.patch('/api/users/updateContact?of=' + $stateParams.id + '&status=' + status)
       .then(function success(data){

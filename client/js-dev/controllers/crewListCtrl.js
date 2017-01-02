@@ -27,7 +27,7 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
 
           vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id
           vm.ready = true
-          console.log(data);
+          // console.log(data);
         })
   })
 
@@ -38,7 +38,7 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
     $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
         vm.newContact.email = ''
-        console.log(data);
+        // console.log(data);
 
         if(data) {
           if(data.success) {
@@ -78,7 +78,7 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
   vm.handleAddToButton = function(id, username) {
     vm.selectedUserId = id;
     vm.selectedUsername = username;
-    console.log(vm.selectedUserId);
+    // console.log(vm.selectedUserId);
     vm.openModal()
   }
 
@@ -87,16 +87,16 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
       to: vm.selectedUserId,
       production: productionId
     }
-    console.log(offer);
+    // console.log(offer);
     $http.post('/api/crew/', offer)
      .success(function(data) {
-       console.log(data);
+      //  console.log(data);
 
        vm.notifModal.isSuccess = true
        vm.notifModal.content = 'You have successfully added ' + vm.selectedUsername + ' to ' + productionName + '.'
      })
      .error(function(data) {
-       console.log(data);
+      //  console.log(data);
 
        vm.notifModal.isFailure = true
        vm.notifModal.content = 'An error has occurred. Please try again.'

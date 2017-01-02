@@ -11,7 +11,7 @@ function loginController($rootScope, $state, $stateParams, AuthService) {
   vm.userRole = $stateParams.ur
 
   if($rootScope.isLoggedIn) {
-    console.log('go to proile');
+    // console.log('go to proile');
     $state.go('profile')
   }
 
@@ -25,14 +25,14 @@ function loginController($rootScope, $state, $stateParams, AuthService) {
     AuthService.login(vm.loginForm.username, vm.loginForm.password)
       // handle success
       .then(function () {
-        console.log("Successful login...")
+        // console.log("Successful login...")
         $state.go('profile')
         vm.disabled = false
         vm.loginForm = {}
       })
       // handle error
       .catch(function () {
-        console.log("Whoops...")
+        // console.log("Whoops...")
         vm.error = true
         vm.errorMessage = "Invalid email and/or password"
         vm.disabled = false

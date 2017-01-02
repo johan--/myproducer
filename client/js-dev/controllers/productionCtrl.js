@@ -24,14 +24,14 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
-          console.log(data);
+          // console.log(data);
 
 
 
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
-              console.log("Production from the Factory", vm.production)
+              // console.log("Production from the Factory", vm.production)
 
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
 
@@ -44,14 +44,14 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       $http.patch('/api/productions/' + $stateParams.id, vm.production)
         .success(function(data) {
           vm.editingState = false
-          console.log(data);
+          // console.log(data);
           data.crew = vm.production.crew
           vm.production = data
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully updated your production.'
         })
         .error(function(data) {
-          console.log(data);
+          // console.log(data);
           vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
@@ -82,7 +82,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       // TODO: Please confirm if the issue above has been fixed. -Kevin
       $http.patch('api/crew/' + id, vm.offer)
         .success(function(data) {
-          console.log(data);
+          // console.log(data);
           vm.production.crew[$index].offer.hours = data.offer.hours
           vm.production.crew[$index].offer.position = data.offer.position
           vm.production.crew[$index].offer.rate = data.offer.rate
@@ -98,7 +98,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           if(vm.message.content){
             $http.post('/api/crew/' + id + '/message', vm.message)
               .success(function(data) {
-                console.log(data);
+                // console.log(data);
               })
           }
         })
@@ -190,7 +190,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     vm.notifyCrew = function() {
       $http.get('/api/productions/' + $stateParams.id + '/notify')
         .success(function(data) {
-          console.log(data);
+          // console.log(data);
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully sent an email notification to your crew members.'
           vm.openNotifModal()

@@ -10,7 +10,7 @@ function registerController($rootScope, $state, $stateParams, AuthService) {
   $rootScope.activeTab = {}
 
   if($rootScope.isLoggedIn) {
-    console.log('go to proile');
+    // console.log('go to proile');
     $state.go('profile')
   } else if ($stateParams.ur === undefined) {
     $state.go('home', {reg: true})

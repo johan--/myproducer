@@ -38,7 +38,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
 
           vm.ready = true
-          console.log(data);
+          // console.log(data);
         })
   })
 
