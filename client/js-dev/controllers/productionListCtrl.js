@@ -85,7 +85,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     $http.patch('/api/productions/' + id, {active: false})
       .success(function(data) {
         console.log(data);
-        vm.currentUser.allProductions.splice(index, 0)
+        vm.currentUser.allProductions[index].active = false
 
         vm.notifModal.isSuccess = true
         vm.notifModal.content = 'You have successfully deleted ' + name
