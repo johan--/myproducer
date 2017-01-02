@@ -16,7 +16,16 @@ router.get('/', function(req, res){
   // find it by the user
   User.findById(req.user._id).populate("productions").exec(function(err, user){
     if(err) return console.log(err)
-    res.json(user.productions)
+
+    if(user && user.active){
+      user.productions = user.productions.filter(function(p) {
+        return p.active
+      })
+
+      res.json(user.productions)
+    } else {
+      res.json(null)
+    }
   })
 })
 
@@ -70,7 +79,12 @@ router.post('/', function(req, res){
 router.get('/:id', function show(req, res){
   Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'by_', select: 'username first_name last_name'}).exec(function(err, production) {
     if(err) return console.log(err)
-    res.json(production)
+
+    if(production.active) {
+      res.json(production)
+    } else {
+      res.json(null)
+    }
   })
 })
 
