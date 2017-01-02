@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('productionController', productionController)
 
-productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTION CONTROLLER
 
-function productionController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function productionController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.offers = []
   vm.currentUser = {}
@@ -26,7 +26,9 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
           vm.currentUser = data
           console.log(data);
 
-          ProductionFactory.show($stateParams.id)
+
+
+          $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
               console.log("Production from the Factory", vm.production)
@@ -128,7 +130,7 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
           vm.showModal = false
           vm.openNotifModal()
         })
-    }
+    } 
 
     vm.removeFromCrew = function(id, index) {
       $http.delete('/api/crew/' + id)

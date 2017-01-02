@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('crewListController', crewListController)
 
-crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTIONS
 
-function crewListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function crewListController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.showModal = false;
   vm.notifModal = {}

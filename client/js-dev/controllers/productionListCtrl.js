@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
 
-productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTIONS
 
-function productionListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function productionListController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.notifModal = {}
   $rootScope.activeTab = {}

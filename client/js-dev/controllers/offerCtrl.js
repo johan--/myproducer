@@ -3,7 +3,7 @@ angular.module('myApp')
 
 offerController.$inject = ['$rootScope', 'AuthService', '$http', '$stateParams', '$state']
 
-function offerController($rootScope, AuthService, $http, $stateParams, $state, ProductionFactory) {
+function offerController($rootScope, AuthService, $http, $stateParams, $state) {
   var vm = this
 
   vm.currentUser = {}

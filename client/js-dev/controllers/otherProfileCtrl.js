@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('otherProfileController', otherProfileController)
 
-otherProfileController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+otherProfileController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // OTHER PROFILE
 
-function otherProfileController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function otherProfileController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this;
   vm.modal = {}
   vm.modal.show = false;

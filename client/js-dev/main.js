@@ -1,6 +1,6 @@
 var myApp = angular.module('myApp', ['ui.router'])
 
-myApp.config(function ($stateProvider, $urlRouterProvider) {
+myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/')
 
@@ -63,9 +63,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       restricted: true
     })
 
-})
+}])
 
-myApp.run(function ($rootScope, $location, $state, AuthService) {
+myApp.run(['$rootScope', '$location', '$state', 'AuthService', function ($rootScope, $location, $state, AuthService) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     AuthService.getUserStatus()
@@ -77,4 +77,4 @@ myApp.run(function ($rootScope, $location, $state, AuthService) {
       }
     })
   })
-})
+}])

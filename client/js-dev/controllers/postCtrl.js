@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('postController', postController)
 
-postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTIONS
 
-function postController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function postController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.currentUser = {}
 
