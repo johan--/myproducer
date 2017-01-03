@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
 
-productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTIONS
 
-function productionListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function productionListController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.notifModal = {}
   $rootScope.activeTab = {}
@@ -81,17 +81,18 @@ function productionListController($rootScope, $http, $stateParams, $state, Produ
       })
   }
 
-  vm.deleteProduction = function(name, id, index) {
+  vm.deleteProduction = function(name, id) {
     $http.patch('/api/productions/' + id, {active: false})
       .success(function(data) {
-        console.log(data);
-        vm.currentUser.allProductions.splice(index, 0)
-
+        // console.log(data);
+        vm.currentUser.allProductions = vm.currentUser.allProductions.filter(function(p, i) {
+          return p._id.toString() != id
+        })
         vm.notifModal.isSuccess = true
         vm.notifModal.content = 'You have successfully deleted ' + name
       })
       .error(function(data) {
-        console.log(data);
+        // console.log(data);
         vm.notifModal.isFailure = true
         vm.notifModal.content = 'An error has occurred. Please try again.'
       })

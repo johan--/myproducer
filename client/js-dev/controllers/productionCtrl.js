@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('productionController', productionController)
 
-productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTION CONTROLLER
 
-function productionController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function productionController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.offers = []
   vm.currentUser = {}
@@ -24,12 +24,14 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
-          console.log(data);
+          // console.log(data);
 
-          ProductionFactory.show($stateParams.id)
+
+
+          $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
-              console.log("Production from the Factory", vm.production)
+              // console.log("Production from the Factory", vm.production)
 
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
 
@@ -42,14 +44,14 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
       $http.patch('/api/productions/' + $stateParams.id, vm.production)
         .success(function(data) {
           vm.editingState = false
-          console.log(data);
+          // console.log(data);
           data.crew = vm.production.crew
           vm.production = data
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully updated your production.'
         })
         .error(function(data) {
-          console.log(data);
+          // console.log(data);
           vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
@@ -80,7 +82,7 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
       // TODO: Please confirm if the issue above has been fixed. -Kevin
       $http.patch('api/crew/' + id, vm.offer)
         .success(function(data) {
-          console.log(data);
+          // console.log(data);
           vm.production.crew[$index].offer.hours = data.offer.hours
           vm.production.crew[$index].offer.position = data.offer.position
           vm.production.crew[$index].offer.rate = data.offer.rate
@@ -96,7 +98,7 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
           if(vm.message.content){
             $http.post('/api/crew/' + id + '/message', vm.message)
               .success(function(data) {
-                console.log(data);
+                // console.log(data);
               })
           }
         })
@@ -134,9 +136,13 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
       $http.delete('/api/crew/' + id)
         .then(function(data) {
           if(data.data.success){
+            vm.production.crew = vm.production.crew.filter(function(c) {
+              return c._id.toString() != id
+            })
+
             vm.notifModal.isSuccess = true
             vm.notifModal.content = 'You have successfully removed a crew member.'
-            vm.production.crew.splice(index, 1)
+            // vm.production.crew.splice(index, 1)
           } else {
             vm.notifModal.isFailure = false
             vm.notifModal.content = 'An error has occurred. Please try again.'
@@ -184,7 +190,7 @@ function productionController($rootScope, $http, $stateParams, $state, Productio
     vm.notifyCrew = function() {
       $http.get('/api/productions/' + $stateParams.id + '/notify')
         .success(function(data) {
-          console.log(data);
+          // console.log(data);
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully sent an email notification to your crew members.'
           vm.openNotifModal()

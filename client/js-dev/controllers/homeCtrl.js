@@ -8,7 +8,7 @@ function homeController($rootScope, $state, $stateParams) {
   var vm = this
 
   if($rootScope.isLoggedIn) {
-    console.log('ding');
+    // console.log('ding');
     $state.go('profile')
   }
 

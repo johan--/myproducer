@@ -3,7 +3,7 @@ angular.module('myApp')
 
 offerController.$inject = ['$rootScope', 'AuthService', '$http', '$stateParams', '$state']
 
-function offerController($rootScope, AuthService, $http, $stateParams, $state, ProductionFactory) {
+function offerController($rootScope, AuthService, $http, $stateParams, $state) {
   var vm = this
 
   vm.currentUser = {}
@@ -23,7 +23,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, P
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
               vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
               vm.ready = true
-              console.log("Crew from get", vm.crew)
+              // console.log("Crew from get", vm.crew)
             })
         })
     })

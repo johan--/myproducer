@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('crewListController', crewListController)
 
-crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTIONS
 
-function crewListController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function crewListController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.showModal = false;
   vm.notifModal = {}
@@ -27,7 +27,7 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
 
           vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id
           vm.ready = true
-          console.log(data);
+          // console.log(data);
         })
   })
 
@@ -38,7 +38,7 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
     $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
         vm.newContact.email = ''
-        console.log(data);
+        // console.log(data);
 
         if(data) {
           if(data.success) {
@@ -78,7 +78,7 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
   vm.handleAddToButton = function(id, username) {
     vm.selectedUserId = id;
     vm.selectedUsername = username;
-    console.log(vm.selectedUserId);
+    // console.log(vm.selectedUserId);
     vm.openModal()
   }
 
@@ -87,16 +87,16 @@ function crewListController($rootScope, $http, $stateParams, $state, ProductionF
       to: vm.selectedUserId,
       production: productionId
     }
-    console.log(offer);
+    // console.log(offer);
     $http.post('/api/crew/', offer)
      .success(function(data) {
-       console.log(data);
+      //  console.log(data);
 
        vm.notifModal.isSuccess = true
        vm.notifModal.content = 'You have successfully added ' + vm.selectedUsername + ' to ' + productionName + '.'
      })
      .error(function(data) {
-       console.log(data);
+      //  console.log(data);
 
        vm.notifModal.isFailure = true
        vm.notifModal.content = 'An error has occurred. Please try again.'

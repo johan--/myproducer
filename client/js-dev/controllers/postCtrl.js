@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('postController', postController)
 
-postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // PRODUCTIONS
 
-function postController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function postController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this
   vm.currentUser = {}
 
@@ -38,7 +38,7 @@ function postController($rootScope, $http, $stateParams, $state, ProductionFacto
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
 
           vm.ready = true
-          console.log(data);
+          // console.log(data);
         })
   })
 

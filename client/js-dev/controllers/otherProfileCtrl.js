@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('otherProfileController', otherProfileController)
 
-otherProfileController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'ProductionFactory', 'AuthService']
+otherProfileController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
 
 // OTHER PROFILE
 
-function otherProfileController($rootScope, $http, $stateParams, $state, ProductionFactory, AuthService){
+function otherProfileController($rootScope, $http, $stateParams, $state, AuthService){
   var vm = this;
   vm.modal = {}
   vm.modal.show = false;
@@ -21,7 +21,7 @@ function otherProfileController($rootScope, $http, $stateParams, $state, Product
       $http.get('/api/users/' + vm.currentUser._id)
         .success(function(data){
           vm.currentUser = data
-          console.log(data);
+          // console.log(data);
 
 
           $http.get('/api/users/' + $stateParams.id + '/profile')
@@ -38,8 +38,8 @@ function otherProfileController($rootScope, $http, $stateParams, $state, Product
   })
 
   vm.updateContactStatus = function(status) {
-    console.log(status);
-    console.log($stateParams.id);
+    // console.log(status);
+    // console.log($stateParams.id);
 
     $http.patch('/api/users/updateContact?of=' + $stateParams.id + '&status=' + status)
       .then(function success(data){

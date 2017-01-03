@@ -1,10 +1,5 @@
 angular.module('myApp')
-
-// AUTHENTICATION Factory =====================================================
-
-  .factory('AuthService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
+.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
 
     // create user variable
     var user = null
@@ -132,38 +127,3 @@ angular.module('myApp')
     }
 
 }])
-
-// PRODUCTION RESTFUL FACTORY =================================================
-
-.factory('ProductionFactory', ['$http', ProductionFactory])
-
-function ProductionFactory($http) {
-  return {
-    index: index,
-    show: show,
-    destroy: destroy,
-    create : create,
-    update: update
-  }
-
-  function index() {
-    return $http.get('/api/productions')
-  }
-
-  function show(paramsFromCtrl) {
-    return $http.get('/api/productions/' + paramsFromCtrl)
-    console.log("Factory Used!")
-  }
-
-  function destroy(id) {
-    return $http.delete('/api/productions/' + id)
-  }
-
-  function create(newProduction) {
-    return $http.post('/api/productions/', newProduction)
-  }
-
-  function update(id, newProduction) {
-    return $http.patch('/api/productions/' + id, newProduction)
-  }
-}
