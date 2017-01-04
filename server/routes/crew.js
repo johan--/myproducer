@@ -91,7 +91,7 @@ router.patch('/:id', function(req, res){
     if(err) return console.log(err)
 
     // variables for NODEMAILER
-    var offerURL = 'http://myproducer.io/#/offer/' + crew._id
+    var offerURL = 'http://www.myproducer.io/#/offer/' + crew._id
     var fromEmail =req.user.username
     var fromName = req.user.first_name + ' ' + req.user.last_name
     User.findById(crew.to).exec(function(err, user){
@@ -155,7 +155,7 @@ router.post('/:id/message', function(req, res){
         // console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
 
         var offerId = newCrew._id
-        var offerURL = 'http://myproducer.io/#/offer/' + offerId
+        var offerURL = 'http://www.myproducer.io/#/offer/' + offerId
 
         mailer.send(
           'message',

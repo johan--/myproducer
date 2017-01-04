@@ -36,7 +36,7 @@ router.post('/addcontact', function(req, res){
       if(!contact){ // if user does not exist
         var email = req.body.email
         var producerId = user._id
-        var registrationURL = 'http://myproducer.io/#/register?p=' + producerId
+        var registrationURL = 'http://www.myproducer.io/#/register?p=' + producerId
         // send email
         mailer.send(
           'invitation',
