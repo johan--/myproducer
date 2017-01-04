@@ -1,14 +1,14 @@
 <div class="text-center">
-  <h1>myproducer.io landing page</h1>
+  <h3>Select which type of account you want to create:</h3>
 
   <div ng-if="!homeCtrl.registerIntent">
-    <a ui-sref="login({ur: 'producer'})" class="btn btn-default">Producer</a>
-    <a ui-sref="login({ur: 'crew'})" class="btn btn-default">Crew & Talent</a>
+    <a ui-sref="login({ur: 'producer'})" class="btn main-btn">Producer</a>
+    <a ui-sref="login({ur: 'crew'})" class="btn main-btn">Crew & Talent</a>
   </div>
 
   <div ng-if="homeCtrl.registerIntent">
-    <a ui-sref="register({ur: 'producer'})" class="btn btn-default">Producer</a>
-    <a ui-sref="register({ur: 'crew'})" class="btn btn-default">Crew & Talent</a>
+    <a ui-sref="register({ur: 'producer'})" class="btn main-btn">Producer</a>
+    <a ui-sref="register({ur: 'crew'})" class="btn main-btn">Crew & Talent</a>
   </div>
 
 </div>

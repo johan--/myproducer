@@ -89,9 +89,58 @@
             <div class="{{ productionCtrl.isProducer ? 'col-xs-3' : 'col-xs-4' }} dropdown">
               <!-- No way to style these really, yikes unless we use ui-bootstrap(nooooo) -->
               <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2" ng-model="productionCtrl.offers[$index].position">
-                <option value="Director of Photography">Director of Photography</option>
+                <option value="Actor">Actor</option>
+                <option value="Actress">Actress</option>
+                <option value="Extra">Extra</option>
+                <option value="Executive Producer">Executive Producer</option>
+                <option value="Line Producer">Line Producer</option>
+                <option value="Producer">Producer</option>
+                <option value="Unit Production Manager">Unit Production Manager</option>
+                <option value="Director">Director</option>
+                <option value="2nd Unit Director">2nd Unit Director</option>
+                <option value="Producer / Director">Producer / Director</option>
+                <option value="Writer / Director">Writer / Director</option>
+                <option value="1st Assistant Director">1st Assistant Director</option>
+                <option value="2nd Assistant Director">2nd Assistant Director</option>
+                <option value="2nd 2nd Assistant Director">2nd 2nd Assistant Director</option>
+                <option value="Writer">Writer</option>
+                <option value="Teleprompter Operator">Teleprompter Operator</option>
+                <option value="Cinematographer">Cinematographer</option>
+                <option value="Camera Operator">Camera Operator</option>
+                <option value="Steadicam Operator">Steadicam Operator</option>
+                <option value="Jib / Crane Operator">Jib / Crane Operator</option>
+                <option value="Ronin / Movi Operator">Ronin / Movi Operator</option>
+                <option value="Drone Operator">Drone Operator</option>
+                <option value="Drone Assistant">Drone Assistant</option>
+                <option value="1st Assistant Camera Operator">1st Assistant Camera Operator</option>
+                <option value="2nd Assistant Camera Operator">2nd Assistant Camera Operator</option>
+                <option value="A Camera Operator">"A" Camera Operator</option>
+                <option value="A 1st Assistant Camera Operator">"A" 1st Assistant Camera Operator</option>
+                <option value="A 2nd Assistant Camera Operator">"A" 2nd Assistant Camera Operator</option>
+                <option value="B Camera Operator">"B" Camera Operator</option>
+                <option value="B 1st Assistant Camera Operator">"B" 1st Assistant Camera Operator</option>
+                <option value="B 2nd Assistant Camera Operator">"B" 2nd Assistant Camera Operator</option>
+                <option value="Gaffer">Gaffer</option>
+                <option value="Best Boy Electric">Best Boy Electric</option>
+                <option value="Key Grip">Key Grip</option>
+                <option value="Best Boy Grip">Best Boy Grip</option>
+                <option value="Grip">Grip</option>
+                <option value="Swing">Swing</option>
                 <option value="Sound Mixer">Sound Mixer</option>
+                <option value="Sound Operator">Sound Operator</option>
                 <option value="Boom Operator">Boom Operator</option>
+                <option value="Playback Operator">Playback Operator</option>
+                <option value="Photographer">Photographer</option>
+                <option value="Script Supervisor">Script Supervisor</option>
+                <option value="Production Assistant">Production Assistant</option>
+                <option value="Production Coordinator">Production Coordinator</option>
+                <option value="Digital Imaging Technician">Digital Imaging Technician</option>
+                <option value="Make Up Artist">Make Up Artist</option>
+                <option value="Assistant Make Up Artist">Assistant Make Up Artist</option>
+                <option value="Set Designer">Set Designer</option>
+                <option value="Set Production Assistant">Set Production Assistant</option>
+                <option value="Creative Director">Creative Director</option>
+                <option value="Account Director">Account Director</option>
               </select>
               <p class="no-margin" ng-show="crew.offer.position"> {{crew.offer.position}} </p>
             </div>
