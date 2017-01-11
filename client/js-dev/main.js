@@ -2,7 +2,7 @@ var myApp = angular.module('myApp', ['ui.router'])
 
 myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/')
+  $urlRouterProvider.otherwise('/profile')
 
   $stateProvider
     .state('home', {
