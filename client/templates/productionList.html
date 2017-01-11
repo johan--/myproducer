@@ -4,9 +4,9 @@
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
       <div class="col-sm-9" ng-show="productionListCtrl.currentUser.role === 'producer'">
         <form class="text-right" ng-submit="productionListCtrl.addProduction()">
-            <input class="bg-transparent subtle-border padding5" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name" required>
-            <input class="bg-transparent subtle-border padding5" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
-            <input class="bg-transparent subtle-border padding5" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
+            <input class="bg-transparent subtle-border padding5 top-margin2" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name" required>
+            <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
+            <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
           <button type="submit" class="btn default-btn">+ Create New</button>
         </form>
       </div>
