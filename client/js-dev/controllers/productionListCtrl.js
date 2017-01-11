@@ -82,23 +82,25 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.deleteProduction = function(name, id) {
-    $http.patch('/api/productions/' + id, {active: false})
-      .success(function(data) {
-        // console.log(data);
-        vm.currentUser.allProductions = vm.currentUser.allProductions.filter(function(p, i) {
-          return p._id.toString() != id
+    if(confirm('Are you sure you want to delete this?')){
+      $http.patch('/api/productions/' + id, {active: false})
+        .success(function(data) {
+          // console.log(data);
+          vm.currentUser.allProductions = vm.currentUser.allProductions.filter(function(p, i) {
+            return p._id.toString() != id
+          })
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully deleted ' + name
         })
-        vm.notifModal.isSuccess = true
-        vm.notifModal.content = 'You have successfully deleted ' + name
-      })
-      .error(function(data) {
-        // console.log(data);
-        vm.notifModal.isFailure = true
-        vm.notifModal.content = 'An error has occurred. Please try again.'
-      })
-      .finally(function() {
-        vm.openNotifModal()
-      })
+        .error(function(data) {
+          // console.log(data);
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
+        })
+      }
   }
 
   vm.openNotifModal = function() {
