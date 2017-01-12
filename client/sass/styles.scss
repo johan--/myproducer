@@ -180,6 +180,7 @@ a, a:hover, a:link{
   color: $text;
   padding: 5px;
   height: 24px;
+  overflow: auto;
 }
 
 .form-control.out{

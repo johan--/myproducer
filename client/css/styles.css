@@ -125,7 +125,8 @@ a, a:hover, a:link {
   line-height: 1.2;
   color: #FFFFFF;
   padding: 5px;
-  height: 24px; }
+  height: 24px;
+  overflow: auto; }
 
 .form-control.out {
   height: 40px;
