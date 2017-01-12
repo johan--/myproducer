@@ -82,7 +82,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.deleteProduction = function(name, id) {
-    if(confirm('Are you sure you want to delete this?')){
+    if(confirm('Are you sure you want to delete this production?')){
       $http.patch('/api/productions/' + id, {active: false})
         .success(function(data) {
           // console.log(data);
