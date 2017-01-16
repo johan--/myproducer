@@ -90,7 +90,7 @@
           <p class="title"><input type="text" class="form-control bg-transparent subtle-border" placeholder="Search" ng-model="prodFilter"></p>
         </div>
       </div>
-      <div class="line-item y-padding" ng-repeat="production in crewListCtrl.currentUser.productions | filter:prodFilter">
+      <div class="line-item y-padding" ng-if="production.active" ng-repeat="production in crewListCtrl.currentUser.productions | filter:prodFilter">
         <div class="col-sm-2">
           <p class="strong no-margin">{{ production.date | date : "shortDate" }}</p>
         </div>
