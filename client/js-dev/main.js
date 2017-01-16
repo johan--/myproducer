@@ -70,9 +70,14 @@ myApp.run(['$rootScope', '$location', '$state', 'AuthService', function ($rootSc
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     AuthService.getUserStatus()
     .then(function(){
-      // console.log(toState)
+      // if they attempted to reach a protected page state before they logged in ...
       if (toState.restricted && !AuthService.isLoggedIn()){
-        // $location.path('/login')
+        // find out what state they were trying to access, capture it
+        $rootScope.returnToState = toState.url;
+        // find out the param id of that state they were trying to access, capture it
+        // we use these in the loginCtrl during AuthService.login to send them back
+        // after they log in
+        $rootScope.returnToStateParams = toParams.id;
         $state.go('login');
       }
     })

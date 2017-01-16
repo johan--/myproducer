@@ -23,10 +23,24 @@ function loginController($rootScope, $state, $stateParams, AuthService) {
 
     // call login from service
     AuthService.login(vm.loginForm.username, vm.loginForm.password)
-      // handle success
+      // handle successful login
+      // console.log("successful login")
       .then(function () {
-        // console.log("Successful login...")
-        $state.go('profile')
+        // if they had been trying to view a particular page but weren't logged in yet
+        // if its a particular offer...
+        if( $rootScope.returnToState === "/offer/:id" ) {
+          // send them to that offer after sucessful login
+          $state.go('offer', {"id":$rootScope.returnToStateParams})
+        }
+        // if it's a particular production ...
+        else if ( $rootScope.returnToState === "/production/:id" ) {
+          // send them to that production after sucessful login
+          $state.go('production', {"id":$rootScope.returnToStateParams})
+        }
+        else {
+          //redirect all others to profile after login
+          $state.go('profile');
+        }
         vm.disabled = false
         vm.loginForm = {}
       })
