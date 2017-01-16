@@ -46,7 +46,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state) {
     vm.offerUpdate = Object.assign({}, vm.crew)
     vm.offerUpdate.offer.status = status
 
-    $http.patch('/api/crew/' + $stateParams.id, vm.offerUpdate)
+    $http.patch('/api/crew/' + $stateParams.id +'/status', vm.offerUpdate)
       .then(function(data){
 
         var message = ''

@@ -119,6 +119,13 @@ router.patch('/:id', function(req, res){
   })
 })
 
+router.patch('/:id/status', function(req, res){
+  Crew.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, crew){
+    if(err) return console.log(err)
+    res.json(crew)
+  })
+})
+
 router.post('/:id/message', function(req, res){
   console.log(req.params.id)
   Crew.findById(req.params.id, function(err, crew){
