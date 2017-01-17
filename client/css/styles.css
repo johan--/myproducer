@@ -80,6 +80,15 @@ a, a:hover, a:link {
   background-color: #FF584B;
   color: #FFFFFF; }
 
+.hero-btn {
+  font-size: 24px;
+  padding: 19px;
+  height: 75px;
+  width: 200px;
+  margin: 15px;
+  font-weight: 300;
+}
+
 .col-centered {
   float: none;
   margin: 0 auto; }
