@@ -119,6 +119,7 @@ router.patch('/:id', function(req, res){
   })
 })
 
+// this patch is here for accepting and declining offers so that it doesn't send email
 router.patch('/:id/status', function(req, res){
   Crew.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, crew){
     if(err) return console.log(err)

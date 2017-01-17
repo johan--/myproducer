@@ -25,6 +25,7 @@ body {
   background-color: $background;
   color: $text;
   letter-spacing: 0.5px;
+  overflow: hidden;
 }
 
 body.bottom-padding{
