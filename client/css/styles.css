@@ -32,7 +32,7 @@ a, a:hover, a:link {
 .line-item {
   background-color: #595959;
   padding: 10px;
-  overflow: auto;
+  overflow: hidden;
   margin-bottom: 5px; }
   .line-item p {
     padding-top: 5px;

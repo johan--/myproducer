@@ -64,7 +64,7 @@ a, a:hover, a:link{
 .line-item {
   background-color: $line-item;
   padding: 10px;
-  overflow: auto;
+  overflow: hidden;
   margin-bottom: 5px;
 
   p{
