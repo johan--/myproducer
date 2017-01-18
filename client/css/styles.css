@@ -75,6 +75,10 @@ a, a:hover, a:link {
   background-color: #00937D;
   color: #FFFFFF; }
 
+.approval-alt-btn {
+  background-color: #72BF44;
+  color: #FFFFFF; }
+
 .error-btn {
   background-color: #FF584B;
   color: #FFFFFF; }
