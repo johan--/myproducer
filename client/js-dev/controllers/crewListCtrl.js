@@ -52,7 +52,7 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
           }
         } else {
           vm.notifModal.isSuccess = true
-          vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + ' to  be part of your crew list.'
+          vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + '. They will appear in your crew list when they accept.'
         }
       })
       .error(function(data) {
