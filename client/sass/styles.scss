@@ -25,7 +25,6 @@ body {
   background-color: $background;
   color: $text;
   letter-spacing: 0.5px;
-  overflow: hidden;
 }
 
 body.bottom-padding{
@@ -121,6 +120,15 @@ a, a:hover, a:link{
 .error-btn{
   background-color: $error;
   color: $text;
+}
+
+.hero-btn {
+  font-size: 24px;
+  padding: 19px;
+  height: 75px;
+  width: 200px;
+  margin: 15px;
+  font-weight: 300;
 }
 
 .col-centered{

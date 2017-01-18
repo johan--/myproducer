@@ -2,8 +2,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #0A0A0A;
   color: #FFFFFF;
-  letter-spacing: 0.5px;
-  overflow: hidden; }
+  letter-spacing: 0.5px; }
 
 body.bottom-padding {
   padding-bottom: 50px; }
@@ -86,8 +85,7 @@ a, a:hover, a:link {
   height: 75px;
   width: 200px;
   margin: 15px;
-  font-weight: 300;
-}
+  font-weight: 300; }
 
 .col-centered {
   float: none;
