@@ -46,10 +46,14 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
             var username = data.data.username
             vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
             vm.currentUser.contacts.push(data.data)
+          } else if(data.newSuccess){
+            vm.notifModal.isSuccess = true
+            vm.notifModal.content = 'We have sent an invitation to ' + data.newEmail + '. They will appear in your crew list when they accept.'
           } else {
             vm.notifModal.isFailure = true
             vm.notifModal.content = data.message
           }
+        // unsure we if we need this anymore -ak
         } else {
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + '. They will appear in your crew list when they accept.'

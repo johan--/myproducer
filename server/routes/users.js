@@ -51,7 +51,7 @@ router.post('/addcontact', function(req, res){
           }
         )
 
-        res.json({success: true})
+        res.json({newSuccess: true, newEmail: email})
 
       } else { // if user exists
 
