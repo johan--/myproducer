@@ -62,23 +62,31 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.addProduction = function(){
-    var newProduction = {
-      from: new Date(vm.dateFrom),
-      to: new Date(vm.dateTo),
-      by_ : vm.currentUser,
-      name: vm.newProduction.name
-    }
+    if((new Date(vm.dateFrom)) > (new Date(vm.dateTo)) )
+    {
+      vm.dateTo = undefined
+      vm.notifModal.isFailure = true
+      vm.notifModal.content = 'Please check date!'
+      vm.notifModal.show = true
+    } else {
+      var newProduction = {
+        from: new Date(vm.dateFrom),
+        to: new Date(vm.dateTo),
+        by_ : vm.currentUser,
+        name: vm.newProduction.name
+      }
 
-    // console.log(newProduction);
-    $http.post('/api/productions', newProduction)
-      .success(function(data){
-        vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
-        // console.log(vm.currentUser)
-        // vm.currentUser.productions.push(data)
-        // vm.newProduction = {}
-        // // redirect them to production view
-        // // $state.go('production')
-      })
+      // console.log(newProduction);
+      $http.post('/api/productions', newProduction)
+        .success(function(data){
+          vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
+          // console.log(vm.currentUser)
+          // vm.currentUser.productions.push(data)
+          // vm.newProduction = {}
+          // // redirect them to production view
+          // // $state.go('production')
+        })
+    }
   }
 
   vm.deleteProduction = function(name, id) {
