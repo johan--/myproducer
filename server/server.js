@@ -76,6 +76,7 @@ app.use(function(err, req, res) {
   }))
 })
 
-app.listen(port, function() {
+app.listen(port, function(err) {
+  if(err){console.log(err)}
   console.log("Listening for requests on port:", port)
 })
