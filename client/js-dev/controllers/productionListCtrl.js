@@ -56,7 +56,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     if((new Date(vm.dateFrom)) > (new Date(vm.dateTo))){
       vm.dateTo = undefined
       vm.notifModal.isFailure = true
-      vm.notifModal.content = 'Please check date!'
+      vm.notifModal.content = 'Please check the production dates!'
       vm.notifModal.show = true
     }
   }
@@ -66,7 +66,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     {
       vm.dateTo = undefined
       vm.notifModal.isFailure = true
-      vm.notifModal.content = 'Please check date!'
+      vm.notifModal.content = 'Please check the production dates! Your production end date is before its start date'
       vm.notifModal.show = true
     } else {
       var newProduction = {
