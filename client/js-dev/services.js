@@ -1,5 +1,5 @@
 angular.module('myApp')
-.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
+.factory('AuthService', ['$q', '$timeout', '$http', '$state', function ($q, $timeout, $http, $state) {
 
     // create user variable
     var user = null
@@ -10,7 +10,8 @@ angular.module('myApp')
       getUserStatus: getUserStatus,
       login: login,
       logout: logout,
-      register: register
+      register: register,
+      forgotPassword: forgotPassword
     })
 
     function isLoggedIn() {
@@ -124,6 +125,15 @@ angular.module('myApp')
       // return promise object
       return deferred.promise
 
+    }
+
+    function forgotPassword(email){
+      console.log("Email line 132");
+      console.log(email);
+      $http.post('/user/forgot-password', {email: email})
+        .success(function(data){
+          $state.go('home')
+        })
     }
 
 }])
