@@ -185,7 +185,6 @@ router.post('/check-token', function(req, res) {
 });
 
 router.post('/reset/:token', function(req, res) {
-  console.log(req.body);
   async.waterfall([
     function(done) {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -197,7 +196,9 @@ router.post('/reset/:token', function(req, res) {
         user.setPassword(req.body.password, function(){
           user.resetPasswordToken = undefined;
           user.resetPasswordExpires = undefined;
-          user.save()
+          user.save(function(err){
+            done(err, user)
+          })
         })
         // user.password = req.body.password;
         // user.resetPasswordToken = undefined;
@@ -223,6 +224,7 @@ router.post('/reset/:token', function(req, res) {
             rejectUnauthorized: false
         }
       };
+
       var smtpTransport = nodemailer.createTransport(smtpConfig);
       var mailOptions = {
         to: user.username,
@@ -237,7 +239,8 @@ router.post('/reset/:token', function(req, res) {
       });
     }
   ], function(err) {
-    res.redirect('/');
+    console.log("res.redirect /#/r?req hit");
+    res.json({message: 'Password Successfully Changed'});
   });
 });
 

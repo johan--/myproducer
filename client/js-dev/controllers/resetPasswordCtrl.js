@@ -14,6 +14,10 @@ function resetPasswordController($rootScope, $state, $stateParams, AuthService) 
 
   vm.resetPassword = function(password){
     AuthService.resetPassword($stateParams.token, password)
+     .then(function(data){
+       console.log(data);
+       $state.go('home')
+     })
   }
 
 
