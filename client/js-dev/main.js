@@ -32,7 +32,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
       controller: 'forgotPasswordController as forgotPWCtrl'
     })
     .state('reset-password', {
-      url: '/reset-password',
+      url: '/reset-password/:token',
       templateUrl: 'templates/reset-password.html',
       controller: 'resetPasswordController as resetPWCtrl'
     })

@@ -11,7 +11,8 @@ angular.module('myApp')
       login: login,
       logout: logout,
       register: register,
-      forgotPassword: forgotPassword
+      forgotPassword: forgotPassword,
+      resetPassword: resetPassword
     })
 
     function isLoggedIn() {
@@ -128,12 +129,41 @@ angular.module('myApp')
     }
 
     function forgotPassword(email){
-      console.log("Email line 132");
-      console.log(email);
       $http.post('/user/forgot-password', {email: email})
         .success(function(data){
           $state.go('home')
         })
+    }
+
+    function resetPassword(token){
+      var deferred = $q.defer()
+      $http.post('/user/check-token', {token: token})
+        // .success(function(user){
+        //   console.log(user);
+        //   return user
+        // })
+        .success(function (data, status) {
+          console.log("Data: services line 147");
+          console.log(data);
+          console.log("Status");
+          console.log(status);
+          if(status === 200){
+            deferred.resolve(data)
+          } else {
+            var user = false
+            deferred.reject()
+          }
+        })
+        // handle error
+        .error(function (data) {
+          user = false
+          deferred.reject()
+        })
+
+      // return promise object
+      console.log("Promise");
+      console.log(deferred);
+      return deferred.promise
     }
 
 }])
