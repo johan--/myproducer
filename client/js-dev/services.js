@@ -143,10 +143,6 @@ angular.module('myApp')
         //   return user
         // })
         .success(function (data, status) {
-          console.log("Data: services line 147");
-          console.log(data);
-          console.log("Status");
-          console.log(status);
           if(status === 200){
             deferred.resolve(data)
           } else {
@@ -161,8 +157,6 @@ angular.module('myApp')
         })
 
       // return promise object
-      console.log("Promise");
-      console.log(deferred);
       return deferred.promise
     }
 
