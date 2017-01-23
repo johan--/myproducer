@@ -12,6 +12,7 @@ angular.module('myApp')
       logout: logout,
       register: register,
       forgotPassword: forgotPassword,
+      checkToken: checkToken,
       resetPassword: resetPassword
     })
 
@@ -135,7 +136,7 @@ angular.module('myApp')
         })
     }
 
-    function resetPassword(token){
+    function checkToken(token){
       var deferred = $q.defer()
       $http.post('/user/check-token', {token: token})
         // .success(function(user){
@@ -158,6 +159,27 @@ angular.module('myApp')
 
       // return promise object
       return deferred.promise
+    }
+
+    function resetPassword(token, password){
+      var deferred = $q.defer()
+      $http.post('/user/reset/' + token, {password: password})
+      .success(function (data, status) {
+        if(status === 200){
+          deferred.resolve(data)
+        } else {
+          var user = false
+          deferred.reject()
+        }
+      })
+      // handle error
+      .error(function (data) {
+        user = false
+        deferred.reject()
+      })
+
+    // return promise object
+    return deferred.promise
     }
 
 }])

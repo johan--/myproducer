@@ -185,11 +185,12 @@ router.post('/check-token', function(req, res) {
 });
 
 router.post('/reset/:token', function(req, res) {
+  console.log(req.body);
   async.waterfall([
     function(done) {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
-          req.flash('error', 'Password reset token is invalid or has expired.');
+          // req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('back');
         }
 
@@ -226,7 +227,7 @@ router.post('/reset/:token', function(req, res) {
           'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        req.flash('success', 'Success! Your password has been changed.');
+        // req.flash('success', 'Success! Your password has been changed.');
         done(err);
       });
     }
