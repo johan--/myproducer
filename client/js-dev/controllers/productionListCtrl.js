@@ -100,6 +100,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           })
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully deleted ' + name
+          $mixpanel.track('Production Deleted')
         })
         .error(function(data) {
           // console.log(data);

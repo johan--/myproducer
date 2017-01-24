@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('productionController', productionController)
 
-productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
+productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
 // PRODUCTION CONTROLLER
 
-function productionController($rootScope, $http, $stateParams, $state, AuthService){
+function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
   var vm = this
   vm.offers = []
   vm.currentUser = {}
@@ -101,6 +101,9 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
                 // console.log(data);
               })
           }
+
+          $mixpanel.track('Hire Clicked')
+
         })
         .error(function(data) {
           vm.notifModal.isFailure = true
@@ -121,6 +124,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.production.crew = data
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully added a new crew member.'
+          $mixpanel.track('Add Crew Clicked')
         })
         .error(function(data) {
           vm.notifModal.isFailure = true
@@ -194,6 +198,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully sent an email notification to your crew members.'
           vm.openNotifModal()
+          $mixpanel.track('Notify Crew Clicked')
         })
     }
 }
