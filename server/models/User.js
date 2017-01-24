@@ -8,6 +8,8 @@ var User = new Schema({
   first_name: String,
   last_name: String,
   password: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   role: String,
   equipment: [String],
   skills: [String],

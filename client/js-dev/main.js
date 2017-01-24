@@ -26,6 +26,16 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
       templateUrl: 'templates/register.html',
       controller: 'registerController as registerCtrl'
     })
+    .state('forgot-password', {
+      url: '/forgot-password',
+      templateUrl: 'templates/forgot-password.html',
+      controller: 'forgotPasswordController as forgotPWCtrl'
+    })
+    .state('reset-password', {
+      url: '/reset-password/:token',
+      templateUrl: 'templates/reset-password.html',
+      controller: 'resetPasswordController as resetPWCtrl'
+    })
     .state('crew-list', {
       url: '/crewlist',
       templateUrl: 'templates/crewList.html',

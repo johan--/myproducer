@@ -1,5 +1,5 @@
 angular.module('myApp')
-.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
+.factory('AuthService', ['$q', '$timeout', '$http', '$state', function ($q, $timeout, $http, $state) {
 
     // create user variable
     var user = null
@@ -10,7 +10,10 @@ angular.module('myApp')
       getUserStatus: getUserStatus,
       login: login,
       logout: logout,
-      register: register
+      register: register,
+      forgotPassword: forgotPassword,
+      checkToken: checkToken,
+      resetPassword: resetPassword
     })
 
     function isLoggedIn() {
@@ -124,6 +127,59 @@ angular.module('myApp')
       // return promise object
       return deferred.promise
 
+    }
+
+    function forgotPassword(email){
+      $http.post('/user/forgot-password', {email: email})
+        .success(function(data){
+          $state.go('home')
+        })
+    }
+
+    function checkToken(token){
+      var deferred = $q.defer()
+      $http.post('/user/check-token', {token: token})
+        // .success(function(user){
+        //   console.log(user);
+        //   return user
+        // })
+        .success(function (data, status) {
+          if(status === 200){
+            deferred.resolve(data)
+          } else {
+            var user = false
+            deferred.reject()
+          }
+        })
+        // handle error
+        .error(function (data) {
+          user = false
+          deferred.reject()
+        })
+
+      // return promise object
+      return deferred.promise
+    }
+
+    function resetPassword(token, password){
+      var deferred = $q.defer()
+      $http.post('/user/reset/' + token, {password: password})
+      .success(function (data, status) {
+        if(status === 200){
+          deferred.resolve(data)
+        } else {
+          var user = false
+          deferred.reject()
+        }
+      })
+      // handle error
+      .error(function (data) {
+        user = false
+        deferred.reject()
+      })
+
+    // return promise object
+    return deferred.promise
     }
 
 }])
