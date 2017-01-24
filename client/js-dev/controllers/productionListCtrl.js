@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
 
-productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
+productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
 // PRODUCTIONS
 
-function productionListController($rootScope, $http, $stateParams, $state, AuthService){
+function productionListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
   var vm = this
   vm.notifModal = {}
   $rootScope.activeTab = {}
@@ -85,6 +85,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // vm.newProduction = {}
           // // redirect them to production view
           // // $state.go('production')
+          $mixpanel.track('New Production Added')
         })
     }
   }
