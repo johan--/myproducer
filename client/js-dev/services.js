@@ -130,19 +130,27 @@ angular.module('myApp')
     }
 
     function forgotPassword(email){
+      var deferred = $q.defer()
       $http.post('/user/forgot-password', {email: email})
-        .success(function(data){
-          $state.go('home')
+        .success(function(data, status){
+          // $state.go('home')
+          if(status === 200){
+            deferred.resolve({message: "resolved"})
+          } else {
+            deferred.reject({message: "rejected"})
+          }
         })
+        // handle error
+        .error(function(data){
+          deferred.reject({message: "rejected"})
+        })
+        // return promise object
+        return deferred.promise
     }
 
     function checkToken(token){
       var deferred = $q.defer()
       $http.post('/user/check-token', {token: token})
-        // .success(function(user){
-        //   console.log(user);
-        //   return user
-        // })
         .success(function (data, status) {
           if(status === 200){
             deferred.resolve(data)
