@@ -230,7 +230,7 @@ router.post('/reset/:token', function(req, res) {
       var mailOptions = {
         to: user.username,
         from: '"myproducer.io" <donotreply@myproducer.io>',
-        subject: 'myproducer.io Password Reset confirmation',
+        subject: 'myproducer.io Password Reset Confirmation',
         text: 'Hello from myproducer.io!,\n\n' +
           'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
       };
