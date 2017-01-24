@@ -7,6 +7,7 @@ var async = require('async')
 var crypto = require('crypto')
 var dotenv = require('dotenv').load({silent: true})
 var nodemailer = require('nodemailer')
+var mailer = require('../nodemailer/mailer.js')
 
 // MODELS
 
