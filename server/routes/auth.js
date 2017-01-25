@@ -156,7 +156,7 @@ router.post('/forgot-password', function(req, res, next) {
         to: user.username,
         from: '"myproducer.io" <donotreply@myproducer.io>',
         subject: 'myproducer.io Password Reset Request',
-        text: `Hey there,\n\nSomeone requested a new password for your myproducer.io account. \n\nhttp://${process.env.HEADER_HOST}/#/reset-password/${token}\n\nIf you did not make this request, then you can ignore this e-mail.\n\n --myproducer.io Team\n\n P.S. You can learn how best to use your account at our support page. Go to support.myproducer.io`
+        text: `Hey there,\n\nSomeone requested a new password for your myproducer.io account. \n\nhttp://${process.env.HEADER_HOST}/#/reset-password/${token}\n\nIf you did not make this request, then you can ignore this e-mail.\n\n--myproducer.io Team\n\n P.S. You can learn how best to use your account at our support page. Go to support.myproducer.io`
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         // req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
