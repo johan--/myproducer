@@ -157,7 +157,7 @@ router.post('/forgot-password', function(req, res, next) {
         subject: 'myproducer.io Password Reset Request',
         text: 'Hello from myproducer.io!\n\n You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + process.env.HEADER_HOST + '/#/reset-password/' + token + '\n\n' +
+          'http://' + process.env.HEADER_HOST + '/#/reset-password/' + token + '\n\n' + 'This link will expire in one hour.\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
