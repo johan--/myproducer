@@ -11,6 +11,7 @@ function forgotPasswordController($rootScope, $state, $stateParams, $http, AuthS
   vm.modalOpen = false
   vm.modal2Open = false
   vm.forgot = function(email){
+    vm.disabled = true
     AuthService.forgotPassword(email)
       .then(function(data){
         if(data.message == "resolved"){

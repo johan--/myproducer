@@ -229,8 +229,13 @@ router.post('/reset/:token', function(req, res) {
         to: user.username,
         from: '"myproducer.io" <donotreply@myproducer.io>',
         subject: 'myproducer.io Password Reset Confirmation',
-        text: 'Hello from myproducer.io!,\n\n' +
-          'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
+        text: `Hey there,\n\n
+                \n\n
+                The password for the account associated with this e-mail address has been reset. Congratulations! You are now back on your way to managing productions with myproducer.io.\n\n
+                <a href="${process.env.HEADER_HOST}/#/productions">Click here to create a new production.</a>\n\n
+                Also, visit our support page at support.myproducer.io to learn the best ways to use the platform.\n\n
+                \n\n
+                --myproducer.io Team`
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         // req.flash('success', 'Success! Your password has been changed.');
