@@ -125,10 +125,11 @@ router.post('/forgot-password', function(req, res, next) {
       console.log("find user");
       User.findOne({ username: req.body.email }, function(err, user) {
         if (!user) {
+          console.log("No user found");
           // req.flash('error', 'No account with that email address exists.');
-          return res.redirect('/#/forgot-password');
+          return res.json({user: false})
         }
-
+        console.log("reset token");
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
