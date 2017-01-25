@@ -7,7 +7,18 @@ forgotPasswordController.$inject = ['$rootScope', '$state', '$stateParams', '$ht
 function forgotPasswordController($rootScope, $state, $stateParams, $http, AuthService) {
   console.log("forgotPasswordController instantiated");
   var vm = this
+
+  vm.modalOpen = false
+  vm.modal2Open = false
   vm.forgot = function(email){
     AuthService.forgotPassword(email)
+      .then(function(data){
+        console.log("DATA from pwctrl line 16");
+        console.log(data);
+
+        if(data.message == "resolved"){
+          vm.modalOpen = true
+        } else {vm.modal2Open = true}
+      })
   }
 }
