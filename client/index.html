@@ -34,12 +34,15 @@
       </div>
       <div class="navright text-right">
         <div class="nav-currentuser bottom-border">
-          <div class="col-sm-11 no-padding" style="margin-right: 0; margin-left: 0;">
+          <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.first_name }}
+            <a ui-sref="logout"><i class="fa fa-cog"></i></a>
+          </p>
+          <!-- <div class="col-sm-11 no-padding" style="margin-right: 0; margin-left: 0;">
             <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.first_name }}</p>
-          </div>
+          </div> -->
           <div class="col-sm-1 no-padding">
             <!-- Collect the nav links, forms, and other content for toggling -->
-      <ul class="nav navbar-nav">
+      <!-- <ul class="nav navbar-nav">
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle"><i class="fa fa-cog"></i></a>
@@ -49,13 +52,8 @@
           </ul>
         </li>
 
-      </ul>
+      </ul> -->
           </div>
-
-
-
-
-
         </div>
         <div class="navigation-tabs">
           <p class="no-margin"><a ng-class="{active: activeTab.profile}" ui-sref="profile">PROFILE</a><a ng-if="main.currentUser.role === 'producer'" ng-class="{active: activeTab.crewList}" ui-sref="crew-list">CREW LIST</a><a ng-class="{active: activeTab.production}" ui-sref="production-list">PRODUCTIONS</a></p>
