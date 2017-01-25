@@ -7,6 +7,7 @@ var async = require('async')
 var crypto = require('crypto')
 var dotenv = require('dotenv').load({silent: true})
 var nodemailer = require('nodemailer')
+var mailer = require('../nodemailer/mailer.js')
 
 // MODELS
 
@@ -124,10 +125,11 @@ router.post('/forgot-password', function(req, res, next) {
       console.log("find user");
       User.findOne({ username: req.body.email }, function(err, user) {
         if (!user) {
+          console.log("No user found");
           // req.flash('error', 'No account with that email address exists.');
-          return res.redirect('/#/forgot-password');
+          return res.json({user: false})
         }
-
+        console.log("reset token");
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
@@ -152,11 +154,11 @@ router.post('/forgot-password', function(req, res, next) {
       var smtpTransport = nodemailer.createTransport(smtpConfig);
       var mailOptions = {
         to: user.username,
-        from: 'passwordreset@demo.com',
-        subject: 'Node.js Password Reset',
-        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+        from: '"myproducer.io" <donotreply@myproducer.io>',
+        subject: 'myproducer.io Password Reset Request',
+        text: 'Hello from myproducer.io!\n\n You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/#/reset-password/' + token + '\n\n' +
+          'http://' + process.env.HEADER_HOST + '/#/reset-password/' + token + '\n\n' + 'This link will expire in one hour.\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
@@ -228,9 +230,9 @@ router.post('/reset/:token', function(req, res) {
       var smtpTransport = nodemailer.createTransport(smtpConfig);
       var mailOptions = {
         to: user.username,
-        from: 'passwordreset@demo.com',
-        subject: 'Your password has been changed',
-        text: 'Hello,\n\n' +
+        from: '"myproducer.io" <donotreply@myproducer.io>',
+        subject: 'myproducer.io Password Reset Confirmation',
+        text: 'Hello from myproducer.io!,\n\n' +
           'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
