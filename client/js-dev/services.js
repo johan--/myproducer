@@ -134,17 +134,14 @@ angular.module('myApp')
       $http.post('/user/forgot-password', {email: email})
         .success(function(data, status){
           if(data.user === false){
-            console.log("Reject");
             // $state.go('forgot-password')
             deferred.resolve({message: "rejected"})
           } else {
-            console.log("Resolve");
             deferred.resolve({message: "resolved"})
           }
         })
         // handle error
         .error(function(data){
-          console.log("Error Reject");
           deferred.reject({message: "rejected"})
         })
         // return promise object
