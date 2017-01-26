@@ -16,7 +16,10 @@ function forgotPasswordController($rootScope, $state, $stateParams, $http, AuthS
       .then(function(data){
         if(data.message == "resolved"){
           vm.modalOpen = true
-        } else {vm.modal2Open = true}
+        } else {
+          vm.modal2Open = true
+          vm.disabled = false
+        }
       })
   }
 }
