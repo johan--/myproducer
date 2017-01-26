@@ -1,9 +1,9 @@
 angular.module('myApp')
   .controller('offerController', offerController)
 
-offerController.$inject = ['$rootScope', 'AuthService', '$http', '$stateParams', '$state']
+offerController.$inject = ['$rootScope', 'AuthService', '$http', '$stateParams', '$state', '$mixpanel']
 
-function offerController($rootScope, AuthService, $http, $stateParams, $state) {
+function offerController($rootScope, AuthService, $http, $stateParams, $state, $mixpanel) {
   var vm = this
 
   vm.currentUser = {}
@@ -38,6 +38,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state) {
         .success(function(data) {
           vm.crew.message = data
           vm.newMessage = ''
+          $mixpanel.track('Chat Message Sent')
         })
     }
   }

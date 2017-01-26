@@ -1,6 +1,8 @@
-var myApp = angular.module('myApp', ['ui.router', 'ui.bootstrap'])
+var myApp = angular.module('myApp', ['ui.router', 'ui.bootstrap', 'analytics.mixpanel'])
 
-myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', function ($stateProvider, $urlRouterProvider, $mixpanelProvider) {
+
+  $mixpanelProvider.apiKey('15cd4875d9c8b7a226829c8fcf5ce560')
 
   $urlRouterProvider.otherwise('/profile')
 
