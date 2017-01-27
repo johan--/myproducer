@@ -3,5 +3,4 @@ _old
 .DS_Store
 .env
 .sass-cache
-./client/js/application.min.js
 client/js/application.min.js
