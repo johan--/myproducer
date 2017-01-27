@@ -102,7 +102,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               })
           }
 
-          $mixpanel.track('Hire Clicked')
+          $mixpanel.track('Hire Clicked', {"user" : vm.currentUser.username})
 
         })
         .error(function(data) {
@@ -124,7 +124,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.production.crew = data
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully added a new crew member.'
-          $mixpanel.track('Add Crew Clicked')
+          $mixpanel.track('Add Crew Clicked', {"user" : vm.currentUser.username})
         })
         .error(function(data) {
           vm.notifModal.isFailure = true

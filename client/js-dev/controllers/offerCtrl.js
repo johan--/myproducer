@@ -38,7 +38,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
         .success(function(data) {
           vm.crew.message = data
           vm.newMessage = ''
-          $mixpanel.track('Chat Message Sent')
+          $mixpanel.track('Chat Message Sent', {"user" : vm.currentUser.username})
         })
     }
   }

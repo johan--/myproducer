@@ -39,7 +39,7 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
       .success(function (data) {
         vm.newContact.email = ''
         // console.log(data);
-        $mixpanel.track('Add Contact Clicked')
+        $mixpanel.track('Add Contact Clicked', {"user" : vm.currentUser.username})
 
         if(data) {
           if(data.success) {
