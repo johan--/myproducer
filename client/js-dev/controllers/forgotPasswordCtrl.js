@@ -11,14 +11,15 @@ function forgotPasswordController($rootScope, $state, $stateParams, $http, AuthS
   vm.modalOpen = false
   vm.modal2Open = false
   vm.forgot = function(email){
+    vm.disabled = true
     AuthService.forgotPassword(email)
       .then(function(data){
-        console.log("DATA from pwctrl line 16");
-        console.log(data);
-
         if(data.message == "resolved"){
           vm.modalOpen = true
-        } else {vm.modal2Open = true}
+        } else {
+          vm.modal2Open = true
+          vm.disabled = false
+        }
       })
   }
 }
