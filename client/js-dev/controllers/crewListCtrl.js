@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('crewListController', crewListController)
 
-crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
+crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
 // PRODUCTIONS
 
-function crewListController($rootScope, $http, $stateParams, $state, AuthService){
+function crewListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
   var vm = this
   vm.showModal = false;
   vm.notifModal = {}
@@ -39,6 +39,7 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
       .success(function (data) {
         vm.newContact.email = ''
         // console.log(data);
+        $mixpanel.track('Add Contact Clicked')
 
         if(data) {
           if(data.success) {
