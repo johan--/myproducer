@@ -63,7 +63,10 @@
 
     <div class="navbar top-padding50" ng-if=!isLoggedIn>
       <div class="logo text-center">
-        <a ui-sref="home">
+        <a ui-sref="home" ng-if=main.isNotLogin>
+          <img ng-src="./img/mpio-logo.png" alt="">
+        </a>
+        <a ui-sref="login" ng-if=main.isLogin>
           <img ng-src="./img/mpio-logo.png" alt="">
         </a>
       </div>

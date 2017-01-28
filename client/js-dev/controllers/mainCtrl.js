@@ -1,11 +1,12 @@
 angular.module('myApp')
   .controller('mainController', mainController)
 
-mainController.$inject = ['$rootScope', '$state', 'AuthService']
+mainController.$inject = ['$rootScope', '$state', 'AuthService', '$location']
 
-function mainController($rootScope, $state, AuthService) {
+function mainController($rootScope, $state, AuthService, $location) {
   var vm = this
-
+  vm.isNotLogin = true
+  vm.isLogin = false
   $rootScope.activeTab = {}
   $rootScope.isLoggedIn = false
 
@@ -17,5 +18,13 @@ function mainController($rootScope, $state, AuthService) {
           $rootScope.isLoggedIn = true
         }
       })
+  })
+
+  $rootScope.$on('$stateChangeSuccess', function(event){
+    console.log($location.path());
+    if($location.path() == "/login" || "/forgot-password"){
+      vm.isNotLogin = false
+      vm.isLogin = true
+    }
   })
 }
