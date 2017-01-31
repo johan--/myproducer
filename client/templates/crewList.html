@@ -14,6 +14,11 @@
         </div>
       </div>
       <div class="group">
+        <div class="line-item" ng-if="crewListCtrl.currentUser.contacts.length < 5">
+          <div class="col-sm-10 col-sm-offset-1">
+            <p class="strong no-margin">Add contacts so that you can begin building productions!</p>
+          </div>
+        </div>
         <div class="line-item y-padding" ng-repeat="crew in crewListCtrl.currentUser.contacts | filter:crewFilter">
           <div class="col-xs-1 text-left">
             <img class="thumb" ng-src="./img/profile_default.png">
