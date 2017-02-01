@@ -27,6 +27,11 @@
             <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.location[1]}} </p>
           </div>
           <div class="form-group">
+            <label for="productionCrewCall">General Crew Call</label>
+            <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.crewCall" class="form-control" id="productionCrewCall" type="time">
+            <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.crewCall | date : "shortTime"}} </p>
+          </div>
+          <div class="form-group">
             <label for="productionWeather">Weather</label>
             <input ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.weather" class="form-control" id="productionWeather">
             <p class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.weather}} </p>

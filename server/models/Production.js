@@ -11,6 +11,7 @@ var Production = new Schema({
   parking: String,
   notes: String,
   date: Date,
+  crewCall: Date,
   productionDay: Number,
   crew: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   active: {type: Boolean, default: true},
