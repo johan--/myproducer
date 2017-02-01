@@ -70,6 +70,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
     vm.modal.show = false
     vm.modal.isSuccess = false
     vm.modal.isFailure = false
+    $state.reload()
   }
 
   vm.compareDate = function(date){
