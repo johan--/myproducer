@@ -28,6 +28,11 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       templateUrl: 'templates/register.html',
       controller: 'registerController as registerCtrl'
     })
+    .state('complete-registration',{
+      url: '/complete-registration/:token',
+      templateUrl: 'templates/complete-registration.html',
+      controller: 'completeRegistrationController as compRegCtrl'
+    })
     .state('forgot-password', {
       url: '/forgot-password',
       templateUrl: 'templates/forgot-password.html',

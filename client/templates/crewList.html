@@ -41,11 +41,20 @@
         <div class="line-item y-padding bg-transparent">
           <form ng-submit="crewListCtrl.addContact()">
             <div class="col-xs-10">
-              <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.email" type="text" placeholder="Crew Email"></p>
+              <div class="col-xs-4">
+                <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.email" type="text" placeholder="Crew Email"></p>
+              </div>
+              <div class="col-xs-4">
+                <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.first_name" type="text" placeholder="Crew First Name"></p>
+              </div>
+              <div class="col-xs-4">
+                <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.last_name" type="text" placeholder="Crew Last Name"></p>
+              </div>
+
             </div>
 
             <div class="col-xs-2 text-right">
-              <p class="no-margin"><button ng-disabled="!crewListCtrl.newContact.email" type"submit" class="btn main-btn">Add New Contact</button></p>
+              <p class="no-margin"><button ng-disabled="!crewListCtrl.newContact.email || !crewListCtrl.newContact.first_name || !crewListCtrl.newContact.last_name" type"submit" class="btn main-btn">Add New Contact</button></p>
             </div>
           </form>
         </div>

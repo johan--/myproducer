@@ -4,6 +4,7 @@ var express = require('express')
 var router = express.Router()
 var mongoose = require('mongoose')
 var mailer = require('../nodemailer/mailer.js')
+var crypto = require('crypto')
 
 // MODELS
 
@@ -34,24 +35,68 @@ router.post('/addcontact', function(req, res){
       if(err) return console.log(err)
 
       if(!contact){ // if user does not exist
-        var email = req.body.email
-        var producerId = user._id
-        var registrationURL = 'http://www.myproducer.io/#/register?p=' + producerId + '&ur=crew'
-        // send email
-        mailer.send(
-          'invitation',
-          {
-            email: email,
-            registrationURL: registrationURL,
-            producer: user.first_name + ' ' + user.last_name
-          },
-          {
-            to: email,
-            subject: 'Invitation to join myproducer.io'
-          }
-        )
+        // Add new contact as object to contacts
 
-        res.json({newSuccess: true, newEmail: email})
+        // Create Token
+        var token;
+        crypto.randomBytes(20, function(err, buf) {
+          token = buf.toString('hex');
+
+          User.register(new User({ username: req.body.email, role: 'crew', first_name: req.body.first_name, last_name: req.body.last_name, resetPasswordToken: token }),
+            'password', function(err, contact) {
+            if (err) {
+              return res.status(500).json({
+                err: err
+              })
+            }
+            // do next functions here: add newContact to user.contacts
+
+              var found = user.contacts.find(function(c) {
+                console.log(c, contact._id);
+                return c == contact._id.toString()
+              })
+
+              if(found) {
+
+                res.json({success: false, message: 'This person is already on your crew list.'})
+              } else if(req.body.email === req.user.username) {
+                res.json({success: false, message: 'You can not add yourself to your crew list.'})
+              } else {
+                user.contacts.push(contact._id) // add new contact id to logged in user's contact list
+
+                user.save(function(err){ // save updated logged in user
+                  if(err) return console.log(err)
+                  res.json({success: true, data: contact})
+                })
+
+                var email = req.body.email
+                var producerId = user._id
+                var registrationURL = `http://${process.env.HEADER_HOST}/#/complete-registration/${token}`
+                // send email
+                mailer.send(
+                  'invitation',
+                  {
+                    email: email,
+                    registrationURL: registrationURL,
+                    producer: user.first_name + ' ' + user.last_name
+                  },
+                  {
+                    to: email,
+                    subject: 'Invitation to join myproducer.io'
+                  }
+                )
+              }
+          })
+        })
+
+
+
+
+
+
+
+
+        // res.json({newSuccess: true, newEmail: email})
 
       } else { // if user exists
 
