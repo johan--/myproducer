@@ -38,6 +38,8 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
     $http.post('/api/users/addcontact', vm.newContact)
       .success(function (data) {
         vm.newContact.email = ''
+        vm.newContact.first_name = ''
+        vm.newContact.last_name = ''
         // console.log(data);
         $mixpanel.track('Add Contact Clicked', {"user" : vm.currentUser.username})
 
