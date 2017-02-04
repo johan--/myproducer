@@ -8,7 +8,14 @@ function mainController($rootScope, $state, AuthService, $location) {
   // these variables are for rendering either the home or login link on the main logo
   vm.isNotLogin = true
   vm.isLogin = false
-  
+  vm.dropDown = false
+
+  vm.showDropdown = function(){
+    if(vm.dropDown == false){vm.dropDown = true
+    } else {vm.dropDown = false}
+
+  }
+
   $rootScope.activeTab = {}
   $rootScope.isLoggedIn = false
 
