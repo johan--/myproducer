@@ -1,0 +1,12 @@
+<div class="col-md-4 col-centered">
+
+  <h3 class="text-center bottom-padding">ACCOUNT SETTINGS</h3>
+  <p class="text-center">Change Password</p>
+  <br>
+  <form class="form" ng-submit="accSetCtrl.changePassword(accSetCtrl.password)">
+    <div class="form-group">
+      <input class="form-control out" type="text" name="email" autofocus="autofocus" ng-model="accSetCtrl.password" placeholder="Email"/>
+    </div>
+    <button ng-disabled="forgotPWCtrl.disabled" class="btn approval-btn full-width" type="submit">Reset Password</button>
+  </form>
+</div>
