@@ -5,8 +5,20 @@
   <br>
   <form class="form" ng-submit="accSetCtrl.changePassword(accSetCtrl.password)">
     <div class="form-group">
-      <input class="form-control out" type="text" name="email" autofocus="autofocus" ng-model="accSetCtrl.password" placeholder="Email"/>
+      <input class="form-control out" type="password" name="password" autofocus="autofocus" ng-model="accSetCtrl.password" placeholder="New Password"/>
     </div>
-    <button ng-disabled="forgotPWCtrl.disabled" class="btn approval-btn full-width" type="submit">Reset Password</button>
+    <button ng-disabled="accSetCtrl.disabled" class="btn approval-btn full-width" type="submit">Change Password</button>
   </form>
+</div>
+
+<!-- Modal -->
+<div id="modal-root" ng-if="accSetCtrl.modalChangePassword" style="
+    background: black;">
+  <div id="modal-container" ng-click="accSetCtrl.closeNotifModal()">
+    <div class="col-md-4 col-centered">
+      <h4 class="text-center">Your password has been successfully changed. </h4>
+      <br>
+      <button class="btn approval-btn full-width" ng-click="accSetCtrl.refresh()">Continue</button>
+    </div>
+  </div>
 </div>

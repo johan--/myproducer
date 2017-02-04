@@ -67,6 +67,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       controller: 'postController as postCtrl',
       restricted: true
     })
+    .state('account-settings', {
+      url: '/account-settings',
+      templateUrl: 'templates/account-settings.html',
+      controller: 'accountSettingController as accSetCtrl',
+      restricted: true
+    })
     .state('otherProfile', {
       url: '/profile/:id',
       templateUrl: 'templates/otherProfile.html',

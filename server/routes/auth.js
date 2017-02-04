@@ -328,7 +328,18 @@ router.patch('/compReg/:token', function(req, res) {
   });
 });
 
+router.post('/changePassword', function(req, res){
+  console.log(req.body);
 
+  User.findById(req.body.user._id, function(err, user){
+    user.setPassword(req.body.password, function(){
+      user.save(function(err){
+        if(err) return err
+        res.json({success: true})
+      })
+    })
+  })
+})
 
 
 module.exports = router
