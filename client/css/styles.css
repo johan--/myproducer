@@ -282,17 +282,21 @@ img.thumb {
 nav ul ul {
   display: none;
   position: fixed;
-  left: 85%;
+  left: 86.5%;
   top: 35px; }
 
 nav ul li:hover > ul {
   display: block; }
 
+nav ul li ul li {
+  margin: 7px 0;
+  font-size: 16px; }
+
 .menu-dropdown {
   background: #3279b8;
   border: solid 1px #1daef0;
-  padding: 5px 25px 5px 0;
-  min-width: 190px;
+  padding: 3px 10px;
+  min-width: 164px;
   z-index: 999; }
 
 .menu-dropdown a {
