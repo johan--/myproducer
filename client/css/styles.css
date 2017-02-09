@@ -282,7 +282,7 @@ img.thumb {
 nav ul ul {
   display: none;
   position: fixed;
-  left: 86.5%;
+  right: 15px;
   top: 35px; }
 
 nav ul li:hover > ul {
