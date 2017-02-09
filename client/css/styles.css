@@ -297,7 +297,8 @@ nav ul li ul li {
   border: solid 1px #1daef0;
   padding: 3px 10px;
   min-width: 164px;
-  z-index: 999; }
+  z-index: 999;
+  display: none; }
 
 .menu-dropdown a {
   color: white; }
