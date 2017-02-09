@@ -28,6 +28,11 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       templateUrl: 'templates/register.html',
       controller: 'registerController as registerCtrl'
     })
+    .state('complete-registration',{
+      url: '/complete-registration/:token',
+      templateUrl: 'templates/complete-registration.html',
+      controller: 'completeRegistrationController as compRegCtrl'
+    })
     .state('forgot-password', {
       url: '/forgot-password',
       templateUrl: 'templates/forgot-password.html',
@@ -60,6 +65,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       url: '/profile',
       templateUrl: 'templates/profile.html',
       controller: 'postController as postCtrl',
+      restricted: true
+    })
+    .state('account-settings', {
+      url: '/account-settings',
+      templateUrl: 'templates/account-settings.html',
+      controller: 'accountSettingController as accSetCtrl',
       restricted: true
     })
     .state('otherProfile', {

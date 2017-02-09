@@ -183,6 +183,20 @@ router.post('/check-token', function(req, res) {
   });
 });
 
+router.post('/check-reg-token', function(req, res) {
+
+  User.findOne({ resetPasswordToken: req.body.token}, function(err, user) {
+    if (err) {
+      console.log("User Not Found");
+      // req.flash('error', 'Password reset token is invalid or has expired.');
+       res.redirect('/#/forgot-password');
+    }
+    res.json({
+      user
+    })
+  });
+});
+
 router.post('/reset/:token', function(req, res) {
   async.waterfall([
     function(done) {
@@ -247,6 +261,85 @@ router.post('/reset/:token', function(req, res) {
   });
 });
 
+router.patch('/compReg/:token', function(req, res) {
+  console.log("Req.body from line 266");
+  console.log(req.body);
+  async.waterfall([
+    function(done) {
+      User.findOne({ resetPasswordToken: req.params.token}, function(err, user) {
+        if (!user) {
+          // req.flash('error', 'Password reset token is invalid or has expired.');
+          return res.redirect('back');
+        }
+
+        user.setPassword(req.body.registerForm.password, function(){
+          user.resetPasswordToken = undefined;
+          user.first_name = req.body.registerForm.first_name
+          user.last_name = req.body.registerForm.last_name
+          user.save(function(err){
+            done(err, user)
+          })
+        })
+        // user.password = req.body.password;
+        // user.resetPasswordToken = undefined;
+        // user.resetPasswordExpires = undefined;
+        //
+        // user.save(function(err) {
+        //   req.logIn(user, function(err) {
+        //     done(err, user);
+        //   });
+        // });
+      });
+    },
+    function(user, done) {
+      var smtpConfig = {
+        host: process.env.NODEMAILER_HOST,
+        port: process.env.NODEMAILER_PORT,
+        secure: false, // use SSL
+        auth: {
+            user: process.env.NODEMAILER_USER,
+            pass: process.env.NODEMAILER_PASS
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+      };
+
+      var smtpTransport = nodemailer.createTransport(smtpConfig);
+      var mailOptions = {
+        to: user.username,
+        from: '"myproducer.io" <donotreply@myproducer.io>',
+        subject: 'myproducer.io Account Registration Confirmation',
+        text: `Hey there,\n\n
+                \n\n
+                You have completed registration!\n\n
+                Also, visit our support page at support.myproducer.io to learn the best ways to use the platform.\n\n
+                \n\n
+                --myproducer.io Team`
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        // req.flash('success', 'Success! Your password has been changed.');
+        done(err);
+      });
+    }
+  ], function(err) {
+    console.log("res.redirect /#/r?req hit");
+    res.json({message: 'Account registration complete'});
+  });
+});
+
+router.post('/changePassword', function(req, res){
+  console.log(req.body);
+
+  User.findById(req.body.user._id, function(err, user){
+    user.setPassword(req.body.password, function(){
+      user.save(function(err){
+        if(err) return err
+        res.json({success: true})
+      })
+    })
+  })
+})
 
 
 module.exports = router

@@ -13,7 +13,9 @@ angular.module('myApp')
       register: register,
       forgotPassword: forgotPassword,
       checkToken: checkToken,
-      resetPassword: resetPassword
+      resetPassword: resetPassword,
+      completeRegistration: completeRegistration,
+      checkCompRegToken: checkCompRegToken
     })
 
     function isLoggedIn() {
@@ -189,5 +191,52 @@ angular.module('myApp')
     // return promise object
     return deferred.promise
     }
+
+    function checkCompRegToken(token){
+      var deferred = $q.defer()
+      $http.post('/user/check-reg-token', {token: token})
+        .success(function (data, status) {
+          if(status === 200){
+            deferred.resolve(data)
+          } else {
+            var user = false
+            deferred.reject()
+          }
+        })
+        // handle error
+        .error(function (data) {
+          user = false
+          deferred.reject()
+        })
+
+      // return promise object
+      return deferred.promise
+    }
+
+    function completeRegistration(token, registerForm){
+      var deferred = $q.defer()
+      console.log("registerForm from services line 218");
+      console.log(registerForm);
+      $http.patch('/user/compReg/' + token, {registerForm: registerForm})
+      .success(function (data, status) {
+        if(status === 200){
+          deferred.resolve(data)
+        } else {
+          var user = false
+          deferred.reject()
+        }
+      })
+      // handle error
+      .error(function (data) {
+        user = false
+        deferred.reject()
+      })
+
+    // return promise object
+    return deferred.promise
+    }
+
+
+
 
 }])
