@@ -2,6 +2,7 @@ var
   gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   uglifyjs = require('gulp-uglify'),
+  sass = require('gulp-sass'),
   concat = require('gulp-concat')
 
 // makes a new task called nodemon
@@ -21,5 +22,13 @@ gulp.task('minify-js', function() {
 
 gulp.watch('client/js-dev/*/*.js', ['minify-js']);
 
+gulp.task('sass', function () {
+  return gulp.src('client/sass/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('client/css'));
+});
+
+  gulp.watch('client/sass/styles.scss', ['sass'])
+  
 // when we run gulp, run nodemon as we defined it
-gulp.task('default', ['nodemon'])
+gulp.task('default', ['nodemon', 'sass'])

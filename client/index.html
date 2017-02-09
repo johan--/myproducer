@@ -34,15 +34,26 @@
       </div>
       <div class="navright text-right">
         <div class="nav-currentuser bottom-border">
-          <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.first_name }}
-            <a ng-click="main.showDropdown()"><i class="fa fa-cog"></i></a></p>
-            <div class="dropdown-main" id="dropdown" ng-if="main.dropDown">
-              <ul class="list-inline">
-                <li><a ui-sref="account-settings">Account Settings</a></li>
-                <li><a href="http://support.myproducer.io">Support</a></li>
-                <li><a ui-sref="logout">Logout</a></li>
-              </ul>
+          <div class="col-sm-8"></div>
+          <div class="col-sm-4">
+            <div class="col-sm-11 no-padding">
+              <p class="no-margin"><span class="strong">Hello, </span>{{ main.currentUser.first_name }}</p>
             </div>
+            <div class="col-sm-1 no-margin no-padding">
+              <nav>
+              	<ul class="list-unstyled">
+              		<li><a href="#"><span id="cog" class="fa fa-cog no-margin no-padding"></span></a>
+              			<ul class="list-unstyled menu-dropdown">
+              				<li><a ui-sref="account-settings">Account Settings</a></li>
+              				<li><a href="http://support.myproducer.io/">Support</a></li>
+              				<li><a ui-sref="logout">Logout</a>
+              				</li>
+              			</ul>
+              		</li>
+              	</ul>
+              </nav>
+            </div>
+          </div>
         </div>
         <div class="navigation-tabs">
           <p class="no-margin"><a ng-class="{active: activeTab.profile}" ui-sref="profile">PROFILE</a><a ng-if="main.currentUser.role === 'producer'" ng-class="{active: activeTab.crewList}" ui-sref="crew-list">CREW LIST</a><a ng-class="{active: activeTab.production}" ui-sref="production-list">PRODUCTIONS</a></p>

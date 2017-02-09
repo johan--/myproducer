@@ -279,4 +279,22 @@ img.thumb {
 .fa-times {
   color: #888888; }
 
-/*# sourceMappingURL=styles.css.map */
+nav ul ul {
+  display: none;
+  position: fixed;
+  left: 84%;
+  top: 35px; }
+
+nav ul li:hover > ul {
+  display: block; }
+
+.menu-dropdown {
+  background: rgba(7, 7, 7, 0.9);
+  padding: 5px 27px 5px 0;
+  min-width: 215px; }
+
+.menu-dropdown a {
+  color: white; }
+
+#cog {
+  margin-top: 13px; }
