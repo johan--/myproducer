@@ -10,6 +10,10 @@ function accountSettingController($rootScope, $state, $stateParams, AuthService,
   vm.disabled = false
   vm.modalChangePassword = false
 
+  $rootScope.activeTab.profile = false
+  $rootScope.activeTab.crewList = false
+  $rootScope.activeTab.production = false
+
   AuthService.getUserStatus()
     .then(function(data){
       vm.user = data.data.user

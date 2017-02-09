@@ -56,7 +56,10 @@
           </div>
         </div>
         <div class="navigation-tabs">
-          <p class="no-margin"><a ng-class="{active: activeTab.profile}" ui-sref="profile">PROFILE</a><a ng-if="main.currentUser.role === 'producer'" ng-class="{active: activeTab.crewList}" ui-sref="crew-list">CREW LIST</a><a ng-class="{active: activeTab.production}" ui-sref="production-list">PRODUCTIONS</a></p>
+          <p class="no-margin">
+            <a ng-class="{active: activeTab.profile}" ui-sref="profile">PROFILE</a>
+            <a ng-if="main.currentUser.role === 'producer'" ng-class="{active: activeTab.crewList}" ui-sref="crew-list">CREW LIST</a>
+            <a ng-class="{active: activeTab.production}" ui-sref="production-list">PRODUCTIONS</a></p>
         </div>
       </div>
     </div>
