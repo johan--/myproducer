@@ -280,7 +280,6 @@ img.thumb {
   color: #888888; }
 
 nav ul ul {
-  display: none;
   position: fixed;
   right: 15px;
   top: 35px; }
@@ -305,4 +304,5 @@ nav ul li ul li {
 
 #cog {
   margin-top: 13px;
-  color: #337ab7; }
+  color: #337ab7;
+  cursor: hand; }
