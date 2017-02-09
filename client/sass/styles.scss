@@ -386,7 +386,7 @@ img.thumb{
 nav ul ul {
   display: none;
   position: fixed;
-  left: 84%;
+  left: 85%;
   top: 35px;}
 
 nav ul li:hover > ul {
@@ -395,9 +395,11 @@ nav ul li:hover > ul {
 
 
 .menu-dropdown {
-  background: rgba(7, 7, 7, 0.9);
-  padding: 5px 27px 5px 0;
-  min-width: 215px; 
+  background: #3279b8;
+  border: solid 1px #1daef0;
+  padding: 5px 25px 5px 0;
+  min-width: 190px;
+  z-index: 999;
 }
 
 .menu-dropdown a {
@@ -406,5 +408,6 @@ nav ul li:hover > ul {
 }
 
 #cog {
-  margin-top: 13px
+  margin-top: 13px;
+  color: #337ab7;
 }
