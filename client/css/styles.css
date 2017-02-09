@@ -290,7 +290,8 @@ nav ul li:hover > ul {
 
 nav ul li ul li {
   margin: 7px 0;
-  font-size: 16px; }
+  font-size: 16px;
+  cursor: hand; }
 
 .menu-dropdown {
   background: #3279b8;
