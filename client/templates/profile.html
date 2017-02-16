@@ -8,7 +8,7 @@
           </div>
           <div class="profile-view-left col-sm-4 right-border">
             <div class="profile-picture" ng-click="postCtrl.openModal2()">
-              <img class="img-responsive" ng-src="{{postCtrl.profilePicture}}">
+              <img id="profile-picture" class="img-responsive" ng-src="{{postCtrl.profilePicture}}">
               <i class="fa fa-plus" aria-hidden="true"></i>
             </div>
             <div class="profile-name">
@@ -157,7 +157,10 @@
       <div class="padding20 text-center">
         <h1>Change Profile Picture</h1>
         <hr>
-        <img class="img-responsive" ng-src="{{postCtrl.profilePicture}}">
+        <div class="profile-view-left col-sm-12">
+          <div class="profile-picture" ng-click="postCtrl.openModal2()">
+            <img class="img-responsive" ng-src="{{postCtrl.profilePicture}}">
+          </div>
         <br>
         <label class="btn btn-default btn-file">Select Image
           <input type="file" style="display: none;">
