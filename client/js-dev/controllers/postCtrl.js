@@ -13,6 +13,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
 
   vm.modal = {}
   vm.modal.show = false;
+  vm.modal.show2 = false;
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.profile = true
@@ -33,6 +34,11 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
               otherProductions.push(crew.production)
             }
           })
+
+          if(vm.currentUser.picture){
+            console.log("Picture Exists");
+            vm.profilePicture = vm.currentUser.picture
+          } else {vm.profilePicture = "./img/profile_default.png"}
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
@@ -66,11 +72,19 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
     vm.modal.show = true
   }
 
+  vm.openModal2 = function() {
+    vm.modal.show2 = true
+  }
+
   vm.closeModal = function() {
     vm.modal.show = false
     vm.modal.isSuccess = false
     vm.modal.isFailure = false
     $state.reload()
+  }
+
+  vm.closeModal2 = function() {
+    vm.modal.show2 = false
   }
 
   vm.compareDate = function(date){

@@ -7,8 +7,8 @@
             <h4>Profile</h4>
           </div>
           <div class="profile-view-left col-sm-4 right-border">
-            <div class="profile-picture">
-              <img class="img-responsive" ng-src="./img/profile_default.png">
+            <div class="profile-picture" ng-click="postCtrl.openModal2()">
+              <img class="img-responsive" ng-src="{{postCtrl.profilePicture}}">
               <i class="fa fa-plus" aria-hidden="true"></i>
             </div>
             <div class="profile-name">
@@ -145,6 +145,23 @@
         <h1><i ng-if="postCtrl.modal.isSuccess" class="fa fa-check-circle-o"></i></h1>
         <h1><i ng-if="postCtrl.modal.isFailure" class="fa fa-times-circle-o"></i></h1>
         <p>{{ postCtrl.modal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="postCtrl.modal.show2">
+  <div id="modal-container" ng-click="postCtrl.closeModal2()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h1>Change Profile Picture</h1>
+        <hr>
+        <img class="img-responsive" ng-src="{{postCtrl.profilePicture}}">
+        <br>
+        <label class="btn btn-default btn-file">Select Image
+          <input type="file" style="display: none;">
+        </label>
         <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>
