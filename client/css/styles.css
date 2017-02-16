@@ -307,3 +307,20 @@ nav ul li ul li {
   margin-top: 13px;
   color: #337ab7;
   cursor: pointer; }
+
+.profile-picture:hover > .img-responsive {
+  opacity: .25; }
+
+.profile-picture:hover > .fa-plus {
+  opacity: 1; }
+
+.profile-picture {
+  border: white solid 1px; }
+
+.fa-plus {
+  position: absolute;
+  font-size: 7em;
+  top: 10%;
+  left: 37%;
+  z-index: 50;
+  opacity: 0; }
