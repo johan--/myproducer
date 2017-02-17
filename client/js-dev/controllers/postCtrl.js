@@ -1,19 +1,24 @@
 angular.module('myApp')
   .controller('postController', postController)
 
-postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService']
+postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$scope']
 
 // PRODUCTIONS
 
-function postController($rootScope, $http, $stateParams, $state, AuthService){
+function postController($rootScope, $http, $stateParams, $state, AuthService, $scope){
   var vm = this
   vm.currentUser = {}
-
+  // vm.fileExists = true;
   vm.editingState = false;
-
+  vm.fileInput = document.getElementById('file-input')
   vm.modal = {}
   vm.modal.show = false;
   vm.modal.show2 = false;
+
+  $scope.file_changed = function(element) {
+    document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
+    vm.fileExists = false;
+  };
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.profile = true
@@ -151,7 +156,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
       xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){
           if(xhr.status === 200){
-            // document.getElementById('preview').src = url;
+            // document.getElementById('profile-pic-preview').src = url
             // document.getElementById('avatar-url').value = url;
             // document.getElementById('nav-avatar').src = url;
           }
@@ -166,6 +171,8 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
     vm.addAvatarToProfile = function(){
       console.log(vm.avatarUrl);
       $http.patch('/api/users/' + vm.currentUser._id, {picture: vm.avatarUrl})
-        .then(document.getElementById('profile-pic-preview').src = vm.avatarUrl)
+        .then(function(data){
+          vm.closeModal2()
+        })
     }
 }
