@@ -166,6 +166,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
     vm.addAvatarToProfile = function(){
       console.log(vm.avatarUrl);
       $http.patch('/api/users/' + vm.currentUser._id, {picture: vm.avatarUrl})
-        .then(vm.profilePicture = vm.avatarUrl)
+        .then(document.getElementById('profile-pic-preview').src = vm.avatarUrl)
     }
 }
