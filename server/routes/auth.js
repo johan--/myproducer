@@ -16,7 +16,7 @@ var User = require('../models/User.js')
 // REGISTER ROUTES
 
 router.post('/register', function(req, res) {
-  User.register(new User({ username: req.body.username, first_name: req.body.first_name, last_name: req.body.last_name, role: req.body.role }),
+  User.register(new User({ username: req.body.username, first_name: req.body.first_name, last_name: req.body.last_name, role: req.body.role, picture: "./img/profile_default.png" }),
     req.body.password, function(err, account) {
     if (err) {
       return res.status(500).json({

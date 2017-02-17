@@ -36,7 +36,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
           })
 
           if(vm.currentUser.picture){
-            console.log("Picture Exists");
             vm.profilePicture = vm.currentUser.picture
           } else {vm.profilePicture = "./img/profile_default.png"}
 
@@ -95,4 +94,78 @@ function postController($rootScope, $http, $stateParams, $state, AuthService){
     }
     return new Date() < date
   }
+
+  /*
+   Function called when file input updated. If there is a file selected, then
+   start upload procedure by asking for a signed request from the app.
+  */
+  vm.initUpload = function(){
+    console.log("Initupload hit");
+    var files = document.getElementById('file-input').files;
+    // var file = files[0];
+    file = files[0];
+    file.randomName = vm.currentUser._id + "." + file.name.split('.').pop()
+    if(file == null){
+      return alert('No file selected.');
+    }
+    vm.getSignedRequest(file);
+  }
+
+  /*
+    Function to get the temporary signed request from the app.
+    If request successful, continue to upload the file using this signed
+    request.
+  */
+  vm.getSignedRequest = function (file){
+    console.log("setSignedRequest");
+    console.log(file.randomName);
+    console.log(file.type);
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/uploads/sign-s3?file-name='+ file.randomName+ '&file-type=' + file.type);
+    // xhr.open('GET', '/uploads/test')
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          const response = JSON.parse(xhr.responseText);
+          vm.avatarUrl = response.url
+          console.log("AvatarURL");
+          console.log(vm.avatarUrl);
+          vm.uploadFile(file, response.signedRequest, response.url);
+          vm.addAvatarToProfile()
+        }
+        else{
+          alert('Could not get signed URL.');
+        }
+      }
+    };
+    xhr.send();
+  }
+
+  /*
+      Function to carry out the actual PUT request to S3 using the signed request from the app.
+    */
+    vm.uploadFile = function (file, signedRequest, url){
+      console.log("uploadFile hit");
+      const xhr = new XMLHttpRequest();
+      xhr.open('PUT', signedRequest);
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+          if(xhr.status === 200){
+            // document.getElementById('preview').src = url;
+            // document.getElementById('avatar-url').value = url;
+            // document.getElementById('nav-avatar').src = url;
+          }
+          else{
+            alert('Could not upload file.');
+          }
+        }
+      };
+      xhr.send(file);
+    }
+
+    vm.addAvatarToProfile = function(){
+      console.log(vm.avatarUrl);
+      $http.patch('/api/users/' + vm.currentUser._id, {picture: vm.avatarUrl})
+        .then(vm.profilePicture = vm.avatarUrl)
+    }
 }

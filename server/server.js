@@ -18,6 +18,7 @@ var MongoStore = require('connect-mongo')(expressSession)
 // mongoose
 var mongoConnectionString = process.env.MONGO_URL
 
+mongoose.Promise = global.Promise;
 mongoose.connect(mongoConnectionString, function(err) {
   if(err) return console.log(err)
   console.log("Connected to MongoDB (myproducer)")
@@ -34,6 +35,7 @@ var authRoutes = require('./routes/auth.js') // register, login, logout, status
 var userRoutes = require('./routes/users.js')
 var productionRoutes = require('./routes/productions.js')
 var crewRoutes = require('./routes/crew.js')
+var uploadRoutes = require('./routes/fileUploads.js')
 
 // define middleware
 app.use(express.static(path.join(__dirname, '../client')))
@@ -56,6 +58,7 @@ app.use('/user/', authRoutes) // TODO: Change to api/auth?
 app.use('/api/users', userRoutes)
 app.use('/api/productions', productionRoutes)
 app.use('/api/crew', crewRoutes)
+app.use('/uploads', uploadRoutes)
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'))

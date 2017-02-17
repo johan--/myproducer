@@ -152,7 +152,7 @@
 </div>
 
 <div id="modal-root" ng-if="postCtrl.modal.show2">
-  <div id="modal-container" ng-click="postCtrl.closeModal2()">
+  <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
         <h1>Change Profile Picture</h1>
@@ -163,9 +163,11 @@
           </div>
         <br>
         <label class="btn btn-default btn-file">Select Image
-          <input type="file" style="display: none;">
+          <!-- <input type="file" style="display: none;"> -->
+          <input type="file" id="file-input" style="display: none;"">
         </label>
-        <p><a class="btn approval-btn">Close</a></p>
+        <p><a class="btn approval-btn" ng-click="postCtrl.initUpload()">Change Picture</a></p>
+        <p><a class="btn approval-btn" ng-click="postCtrl.closeModal2()">Close</a></p>
       </div>
     </div>
   </div>

@@ -1,10 +1,12 @@
 // NPM PACKAGES
 
 var express = require('express')
+var app = express()
 var router = express.Router()
 var mongoose = require('mongoose')
 var mailer = require('../nodemailer/mailer.js')
 var crypto = require('crypto')
+
 
 // MODELS
 
