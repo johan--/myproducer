@@ -41,7 +41,10 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           })
 
           if(vm.currentUser.picture){
-            vm.profilePicture = vm.currentUser.picture
+            // function randomNum(){
+            //   return Math.random()
+            // }
+            vm.profilePicture = vm.currentUser.picture + "?random=" + Math.random()
           } else {vm.profilePicture = "./img/profile_default.png"}
 
           // combine my productions and other productions where I am crew member
