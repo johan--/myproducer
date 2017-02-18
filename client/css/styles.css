@@ -271,7 +271,7 @@ img.thumb {
 #modal-md {
   color: #FFF;
   width: 450px;
-  height: 600px;
+  /*height: 600px;*/
   margin: 0 auto;
   background: #333333;
   float: none; }
@@ -324,7 +324,10 @@ nav ul li ul li {
 
 .profile-picture {
   border: white solid 1px;
-  position: relative; }
+  position: relative;
+  max-width: 200px;
+  margin: 0 auto;
+}
 
 .fa-plus {
   position: absolute;
@@ -334,3 +337,6 @@ nav ul li ul li {
   left: 50%;
   margin-left: -39px;
   opacity: 0; }
+
+.no-height {
+  height: auto; }

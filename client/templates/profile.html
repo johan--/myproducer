@@ -166,8 +166,8 @@
           <!-- <input type="file" style="display: none;"> -->
           <input type="file" id="file-input" onchange="angular.element(this).scope().file_changed(this)" accept="image/*" style="display: none;"">
         </label>
-        <p><a class="btn approval-btn" ng-disabled="postCtrl.fileExists" ng-click="postCtrl.initUpload()">Change Picture</a></p>
-        <p><a class="btn approval-btn" ng-click="postCtrl.closeModal2()">Cancel</a></p>
+        <p><a class="btn main-btn" ng-disabled="postCtrl.fileExists" ng-click="postCtrl.initUpload()">Save</a></p>
+        <p><a class="btn error-btn" ng-click="postCtrl.closeModal2()">Cancel</a></p>
       </div>
     </div>
   </div>
