@@ -26,8 +26,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   // vm.currentUser.productions = []
   AuthService.getUserStatus()
     .then(function(data){
-      // vm.currentUser = data.data.user
-      // console.log(data.data.user)
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data){
           vm.currentUser = data
@@ -41,9 +39,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           })
 
           if(vm.currentUser.picture){
-            // function randomNum(){
-            //   return Math.random()
-            // }
             vm.profilePicture = vm.currentUser.picture + "?random=" + Math.random()
           } else {vm.profilePicture = "./img/profile_default.png"}
 
@@ -51,7 +46,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
 
           vm.ready = true
-          // console.log(data);
         })
   })
 
@@ -108,7 +102,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
    start upload procedure by asking for a signed request from the app.
   */
   vm.initUpload = function(){
-    console.log("Initupload hit");
     var files = document.getElementById('file-input').files;
     // var file = files[0];
     file = files[0];
@@ -125,9 +118,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     request.
   */
   vm.getSignedRequest = function (file){
-    console.log("setSignedRequest");
-    console.log(file.randomName);
-    console.log(file.type);
     const xhr = new XMLHttpRequest();
     xhr.open('GET', '/uploads/sign-s3?file-name='+ file.randomName+ '&file-type=' + file.type);
     // xhr.open('GET', '/uploads/test')
@@ -136,8 +126,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
         if(xhr.status === 200){
           const response = JSON.parse(xhr.responseText);
           vm.avatarUrl = response.url
-          console.log("AvatarURL");
-          console.log(vm.avatarUrl);
           vm.uploadFile(file, response.signedRequest, response.url);
           vm.addAvatarToProfile()
         }
@@ -153,15 +141,12 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       Function to carry out the actual PUT request to S3 using the signed request from the app.
     */
     vm.uploadFile = function (file, signedRequest, url){
-      console.log("uploadFile hit");
       const xhr = new XMLHttpRequest();
       xhr.open('PUT', signedRequest);
       xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){
           if(xhr.status === 200){
-            // document.getElementById('profile-pic-preview').src = url
-            // document.getElementById('avatar-url').value = url;
-            // document.getElementById('nav-avatar').src = url;
+            document.getElementById('profile-picture').src = url + "?random=" + Math.random()
           }
           else{
             alert('Could not upload file.');
@@ -172,9 +157,9 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     }
 
     vm.addAvatarToProfile = function(){
-      console.log(vm.avatarUrl);
       $http.patch('/api/users/' + vm.currentUser._id, {picture: vm.avatarUrl})
         .then(function(data){
+          vm.profilePicture = data.data.picture + "?random=" + Math.random()
           vm.closeModal2()
         })
     }
