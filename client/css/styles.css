@@ -275,10 +275,10 @@ img.profile {
 #modal-md {
   color: #FFF;
   width: 450px;
-  height: 600px;
   margin: 0 auto;
   background: #333333;
-  float: none; }
+  float: none;
+  padding-bottom: 20px; }
 
 .alert {
   padding: 10px;
