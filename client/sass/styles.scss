@@ -295,6 +295,10 @@ img.profile {
   background-color: transparent;
 }
 
+.padding10 {
+  padding: 10px;
+}
+
 .padding20{
   padding: 20px;
 }
@@ -512,6 +516,7 @@ nav ul li ul li {
 .round {
   border-radius: 50%;
 }
+
 
 // Media Queries
 @media screen and (max-width : 767px) {
