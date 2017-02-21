@@ -85,7 +85,7 @@
         <div class="crew-list col-sm-12 no-padding">
           <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && ((productionCtrl.isProducer &&  productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
             <div class="col-xs-1 text-left">
-              <img class="thumb" ng-src="./img/profile_default.png">
+              <img class="thumb" ng-src={{crew.to.picture}}>
               <!-- <img ui-sref="" ng-src=""> -->
             </div>
             <div class="col-xs-2">
