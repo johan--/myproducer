@@ -13,6 +13,7 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
   vm.currentUser = {}
 
   $rootScope.activeTab = {}
+  $rootScope.activeTab.crewList = true
 
   AuthService.getUserStatus()
     .then(function(data){
