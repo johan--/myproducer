@@ -41,7 +41,7 @@
 
       <div class="col-sm-12 padding20" ng-if="offerCtrl.isProducer || offerCtrl.crew.offer.status != 'Pending'">
         <div class="text-center">
-          <p class="approval-btn padding10">Offer is Pending</p>
+          <p class="approval-btn padding10">Offer is {{ offerCtrl.crew.offer.status }}</p>
           <!-- <a class="btn approval-btn x-padding"> {{ offerCtrl.crew.offer.status }} </a> -->
         </div>
       </div>
