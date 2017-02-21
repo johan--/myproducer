@@ -7,8 +7,8 @@
             <h4>Profile</h4>
           </div>
           <div class="profile-view-left col-sm-4 right-border">
-            <div class="profile-picture">
-              <img class="img-responsive" ng-src="./img/profile_default.png">
+            <div class="profile-picture round">
+              <img id="profile-picture" class="img-responsive round" ng-src="{{otherProfileCtrl.profilePicture}}">
             </div>
             <div class="profile-name">
               <h3 class="sub-title">{{ otherProfileCtrl.user.first_name + ' ' + otherProfileCtrl.user.last_name | uppercase }}</h3>
