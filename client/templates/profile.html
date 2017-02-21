@@ -163,12 +163,12 @@
             <img class="img-responsive round" id="profile-pic-preview" ng-src="{{postCtrl.profilePicture}}">
           </div>
         <br>
-        <label class="btn btn-default btn-file">Select Image
-          <!-- <input type="file" style="display: none;"> -->
-          <input type="file" id="file-input" onchange="angular.element(this).scope().file_changed(this)" accept="image/*" style="display: none;"">
+        <label class="btn btn-default btn-file margin10 width50">Select Image
+          <input type="file" id="file-input" onchange="angular.element(this).scope().file_changed(this)" accept="image/*" style="display: none;">
         </label>
-        <p><a class="btn main-btn" ng-disabled="postCtrl.fileExists" ng-click="postCtrl.initUpload()">Save</a></p>
-        <p><a class="btn error-btn" ng-click="postCtrl.closeModal2()">Cancel</a></p>
+        <br>
+        <a class="btn error-btn margin10 width30" ng-click="postCtrl.closeModal2()">Cancel</a>
+        <a class="btn approval-btn margin10 width30" ng-disabled="!document.getElementById('file-input').files[0]" ng-click="postCtrl.initUpload()">Save</a>
       </div>
     </div>
   </div>

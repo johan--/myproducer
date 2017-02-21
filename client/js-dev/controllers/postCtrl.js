@@ -12,13 +12,14 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.editingState = false;
   vm.fileInput = document.getElementById('file-input')
   vm.modal = {}
-  vm.modal.show = false;
-  vm.modal.show2 = false;
+  vm.showSaveButton = true;
 
   $scope.file_changed = function(element) {
     document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
-    vm.fileExists = false;
+    console.log("File selected");
+    vm.showSaveButton = false;
   };
+
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.profile = true
@@ -75,6 +76,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
   vm.openModal2 = function() {
     vm.modal.show2 = true
+    vm.showSaveButton = true;
   }
 
   vm.closeModal = function() {
