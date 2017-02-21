@@ -28,6 +28,9 @@ a, a:hover, a:link {
     padding-bottom: 5px;
     border-bottom: solid #595959 2px; }
 
+.text-vw {
+  font-size: 1.5vw; }
+
 .line-item {
   background-color: #595959;
   padding: 10px;
@@ -379,3 +382,7 @@ nav ul li ul li {
 
 .round {
   border-radius: 50%; }
+
+@media screen and (max-width: 767px) {
+  .text-vw {
+    font-size: 4vw; } }

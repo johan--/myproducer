@@ -61,6 +61,12 @@ a, a:hover, a:link{
   }
 }
 
+.text-vw {
+  font-size: 1.5vw;
+}
+
+
+
 .line-item {
   background-color: $line-item;
   padding: 10px;
@@ -505,4 +511,11 @@ nav ul li ul li {
 
 .round {
   border-radius: 50%;
+}
+
+// Media Queries
+@media screen and (max-width : 767px) {
+  .text-vw {
+    font-size: 4vw;
+  }
 }
