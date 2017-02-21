@@ -349,6 +349,14 @@ nav ul li ul li {
   margin: 0 auto;
   overflow: hidden; }
 
+.profile-picture-other-profile {
+  border: white solid 1px;
+  position: relative;
+  max-width: 150px;
+  max-height: 150px;
+  margin: 0 auto;
+  overflow: hidden; }
+
 #profile-picture {
   height: 148px;
   width: 148px; }
