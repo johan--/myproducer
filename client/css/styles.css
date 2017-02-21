@@ -197,6 +197,10 @@ img.thumb {
   max-height: 32px;
   max-width: 32px; }
 
+img.profile {
+  max-height: 150px;
+  max-width: 150px; }
+
 .bg-transparent {
   background-color: transparent; }
 
@@ -271,7 +275,7 @@ img.thumb {
 #modal-md {
   color: #FFF;
   width: 450px;
-  /*height: 600px;*/
+  height: 600px;
   margin: 0 auto;
   background: #333333;
   float: none; }
@@ -322,12 +326,36 @@ nav ul li ul li {
 .profile-picture:hover > .fa-plus {
   opacity: 1; }
 
+.profile-picture > p {
+  opacity: 0;
+  text-align: center;
+  position: absolute;
+  background-color: white;
+  color: black;
+  left: 50%;
+  margin-left: -74px;
+  bottom: -7%;
+  width: 100%;
+  padding: 10px; }
+
+.profile-picture:hover > p {
+  opacity: 1; }
+
 .profile-picture {
   border: white solid 1px;
   position: relative;
-  max-width: 200px;
+  max-width: 150px;
+  max-height: 150px;
   margin: 0 auto;
-}
+  overflow: hidden; }
+
+#profile-picture {
+  height: 148px;
+  width: 148px; }
+
+#profile-pic-preview {
+  height: 148px;
+  width: 148px; }
 
 .fa-plus {
   position: absolute;
@@ -340,3 +368,6 @@ nav ul li ul li {
 
 .no-height {
   height: auto; }
+
+.round {
+  border-radius: 50%; }

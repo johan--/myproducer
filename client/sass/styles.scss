@@ -280,6 +280,11 @@ img.thumb{
   max-width: 32px;
 }
 
+img.profile {
+  max-height: 150px;
+  max-width: 150px;
+}
+
 .bg-transparent{
   background-color: transparent;
 }
@@ -437,9 +442,42 @@ nav ul li ul li {
   opacity: 1;
 }
 
+.profile-picture > p {
+  opacity: 0;
+  text-align: center;
+  position: absolute;
+  background-color: white;
+  color: black;
+  left: 50%;
+  margin-left: -74px;
+  bottom: -7%;
+  width: 100%;
+  padding: 10px;
+
+}
+
+.profile-picture:hover > p {
+  opacity: 1;
+}
+
 .profile-picture {
   border: white solid 1px;
-  position: relative
+  position: relative;
+  max-width: 150px;
+  max-height: 150px;
+  margin: 0 auto;
+  overflow: hidden;
+
+}
+
+#profile-picture {
+  height: 148px;
+  width: 148px;
+}
+
+#profile-pic-preview {
+  height: 148px;
+  width: 148px;
 }
 
 .fa-plus {
@@ -454,4 +492,8 @@ nav ul li ul li {
 
 .no-height {
   height: auto;
+}
+
+.round {
+  border-radius: 50%;
 }

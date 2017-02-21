@@ -7,9 +7,10 @@
             <h4>Profile</h4>
           </div>
           <div class="profile-view-left col-sm-4 right-border">
-            <div class="profile-picture" ng-click="postCtrl.openModal2()">
-              <img id="profile-picture" class="img-responsive" ng-src="{{postCtrl.profilePicture}}">
-              <i class="fa fa-plus" aria-hidden="true"></i>
+            <div class="profile-picture round" ng-click="postCtrl.openModal2()">
+              <img id="profile-picture" class="img-responsive round" ng-src="{{postCtrl.profilePicture}}">
+              <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+              <p>Change</p>
             </div>
             <div class="profile-name">
               <h3 class="sub-title">{{ postCtrl.currentUser.first_name + ' ' + postCtrl.currentUser.last_name | uppercase }}</h3>
@@ -158,8 +159,8 @@
         <h1>Change Profile Picture</h1>
         <hr>
         <div class="profile-view-left col-sm-12">
-          <div class="profile-picture" ng-click="postCtrl.openModal2()">
-            <img class="img-responsive" id="profile-pic-preview" ng-src="{{postCtrl.profilePicture}}">
+          <div class="profile-picture round" ng-click="postCtrl.openModal2()">
+            <img class="img-responsive round" id="profile-pic-preview" ng-src="{{postCtrl.profilePicture}}">
           </div>
         <br>
         <label class="btn btn-default btn-file">Select Image
