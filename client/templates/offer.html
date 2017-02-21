@@ -49,7 +49,7 @@
         <div class="group line-item">
           <div class="message" ng-repeat="message in offerCtrl.crew.message">
               <div class="avatar">
-                <img class="thumb" ng-src="./img/profile_default.png">
+                <img class="thumb round" ng-src={{message._by.picture}}>
               </div>
               <div class="chat">
                 <span class="strong">{{message._by.first_name + ' ' + message._by.last_name}}</span>
