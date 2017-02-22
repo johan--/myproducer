@@ -41,7 +41,8 @@
 
       <div class="col-sm-12 padding20" ng-if="offerCtrl.isProducer || offerCtrl.crew.offer.status != 'Pending'">
         <div class="text-center">
-          <a class="btn approval-btn x-padding"> {{ offerCtrl.crew.offer.status }} </a>
+          <p class="approval-btn padding10">Offer is {{ offerCtrl.crew.offer.status }}</p>
+          <!-- <a class="btn approval-btn x-padding"> {{ offerCtrl.crew.offer.status }} </a> -->
         </div>
       </div>
 
@@ -49,7 +50,7 @@
         <div class="group line-item">
           <div class="message" ng-repeat="message in offerCtrl.crew.message">
               <div class="avatar">
-                <img class="thumb" ng-src="./img/profile_default.png">
+                <img class="thumb round" ng-src={{message._by.picture}}>
               </div>
               <div class="chat">
                 <span class="strong">{{message._by.first_name + ' ' + message._by.last_name}}</span>

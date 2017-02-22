@@ -13,6 +13,7 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
   vm.currentUser = {}
 
   $rootScope.activeTab = {}
+  $rootScope.activeTab.crewList = true
 
   AuthService.getUserStatus()
     .then(function(data){
@@ -27,6 +28,9 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
           $http.get('/api/users/' + $stateParams.id + '/profile')
             .then(function(data){
               vm.user = data.data
+              if(vm.user.picture){
+                vm.profilePicture = vm.user.picture
+              }else {vm.profilePicture = "./img/profile_default.png"}
 
               vm.isPending = vm.currentUser.pendingContacts.find(function(pc) {
                 return pc === vm.user._id

@@ -4,11 +4,13 @@
       <div class="profile-view-content">
         <form ng-submit="postCtrl.editUser()">
           <div class="col-sm-12">
-            <h4>Profile</h4>
+            <br>
           </div>
           <div class="profile-view-left col-sm-4 right-border">
-            <div class="profile-picture">
-              <img class="img-responsive" ng-src="./img/profile_default.png">
+            <div class="profile-picture round" ng-click="postCtrl.openModal2()">
+              <img id="profile-picture" class="img-responsive round" ng-src="{{postCtrl.profilePicture}}">
+              <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+              <p>Change</p>
             </div>
             <div class="profile-name">
               <h3 class="sub-title">{{ postCtrl.currentUser.first_name + ' ' + postCtrl.currentUser.last_name | uppercase }}</h3>
@@ -145,6 +147,28 @@
         <h1><i ng-if="postCtrl.modal.isFailure" class="fa fa-times-circle-o"></i></h1>
         <p>{{ postCtrl.modal.content }}</p>
         <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="postCtrl.modal.show2">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h1>Change Profile Picture</h1>
+        <hr>
+        <div class="profile-view-left col-sm-12">
+          <div class="profile-picture round" ng-click="postCtrl.openModal2()">
+            <img class="img-responsive round" id="profile-pic-preview" ng-src="{{postCtrl.profilePicture}}">
+          </div>
+        <br>
+        <label class="btn btn-default btn-file margin10 width50">Select Image
+          <input type="file" id="file-input" onchange="angular.element(this).scope().file_changed(this)" accept="image/*" style="display: none;">
+        </label>
+        <br>
+        <a class="btn error-btn margin10 width30" ng-click="postCtrl.closeModal2()">Cancel</a>
+        <a class="btn approval-btn margin10 width30" ng-click="postCtrl.initUpload()">Save</a>
       </div>
     </div>
   </div>
