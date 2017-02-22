@@ -85,7 +85,7 @@
         <div class="crew-list col-sm-12 no-padding">
           <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && ((productionCtrl.isProducer &&  productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
             <div class="col-xs-1 text-left">
-              <img class="thumb" ng-src="./img/profile_default.png">
+              <img class="thumb round" ng-src={{crew.to.picture}}>
               <!-- <img ui-sref="" ng-src=""> -->
             </div>
             <div class="col-xs-2">
@@ -173,7 +173,7 @@
               <a ng-if="crew.offer.status ===
               'Accepted'" class="btn approval-alt-btn">Hired</a>
               <a ng-if="crew.offer.status === 'Pending' || crew.offer.status ===
-              'Accepted'" href="/#/offer/{{crew._id}}" class="btn default-btn">Chat</a>
+              'Accepted'" href="/#/offer/{{crew._id}}" class="btn default-btn">View Offer</a>
               <a ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
             </div>
           </div>

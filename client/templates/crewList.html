@@ -21,7 +21,7 @@
         </div>
         <div class="line-item y-padding" ng-repeat="crew in crewListCtrl.currentUser.contacts | filter:crewFilter">
           <div class="col-xs-1 text-left">
-            <img class="thumb" ng-src="./img/profile_default.png">
+            <img class="thumb round" ng-src={{crew.picture}}>
           </div>
           <div class="col-xs-3">
             <p class="strong no-margin">{{crew.first_name + ' ' + crew.last_name}}</p>

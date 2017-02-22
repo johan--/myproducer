@@ -24,6 +24,7 @@ var User = new Schema({
   contacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
   pendingContacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
   active: {type: Boolean, default: true},
+  picture: String,
 }, {timestamps: true})
 
 User.plugin(passportLocalMongoose)
