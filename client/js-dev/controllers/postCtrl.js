@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('postController', postController)
 
-postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$scope']
+postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$scope', '$mixpanel']
 
 // PRODUCTIONS
 
-function postController($rootScope, $http, $stateParams, $state, AuthService, $scope){
+function postController($rootScope, $http, $stateParams, $state, AuthService, $scope, $mixpanel){
   var vm = this
   vm.currentUser = {}
   // vm.fileExists = true;
@@ -130,6 +130,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           vm.avatarUrl = response.url
           vm.uploadFile(file, response.signedRequest, response.url);
           vm.addAvatarToProfile()
+          $mixpanel.track('Profile Picture Uploaded', {"user" : vm.currentUser.username})
         }
         else{
           alert('Could not get signed URL.');
