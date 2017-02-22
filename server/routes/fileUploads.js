@@ -37,8 +37,4 @@ const
     });
   });
 
-  app.get('/test', function(req, res){
-    res.json({message: 'fileUploads hit'})
-  })
-
  module.exports = app

@@ -151,6 +151,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
             document.getElementById('profile-picture').src = url + "?random=" + Math.random()
           }
           else{
+            console.log(xhr.status);
             alert('Could not upload file.');
           }
         }
