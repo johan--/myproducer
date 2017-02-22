@@ -87,6 +87,7 @@ router.get('/:id', function(req, res){
 })
 
 router.patch('/:id', function(req, res){
+  console.log(req.body);
   Crew.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, crew){
     if(err) return console.log(err)
 
