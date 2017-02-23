@@ -19,8 +19,6 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
       // console.log(data.data.user)
       $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data){
-          // TODO: Remove this log
-          console.log(data);
           vm.currentUser = data
 
           if (vm.currentUser.role === 'crew') {
