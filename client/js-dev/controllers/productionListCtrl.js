@@ -85,7 +85,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // vm.newProduction = {}
           // // redirect them to production view
           // // $state.go('production')
-          $mixpanel.track('New Production Added', {"user" : vm.currentUser.username})
+          $mixpanel.track('New Production Added', {"user" : vm.currentUser.username, "length" : data.length})
         })
     }
   }
