@@ -94,6 +94,10 @@ a, a:hover, a:link {
   margin: 15px;
   font-weight: 300; }
 
+.remove-btn-hover:hover {
+  color: white;
+  cursor: auto; }
+
 .col-centered {
   float: none;
   margin: 0 auto; }

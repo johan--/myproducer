@@ -198,6 +198,4 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           $mixpanel.track('Notify Crew Clicked')
         })
     }
-    console.log("vm.production.crew");
-    console.log(vm.production);
 }

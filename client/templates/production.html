@@ -169,7 +169,7 @@
             <div ng-if="productionCtrl.isProducer" class="col-xs-3 no-padding text-right top-margin5">
               <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)"
                class="btn main-btn">Hire</a>
-              <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn">Pending</a>
+              <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn remove-btn-hover">Pending</a>
               <a ng-if="crew.offer.status ===
               'Accepted'" class="btn approval-alt-btn">Hired</a>
               <a ng-if="crew.offer.status === 'Pending' || crew.offer.status ===
