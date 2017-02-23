@@ -30,6 +30,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     })
 
   vm.addMessage = function(message) {
+    vm.messageBox = document.getElementById('message-box')
     vm.message = {
         content : message || vm.newMessage
     }
@@ -39,6 +40,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
         .success(function(data) {
           vm.crew.message = data
           vm.newMessage = ''
+          vm.messageBox.focus()
           $mixpanel.track('Chat Message Sent', {"user" : vm.currentUser.username})
         })
     }
