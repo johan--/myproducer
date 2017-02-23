@@ -138,4 +138,13 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
   vm.closeDeleteContactModal = function(){
     vm.showDeleteContactModal = false;
   }
+
+  vm.compareDate = function(date){
+    date = new Date(date)
+    date.setDate(date.getDate() + 1)
+    if(!date){
+      return false
+    }
+    return new Date() < date
+  }
 }
