@@ -15,7 +15,7 @@
       </div>
       <div class="group">
         <div class="line-item bg-transparent" ng-if="crewListCtrl.currentUser.contacts.length < 5">
-          <div class="col-sm-10 col-sm-offset-1 bg-transparent">
+          <div class="col-sm-12 bg-transparent">
             <p class="strong no-margin">Add contacts so that you can begin building productions!</p>
             <form ng-submit="crewListCtrl.addContact()">
               <div class="col-xs-10">
@@ -52,28 +52,8 @@
           </div>
           <div class="col-xs-3 text-right">
             <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
-            <button ng-click="crewListCtrl.handleAddToButton(crew._id, crew.username)" class="btn main-btn">+ Add To</button> <a ng-click="crewListCtrl.deleteContact(crew._id)"><i class="fa fa-times"></i></a></p>
+            <button ng-click="crewListCtrl.handleAddToButton(crew._id, crew.username)" class="btn main-btn">+ Add To</button> <a ng-click="crewListCtrl.openDeleteContactModal(crew)"><i class="fa fa-times"></i></a></p>
           </div>
-        </div>
-
-        <div class="line-item y-padding bg-transparent">
-          <form ng-submit="crewListCtrl.addContact()">
-            <div class="col-xs-10">
-              <div class="col-xs-4">
-                <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.first_name" type="text" placeholder="First Name"></p>
-              </div>
-              <div class="col-xs-4">
-                <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.last_name" type="text" placeholder="Last Name"></p>
-              </div>
-              <div class="col-xs-4">
-                <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.email" type="text" placeholder="Email"></p>
-              </div>
-            </div>
-
-            <div class="col-xs-2 text-right">
-              <p class="no-margin"><button ng-disabled="!crewListCtrl.newContact.email || !crewListCtrl.newContact.first_name || !crewListCtrl.newContact.last_name" type"submit" class="btn main-btn">Add New Contact</button></p>
-            </div>
-          </form>
         </div>
       </div>
     </div>
@@ -159,6 +139,23 @@
         <h1><i ng-if="crewListCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
         <p>{{ crewListCtrl.notifModal.content }}</p>
         <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="crewListCtrl.showDeleteContactModal">
+  <div id="modal-container" ng-click="crewListCtrl.closeDeleteContactModal()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h3>Are you sure you want to delete {{ crewListCtrl.contact.first_name + ' ' + crewListCtrl.contact.last_name }} from your Approved Crew?</h3>
+        <br>
+        <img class="thumb-md round" ng-src="{{crewListCtrl.contact.picture}}" alt="">
+        <br>
+        <br>
+        <h5>You can always add them back later.</h5>
+        <br>
+        <p><a class="btn approval-btn" ng-click="crewListCtrl.deleteContact(crewListCtrl.contact._id)">Yes</a> <a class="btn error-btn" ng-click="crewListCtrl.closeDeleteContactModal()">Cancel</a></p>
       </div>
     </div>
   </div>

@@ -72,11 +72,8 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
   }
 
   vm.deleteContact = function(contact){
-    console.log(contact);
     $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser})
     .success(function(data){
-      console.log("First Data");
-      console.log(data);
       vm.currentUser.contacts = data.user.contacts
     })
   }
@@ -90,6 +87,11 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
 
   vm.openModal = function() {
     vm.showModal = true;
+  }
+
+  vm.openDeleteContactModal = function(contact){
+    vm.contact = contact
+    vm.showDeleteContactModal = true;
   }
 
   vm.handleAddToButton = function(id, username) {
@@ -131,5 +133,9 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
     vm.notifModal.show = false
     vm.notifModal.isSuccess = false
     vm.notifModal.isFaiure = false
+  }
+
+  vm.closeDeleteContactModal = function(){
+    vm.showDeleteContactModal = false;
   }
 }
