@@ -71,6 +71,16 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
       })
   }
 
+  vm.deleteContact = function(contact){
+    console.log(contact);
+    $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser})
+    .success(function(data){
+      console.log("First Data");
+      console.log(data);
+      vm.currentUser.contacts = data.user.contacts
+    })
+  }
+
   vm.closeModal = function(evt) {
     if(evt.target.getAttribute('id') === 'modal-container'){
       vm.selectedUserId = undefined;

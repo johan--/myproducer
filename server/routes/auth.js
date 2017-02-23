@@ -122,7 +122,6 @@ router.post('/forgot-password', function(req, res, next) {
       });
     },
     function(token, done) {
-      console.log("find user");
       User.findOne({ username: req.body.email }, function(err, user) {
         if (!user) {
           console.log("No user found");

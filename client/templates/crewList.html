@@ -35,7 +35,7 @@
           </div>
           <div class="col-xs-3 text-right">
             <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
-            <button ng-click="crewListCtrl.handleAddToButton(crew._id, crew.username)" class="btn main-btn">+ Add To</button></p>
+            <button ng-click="crewListCtrl.handleAddToButton(crew._id, crew.username)" class="btn main-btn">+ Add To</button><a ng-click="crewListCtrl.deleteContact(crew._id)">X</a></p>
           </div>
         </div>
 

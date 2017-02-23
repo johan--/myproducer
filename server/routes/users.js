@@ -90,14 +90,6 @@ router.post('/addcontact', function(req, res){
               }
           })
         })
-
-
-
-
-
-
-
-
         // res.json({newSuccess: true, newEmail: email})
 
       } else { // if user exists
@@ -146,6 +138,29 @@ router.patch('/updateContact', function(req, res){
     } else {
       res.json({success: false})
     }
+  })
+})
+
+// Remove contact route
+router.patch('/delete-contact', function(req, res){
+  console.log("delete-contact hit");
+  console.log("contact on line 148 users route");
+  console.log(req.body.contact);
+  console.log("currentUser._id on line 149");
+  console.log(req.body.currentUser._id);
+
+  User.findById(req.body.currentUser._id, function(err, user){
+    contact = req.body.contact
+    position = user.contacts.indexOf(contact)
+    user.contacts.splice(position,1)
+    user.save(function(err) {
+      if(err) return console.log(err)
+      User.findById(user._id).populate({path: 'contacts'}).exec(function(err, user){
+        return res.json({success: true, user: user})
+      })
+
+    })
+
   })
 })
 
