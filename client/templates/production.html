@@ -85,8 +85,8 @@
         <div class="crew-list col-sm-12 no-padding">
           <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && ((productionCtrl.isProducer &&  productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
             <div class="col-xs-1 text-left">
-              <img class="thumb round" ng-show="!crew.picture" ng-src="./img/profile_default.png">
-              <img class="thumb round" ng-show="crew.picture" ng-src={{crew.picture}}>
+              <img class="thumb round" ng-show="!crew.to.picture" ng-src="./img/profile_default.png">
+              <img class="thumb round" ng-show="crew.to.picture" ng-src={{crew.to.picture}}>
             </div>
             <div class="col-xs-2">
               <p class="no-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</p>

@@ -9,7 +9,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   var vm = this
   vm.offers = []
   vm.currentUser = {}
-
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
 
@@ -199,4 +198,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           $mixpanel.track('Notify Crew Clicked')
         })
     }
+    console.log("vm.production.crew");
+    console.log(vm.production);
 }
