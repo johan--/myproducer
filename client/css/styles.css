@@ -312,7 +312,8 @@ img.profile {
   border-color: #a94442; }
 
 .fa-times {
-  color: #888888; }
+  color: #888888;
+  cursor: pointer; }
 
 nav ul ul {
   position: absolute;
