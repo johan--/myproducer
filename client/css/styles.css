@@ -315,9 +315,8 @@ img.profile {
   color: #888888; }
 
 nav ul ul {
-  position: fixed;
-  right: 15px;
-  top: 35px; }
+  position: absolute;
+  right: 0; }
 
 nav ul li:hover > ul {
   display: block; }
