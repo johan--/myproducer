@@ -148,12 +148,14 @@
   <div id="modal-container" ng-click="crewListCtrl.closeDeleteContactModal()">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
-        <h3>Are you sure you want to delete {{ crewListCtrl.contact.first_name + ' ' + crewListCtrl.contact.last_name }} from your Approved Crew?</h3>
+        <h1><i class="fa fa-times-circle"></i></h1>
+        <p>Are you sure you want to delete {{ crewListCtrl.contact.first_name + ' ' + crewListCtrl.contact.last_name }} from your Approved Crew?</p>
         <br>
-        <img class="thumb-md round" ng-src="{{crewListCtrl.contact.picture}}" alt="">
+        <img class="thumb-md round" ng-show="!crewListCtrl.contact.picture" ng-src="./img/profile_default.png">
+        <img class="thumb-md round" ng-show="crewListCtrl.contact.picture" ng-src={{crewListCtrl.contact.picture}}>
         <br>
         <br>
-        <h5>You can always add them back later.</h5>
+        <p>You can always add them back later.</p>
         <br>
         <p><a class="btn approval-btn" ng-click="crewListCtrl.deleteContact(crewListCtrl.contact._id)">Yes</a> <a class="btn error-btn" ng-click="crewListCtrl.closeDeleteContactModal()">Cancel</a></p>
       </div>
