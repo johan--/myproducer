@@ -19,7 +19,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
 
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
-              console.log(crew.message[0]._by.picture);
+              // console.log(crew.message[0]._by.picture);
               vm.crew = crew
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
               vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
@@ -73,4 +73,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     }
     return new Date() < date
   }
+
+  console.log("Offer Status");
+  // console.log(vm.crew.offer);
 }
