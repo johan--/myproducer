@@ -45,7 +45,8 @@
         <div class="col-xs-3 text-right no-padding">
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
-            <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+            <!-- <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a> -->
+            <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
           </p>
         </div>
       </div>
@@ -93,7 +94,8 @@
         <div class="col-xs-3 text-right no-padding">
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
-            <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+            <!-- <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a> -->
+            <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
           </p>
         </div>
       </div>
@@ -109,6 +111,19 @@
         <h1><i ng-if="productionListCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
         <p>{{ productionListCtrl.notifModal.content }}</p>
         <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionListCtrl.showDeleteProductionModal">
+  <div id="modal-container" ng-click="productionListCtrl.closeDeleteProductionModal()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h3>Are you sure you want to delete {{ productionListCtrl.productionName }}?</h3>
+        <br>
+        <br>
+        <p><a class="btn approval-btn" ng-click="productionListCtrl.deleteProduction(productionListCtrl.productionName, productionListCtrl.productionID, productionListCtrl.$index)">Yes</a> <a class="btn error-btn" ng-click="productionListCtrl.closeDeleteProductionModal()">Cancel</a></p>
       </div>
     </div>
   </div>

@@ -91,7 +91,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.deleteProduction = function(name, id) {
-    if(confirm('Are you sure you want to delete this production?')){
       $http.patch('/api/productions/' + id, {active: false})
         .success(function(data) {
           // console.log(data);
@@ -110,7 +109,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         .finally(function() {
           vm.openNotifModal()
         })
-      }
   }
 
   vm.openNotifModal = function() {
@@ -130,5 +128,19 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       return false
     }
     return new Date() < date
+  }
+
+  vm.openDeleteProductionModal = function(name, id, index){
+    vm.productionName = name
+    vm.productionID = id
+    vm.$index = index
+    console.log(vm.productionName);
+    console.log(vm.productionID);
+    console.log(vm.$index);
+    vm.showDeleteProductionModal = true;
+  }
+
+  vm.closeDeleteProductionModal = function(){
+    vm.showDeleteProductionModal = false;
   }
 }
