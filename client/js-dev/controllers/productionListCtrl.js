@@ -6,6 +6,7 @@ productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$sta
 // PRODUCTIONS
 
 function productionListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
+  console.log("productionListController instantiated");
   var vm = this
   vm.notifModal = {}
   $rootScope.activeTab = {}
@@ -29,7 +30,8 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
-
+          // console.log(vm.currentUser.allProductions[17].by_);
+          // console.log(vm.currentUser._id);
           vm.ready = true
 
           if (vm.currentUser.role === 'producer') {
