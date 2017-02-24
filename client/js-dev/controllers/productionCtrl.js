@@ -9,7 +9,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   var vm = this
   vm.offers = []
   vm.currentUser = {}
-
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
 

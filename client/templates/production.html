@@ -75,7 +75,7 @@
     <div class="section">
       <div class="crew-list">
         <div class="col-sm-6 no-padding">
-          <h3 class="title">CREW LIST</h3>
+          <h3 class="title">CAST AND CREW</h3>
         </div>
         <div class="col-sm-6 no-padding">
           <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="text-right title">
@@ -85,8 +85,8 @@
         <div class="crew-list col-sm-12 no-padding">
           <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && ((productionCtrl.isProducer &&  productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
             <div class="col-xs-1 text-left">
-              <img class="thumb round" ng-src={{crew.to.picture}}>
-              <!-- <img ui-sref="" ng-src=""> -->
+              <img class="thumb round" ng-show="!crew.to.picture" ng-src="./img/profile_default.png">
+              <img class="thumb round" ng-show="crew.to.picture" ng-src={{crew.to.picture}}>
             </div>
             <div class="col-xs-2">
               <p class="no-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</p>
@@ -169,11 +169,12 @@
             <div ng-if="productionCtrl.isProducer" class="col-xs-3 no-padding text-right top-margin5">
               <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)"
                class="btn main-btn">Hire</a>
-              <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn">Pending</a>
+              <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn remove-btn-hover">Pending</a>
+              <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover">Declined</a>
               <a ng-if="crew.offer.status ===
-              'Accepted'" class="btn approval-alt-btn">Hired</a>
+              'Accepted'" class="btn approval-alt-btn remove-btn-hover">Hired</a> 
               <a ng-if="crew.offer.status === 'Pending' || crew.offer.status ===
-              'Accepted'" href="/#/offer/{{crew._id}}" class="btn default-btn">View Offer</a>
+              'Accepted' || crew.offer.status === 'Declined'" href="/#/offer/{{crew._id}}" class="btn default-btn">View Offer</a>
               <a ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
             </div>
           </div>
@@ -204,7 +205,8 @@
         <div class="line-item" ng-repeat="crew in productionCtrl.currentUser.contacts | filter: crewFilter track by $index">
           <div class="row">
             <div class="col-xs-1 text-left">
-              <img class="thumb round" ng-src="{{crew.picture}}">
+              <img class="thumb round" ng-show="!crew.picture" ng-src="./img/profile_default.png">
+              <img class="thumb round" ng-show="crew.picture" ng-src={{crew.picture}}>
             </div>
             <div class="col-xs-3">
               <p class="no-margin">{{crew.first_name + ' ' + crew.last_name}}</p>

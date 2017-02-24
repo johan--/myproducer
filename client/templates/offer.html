@@ -41,7 +41,9 @@
 
       <div class="col-sm-12 padding20" ng-if="offerCtrl.isProducer || offerCtrl.crew.offer.status != 'Pending'">
         <div class="text-center">
-          <p class="approval-btn padding10">Offer is {{ offerCtrl.crew.offer.status }}</p>
+          <p class="padding10 error-btn" ng-if="offerCtrl.crew.offer.status === 'Declined'">Offer {{ offerCtrl.crew.offer.status }}</p>
+          <p class="padding10 approval-alt-btn" ng-if="offerCtrl.crew.offer.status === 'Accepted'">Offer {{ offerCtrl.crew.offer.status }}</p>
+          <p class="padding10 approval-btn" ng-if="offerCtrl.crew.offer.status === 'Pending'">Offer {{ offerCtrl.crew.offer.status }}</p>
           <!-- <a class="btn approval-btn x-padding"> {{ offerCtrl.crew.offer.status }} </a> -->
         </div>
       </div>
@@ -62,7 +64,7 @@
 
         <form ng-submit="offerCtrl.addMessage()">
           <p>
-            <input type="text" class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message">
+            <input type="text" id="message-box" class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message">
           </p>
 
           <button type="submit" class="btn default-btn x-padding">Send</a>

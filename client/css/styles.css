@@ -94,6 +94,10 @@ a, a:hover, a:link {
   margin: 15px;
   font-weight: 300; }
 
+.remove-btn-hover:hover {
+  color: white;
+  cursor: auto; }
+
 .col-centered {
   float: none;
   margin: 0 auto; }
@@ -206,8 +210,12 @@ select.subtle-border-2 {
   float: right; }
 
 img.thumb {
-  max-height: 32px;
-  max-width: 32px; }
+  height: 32px;
+  width: 32px; }
+
+img.thumb-md {
+  height: 64px;
+  width: 64px; }
 
 img.profile {
   max-height: 150px;
@@ -307,9 +315,8 @@ img.profile {
   color: #888888; }
 
 nav ul ul {
-  position: fixed;
-  right: 15px;
-  top: 35px; }
+  position: absolute;
+  right: 0; }
 
 nav ul li:hover > ul {
   display: block; }

@@ -19,8 +19,6 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
       // console.log(data.data.user)
       $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data){
-          // TODO: Remove this log
-          console.log(data);
           vm.currentUser = data
 
           if (vm.currentUser.role === 'crew') {
@@ -73,6 +71,13 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
       })
   }
 
+  vm.deleteContact = function(contact){
+    $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser})
+    .success(function(data){
+      vm.currentUser.contacts = data.user.contacts
+    })
+  }
+
   vm.closeModal = function(evt) {
     if(evt.target.getAttribute('id') === 'modal-container'){
       vm.selectedUserId = undefined;
@@ -82,6 +87,11 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
 
   vm.openModal = function() {
     vm.showModal = true;
+  }
+
+  vm.openDeleteContactModal = function(contact){
+    vm.contact = contact
+    vm.showDeleteContactModal = true;
   }
 
   vm.handleAddToButton = function(id, username) {
@@ -123,5 +133,18 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
     vm.notifModal.show = false
     vm.notifModal.isSuccess = false
     vm.notifModal.isFaiure = false
+  }
+
+  vm.closeDeleteContactModal = function(){
+    vm.showDeleteContactModal = false;
+  }
+
+  vm.compareDate = function(date){
+    date = new Date(date)
+    date.setDate(date.getDate() + 1)
+    if(!date){
+      return false
+    }
+    return new Date() < date
   }
 }

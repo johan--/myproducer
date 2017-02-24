@@ -143,6 +143,11 @@ a, a:hover, a:link{
   font-weight: 300;
 }
 
+.remove-btn-hover:hover {
+  color: white;
+  cursor: auto;
+}
+
 .col-centered{
     float: none;
     margin: 0 auto;
@@ -294,8 +299,13 @@ select.subtle-border-2{
 }
 
 img.thumb{
-  max-height: 32px;
-  max-width: 32px;
+  height: 32px;
+  width: 32px;
+}
+
+img.thumb-md{
+  height: 64px;
+  width: 64px;
 }
 
 img.profile {
@@ -421,9 +431,9 @@ img.profile {
 
 nav ul ul {
   // display: none;
-  position: fixed;
-  right: 15px;
-  top: 35px;}
+  position: absolute;;
+  right: 0;
+}
 
 nav ul li:hover > ul {
 	display: block;

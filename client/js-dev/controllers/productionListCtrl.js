@@ -6,6 +6,7 @@ productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$sta
 // PRODUCTIONS
 
 function productionListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
+  console.log("productionListController instantiated");
   var vm = this
   vm.notifModal = {}
   $rootScope.activeTab = {}
@@ -29,7 +30,8 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
-
+          // console.log(vm.currentUser.allProductions[17].by_);
+          // console.log(vm.currentUser._id);
           vm.ready = true
 
           if (vm.currentUser.role === 'producer') {
@@ -85,13 +87,12 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // vm.newProduction = {}
           // // redirect them to production view
           // // $state.go('production')
-          $mixpanel.track('New Production Added', {"user" : vm.currentUser.username})
+          $mixpanel.track('New Production Added', {"user" : vm.currentUser.username, "length" : data.length})
         })
     }
   }
 
   vm.deleteProduction = function(name, id) {
-    if(confirm('Are you sure you want to delete this production?')){
       $http.patch('/api/productions/' + id, {active: false})
         .success(function(data) {
           // console.log(data);
@@ -110,7 +111,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         .finally(function() {
           vm.openNotifModal()
         })
-      }
   }
 
   vm.openNotifModal = function() {
@@ -130,5 +130,19 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       return false
     }
     return new Date() < date
+  }
+
+  vm.openDeleteProductionModal = function(name, id, index){
+    vm.productionName = name
+    vm.productionID = id
+    vm.$index = index
+    console.log(vm.productionName);
+    console.log(vm.productionID);
+    console.log(vm.$index);
+    vm.showDeleteProductionModal = true;
+  }
+
+  vm.closeDeleteProductionModal = function(){
+    vm.showDeleteProductionModal = false;
   }
 }
