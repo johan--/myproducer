@@ -59,7 +59,7 @@
           <div class="profile-view-right col-sm-8">
             <div class="profile-bio form-group">
               <h4 class="sub-title">Bio</h4>
-              <textarea ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
+              <textarea ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio" placeholder="Tell us your story."></textarea>
               <p ng-hide="postCtrl.editingState || !postCtrl.currentUser.bio" >{{postCtrl.currentUser.bio}}</p>
             </div>
             <div class="profile-skills form-group">

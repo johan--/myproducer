@@ -16,7 +16,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
   $scope.file_changed = function(element) {
     document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
-    console.log("File selected");
+    // console.log("File selected");
     vm.showSaveButton = false;
   };
 
@@ -152,7 +152,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
             document.getElementById('profile-picture').src = url + "?random=" + Math.random()
           }
           else{
-            console.log(xhr.status);
+            // console.log(xhr.status);
             alert('Could not upload file.');
           }
         }
