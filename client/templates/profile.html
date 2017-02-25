@@ -59,8 +59,9 @@
           <div class="profile-view-right col-sm-8">
             <div class="profile-bio form-group">
               <h4 class="sub-title">Bio</h4>
-              <textarea ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio" placeholder="Tell us your story."></textarea>
+              <textarea ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
               <p ng-hide="postCtrl.editingState || !postCtrl.currentUser.bio" >{{postCtrl.currentUser.bio}}</p>
+              <p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState">Tell everyone about yourself.</p>
             </div>
             <div class="profile-skills form-group">
               <h4 class="sub-title">Skills</h4>
@@ -71,6 +72,7 @@
                 <p><input ng-model="postCtrl.currentUser.skills[3]" class="form-control" id="userSkill4"></p>
               </div>
               <ul ng-hide="postCtrl.editingState">
+                <p ng-hide="postCtrl.currentUser.skills[0] || postCtrl.editingState">List any equipment you have here.</p>
                 <li ng-if="postCtrl.currentUser.skills[0]">{{postCtrl.currentUser.skills[0]}}</li>
                 <li ng-if="postCtrl.currentUser.skills[1]">{{postCtrl.currentUser.skills[1]}}</li>
                 <li ng-if="postCtrl.currentUser.skills[2]">{{postCtrl.currentUser.skills[2]}}</li>
@@ -86,6 +88,7 @@
                 <p><input ng-model="postCtrl.currentUser.equipment[3]" class="form-control" id="userEquipment4"></p>
               </div>
               <ul ng-hide="postCtrl.editingState">
+                <p ng-hide="postCtrl.currentUser.equipment[0] || postCtrl.editingState">List any equipment you have here.</p>
                 <li ng-if="postCtrl.currentUser.equipment[0]">{{postCtrl.currentUser.equipment[0]}}</li>
                 <li ng-if="postCtrl.currentUser.equipment[1]">{{postCtrl.currentUser.equipment[1]}}</li>
                 <li ng-if="postCtrl.currentUser.equipment[2]">{{postCtrl.currentUser.equipment[2]}}</li>
