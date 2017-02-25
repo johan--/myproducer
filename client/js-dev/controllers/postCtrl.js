@@ -83,7 +83,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     vm.modal.show = false
     vm.modal.isSuccess = false
     vm.modal.isFailure = false
-    $state.reload()
+    // $state.reload()
   }
 
   vm.closeModal2 = function() {
