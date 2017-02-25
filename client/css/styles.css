@@ -403,6 +403,9 @@ nav ul li ul li {
 .round {
   border-radius: 50%; }
 
+.hand {
+  cursor: pointer; }
+
 @media screen and (max-width: 767px) {
   .text-vw {
     font-size: 4vw; } }
