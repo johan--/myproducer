@@ -184,6 +184,10 @@ a, a:hover, a:link{
   margin: 0;
 }
 
+.margin2-top {
+  margin-top: 2px;
+}
+
 .margin10{
   margin: 10px auto;
 }
@@ -549,6 +553,15 @@ nav ul li ul li {
 
 .highlight:hover {
   border: solid 1px $highlight;
+}
+
+.highlight i {
+  display: none;
+  float: right;
+}
+
+.highlight:hover i {
+  display: inline;
 }
 
 
