@@ -406,6 +406,12 @@ nav ul li ul li {
 .hand {
   cursor: pointer; }
 
+.highlight {
+  border: solid 1px #333333; }
+
+.highlight:hover {
+  border: solid 1px #00AEEF; }
+
 @media screen and (max-width: 767px) {
   .text-vw {
     font-size: 4vw; } }

@@ -1,7 +1,7 @@
 // SASS Variables ------------------------------------
 
 // colors
-$background : #0A0A0A;
+$background: #0A0A0A;
 $section: #333333;
 $line-item: #595959;
 $button: #888888;
@@ -541,6 +541,14 @@ nav ul li ul li {
 
 .hand {
   cursor: pointer;
+}
+
+.highlight {
+  border: solid 1px $section;
+}
+
+.highlight:hover {
+  border: solid 1px $highlight;
 }
 
 
