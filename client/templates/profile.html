@@ -29,27 +29,27 @@
             <div class="form-group">
               <h5 class="field-title"><label for="userLocation">Location</label></h4>
               <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.location" class="form-control" id="userLocation">
-              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.location}} <i class="fa fa-pencil"></i></p>
+              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.location}} <i class="fa fa-pencil float-right"></i></p>
             </div>
             <div class="form-group">
               <h5 class="field-title"><label for="userTitle">Title</label></h4>
               <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.title" class="form-control" id="userTitle">
-              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.title}} <i class="fa fa-pencil"></i></p>
+              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.title}} <i class="fa fa-pencil float-right"></i></p>
             </div>
             <div class="form-group">
               <h5 class="field-title"><label for="userTitle">Email Address</label></h4>
               <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.username" class="form-control" id="userEmail">
-              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.username}} <i class="fa fa-pencil"></i></p>
+              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.username}} <i class="fa fa-pencil float-right"></i></p>
             </div>
             <div class="form-group">
               <h5 class="field-title"><label for="userPhone">Phone Number</label></h4>
               <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.phone" class="form-control" id="userPhone"></input>
-              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.phone}} <i class="fa fa-pencil"></i></p>
+              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.phone}} <i class="fa fa-pencil float-right"></i></p>
             </div>
             <div class="form-group">
               <h5 class="field-title"><label for="userWebsite">Website</label></h4>
               <input ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.website" class="form-control" id="userWebsite">
-              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.website}} <i class="fa fa-pencil"></i></p>
+              <p class="disabled-form-control hand highlight" ng-click="postCtrl.editingState = true" ng-hide="postCtrl.editingState"> {{postCtrl.currentUser.website}} <i class="fa fa-pencil float-right"></i></p>
             </div>
             <div class="form-group">
               <button ng-show="postCtrl.editingState" type="submit" class="btn default-btn">Update</button>
@@ -60,8 +60,8 @@
             <div class="profile-bio form-group">
               <h4 class="sub-title">Bio</h4>
               <textarea ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
-              <p class="hand highlight" ng-hide="postCtrl.editingState || !postCtrl.currentUser.bio" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.bio}} <i class="fa fa-pencil margin2-top"></i></p>
-              <p class="highlight hand" ng-hide="postCtrl.currentUser.bio || postCtrl.editingState" ng-click="postCtrl.editingState = true">Tell everyone about yourself. <i class="fa fa-pencil margin2-top"></i></p>
+              <p ng-hide="postCtrl.editingState || !postCtrl.currentUser.bio" ng-click="postCtrl.editingState = true"><span class="hand highlight">{{postCtrl.currentUser.bio}}<i class="fa fa-pencil margin2-top"></i></span></p>
+              <p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState" ng-click="postCtrl.editingState = true"><span class="hand highlight">Tell everyone about yourself.<i class="fa fa-pencil margin2-top"></i></span></p>
             </div>
             <div class="profile-skills form-group">
               <h4 class="sub-title">Skills</h4>
@@ -72,11 +72,11 @@
                 <p><input ng-model="postCtrl.currentUser.skills[3]" class="form-control" id="userSkill4"></p>
               </div>
               <ul ng-hide="postCtrl.editingState">
-                <p class="hand highlight" ng-hide="postCtrl.currentUser.skills[0] || postCtrl.editingState" ng-click="postCtrl.editingState = true">List any equipment you have here. <i class="fa fa-pencil margin2-top" ></i></p>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.skills[0]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.skills[0]}} <i class="fa fa-pencil margin2-top"></i></li>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.skills[1]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.skills[1]}} <i class="fa fa-pencil margin2-top"></i></li>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.skills[2]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.skills[2]}} <i class="fa fa-pencil margin2-top"></i></li>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.skills[3]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.skills[3]}} <i class="fa fa-pencil margin2-top"></i></li>
+                <p ng-hide="postCtrl.currentUser.skills[0] || postCtrl.editingState" ng-click="postCtrl.editingState = true"><span class="hand highlight">List the skills you have here.<i class="fa fa-pencil margin2-top"></i></span></p>
+                <li ng-if="postCtrl.currentUser.skills[0]" ng-click="postCtrl.editingState = true"><span class="hand highlight">{{postCtrl.currentUser.skills[0]}} <i class="fa fa-pencil margin2-top"></i></span></li>
+                <li ng-if="postCtrl.currentUser.skills[1]" ng-click="postCtrl.editingState = true"><span class="highlight hand">{{postCtrl.currentUser.skills[1]}} <i class="fa fa-pencil margin2-top"></i></span></li>
+                <li ng-if="postCtrl.currentUser.skills[2]" ng-click="postCtrl.editingState = true"><span class="hand highlight">{{postCtrl.currentUser.skills[2]}} <i class="fa fa-pencil margin2-top"></i></span></li>
+                <li ng-if="postCtrl.currentUser.skills[3]" ng-click="postCtrl.editingState = true"><span class="hand highlight">{{postCtrl.currentUser.skills[3]}} <i class="fa fa-pencil margin2-top"></i></span></li>
               </ul>
             </div>
             <div class="profile-equipment form-group">
@@ -88,11 +88,11 @@
                 <p><input ng-model="postCtrl.currentUser.equipment[3]" class="form-control" id="userEquipment4"></p>
               </div>
               <ul ng-hide="postCtrl.editingState">
-                <p class="hand highlight" ng-hide="postCtrl.currentUser.equipment[0] || postCtrl.editingState" ng-click="postCtrl.editingState = true">List the skills you have here. <i class="fa fa-pencil margin2-top"></i></p>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.equipment[0]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.equipment[0]}} <i class="fa fa-pencil margin2-top"></i></li>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.equipment[1]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.equipment[1]}} <i class="fa fa-pencil margin2-top"></i></li>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.equipment[2]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.equipment[2]}} <i class="fa fa-pencil margin2-top"></i></li>
-                <li class="hand highlight" ng-if="postCtrl.currentUser.equipment[3]" ng-click="postCtrl.editingState = true">{{postCtrl.currentUser.equipment[3]}} <i class="fa fa-pencil margin2-top"></i></li>
+                <p ng-hide="postCtrl.currentUser.equipment[0] || postCtrl.editingState" ng-click="postCtrl.editingState = true"><span class="highlight hand">List any equipment you have here.<i class="fa fa-pencil margin2-top"></i></span></p>
+                <li ng-if="postCtrl.currentUser.equipment[0]" ng-click="postCtrl.editingState = true"><span class="highlight hand">{{postCtrl.currentUser.equipment[0]}} <i class="fa fa-pencil margin2-top"></i></span></li>
+                <li ng-if="postCtrl.currentUser.equipment[1]" ng-click="postCtrl.editingState = true"><span class="hand highlight">{{postCtrl.currentUser.equipment[1]}} <i class="fa fa-pencil margin2-top"></i></span></li>
+                <li ng-if="postCtrl.currentUser.equipment[2]" ng-click="postCtrl.editingState = true"><span class="hand highlight">{{postCtrl.currentUser.equipment[2]}} <i class="fa fa-pencil margin2-top"></i></span></li>
+                <li ng-if="postCtrl.currentUser.equipment[3]" ng-click="postCtrl.editingState = true"><span class="highlight hand">{{postCtrl.currentUser.equipment[3]}} <i class="fa fa-pencil margin2-top"></i></span></li>
               </ul>
             </div>
           </div>

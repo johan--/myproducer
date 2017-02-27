@@ -159,6 +159,9 @@ a, a:hover, a:link {
   height: 24px;
   overflow: auto; }
 
+.fa-pencil {
+  margin-left: 5px; }
+
 .form-control.out {
   height: 40px;
   font-size: 16px; }
@@ -416,8 +419,7 @@ nav ul li ul li {
   border: solid 1px #00AEEF; }
 
 .highlight i {
-  display: none;
-  float: right; }
+  display: none; }
 
 .highlight:hover i {
   display: inline; }
