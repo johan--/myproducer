@@ -134,6 +134,9 @@ a, a:hover, a:link {
 .margin2-top {
   margin-top: 2px; }
 
+.margin5-top {
+  margin-top: 5px; }
+
 .margin10 {
   margin: 10px auto; }
 
@@ -431,7 +434,16 @@ nav ul li ul li {
 #bio-pencil:hover ~ p > span.highlight {
   border: solid 1px #00AEEF; }
 
+#bio-pencil:hover ~ p.highlight {
+  border: solid 1px #00AEEF; }
+
 #skills-pencil:hover ~ ul.highlight {
+  border: solid 1px #00AEEF; }
+
+#skills-pencil:hover ~ ul > p.highlight {
+  border: solid 1px #00AEEF; }
+
+#equipment-pencil:hover ~ ul > p.highlight {
   border: solid 1px #00AEEF; }
 
 #equipment-pencil:hover ~ ul.highlight {

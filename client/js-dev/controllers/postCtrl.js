@@ -8,7 +8,6 @@ postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'Auth
 function postController($rootScope, $http, $stateParams, $state, AuthService, $scope, $mixpanel){
   var vm = this
   vm.currentUser = {}
-  // vm.fileExists = true;
   vm.editingState = false;
   vm.fileInput = document.getElementById('file-input')
   vm.modal = {}
@@ -74,7 +73,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
         } else if (vm.editingState4 == true) {
           vm.editingState4 = false
         }
-        vm.openModal()
+        // vm.openModal()
       })
   }
 
@@ -179,7 +178,9 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     function initialRows(bio){
       var len = bio.length
 
-      if(len<75){
+      if (len == 0){
+        vm.rows = 4
+      } else if(len<75){
         vm.rows = 1
       } else if (len > 74 && len < 150) {
         vm.rows = 2
@@ -194,5 +195,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       } else if (len > 424) {
         vm.rows = 7
       }
+      console.log(vm.rows);
     }
 }

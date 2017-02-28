@@ -52,7 +52,7 @@
               <p class="disabled-form-control hand highlight-specific" ng-click="postCtrl.editingState1 = true" ng-hide="postCtrl.editingState1"> {{postCtrl.currentUser.website}} <i class="fa fa-pencil float-right"></i></p>
             </div>
             <div class="form-group">
-              <button ng-show="postCtrl.editingState1 || postCtrl.editingState2 || postCtrl.editingState3 || postCtrl.editingState4" type="submit" class="btn default-btn">Update</button>
+              <button ng-show="postCtrl.editingState1" type="submit" class="btn default-btn">Update</button>
               <!-- <a ng-hide="postCtrl.editingState1 || postCtrl.editingsState2 || postCtrl.editingState3 || postCtrl.editingState4" ng-click="postCtrl.editingState = true" class="btn default-btn">Edit</a> -->
             </div>
           </div>
@@ -63,7 +63,8 @@
               <hr class="hr-sub">
               <textarea rows="{{postCtrl.rows}}" ng-show="postCtrl.editingState2" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
               <p ng-hide="postCtrl.editingState2 || !postCtrl.currentUser.bio"><span id="biography" class="highlight">{{postCtrl.currentUser.bio}}</span></p>
-              <p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState2"><span class="highlight">Tell everyone about yourself.</span></p>
+              <p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState2" class="highlight"><span>Tell everyone about yourself.</span></p>
+              <button ng-show="postCtrl.editingState2" type="submit" class="btn default-btn margin5-top">Update</button>
             </div>
             <div class="profile-skills form-group">
               <h4 class="sub-title sub-inline">Skills</h4>
@@ -75,13 +76,14 @@
                 <p><input ng-model="postCtrl.currentUser.skills[2]" class="form-control" id="userSkill3"></p>
                 <p><input ng-model="postCtrl.currentUser.skills[3]" class="form-control" id="userSkill4"></p>
               </div>
-              <ul ng-hide="postCtrl.editingState3" class="highlight list-unstyled">
-                <p ng-hide="postCtrl.currentUser.skills[0] || postCtrl.editingState3" ng-click="postCtrl.editingState = true"><span class="hand highlight">List the skills you have here.</span></p>
+              <ul ng-hide="postCtrl.editingState3" ng-class="{highlight:postCtrl.currentUser.skills[0]}" class="list-unstyled">
+                <p class="highlight" ng-hide="postCtrl.currentUser.skills[0] || postCtrl.editingState3"><span>List the skills you have here.</span></p>
                 <li ng-if="postCtrl.currentUser.skills[0]"><span >{{postCtrl.currentUser.skills[0]}}</span></li>
                 <li ng-if="postCtrl.currentUser.skills[1]"><span >{{postCtrl.currentUser.skills[1]}}</span></li>
                 <li ng-if="postCtrl.currentUser.skills[2]"><span >{{postCtrl.currentUser.skills[2]}}</span></li>
                 <li ng-if="postCtrl.currentUser.skills[3]"><span>{{postCtrl.currentUser.skills[3]}}</span></li>
               </ul>
+              <button ng-show="postCtrl.editingState3" type="submit" class="btn default-btn margin5-top">Update</button>
             </div>
             <div class="profile-equipment form-group">
               <h4 class="sub-title sub-inline">Equipment</h4>
@@ -93,13 +95,14 @@
                 <p><input ng-model="postCtrl.currentUser.equipment[2]" class="form-control" id="userEquipment3"></p>
                 <p><input ng-model="postCtrl.currentUser.equipment[3]" class="form-control" id="userEquipment4"></p>
               </div>
-              <ul ng-hide="postCtrl.editingState4" class="highlight list-unstyled">
-                <p ng-hide="postCtrl.currentUser.equipment[0] || postCtrl.editingState"><span>List any equipment you have here.</span></p>
+              <ul ng-hide="postCtrl.editingState4" class="list-unstyled" ng-class="{highlight:postCtrl.currentUser.equipment[0]}">
+                <p ng-hide="postCtrl.currentUser.equipment[0] || postCtrl.editingState" class="highlight">List any equipment you have here.</p>
                 <li ng-if="postCtrl.currentUser.equipment[0]"><span>{{postCtrl.currentUser.equipment[0]}}</span></li>
                 <li ng-if="postCtrl.currentUser.equipment[1]" ><span >{{postCtrl.currentUser.equipment[1]}}</span></li>
                 <li ng-if="postCtrl.currentUser.equipment[2]"><span>{{postCtrl.currentUser.equipment[2]}}</span></li>
                 <li ng-if="postCtrl.currentUser.equipment[3]"><span>{{postCtrl.currentUser.equipment[3]}}</span></li>
               </ul>
+              <button ng-show="postCtrl.editingState4" type="submit" class="btn default-btn margin5-top">Update</button>
             </div>
           </div>
         </form>
