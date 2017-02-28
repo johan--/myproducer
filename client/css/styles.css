@@ -24,9 +24,14 @@ a, a:hover, a:link {
   .section .title {
     padding: 15px;
     margin: 0; }
-  .section .sub-title {
-    padding-bottom: 5px;
-    border-bottom: solid #595959 2px; }
+
+.sub-inline {
+  display: inline; }
+
+.hr-sub {
+  margin: 0;
+  margin-bottom: 10px;
+  border: solid #595959 1px; }
 
 .text-vw {
   font-size: 1.5vw; }
@@ -160,7 +165,8 @@ a, a:hover, a:link {
   overflow: auto; }
 
 .fa-pencil {
-  margin-left: 5px; }
+  margin-left: 5px;
+  text-align: right; }
 
 #biography {
   display: inherit; }
@@ -419,16 +425,20 @@ nav ul li ul li {
   cursor: pointer; }
 
 .highlight {
-  border: solid 1px #333333; }
+  border: solid 1px #333333;
+  padding: 5px; }
 
-.highlight:hover {
+#bio-pencil:hover ~ p > span.highlight {
   border: solid 1px #00AEEF; }
 
-.highlight i {
-  display: none; }
+#skills-pencil:hover ~ ul.highlight {
+  border: solid 1px #00AEEF; }
 
-.highlight:hover i {
-  display: inline; }
+#equipment-pencil:hover ~ ul.highlight {
+  border: solid 1px #00AEEF; }
+
+.highlight-specific:hover {
+  border: solid 1px #00AEEF; }
 
 @media screen and (max-width: 767px) {
   .text-vw {

@@ -56,9 +56,19 @@ a, a:hover, a:link{
   }
 
   .sub-title{
-    padding-bottom: 5px;
-    border-bottom: solid $line-item 2px;
+    // padding-bottom: 5px;
+    // border-bottom: solid $line-item 2px;
   }
+}
+
+.sub-inline {
+  display: inline;
+}
+
+.hr-sub {
+  margin: 0;
+  margin-bottom: 10px;
+  border: solid $line-item 1px;
 }
 
 .text-vw {
@@ -227,6 +237,7 @@ a, a:hover, a:link{
 
 .fa-pencil {
   margin-left: 5px;
+  text-align: right;
 }
 
 #biography {
@@ -561,18 +572,23 @@ nav ul li ul li {
 
 .highlight {
   border: solid 1px $section;
+  padding: 5px;
 }
 
-.highlight:hover {
+#bio-pencil:hover ~ p > span.highlight{
   border: solid 1px $highlight;
 }
 
-.highlight i {
-  display: none;
+#skills-pencil:hover ~ ul.highlight{
+  border: solid 1px $highlight;
 }
 
-.highlight:hover i {
-  display: inline;
+#equipment-pencil:hover ~ ul.highlight{
+  border: solid 1px $highlight;
+}
+
+.highlight-specific:hover {
+  border: solid 1px $highlight;
 }
 
 

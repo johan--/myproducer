@@ -30,7 +30,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data){
           vm.currentUser = data
-
+          initialRows(vm.currentUser.bio)
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
@@ -65,7 +65,15 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
         vm.modal.content = 'An error has occurred. Please try again.'
       })
       .finally(function() {
-        vm.editingState = false
+        if(vm.editingState1 == true){
+          vm.editingState1 = false
+        } else if (vm.editingState2 == true) {
+          vm.editingState2 = false
+        } else if (vm.editingState3 == true) {
+          vm.editingState3 = false
+        } else if (vm.editingState4 == true) {
+          vm.editingState4 = false
+        }
         vm.openModal()
       })
   }
@@ -166,5 +174,25 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           vm.profilePicture = data.data.picture + "?random=" + Math.random()
           vm.closeModal2()
         })
+    }
+
+    function initialRows(bio){
+      var len = bio.length
+
+      if(len<75){
+        vm.rows = 1
+      } else if (len > 74 && len < 150) {
+        vm.rows = 2
+      } else if (len > 149 && len < 225) {
+        vm.rows = 3
+      } else if (len > 224 && len < 300) {
+        vm.rows = 4
+      } else if (len > 299 && len < 375) {
+        vm.rows = 5
+      } else if (len > 374 && len < 425) {
+        vm.rows = 6
+      } else if (len > 424) {
+        vm.rows = 7
+      }
     }
 }
