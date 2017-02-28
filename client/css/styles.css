@@ -162,6 +162,12 @@ a, a:hover, a:link {
 .fa-pencil {
   margin-left: 5px; }
 
+#biography {
+  display: inherit; }
+
+.form-control, .disabled-form-control, .disabled-form-control-2 {
+  min-height: 26px; }
+
 .form-control.out {
   height: 40px;
   font-size: 16px; }

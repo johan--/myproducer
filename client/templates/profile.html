@@ -60,7 +60,7 @@
             <div class="profile-bio form-group">
               <h4 class="sub-title">Bio</h4>
               <textarea ng-show="postCtrl.editingState" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
-              <p ng-hide="postCtrl.editingState || !postCtrl.currentUser.bio" ng-click="postCtrl.editingState = true"><span class="hand highlight">{{postCtrl.currentUser.bio}}<i class="fa fa-pencil margin2-top"></i></span></p>
+              <p ng-hide="postCtrl.editingState || !postCtrl.currentUser.bio" ng-click="postCtrl.editingState = true"><span id="biography" class="hand highlight">{{postCtrl.currentUser.bio}}<i class="fa fa-pencil margin2-top"></i></span></p>
               <p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState" ng-click="postCtrl.editingState = true"><span class="hand highlight">Tell everyone about yourself.<i class="fa fa-pencil margin2-top"></i></span></p>
             </div>
             <div class="profile-skills form-group">
