@@ -53,11 +53,14 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.editUser = function() {
     $http.patch('/api/users/'+ vm.currentUser._id, vm.currentUser)
       .success(function(data) {
-        data.productions = vm.currentUser.productions
-        data.offersReceived = vm.currentUser.offersReceived
-        vm.currentUser = data
-        vm.modal.isSuccess = true
-        vm.modal.content = 'You have successfully updated your profile.'
+        // // vm.currentUser.productions = data.productions
+        // // vm.currentUser.offersReceived = data.offersReceived
+        // vm.currentUser = data
+        // console.log(vm.currentUser);
+        // console.log(vm.currentUser.offersReceived);
+        // console.log(vm.currentUser.productions);
+        // vm.modal.isSuccess = true
+        // // vm.modal.content = 'You have successfully updated your profile.'
       })
       .error(function(data) {
         vm.modal.isFailure = true
