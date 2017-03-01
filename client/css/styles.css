@@ -408,7 +408,8 @@ nav ul li ul li {
 #invitation {
   font-size: 12px;
   border: solid 1px grey;
-  padding: 5px; }
+  padding: 5px;
+  min-height: 40px; }
 
 #profile-pic-preview {
   height: 148px;
