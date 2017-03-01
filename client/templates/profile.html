@@ -76,12 +76,12 @@
                 <p><input ng-model="postCtrl.currentUser.skills[2]" class="form-control" id="userSkill3"></p>
                 <p><input ng-model="postCtrl.currentUser.skills[3]" class="form-control" id="userSkill4"></p>
               </div>
-              <ul ng-hide="postCtrl.editingState3" ng-class="{highlight:postCtrl.currentUser.skills[0]}" class="list-unstyled">
+              <ul ng-hide="postCtrl.editingState3" ng-class="{highlight:postCtrl.currentUser.skills[0]}">
                 <p class="highlight" ng-hide="postCtrl.currentUser.skills[0] || postCtrl.editingState3"><span>List the skills you have here.</span></p>
-                <li ng-if="postCtrl.currentUser.skills[0]"><span >{{postCtrl.currentUser.skills[0]}}</span></li>
-                <li ng-if="postCtrl.currentUser.skills[1]"><span >{{postCtrl.currentUser.skills[1]}}</span></li>
-                <li ng-if="postCtrl.currentUser.skills[2]"><span >{{postCtrl.currentUser.skills[2]}}</span></li>
-                <li ng-if="postCtrl.currentUser.skills[3]"><span>{{postCtrl.currentUser.skills[3]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.skills[0]"><span >{{postCtrl.currentUser.skills[0]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.skills[1]"><span >{{postCtrl.currentUser.skills[1]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.skills[2]"><span >{{postCtrl.currentUser.skills[2]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.skills[3]"><span>{{postCtrl.currentUser.skills[3]}}</span></li>
               </ul>
               <button ng-show="postCtrl.editingState3" type="submit" class="btn default-btn margin5-top">Update</button>
             </div>
@@ -95,12 +95,12 @@
                 <p><input ng-model="postCtrl.currentUser.equipment[2]" class="form-control" id="userEquipment3"></p>
                 <p><input ng-model="postCtrl.currentUser.equipment[3]" class="form-control" id="userEquipment4"></p>
               </div>
-              <ul ng-hide="postCtrl.editingState4" class="list-unstyled" ng-class="{highlight:postCtrl.currentUser.equipment[0]}">
+              <ul ng-hide="postCtrl.editingState4" ng-class="{highlight:postCtrl.currentUser.equipment[0]}">
                 <p ng-hide="postCtrl.currentUser.equipment[0] || postCtrl.editingState" class="highlight">List any equipment you have here.</p>
-                <li ng-if="postCtrl.currentUser.equipment[0]"><span>{{postCtrl.currentUser.equipment[0]}}</span></li>
-                <li ng-if="postCtrl.currentUser.equipment[1]" ><span >{{postCtrl.currentUser.equipment[1]}}</span></li>
-                <li ng-if="postCtrl.currentUser.equipment[2]"><span>{{postCtrl.currentUser.equipment[2]}}</span></li>
-                <li ng-if="postCtrl.currentUser.equipment[3]"><span>{{postCtrl.currentUser.equipment[3]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.equipment[0]"><span>{{postCtrl.currentUser.equipment[0]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.equipment[1]" ><span >{{postCtrl.currentUser.equipment[1]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.equipment[2]"><span>{{postCtrl.currentUser.equipment[2]}}</span></li>
+                <li class="left-margin15" ng-if="postCtrl.currentUser.equipment[3]"><span>{{postCtrl.currentUser.equipment[3]}}</span></li>
               </ul>
               <button ng-show="postCtrl.editingState4" type="submit" class="btn default-btn margin5-top">Update</button>
             </div>
