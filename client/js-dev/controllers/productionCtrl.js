@@ -198,4 +198,44 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           $mixpanel.track('Notify Crew Clicked')
         })
     }
+
+    // ADD USER TO CONTACTS
+
+    vm.addContact = function() {
+      // search for existing user here
+      $http.post('/api/users/addcontact', vm.newContact)
+        .success(function (data) {
+          vm.newContact.email = ''
+          vm.newContact.first_name = ''
+          vm.newContact.last_name = ''
+          // console.log(data);
+          $mixpanel.track('Add Contact Clicked', {"user" : vm.currentUser.username})
+
+          if(data) {
+            if(data.success) {
+              vm.notifModal.isSuccess = true
+              var username = data.data.username
+              vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
+              vm.currentUser.contacts.push(data.data)
+            } else if(data.newSuccess){
+              vm.notifModal.isSuccess = true
+              vm.notifModal.content = 'We have sent an invitation to ' + data.newEmail + '. They will appear in your crew list once they accept.'
+            } else {
+              vm.notifModal.isFailure = true
+              vm.notifModal.content = data.message
+            }
+          // unsure we if we need this anymore -ak
+          } else {
+            vm.notifModal.isSuccess = true
+            vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + '. They will appear in your crew list when they accept.'
+          }
+        })
+        .error(function(data) {
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
+        })
+    }
 }

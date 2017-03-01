@@ -83,7 +83,7 @@
         </div>
         <div class="line-item">
           <p class="no-margin">Invite users to your crew list:</p>
-          <p>{{crewListCtrl.inviteUrl}}</p>
+          <p id="invitation">{{crewListCtrl.inviteUrl}}</p><a ng-click="crewListCtrl.copy(crewListCtrl.inviteUrl)">copy</a>
         </div>
       </div>
     </div>
