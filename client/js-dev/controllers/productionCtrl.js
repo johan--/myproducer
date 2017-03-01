@@ -238,4 +238,20 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.openNotifModal()
         })
     }
+
+    vm.openDeleteContactModal = function(contact){
+      vm.contact = contact
+      vm.showDeleteContactModal = true;
+    }
+
+    vm.closeDeleteContactModal = function(){
+      vm.showDeleteContactModal = false;
+    }
+
+    vm.deleteContact = function(contact){
+      $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser})
+      .success(function(data){
+        vm.currentUser.contacts = data.user.contacts
+      })
+    }
 }

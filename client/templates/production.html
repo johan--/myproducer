@@ -236,7 +236,7 @@
             </div>
             <div class="col-xs-3 text-right">
               <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
-              <a ng-click="productionCtrl.addToCrew(crew._id)" class="btn main-btn">Add</a></p>
+              <a ng-click="productionCtrl.addToCrew(crew._id)" class="btn main-btn">Add</a><a ng-click="productionCtrl.openDeleteContactModal(crew)"><i class="fa fa-times"style="margin-left: 2px;"></i></a></p>
             </div>
           </div>
         </div>
@@ -253,6 +253,25 @@
         <h1><i ng-if="productionCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
         <p>{{ productionCtrl.notifModal.content }}</p>
         <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionCtrl.showDeleteContactModal">
+  <div id="modal-container" ng-click="productionCtrl.closeDeleteContactModal()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-times-circle"></i></h1>
+        <p>Are you sure you want to delete {{ crewListCtrl.contact.first_name + ' ' + crewListCtrl.contact.last_name }} from your Approved Crew?</p>
+        <br>
+        <!-- <img class="thumb-md round" ng-show="!crewListCtrl.contact.picture" ng-src="./img/profile_default.png"> -->
+        <img class="thumb-md round" ng-show="productionCtrl.contact.picture" ng-src={{productionCtrl.contact.picture}}>
+        <br>
+        <br>
+        <p>You can always add them back later.</p>
+        <br>
+        <p><a class="btn approval-btn" ng-click="productionCtrl.deleteContact(crewListCtrl.contact._id)">Yes</a> <a class="btn error-btn" ng-click="productionCtrl.closeDeleteContactModal()">Cancel</a></p>
       </div>
     </div>
   </div>
