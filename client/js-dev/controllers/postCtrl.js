@@ -196,8 +196,22 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           vm.rows = 5
         } else if (len > 374 && len < 425) {
           vm.rows = 6
-        } else if (len > 424) {
+        } else if (len > 424 && len < 500) {
           vm.rows = 7
+        } else if (len > 499 && len < 575) {
+          vm.rows = 8
+        } else if (len > 574 && len < 650) {
+          vm.rows = 9
+        } else if (len > 649 && len < 725) {
+          vm.rows = 10
+        } else if (len > 724 && len < 800) {
+          vm.rows = 11
+        } else if (len > 799 && len < 875) {
+          vm.rows = 12
+        } else if (len > 874 && len < 950) {
+          vm.rows = 13
+        } else if (len > 949) {
+          vm.rows = 14
         }
       } else {vm.rows = 4}
     }

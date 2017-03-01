@@ -61,7 +61,7 @@
               <h4 class="sub-title sub-inline">Bio</h4>
               <i id="bio-pencil" class="fa fa-pencil float-right hand" ng-click="postCtrl.editingState2=true"></i>
               <hr class="hr-sub">
-              <textarea rows="{{postCtrl.rows}}" ng-show="postCtrl.editingState2" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
+              <textarea rows="{{postCtrl.rows}}" maxlength="1000" ng-show="postCtrl.editingState2" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
               <p ng-hide="postCtrl.editingState2 || !postCtrl.currentUser.bio"><span id="biography" class="highlight">{{postCtrl.currentUser.bio}}</span></p>
               <p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState2" class="highlight"><span>Tell everyone about yourself.</span></p>
               <button ng-show="postCtrl.editingState2" type="submit" class="btn default-btn margin5-top">Update</button>
