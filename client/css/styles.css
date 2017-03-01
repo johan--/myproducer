@@ -461,6 +461,11 @@ nav ul li ul li {
 .highlight-specific:hover {
   border: solid 1px #00AEEF; }
 
+.form-control:focus {
+  box-shadow: none;
+  border-top: solid 1px #535353;
+  background-color: #888888; }
+
 @media screen and (max-width: 767px) {
   .text-vw {
     font-size: 4vw; } }

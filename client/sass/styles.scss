@@ -618,6 +618,12 @@ nav ul li ul li {
   border: solid 1px $highlight;
 }
 
+.form-control:focus {
+  box-shadow: none;
+  border-top: solid 1px #535353;
+  background-color: #888888;
+}
+
 
 // Media Queries
 @media screen and (max-width : 767px) {
