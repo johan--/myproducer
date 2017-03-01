@@ -64,7 +64,7 @@
 
         <form ng-submit="offerCtrl.addMessage()">
           <p>
-            <input type="text" id="message-box" class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message">
+            <input type="text" id="message-box" class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'">
           </p>
 
           <button type="submit" class="btn default-btn x-padding">Send</a>
