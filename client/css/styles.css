@@ -409,10 +409,10 @@ nav ul li ul li {
   width: 148px; }
 
 #invitation {
-  font-size: 12px;
+  font-size: 11px;
   border: solid 1px grey;
   padding: 5px;
-  min-height: 40px; }
+  min-height: 20px; }
 
 #profile-pic-preview {
   height: 148px;
