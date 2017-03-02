@@ -412,7 +412,8 @@ nav ul li ul li {
   font-size: 11px;
   border: solid 1px grey;
   padding: 5px;
-  min-height: 20px; }
+  min-height: 22px;
+  height: auto; }
 
 #profile-pic-preview {
   height: 148px;
