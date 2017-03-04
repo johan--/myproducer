@@ -24,7 +24,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         .success(function(data){
           vm.currentUser = data
 
-
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
