@@ -462,7 +462,7 @@ nav ul li ul li {
 .highlight-specific:hover {
   border: solid 1px #00AEEF; }
 
-.form-control:focus {
+.message-form:focus {
   box-shadow: none;
   border-top: none;
   background-color: #888888; }
