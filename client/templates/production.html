@@ -48,7 +48,7 @@
           </div>
           <div class="form-group">
             <label for="productionNotes">Notes:</label>
-            <textarea ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes"></textarea>
+            <textarea ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes" rows="4"></textarea>
             <p id="notes" class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.notes}} </p>
           </div>
           <!-- TODO Works for Entering Info, not Displaying -->
