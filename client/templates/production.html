@@ -50,6 +50,9 @@
             <label for="productionNotes">Notes:</label>
             <textarea ng-show="productionCtrl.editingState" ng-model="productionCtrl.production.notes" class="form-control" id="productionNotes" rows="6"></textarea>
             <p id="notes" class="disabled-form-control"  ng-hide="productionCtrl.editingState"> {{productionCtrl.production.notes}} </p>
+            <!-- <div id="notes" class="disabled-form-control"  ng-hide="productionCtrl.editingState" ng-repeat="note in productionCtrl.production.notes track by $index">
+              <p>{{note}}</p>
+            </div> -->
           </div>
           <!-- TODO Works for Entering Info, not Displaying -->
           <!-- <div class="form-group">

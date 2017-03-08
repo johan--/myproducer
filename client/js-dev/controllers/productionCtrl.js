@@ -28,6 +28,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             .success(function(production) {
               vm.production = production
               // console.log("Production from the Factory", vm.production)
+              // splitNotes(production.notes)
 
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
 
@@ -45,6 +46,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.production = data
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully updated your production.'
+          // splitNotes(vm.production.notes)
         })
         .error(function(data) {
           // console.log(data);
@@ -267,5 +269,12 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       .success(function(data){
         vm.currentUser.contacts = data.user.contacts
       })
+    }
+
+    splitNotes = function(notes){
+      var notesArray = notes.split('\n\n')
+      vm.production.notes = notesArray
+      // console.log(vm.production.notes);
+
     }
 }

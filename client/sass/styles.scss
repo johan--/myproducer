@@ -634,7 +634,8 @@ nav ul li ul li {
 #notes {
   height: inherit;
   overflow: inherit;
-  word-break: break-all
+  word-break: break-all;
+  white-space:pre-wrap;
 }
 // Media Queries
 @media screen and (max-width : 767px) {
