@@ -467,6 +467,10 @@ nav ul li ul li {
   border-top: none;
   background-color: #888888; }
 
+#production-error {
+  width: 46%;
+  margin: 5px auto; }
+
 @media screen and (max-width: 767px) {
   .text-vw {
     font-size: 4vw; } }
