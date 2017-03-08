@@ -471,6 +471,10 @@ nav ul li ul li {
   width: 46%;
   margin: 5px auto; }
 
+#notes {
+  height: inherit;
+  overflow: inherit; }
+
 @media screen and (max-width: 767px) {
   .text-vw {
     font-size: 4vw; } }

@@ -120,6 +120,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           })
           .finally(function() {
             vm.openNotifModal()
+            vm.error = false
           })
       }
     }
