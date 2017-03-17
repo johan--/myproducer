@@ -14,9 +14,10 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     .then(function(data){
       console.log("user in offerCtrl");
       console.log(data.data.user);
+      console.log($stateParams);
 
       if(!data.data.user.picture) {
-        $state.go('complete-registration')
+        $state.go('complete-registration', {'user': data.data.user})
       }
 
       vm.currentUser = data.data.user

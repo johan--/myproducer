@@ -24,6 +24,7 @@ router.post('/register', function(req, res) {
       })
     }
 
+
     console.log(req.query)
 
     // Add to newly registered user to another user's contact list
@@ -57,6 +58,21 @@ router.post('/register', function(req, res) {
     }
 
     passport.authenticate('local')(req, res, function () {
+        // nodemailer variables
+        var toEmail = account.username
+        var toName = account.first_name + ' '
+
+        // send welcome email
+        mailer.send(
+          'welcome',
+          {
+            recipient: toName
+          },
+          {
+            to: toEmail,
+            subject: 'Welcome to myproducer.io!'
+          }
+        )
       return res.status(200).json({
         status: 'Registration successful!'
       })
@@ -278,6 +294,7 @@ router.patch('/compReg/:token', function(req, res) {
           user.resetPasswordToken = undefined;
           user.first_name = req.body.registerForm.first_name
           user.last_name = req.body.registerForm.last_name
+          user.picture = "./img/profile_default.png"
           user.save(function(err){
             done(err, user)
           })

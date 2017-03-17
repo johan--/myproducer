@@ -51,7 +51,7 @@ app.use(require('express-session')({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static(path.join(__dirname, 'public')))
 
 // routes
 app.use('/user/', authRoutes) // TODO: Change to api/auth?
@@ -63,6 +63,8 @@ app.use('/uploads', uploadRoutes)
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'))
 })
+
+
 
 // error hndlers
 app.use(function(req, res, next) {
