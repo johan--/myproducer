@@ -71,22 +71,22 @@ router.post('/addcontact', function(req, res){
                   res.json({success: true, data: contact})
                 })
 
-                var email = req.body.email
-                var producerId = user._id
-                var registrationURL = `http://${process.env.HEADER_HOST}/#/complete-registration/${token}`
+                // var email = req.body.email
+                // var producerId = user._id
+                // var registrationURL = `http://${process.env.HEADER_HOST}/#/complete-registration/${token}`
                 // send email
-                mailer.send(
-                  'invitation',
-                  {
-                    email: email,
-                    registrationURL: registrationURL,
-                    producer: user.first_name + ' ' + user.last_name
-                  },
-                  {
-                    to: email,
-                    subject: 'Invitation to join myproducer.io'
-                  }
-                )
+                // mailer.send(
+                //   'invitation',
+                //   {
+                //     email: email,
+                //     registrationURL: registrationURL,
+                //     producer: user.first_name + ' ' + user.last_name
+                //   },
+                //   {
+                //     to: email,
+                //     subject: 'Invitation to join myproducer.io'
+                //   }
+                // )
               }
           })
         })

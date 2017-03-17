@@ -73,7 +73,7 @@
       </div>
     </div>
   </div>
-
+                        <!-- Cast & Crew entire table-->
   <div class="crew-view col-sm-9" ng-init="showModal=false">
     <div class="section">
       <div class="crew-list">
@@ -85,10 +85,12 @@
             <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add Crew</a>
           </div>
         </div>
+                          <!-- Crew List Entire Table-->
         <div class="crew-list col-sm-12 no-padding">
           <div>
             <p id="production-error" ng-show="productionCtrl.error" class="alert alert-danger">{{ productionCtrl.errorMessage }}</p>
           </div>
+                          <!-- Every Individual Table-->
           <div ng-repeat="crew in productionCtrl.production.crew track by crew._id" class="line-item" ng-if="crew.active && ((productionCtrl.isProducer &&  productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
             <div class="col-xs-1 text-left">
               <img class="thumb round" ng-show="!crew.to.picture" ng-src="./img/profile_default.png">
@@ -173,6 +175,7 @@
                 <p class="no-margin" ng-show="crew.offer.hours"> {{ crew.offer.hours }} hour<span ng-if="crew.offer.hours != 1">s</span> </p>
               <!-- </div> -->
             </div>
+                            <!-- Crew List Buttons-->
             <div ng-if="productionCtrl.isProducer" class="col-xs-3 no-padding text-right top-margin5">
               <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)"
                class="btn main-btn">Hire</a>
