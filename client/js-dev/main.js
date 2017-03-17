@@ -92,7 +92,7 @@ myApp.run(['$rootScope', '$location', '$state', 'AuthService', function ($rootSc
   $rootScope.$on("$stateChangeError", console.log.bind(console));
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     AuthService.getUserStatus()
-    .then(function(){
+    .then(function(data){
       // if they attempted to reach a protected page state before they logged in ...
       if (toState.restricted && !AuthService.isLoggedIn()){
         // find out what state they were trying to access, capture it

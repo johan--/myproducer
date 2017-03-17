@@ -6,6 +6,7 @@ resetPasswordController.$inject = ['$rootScope', '$state', '$stateParams', 'Auth
 // Reset Password CONTROLLER:
 function resetPasswordController($rootScope, $state, $stateParams, AuthService) {
   console.log("resetPasswordController instantiated");
+  console.log($stateParams.token)
   var vm = this
 
   vm.modalOpen = false

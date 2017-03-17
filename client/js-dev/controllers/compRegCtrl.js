@@ -9,17 +9,28 @@ function completeRegistrationController($rootScope, $state, $stateParams, AuthSe
   var vm = this
   vm.modalOpen = false
 
-  AuthService.checkCompRegToken($stateParams.token)
-    .then(function(data){
-      if(!data.user){$state.go('home')}
-    })
+  AuthService.getUserStatus()
+    .then(function(data) {
+      if (!data.data.user || !data.data.user.resetPasswordToken) {
+        $state.go('home')
+      }
 
-    vm.completeRegistration = function(user){
-      vm.disabled = true
-      AuthService.completeRegistration($stateParams.token, vm.registerForm)
+      vm.currentUser = data.data.user
+
+      $stateParams.token = vm.currentUser.resetPasswordToken
+
+      AuthService.checkCompRegToken($stateParams.token)
+        .then(function(data){
+          if(!data.user){$state.go('home')}
+        })
+
+      vm.completeRegistration = function(user){
+        vm.disabled = true
+        AuthService.completeRegistration($stateParams.token, vm.registerForm)
        .then(function(data){
         //  $state.go('login')
         vm.modalOpen = true
        })
-    }
+      }
+    })
 }
