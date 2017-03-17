@@ -24,9 +24,14 @@ a, a:hover, a:link {
   .section .title {
     padding: 15px;
     margin: 0; }
-  .section .sub-title {
-    padding-bottom: 5px;
-    border-bottom: solid #595959 2px; }
+
+.sub-inline {
+  display: inline; }
+
+.hr-sub {
+  margin: 0;
+  margin-bottom: 10px;
+  border: solid #595959 1px; }
 
 .text-vw {
   font-size: 1.5vw; }
@@ -126,6 +131,12 @@ a, a:hover, a:link {
 .no-margin {
   margin: 0; }
 
+.margin2-top {
+  margin-top: 2px; }
+
+.margin5-top {
+  margin-top: 5px; }
+
 .margin10 {
   margin: 10px auto; }
 
@@ -155,6 +166,16 @@ a, a:hover, a:link {
   padding: 5px;
   height: 24px;
   overflow: auto; }
+
+.fa-pencil {
+  margin-left: 5px;
+  text-align: right; }
+
+#biography {
+  display: inherit; }
+
+.form-control, .disabled-form-control, .disabled-form-control-2 {
+  min-height: 26px; }
 
 .form-control.out {
   height: 40px;
@@ -255,6 +276,9 @@ img.profile {
 .top-margin2 {
   margin-top: 2px; }
 
+.left-margin15 {
+  margin-left: 15px; }
+
 .top-padding50 {
   padding-top: 50px; }
 
@@ -340,7 +364,7 @@ nav ul li ul li {
 
 #cog {
   margin-top: 13px;
-  color: #337ab7;
+  color: #00AEEF;
   cursor: pointer; }
 
 .profile-picture:hover > #profile-picture {
@@ -384,6 +408,13 @@ nav ul li ul li {
   height: 148px;
   width: 148px; }
 
+#invitation {
+  font-size: 11px;
+  border: solid 1px grey;
+  padding: 5px;
+  min-height: 22px;
+  height: auto; }
+
 #profile-pic-preview {
   height: 148px;
   width: 148px; }
@@ -402,6 +433,49 @@ nav ul li ul li {
 
 .round {
   border-radius: 50%; }
+
+.hand {
+  cursor: pointer; }
+
+.highlight {
+  border: solid 1px #333333;
+  padding: 5px; }
+
+#bio-pencil:hover ~ p > span.highlight {
+  border: solid 1px #00AEEF; }
+
+#bio-pencil:hover ~ p.highlight {
+  border: solid 1px #00AEEF; }
+
+#skills-pencil:hover ~ ul.highlight {
+  border: solid 1px #00AEEF; }
+
+#skills-pencil:hover ~ ul > p.highlight {
+  border: solid 1px #00AEEF; }
+
+#equipment-pencil:hover ~ ul > p.highlight {
+  border: solid 1px #00AEEF; }
+
+#equipment-pencil:hover ~ ul.highlight {
+  border: solid 1px #00AEEF; }
+
+.highlight-specific:hover {
+  border: solid 1px #00AEEF; }
+
+.message-form:focus {
+  box-shadow: none;
+  border-top: none;
+  background-color: #888888; }
+
+#production-error {
+  width: 46%;
+  margin: 5px auto; }
+
+#notes {
+  height: inherit;
+  overflow: inherit;
+  word-break: break-all;
+  white-space: pre-wrap; }
 
 @media screen and (max-width: 767px) {
   .text-vw {

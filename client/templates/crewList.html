@@ -14,9 +14,10 @@
         </div>
       </div>
       <div class="group">
-        <div class="line-item bg-transparent" ng-if="crewListCtrl.currentUser.contacts.length < 5">
+        <!-- <div class="line-item bg-transparent" ng-if="crewListCtrl.currentUser.contacts.length < 5"> -->
+        <div class="line-item bg-transparent">
           <div class="col-sm-12 bg-transparent">
-            <p class="strong no-margin" style="margin-left: 31px;">Add contacts so that you can begin building productions!</p>
+            <p ng-if="crewListCtrl.currentUser.contacts.length < 5" class="strong no-margin" style="margin-left: 31px;">Add contacts so that you can begin building productions!</p>
             <form ng-submit="crewListCtrl.addContact()">
               <div class="col-xs-10">
                 <div class="col-xs-4">
@@ -68,7 +69,8 @@
       <div class="group">
         <div class="line-item y-padding" ng-repeat="pendingContact in crewListCtrl.currentUser.pendingContacts">
           <div class="col-xs-2 text-left">
-            <img class="thumb" ng-src="./img/profile_default.png">
+            <img class="thumb round" ng-show="!crew.picture" ng-src="./img/profile_default.png">
+            <img class="thumb round" ng-show="crew.picture" ng-src={{crew.picture}}>
             <!-- <img ui-sref="" ng-src=""> -->
           </div>
           <div class="col-xs-6">
@@ -82,7 +84,8 @@
         </div>
         <div class="line-item">
           <p class="no-margin">Invite users to your crew list:</p>
-          <input class="form-control" ng-model="crewListCtrl.inviteUrl">
+          <!-- <input class="form-control" ng-model="crewListCtrl.inviteUrl" disabled="disabled"> -->
+          <p class="form-control" id="invitation">{{crewListCtrl.inviteUrl}}</p>
         </div>
       </div>
     </div>

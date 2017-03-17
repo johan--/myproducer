@@ -24,11 +24,11 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         .success(function(data){
           vm.currentUser = data
 
-
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
               // console.log("Production from the Factory", vm.production)
+              // splitNotes(production.notes)
 
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
 
@@ -46,6 +46,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.production = data
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully updated your production.'
+          // splitNotes(vm.production.notes)
         })
         .error(function(data) {
           // console.log(data);
@@ -65,50 +66,65 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.makeOffer = function(id, $index) {
-      var newOffer = vm.offers[$index]
+      if(!vm.offers[$index]){
+        vm.error = true
+        vm.errorMessage = "Please Fill Out Entire Offer"
+      }else if(!vm.offers[$index].position){
+        vm.error = true
+        vm.errorMessage = "Please Select a Position"
+      }else if (!vm.offers[$index].rate) {
+        vm.error = true
+        vm.errorMessage = "Please Provide Rate"
+      } else if (!vm.offers[$index].hours) {
+        vm.error = true
+        vm.errorMessage = "Please Provide Hours"
+      } else {
+        var newOffer = vm.offers[$index]
 
-      vm.offer = {
-        offer : {
-          status : 'Pending',
-          position : newOffer.position,
-          rate : newOffer.rate,
-          hours : newOffer.hours
+        vm.offer = {
+          offer : {
+            status : 'Pending',
+            position : newOffer.position,
+            rate : newOffer.rate,
+            hours : newOffer.hours
+          }
         }
+        // TODO this patches the offer, but somehow that doesn't reflect within the production object? Do we need to save the production as well on this patch?
+        // TODO: Please confirm if the issue above has been fixed. -Kevin
+        $http.patch('api/crew/' + id, vm.offer)
+          .success(function(data) {
+            // console.log(data);
+            vm.production.crew[$index].offer.hours = data.offer.hours
+            vm.production.crew[$index].offer.position = data.offer.position
+            vm.production.crew[$index].offer.rate = data.offer.rate
+            vm.production.crew[$index].offer.status = data.offer.status
+
+            vm.notifModal.isSuccess = true
+            vm.notifModal.content = 'You have successfully sent on offer to ' + vm.production.crew[$index].to.username + '.'
+
+            vm.message = {
+                content : 'I would like to invite you to be part of my production team.'
+            }
+
+            if(vm.message.content){
+              $http.post('/api/crew/' + id + '/message', vm.message)
+                .success(function(data) {
+                  // console.log(data);
+                })
+            }
+
+            $mixpanel.track('Hire Clicked', {"user" : vm.currentUser.username})
+
+          })
+          .error(function(data) {
+            vm.notifModal.isFailure = true
+            vm.notifModal.content = 'An error has occurred. Please try again.'
+          })
+          .finally(function() {
+            vm.openNotifModal()
+            vm.error = false
+          })
       }
-      // TODO this patches the offer, but somehow that doesn't reflect within the production object? Do we need to save the production as well on this patch?
-      // TODO: Please confirm if the issue above has been fixed. -Kevin
-      $http.patch('api/crew/' + id, vm.offer)
-        .success(function(data) {
-          // console.log(data);
-          vm.production.crew[$index].offer.hours = data.offer.hours
-          vm.production.crew[$index].offer.position = data.offer.position
-          vm.production.crew[$index].offer.rate = data.offer.rate
-          vm.production.crew[$index].offer.status = data.offer.status
-
-          vm.notifModal.isSuccess = true
-          vm.notifModal.content = 'You have successfully sent on offer to ' + vm.production.crew[$index].to.username + '.'
-
-          vm.message = {
-              content : 'I would like to invite you to be part of my production team.'
-          }
-
-          if(vm.message.content){
-            $http.post('/api/crew/' + id + '/message', vm.message)
-              .success(function(data) {
-                // console.log(data);
-              })
-          }
-
-          $mixpanel.track('Hire Clicked', {"user" : vm.currentUser.username})
-
-        })
-        .error(function(data) {
-          vm.notifModal.isFailure = true
-          vm.notifModal.content = 'An error has occurred. Please try again.'
-        })
-        .finally(function() {
-          vm.openNotifModal()
-        })
     }
 
     vm.addToCrew = function(id) {
@@ -197,5 +213,68 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.openNotifModal()
           $mixpanel.track('Notify Crew Clicked')
         })
+    }
+
+    // ADD USER TO CONTACTS
+
+    vm.addContact = function() {
+      // search for existing user here
+      $http.post('/api/users/addcontact', vm.newContact)
+        .success(function (data) {
+          vm.newContact.email = ''
+          vm.newContact.first_name = ''
+          vm.newContact.last_name = ''
+          // console.log(data);
+          $mixpanel.track('Add Contact Clicked', {"user" : vm.currentUser.username})
+
+          if(data) {
+            if(data.success) {
+              vm.notifModal.isSuccess = true
+              var username = data.data.username
+              vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
+              vm.currentUser.contacts.push(data.data)
+            } else if(data.newSuccess){
+              vm.notifModal.isSuccess = true
+              vm.notifModal.content = 'We have sent an invitation to ' + data.newEmail + '. They will appear in your crew list once they accept.'
+            } else {
+              vm.notifModal.isFailure = true
+              vm.notifModal.content = data.message
+            }
+          // unsure we if we need this anymore -ak
+          } else {
+            vm.notifModal.isSuccess = true
+            vm.notifModal.content = 'We have sent an invitation to ' + vm.newContact.email + '. They will appear in your crew list when they accept.'
+          }
+        })
+        .error(function(data) {
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
+        })
+        .finally(function() {
+          vm.openNotifModal()
+        })
+    }
+
+    vm.openDeleteContactModal = function(contact){
+      vm.contact = contact
+      vm.showDeleteContactModal = true;
+    }
+
+    vm.closeDeleteContactModal = function(){
+      vm.showDeleteContactModal = false;
+    }
+
+    vm.deleteContact = function(contact){
+      $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser})
+      .success(function(data){
+        vm.currentUser.contacts = data.user.contacts
+      })
+    }
+
+    splitNotes = function(notes){
+      var notesArray = notes.split('\n\n')
+      vm.production.notes = notesArray
+      // console.log(vm.production.notes);
+
     }
 }

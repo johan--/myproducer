@@ -96,10 +96,10 @@
         <h4 class="title">Applicant Review</h4>
         <div class="col-sm-12 padding20">
           <div class="col-sm-6 text-right">
-            <a class="btn default-btn x-padding" ng-click="otherProfileCtrl.updateContactStatus('decline')">Decline</a>
+            <a class="btn default-btn x-padding" ng-click="otherProfileCtrl.updateContactStatus('decline', otherProfileCtrl.user)">Decline</a>
           </div>
           <div class="col-sm-6 text-left">
-            <a class="btn approval-btn x-padding" ng-click="otherProfileCtrl.updateContactStatus('approve')">Accept</a>
+            <a class="btn approval-btn x-padding" ng-click="otherProfileCtrl.updateContactStatus('approve', otherProfileCtrl.user)">Accept</a>
           </div>
         </div>
       </div>

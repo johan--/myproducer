@@ -8,7 +8,6 @@ postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'Auth
 function postController($rootScope, $http, $stateParams, $state, AuthService, $scope, $mixpanel){
   var vm = this
   vm.currentUser = {}
-  // vm.fileExists = true;
   vm.editingState = false;
   vm.fileInput = document.getElementById('file-input')
   vm.modal = {}
@@ -16,7 +15,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
   $scope.file_changed = function(element) {
     document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
-    console.log("File selected");
+    // console.log("File selected");
     vm.showSaveButton = false;
   };
 
@@ -30,7 +29,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data){
           vm.currentUser = data
-
+          initialRows(vm.currentUser.bio)
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
@@ -54,19 +53,30 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.editUser = function() {
     $http.patch('/api/users/'+ vm.currentUser._id, vm.currentUser)
       .success(function(data) {
-        data.productions = vm.currentUser.productions
-        data.offersReceived = vm.currentUser.offersReceived
-        vm.currentUser = data
-        vm.modal.isSuccess = true
-        vm.modal.content = 'You have successfully updated your profile.'
+        // // vm.currentUser.productions = data.productions
+        // // vm.currentUser.offersReceived = data.offersReceived
+        // vm.currentUser = data
+        // console.log(vm.currentUser);
+        // console.log(vm.currentUser.offersReceived);
+        // console.log(vm.currentUser.productions);
+        // vm.modal.isSuccess = true
+        // // vm.modal.content = 'You have successfully updated your profile.'
       })
       .error(function(data) {
         vm.modal.isFailure = true
         vm.modal.content = 'An error has occurred. Please try again.'
       })
       .finally(function() {
-        vm.editingState = false
-        vm.openModal()
+        if(vm.editingState1 == true){
+          vm.editingState1 = false
+        } else if (vm.editingState2 == true) {
+          vm.editingState2 = false
+        } else if (vm.editingState3 == true) {
+          vm.editingState3 = false
+        } else if (vm.editingState4 == true) {
+          vm.editingState4 = false
+        }
+        // vm.openModal()
       })
   }
 
@@ -83,7 +93,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     vm.modal.show = false
     vm.modal.isSuccess = false
     vm.modal.isFailure = false
-    $state.reload()
+    // $state.reload()
   }
 
   vm.closeModal2 = function() {
@@ -152,7 +162,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
             document.getElementById('profile-picture').src = url + "?random=" + Math.random()
           }
           else{
-            console.log(xhr.status);
+            // console.log(xhr.status);
             alert('Could not upload file.');
           }
         }
@@ -166,5 +176,43 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           vm.profilePicture = data.data.picture + "?random=" + Math.random()
           vm.closeModal2()
         })
+    }
+
+    function initialRows(bio){
+
+      if(bio){
+        var len = bio.length
+        if (len == 0){
+          vm.rows = 4
+        } else if(len<75){
+          vm.rows = 1
+        } else if (len > 74 && len < 150) {
+          vm.rows = 2
+        } else if (len > 149 && len < 225) {
+          vm.rows = 3
+        } else if (len > 224 && len < 300) {
+          vm.rows = 4
+        } else if (len > 299 && len < 375) {
+          vm.rows = 5
+        } else if (len > 374 && len < 425) {
+          vm.rows = 6
+        } else if (len > 424 && len < 500) {
+          vm.rows = 7
+        } else if (len > 499 && len < 575) {
+          vm.rows = 8
+        } else if (len > 574 && len < 650) {
+          vm.rows = 9
+        } else if (len > 649 && len < 725) {
+          vm.rows = 10
+        } else if (len > 724 && len < 800) {
+          vm.rows = 11
+        } else if (len > 799 && len < 875) {
+          vm.rows = 12
+        } else if (len > 874 && len < 950) {
+          vm.rows = 13
+        } else if (len > 949) {
+          vm.rows = 14
+        }
+      } else {vm.rows = 4}
     }
 }

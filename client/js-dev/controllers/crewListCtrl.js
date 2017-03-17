@@ -147,4 +147,5 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
     }
     return new Date() < date
   }
+
 }

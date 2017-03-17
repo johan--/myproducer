@@ -35,19 +35,21 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
               vm.isPending = vm.currentUser.pendingContacts.find(function(pc) {
                 return pc === vm.user._id
               })
-
               vm.ready = true
             })
         })
   })
 
-  vm.updateContactStatus = function(status) {
+  vm.updateContactStatus = function(status, user) {
     // console.log(status);
     // console.log($stateParams.id);
 
     $http.patch('/api/users/updateContact?of=' + $stateParams.id + '&status=' + status)
       .then(function success(data){
-        vm.modal.content = 'You have ' + status + 'd offer to join your crew list.'
+        if(status == 'approve'){
+          vm.modal.content = 'You have added ' + user.first_name.capitalize() + ' ' + user.last_name.capitalize() + ' as an approved contact.'
+        } else {vm.modal.content = 'You have declined to add ' + user.first_name.capitalize() + ' ' + user.last_name.capitalize() + ' as an approved contact.'}
+        vm.isPending = false
         vm.showModal()
       }, function failure() {
         vm.modal.content = 'An error has occurred. Please try again.'
@@ -71,4 +73,8 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
   vm.closeModal = function(){
     vm.modal.show = false
   }
+
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 }

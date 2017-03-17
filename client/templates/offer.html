@@ -52,7 +52,9 @@
         <div class="group line-item">
           <div class="message" ng-repeat="message in offerCtrl.crew.message">
               <div class="avatar">
-                <img class="thumb round" ng-src={{message._by.picture}}>
+                <img class="thumb round" ng-hide="message._by.picture" ng-src="./img/profile_default.png">
+                <img class="thumb round" ng-show="message._by.picture" ng-src={{message._by.picture}}>
+                <!-- <img class="thumb round" ng-src={{message._by.picture}}> -->
               </div>
               <div class="chat">
                 <span class="strong">{{message._by.first_name + ' ' + message._by.last_name}}</span>
@@ -64,7 +66,7 @@
 
         <form ng-submit="offerCtrl.addMessage()">
           <p>
-            <input type="text" id="message-box" class="form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message">
+            <input type="text" id="message-box" class="message-form form-control no-border" ng-model="offerCtrl.newMessage" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'">
           </p>
 
           <button type="submit" class="btn default-btn x-padding">Send</a>

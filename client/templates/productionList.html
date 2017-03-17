@@ -45,9 +45,7 @@
         <div class="col-xs-3 text-right no-padding">
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
-            <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
-            <!-- Logic to not show productions that aren't created by the currentUser - does not work yet -->
-             <!-- && production.by_ === 'productionListCtrl.currentUser._id' -->
+            <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
           </p>
         </div>
       </div>
@@ -96,7 +94,7 @@
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
             <!-- <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a> -->
-            <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+            <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
           </p>
         </div>
       </div>
