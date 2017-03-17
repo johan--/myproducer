@@ -12,6 +12,11 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
 
   AuthService.getUserStatus()
     .then(function(data){
+      console.log("checking user registration")
+      console.log(data.data.user.picture)
+      if(data.data.user.picture) {
+        $state.go('complete-registration')
+      }
       vm.currentUser = data.data.user
       $http.get('/api/users/' + vm.currentUser._id)
         .success(function(data){

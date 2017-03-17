@@ -184,6 +184,9 @@ router.post('/check-token', function(req, res) {
 
 router.post('/check-reg-token', function(req, res) {
 
+  console.log("token in auth.js")
+  console.log(req.body.token)
+
   User.findOne({ resetPasswordToken: req.body.token}, function(err, user) {
     if (err) {
       console.log("User Not Found");
