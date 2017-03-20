@@ -40,6 +40,10 @@ table td{
   text-align: center;
 }
 
+.align-left {
+  text-align: left;
+}
+
 .crew-view {
   background-color: #333333;
 }

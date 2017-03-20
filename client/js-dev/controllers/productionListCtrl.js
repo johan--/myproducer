@@ -108,9 +108,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
-        .finally(function() {
-          vm.openNotifModal()
-        })
+        // .finally(function() {
+        //   vm.openNotifModal()
+        // })
   }
 
   vm.openNotifModal = function() {
