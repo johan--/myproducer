@@ -128,6 +128,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.addToCrew = function(id) {
+      console.log(id);
       crewOffer = {
         "to": id,
         "production": $stateParams.id,
@@ -256,6 +257,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.openDeleteContactModal = function(contact){
+      console.log(contact);
       vm.contact = contact
       vm.showDeleteContactModal = true;
     }

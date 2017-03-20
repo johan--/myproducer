@@ -184,7 +184,7 @@
                 <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover production-margin">Declined</a>
                 <a ng-if="crew.offer.status === 'Accepted'"  class="btn approval-alt-btn remove-btn-hover production-margin">Hired</a>
                 <a ng-if="crew.offer.status === 'Pending' || crew.offer.status === 'Accepted' || crew.offer.status === 'Declined'" href="/#/offer/{{crew._id}}" class="btn default-btn production-margin">View Offer</a>
-                <a class="production-margin" ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.removeFromCrew(crew._id, $index)"><i class="fa fa-times"></i></a>
+                <a class="production-margin" ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.openDeleteContactModal(crew._id)"><i class="fa fa-times"></i></a>
               </div></td>
             </div>
             </tr>
@@ -281,7 +281,7 @@
         <br>
         <p>You can always add them back later.</p>
         <br>
-        <p><a class="btn approval-btn" ng-click="productionCtrl.deleteContact(crewListCtrl.contact._id)">Yes</a> <a class="btn error-btn" ng-click="productionCtrl.closeDeleteContactModal()">Cancel</a></p>
+        <p><a class="btn approval-btn" ng-click="productionCtrl.removeFromCrew(productionCtrl.contact)">Yes</a> <a class="btn error-btn" ng-click="productionCtrl.closeDeleteContactModal()">Cancel</a></p>
       </div>
     </div>
   </div>
