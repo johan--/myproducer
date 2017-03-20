@@ -21,6 +21,10 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
         .success(function(data){
           vm.currentUser = data
 
+          if(vm.currentUser.resetPasswordToken) {
+            $state.go('complete-registration')
+          }
+
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
               // console.log(crew.message[0]._by.picture);

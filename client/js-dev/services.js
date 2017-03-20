@@ -15,7 +15,8 @@ angular.module('myApp')
       checkToken: checkToken,
       resetPassword: resetPassword,
       completeRegistration: completeRegistration,
-      checkCompRegToken: checkCompRegToken
+      checkCompRegToken: checkCompRegToken,
+      getCrewStatus: getCrewStatus
     })
 
     function isLoggedIn() {
@@ -234,6 +235,16 @@ angular.module('myApp')
 
     // return promise object
     return deferred.promise
+    }
+
+    function getCrewStatus(id) {
+      $http.get('/api/crew/check', {id: id})
+      .success(function(data) {
+        var crew = data
+      })
+      .error(function(data) {
+        var crew = false
+      })
     }
 
 
