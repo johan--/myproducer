@@ -198,6 +198,19 @@ router.post('/check-token', function(req, res) {
   });
 });
 
+router.get('/check-token', function(req,res) {
+  console.log("back end check token route hit");
+  User.find({ resetPasswordToken: req.body.token }, function(err, user) {
+    if(err) {
+      console.log("User not found")
+      res.redirect('/#/forgot-password')
+    }
+    res.json({
+      user
+    })
+  })
+})
+
 router.post('/check-reg-token', function(req, res) {
 
   console.log("token in auth.js")

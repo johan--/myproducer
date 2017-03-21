@@ -238,13 +238,19 @@ angular.module('myApp')
     }
 
     function getCrewStatus(id) {
-      $http.get('/api/crew/check', {id: id})
+      console.log("getting crew status line 241");
+      var deferred = $q.defer()
+
+      $http.get('/user/check-token', {id: id})
       .success(function(data) {
-        var crew = data
+        console.log(data);
+        deferred.resolve(data)
       })
       .error(function(data) {
-        var crew = false
+        deferred.reject()
       })
+
+      return deferred.promise
     }
 
 

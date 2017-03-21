@@ -11,15 +11,21 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
   $rootScope.activeTab = {}
 
   AuthService.getUserStatus()
-    // .then(function(data){
-    //   if(data.data.user.resetPasswordToken) {
-    //     $state.go('complete-registration')
-    //   }
-
+    .then(function(data){
       vm.currentUser = data.data.user
       $http.get('/api/users/' + vm.currentUser._id)
         .success(function(data){
           vm.currentUser = data
+
+          AuthService.getCrewStatus($stateParams.id)
+            .then(function(data) {
+              console.log("crew user that was found:");
+              console.log(data);
+              if(data.user[0].resetPasswordToken || data.user.resetPasswordToken) {
+                console.log("should go to comp reg")
+                $state.go('complete-registration')
+              }
+            })
 
           if(vm.currentUser.resetPasswordToken) {
             $state.go('complete-registration')

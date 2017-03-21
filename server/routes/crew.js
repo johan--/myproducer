@@ -28,7 +28,7 @@ router.post('/', function(req, res){
 
   newCrew.save(function(err, crew){
     if(err) return console.log(err)
-
+    console.log(crew);
     // Find user who submitted the crew
     User.findById(req.user._id, function(err, user){
       if(err) return console.log(err)
