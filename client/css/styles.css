@@ -233,7 +233,8 @@ table td{
   margin-bottom: 2px; }
 
 .bottom-border {
-  border-bottom: solid #595959 2px; }
+  border-bottom: solid #FFFFFF 2px;
+  margin-bottom: 25px; }
 
 .right-border {
   border-right: solid #595959 2px; }
