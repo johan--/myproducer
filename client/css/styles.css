@@ -28,6 +28,12 @@ table td{
   margin-left: 5px;
 }
 
+.x-button {
+  padding: 1px;
+  margin-left: 5px;
+  float: right;
+}
+
 .production-margin {
   margin-top: 12px;
 }
