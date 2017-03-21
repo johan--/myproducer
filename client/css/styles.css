@@ -10,6 +10,54 @@ body.bottom-padding {
 a, a:hover, a:link {
   text-decoration: none; }
 
+table td{
+  border-top: none !important;
+}
+
+.production-width {
+  max-width: 1920px;
+  white-space: nowrap;
+}
+
+.container-fluid {
+  width: 100%;
+}
+
+.form-margin {
+  margin-top: 5px;
+  width: 222px;
+}
+
+.thumb-margin {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.x-button {
+  padding: 1px;
+  margin-left: 5px;
+  float: right;
+}
+
+.production-margin {
+  margin-top: 12px;
+}
+
+.align-right {
+  text-align: right;
+}
+.align-center {
+  text-align: center;
+}
+
+.crew-view {
+  background-color: #333333;
+}
+
+.other-background {
+  background-color: #595959;
+}
+
 .fff-text {
   color: #fff; }
 
@@ -189,7 +237,8 @@ a, a:hover, a:link {
   margin-bottom: 2px; }
 
 .bottom-border {
-  border-bottom: solid #595959 2px; }
+  border-bottom: solid #FFFFFF 2px;
+  margin-bottom: 25px; }
 
 .right-border {
   border-right: solid #595959 2px; }
