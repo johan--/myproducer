@@ -11,10 +11,10 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
   $rootScope.activeTab = {}
 
   AuthService.getUserStatus()
-    .then(function(data){
-      if(data.data.user.resetPasswordToken) {
-        $state.go('complete-registration')
-      }
+    // .then(function(data){
+    //   if(data.data.user.resetPasswordToken) {
+    //     $state.go('complete-registration')
+    //   }
 
       vm.currentUser = data.data.user
       $http.get('/api/users/' + vm.currentUser._id)
