@@ -19,7 +19,11 @@ table td{
 }
 
 .emailLink:hover {
-  color: #1898D8
+  color: #1898D8;
+}
+
+.emailLink:active {
+  color: #1898D8;
 }
 
 .production-width {
