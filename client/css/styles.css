@@ -14,11 +14,11 @@ table td{
   border-top: none !important;
 }
 
-#emailLink {
+.emailLink {
   text-decoration: none;
 }
 
-#emailLink:hover {
+.emailLink:hover {
   color: #1898D8
 }
 
