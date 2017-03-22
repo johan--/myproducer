@@ -63,7 +63,7 @@
               <hr class="hr-sub">
               <textarea rows="{{postCtrl.rows}}" maxlength="1000" ng-show="postCtrl.editingState2" ng-model="postCtrl.currentUser.bio" class="form-control" id="userBio"></textarea>
               <p ng-hide="postCtrl.editingState2 || !postCtrl.currentUser.bio"><span id="biography" class="highlight">{{postCtrl.currentUser.bio}}</span></p>
-              <p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState2" class="highlight"><span>Tell everyone about yourself.</span></p>
+              <ul><p ng-hide="postCtrl.currentUser.bio || postCtrl.editingState2" class="highlight"><span>Tell everyone about yourself.</span></p></ul>
               <button ng-show="postCtrl.editingState2" type="submit" class="btn default-btn margin5-top">Update</button>
             </div>
             <div class="profile-skills form-group">
