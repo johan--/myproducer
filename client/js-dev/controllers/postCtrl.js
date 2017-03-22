@@ -29,7 +29,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data){
           vm.currentUser = data
-          vm.userWebsite = vm.currentUser.website
           initialRows(vm.currentUser.bio)
           // get all productions where I am a crew member
           var otherProductions = []
