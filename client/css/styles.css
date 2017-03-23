@@ -66,6 +66,7 @@ table td{
   padding: 1px;
   margin-left: 5px;
   float: right;
+  position:absolute;
 }
 
 .production-margin {
@@ -75,6 +76,13 @@ table td{
 .align-right {
   text-align: right;
 }
+
+#crew-title {
+  float: left;
+  position: relative;
+  left: -3%;
+}
+
 .align-center {
   text-align: center;
 }
