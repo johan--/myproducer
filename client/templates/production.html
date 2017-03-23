@@ -5,7 +5,7 @@
         <h3 class="no-margin">
           PRODUCTION
         </h3>
-        <p class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}}</p>
+        <p id="date-title" class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}}</p>
         <form ng-submit="productionCtrl.editProduction()">
           <div class="production-name form-group">
             <label for="productionName">Title</label>
@@ -77,15 +77,17 @@
                 <!-- Cast & Crew entire table-->
                 <!-- <div class="other-background"> -->
   <div class="crew-view col-sm-9" ng-init="showModal=false">
-    <div class="col-sm-6 no-padding section">
-      <h3 class="title">CAST AND CREW</h3>
-    </div>
-    <div class="col-sm-6 no-padding section">
-      <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
-        <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add Crew</a>
+    <div class="container-fluid bottom-border">
+      <div class="col-sm-6 no-padding section">
+        <h3 class="title">CAST AND CREW</h3>
+      </div>
+      <div class="col-sm-6 no-padding section">
+        <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
+          <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add Crew</a>
+        </div>
       </div>
     </div>
-    <div class="container-fluid bottom-border">
+    <div class="container-fluid">
       <p id="production-error" ng-show="productionCtrl.error" class="alert alert-danger">{{ productionCtrl.errorMessage }}</p>
     </div>
 

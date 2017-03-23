@@ -14,6 +14,19 @@ table td{
   border-top: none !important;
 }
 
+#date-title {
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.left-title {
+  margin-bottom: 10px;
+}
+
+.right-title {
+  margin-bottom: 10px;
+}
+
 .emailLink {
   text-decoration: none;
 }
