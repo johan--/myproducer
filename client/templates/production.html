@@ -79,7 +79,7 @@
   <div class="crew-view col-sm-9" ng-init="showModal=false">
     <div class="container-fluid bottom-border">
       <div class="col-sm-6 no-padding section">
-        <h3 class="title">CAST AND CREW</h3>
+        <h3 class="align-left stick-bottom title">CAST AND CREW</h3>
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
@@ -104,7 +104,7 @@
               <td class="container col-md-2"><p class="production-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</p></td>
 
               <!-- Select/Show Role-->
-              <td class="container col-md-3 align-left"><div class="dropdown">
+              <td class="container col-md-2 align-left"><div class="dropdown">
                 <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
                           <option value="Actor">Actor</option>
                           <option value="Actress">Actress</option>
@@ -186,8 +186,8 @@
                 <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover production-margin">Declined</a>
                 <a ng-if="crew.offer.status === 'Accepted'"  class="btn approval-alt-btn remove-btn-hover production-margin">Hired</a>
                 <a ng-if="crew.offer.status === 'Pending' || crew.offer.status === 'Accepted' || crew.offer.status === 'Declined'" href="/#/offer/{{crew._id}}" class="btn default-btn production-margin">View Offer</a>
-                <a class="production-margin align-right x-button" ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.openDeleteContactModal(crew._id)"><i class="fa fa-times"></i></a>
               </div></td>
+              <td class="container col-xs-1"><a class="production-margin align-right x-button" ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.openDeleteContactModal(crew._id)"><i class="fa fa-times"></i></a></td>
             </div>
             </tr>
           </tbody>
