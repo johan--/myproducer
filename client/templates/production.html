@@ -102,7 +102,7 @@
               <td class="container col-md-2"><p class="production-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</p></td>
 
               <!-- Select/Show Role-->
-              <td class="container col-md-2 align-left"><div class="dropdown">
+              <td class="container col-md-3 align-left"><div class="dropdown">
                 <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
                           <option value="Actor">Actor</option>
                           <option value="Actress">Actress</option>
@@ -178,7 +178,7 @@
               </div></td>
 
               <!-- Buttons -->
-              <td class="container align-right col-md-3"><div ng-if="productionCtrl.isProducer">
+              <td class="container align-right col-md-2"><div ng-if="productionCtrl.isProducer">
                   <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)" class="btn main-btn production-margin">Hire</a>
                 <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn remove-btn-hover production-margin">Pending</a>
                 <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover production-margin">Declined</a>
