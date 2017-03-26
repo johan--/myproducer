@@ -17,19 +17,19 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
         .success(function(data){
           vm.currentUser = data
 
-          AuthService.getCrewStatus($stateParams.id)
-            .then(function(data) {
-              console.log("crew user that was found:");
-              console.log(data);
-              if(data.user[0].resetPasswordToken || data.user.resetPasswordToken) {
-                console.log("should go to comp reg")
-                $state.go('complete-registration')
-              }
-            })
-
-          if(vm.currentUser.resetPasswordToken) {
-            $state.go('complete-registration')
-          }
+          // AuthService.getCrewStatus($stateParams.id)
+          //   .then(function(data) {
+          //     console.log("crew user that was found:");
+          //     console.log(data);
+          //     if(data.user[0].resetPasswordToken || data.user.resetPasswordToken) {
+          //       console.log("should go to comp reg")
+          //       $state.go('complete-registration')
+          //     }
+          //   })
+          //
+          // if(vm.currentUser.resetPasswordToken) {
+          //   $state.go('complete-registration')
+          // }
 
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
