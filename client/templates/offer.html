@@ -1,4 +1,4 @@
-<div ng-if="offerCtrl.ready">
+<!-- <div ng-if="offerCtrl.ready"> -->
   <div class="section bottom-padding">
     <div class="col-sm-6 col-centered">
       <h3 ng-if="offerCtrl.isProducer">OFFER TO {{offerCtrl.crew.to.first_name + ' ' + offerCtrl.crew.to.last_name | uppercase}}</h3>
@@ -71,6 +71,21 @@
 
           <button type="submit" class="btn default-btn x-padding">Send</a>
         </form>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->
+
+<div id="modal-root" ng-if="offerCtrl.showVerificationModal">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-times-circle"></i></h1>
+        <h1>Oops!</h1>
+        <p>You must be logged in to do that.</p>
+        <br>
+        <p><a class="btn approval-btn" ui-sref="login">Login</a>
+          <a class="btn error-btn" ng-click="offerCtrl.redirectCompReg()">Complete Registration</a></p>
       </div>
     </div>
   </div>

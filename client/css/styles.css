@@ -10,90 +10,71 @@ body.bottom-padding {
 a, a:hover, a:link {
   text-decoration: none; }
 
-table td{
-  border-top: none !important;
-}
+table td {
+  border-top: none !important; }
 
 #date-title {
   margin-top: 10px;
-  margin-bottom: 25px;
-}
+  margin-bottom: 25px; }
 
 .left-title {
-  margin-bottom: 10px;
-}
+  margin-bottom: 10px; }
 
 .right-title {
-  margin-bottom: 10px;
-}
+  margin-bottom: 10px; }
 
 .emailLink {
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 .emailLink:visited {
-  color: #FFFFFF;
-}
+  color: #FFFFFF; }
 
 .emailLink:hover {
-  color: #1898D8;
-}
+  color: #1898D8; }
 
 .emailLink:active {
-  color: #1898D8;
-}
+  color: #1898D8; }
 
 .production-width {
   max-width: 1920px;
-  white-space: nowrap;
-}
+  white-space: nowrap; }
 
 .container-fluid {
-  width: 100%;
-}
+  width: 100%; }
 
 .form-margin {
   margin-top: 5px;
-  width: 100%;
-}
+  width: 100%; }
 
 .thumb-margin {
   margin-top: 5px;
-  margin-left: 5px;
-}
+  margin-left: 5px; }
 
 .x-button {
   padding: 1px;
   margin-left: 5px;
   float: right;
-  position:absolute;
-}
+  position: absolute; }
 
 .production-margin {
-  margin-top: 12px;
-}
+  margin-top: 12px; }
 
 .align-right {
-  text-align: right;
-}
+  text-align: right; }
 
 #crew-title {
   float: left;
   position: relative;
-  left: -3%;
-}
+  left: -3%; }
 
 .align-center {
-  text-align: center;
-}
+  text-align: center; }
 
 .crew-view {
-  background-color: #333333;
-}
+  background-color: #333333; }
 
 .other-background {
-  background-color: #595959;
-}
+  background-color: #595959; }
 
 .fff-text {
   color: #fff; }
@@ -274,8 +255,7 @@ table td{
   margin-bottom: 2px; }
 
 .bottom-border {
-  border-bottom: solid #FFFFFF 2px;
-  margin-bottom: 25px; }
+  border-bottom: solid #595959 2px; }
 
 .right-border {
   border-right: solid #595959 2px; }

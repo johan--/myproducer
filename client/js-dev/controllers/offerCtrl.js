@@ -12,24 +12,13 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
 
   AuthService.getUserStatus()
     .then(function(data){
-      vm.currentUser = data.data.user
-      $http.get('/api/users/' + vm.currentUser._id)
-        .success(function(data){
-          vm.currentUser = data
 
-          // AuthService.getCrewStatus($stateParams.id)
-          //   .then(function(data) {
-          //     console.log("crew user that was found:");
-          //     console.log(data);
-          //     if(data.user[0].resetPasswordToken || data.user.resetPasswordToken) {
-          //       console.log("should go to comp reg")
-          //       $state.go('complete-registration')
-          //     }
-          //   })
-          //
-          // if(vm.currentUser.resetPasswordToken) {
-          //   $state.go('complete-registration')
-          // }
+      if(data.data.status == true) {
+        $http.get('/api/users/' + vm.currentUser._id)
+          .success(function(data){
+            vm.currentUser = data
+          })
+      }
 
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
@@ -39,8 +28,8 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
               vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
               vm.ready = true
               // console.log("Crew from get", vm.crew)
+              console.log(vm.crew.to.resetPasswordToken);
             })
-        })
     })
 
   vm.addMessage = function(message) {
@@ -61,6 +50,11 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
   }
 
   vm.updateOfferStatus = function(status) {
+
+    if(!vm.currentUser._id) {
+      return vm.showVerificationModal = true
+    } else {
+
     vm.offerUpdate = Object.assign({}, vm.crew)
     vm.offerUpdate.offer.status = status
 
@@ -77,6 +71,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
           vm.addMessage(message)
         }
       })
+    }
   }
 
   vm.compareDate = function(date){
@@ -86,6 +81,10 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
       return false
     }
     return new Date() < date
+  }
+
+  vm.redirectCompReg = function() {
+    $state.go('complete-registration', {token: vm.crew.to.resetPasswordToken})
   }
 
   console.log("Offer Status");
