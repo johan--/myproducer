@@ -6,18 +6,19 @@ completeRegistrationController.$inject = ['$rootScope', '$state', '$stateParams'
 // Complete Registration CONTROLLER
 function completeRegistrationController($rootScope, $state, $stateParams, AuthService){
   console.log("completeRegistrationController instantiated");
+  console.log($stateParams.token);
   var vm = this
   vm.modalOpen = false
 
   AuthService.getUserStatus()
     .then(function(data) {
-      if (!data.data.user || !data.data.user.resetPasswordToken) {
-        $state.go('home')
-      }
+      // if (!data.data.user || !data.data.user.resetPasswordToken) {
+      //   $state.go('home')
+      // }
 
-      vm.currentUser = data.data.user
+      // vm.currentUser = data.data.user
 
-      $stateParams.token = vm.currentUser.resetPasswordToken
+      // $stateParams.token = vm.currentUser.resetPasswordToken
 
       AuthService.checkCompRegToken($stateParams.token)
         .then(function(data){
