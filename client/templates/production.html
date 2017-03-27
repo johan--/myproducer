@@ -209,9 +209,9 @@
       </div>
 
       <div class="group">
-        <div class="line-item bg-transparent" ng-if="productionCtrl.currentUser.contacts.length < 5">
+        <div class="line-item bg-transparent">
           <div class="col-sm-12 bg-transparent">
-            <p class="strong no-margin" style="margin-left: 31px;">Add contacts so that you can begin building productions!</p>
+            <p class="strong no-margin" ng-if="productionCtrl.currentUser.contacts.length < 5" style="margin-left: 31px;">Add contacts so that you can begin building productions!</p>
             <form ng-submit="productionCtrl.addContact()">
               <div class="col-xs-10">
                 <div class="col-xs-4">
