@@ -17,6 +17,13 @@ table td {
   margin-top: 10px;
   margin-bottom: 25px; }
 
+#production-crew-link {
+  margin-top: inherit;
+  color: #FFFFFF; }
+
+#production-crew-link:hover {
+  color: #1898D8; }
+
 .left-title {
   margin-bottom: 10px; }
 
