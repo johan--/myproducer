@@ -82,8 +82,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
     .state('offer', {
       url: '/offer/:id',
       templateUrl: 'templates/offer.html',
-      controller: 'offerController as offerCtrl',
-      restricted: true
+      controller: 'offerController as offerCtrl'
     })
 
 }])
