@@ -101,10 +101,10 @@
                 <img class="thumb round thumb-margin" ng-show="crew.to.picture" ng-src={{crew.to.picture}}></td>
 
               <!-- Name -->
-              <td class="container col-md-1"><a href="/#/profile/{{crew.to._id}}" id="production-crew-link" class="production-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</a></td>
+              <td class="container col-md-2"><a href="/#/profile/{{crew.to._id}}" id="production-crew-link" class="production-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</a></td>
 
               <!-- Select/Show Role-->
-              <td class="container col-md-3 align-left"><div class="dropdown">
+              <td class="container col-md-2 align-left"><div class="dropdown">
                 <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
                           <option value="Actor">Actor</option>
                           <option value="Actress">Actress</option>

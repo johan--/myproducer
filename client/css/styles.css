@@ -18,8 +18,9 @@ table td {
   margin-bottom: 25px; }
 
 #production-crew-link {
-  margin-top: inherit;
-  color: #FFFFFF; }
+  margin-top: 12px;
+  color: #FFFFFF;
+  display: inline-block; }
 
 #production-crew-link:hover {
   color: #1898D8; }
