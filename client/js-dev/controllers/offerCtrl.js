@@ -12,11 +12,12 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
 
   AuthService.getUserStatus()
     .then(function(data){
-
+      vm.currentUser = data.data.user
       if(data.data.status == true) {
         $http.get('/api/users/' + vm.currentUser._id)
           .success(function(data){
-            vm.currentUser = data
+            console.log("data line 19");
+            console.log(data);
           })
       }
 
@@ -28,7 +29,6 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
               vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
               vm.ready = true
               // console.log("Crew from get", vm.crew)
-              console.log(vm.crew.to.resetPasswordToken);
             })
     })
 
@@ -50,7 +50,6 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
   }
 
   vm.updateOfferStatus = function(status) {
-
     if(!vm.currentUser._id) {
       return vm.showVerificationModal = true
     } else {
@@ -87,6 +86,4 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     $state.go('complete-registration', {token: vm.crew.to.resetPasswordToken})
   }
 
-  console.log("Offer Status");
-  // console.log(vm.crew.offer);
 }
