@@ -30,19 +30,19 @@
         </div>
       </div> -->
       <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'">
-        <div class="col-xs-2 start-date">
+        <div class="col-md-2 start-date">
           <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
-        <div class="col-xs-2">
+        <div class="col-md-2">
           <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
         </div>
-        <div class="col-xs-2 end-date">
+        <div class="col-md-2 end-date">
           <p class="no-margin">{{ production.productionDay ? "Day " + production.productionDay : ''}}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
-        <div class="col-xs-3 text-right no-padding">
+        <div class="col-md-3 text-right no-padding">
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
             <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
