@@ -25,14 +25,20 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
             .success(function(crew) {
               // console.log(crew.message[0]._by.picture);
               vm.crew = crew
+              vm.isCrew = vm.crew
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
-              vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id
+              // vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id || vm.crew
               vm.ready = true
               // console.log("Crew from get", vm.crew)
             })
     })
 
   vm.addMessage = function(message) {
+    if(!vm.currentUser) {
+      return vm.showVerificationModal = true
+    } else {
+
+
     vm.messageBox = document.getElementById('message-box')
     vm.message = {
         content : message || vm.newMessage
@@ -47,10 +53,11 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
           $mixpanel.track('Chat Message Sent', {"user" : vm.currentUser.username})
         })
     }
+    }
   }
 
   vm.updateOfferStatus = function(status) {
-    if(!vm.currentUser._id) {
+    if(!vm.currentUser) {
       return vm.showVerificationModal = true
     } else {
 
