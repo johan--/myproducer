@@ -12,6 +12,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
 
   AuthService.getUserStatus()
     .then(function(data){
+      console.log(data);
       vm.currentUser = data.data.user
       if(data.data.status == true) {
         $http.get('/api/users/' + vm.currentUser._id)
