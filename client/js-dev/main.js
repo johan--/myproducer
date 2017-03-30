@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router', 'ui.bootstrap', 'analytics.mixpanel'])
+var myApp = angular.module('myApp', ['ui.router', 'ui.bootstrap', 'analytics.mixpanel', 'ngImgCrop'])
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', function ($stateProvider, $urlRouterProvider, $mixpanelProvider) {
 

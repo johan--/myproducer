@@ -19,6 +19,27 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     vm.showSaveButton = false;
   };
 
+  // image cropping
+  $scope.myImage = '';
+  $scope.myCroppedImage = '';
+
+  $scope.init = function() {
+    var file = angular.element(document.getElementById("file-input"));
+    file.on('change', handleFileSelect)
+}
+
+  var handleFileSelect=function(evt) {
+    console.log("handle file hit");
+    var file=evt.currentTarget.files[0];
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function($scope){
+        $scope.myImage=evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.profile = true
@@ -114,6 +135,19 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
    start upload procedure by asking for a signed request from the app.
   */
   vm.initUpload = function(){
+  // 
+  //   var dataURItoBlob = function(dataURI) {
+  //   var binary = atob(dataURI.split(',')[1]);
+  //   var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  //   var array = [];
+  //   for(var i = 0; i < binary.length; i++) {
+  //     array.push(binary.charCodeAt(i));
+  //   }
+  //   return new Blob([new Uint8Array(array)], {type: mimeString});
+  // };
+  //
+  //   var blob = dataURItoBlob($scope.myCroppedImage)
+
     var files = document.getElementById('file-input').files;
     // var file = files[0];
     file = files[0];

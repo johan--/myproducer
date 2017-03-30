@@ -84,6 +84,19 @@ table td {
 .other-background {
   background-color: #595959; }
 
+.cropArea {
+  position: relative;
+  background: #E4E4E4;
+  overflow: hidden;
+  width: 75%;
+  height: 150px;
+  margin: 0 auto; }
+
+.cropArea canvas {
+  margin: 0 !important;
+  height: 100%;
+  width: 100%; }
+
 .fff-text {
   color: #fff; }
 
