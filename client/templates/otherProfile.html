@@ -35,7 +35,6 @@
             <div class="form-group">
               <h5 class="field-title"><label>Email Address</label></h4>
               <a target="_blank" href="mailto:{{otherProfileCtrl.user.username}}?subject=Message from myproducer.io" class="emailLink form-control"> {{otherProfileCtrl.user.username}} </a>
-              <!-- <p class="form-control">{{otherProfileCtrl.user.username}}</p> -->
             </div>
             <div class="form-group">
               <h5 class="field-title"><label for="userPhone">Phone Number</label></h4>
@@ -43,8 +42,7 @@
             </div>
             <div class="form-group">
               <h5 class="field-title"><label for="userWebsite">Website</label></h4>
-              <a id="notes" class="form-control emailLink" target="_blank" href="//{{otherProfileCtrl.user.website}}">{{otherProfileCtrl.user.website}}</a>
-              <!-- <p id="notes" class="form-control">{{otherProfileCtrl.user.website}}</p> -->
+              <a id="notes" class="form-control emailLink" target="_blank" href="{{otherProfileCtrl.user.website}}">{{otherProfileCtrl.user.website}}</a>
             </div>
           </div>
           <div class="profile-view-right col-sm-8">

@@ -27,7 +27,12 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
 
           $http.get('/api/users/' + $stateParams.id + '/profile')
             .then(function(data){
+              var http = 'http://'
               vm.user = data.data
+              if(vm.user.website[0] && vm.user.website[1] && vm.user.website[2] === 'w') {
+                vm.user.website = http + vm.user.website
+              }
+
               if(vm.user.picture){
                 vm.profilePicture = vm.user.picture
               }else {vm.profilePicture = "./img/profile_default.png"}
