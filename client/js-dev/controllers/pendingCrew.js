@@ -7,7 +7,11 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
   var vm = this
 
   vm.currentUser = {}
+  vm.modal = {}
+  vm.modal2 = {}
   vm.pendingList = []
+  vm.modal.show = false
+  vm.modal2.show = false
   vm.leftButton = true
   vm.rightButton = true
 
@@ -26,11 +30,17 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
           vm.currentIndex = vm.pendingList.indexOf($stateParams.id)
 
           // conditionals to show buttons
-          if(vm.currentIndex === 0){
+          if(vm.currentIndex === 0 && vm.pendingList.length === 1){
             vm.leftButton = false
-          } else if(vm.currentIndex === vm.pendingList.length - 1){
+            vm.rightButton = false
+          } else if(vm.currentIndex === 0){
+            vm.leftButton = false
+          } else if(vm.currentIndex == vm.pendingList.length - 1){
             vm.rightButton = false
           }
+
+          console.log(vm.currentIndex);
+          console.log(vm.pendingList.length - 1);
 
           // get user that current user is viewing
           $http.get('/api/users/' + $stateParams.id + '/profile')
@@ -54,9 +64,11 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
         .then(function success(data){
           if(status == 'approve'){
             vm.modal.content = 'You have added ' + user.first_name.capitalize() + ' ' + user.last_name.capitalize() + ' as an approved contact.'
-          } else {vm.modal.content = 'You have declined to add ' + user.first_name.capitalize() + ' ' + user.last_name.capitalize() + ' as an approved contact.'}
+            vm.showModal()
+          } else {
+          vm.closeModal2()
+          }
           vm.isPending = false
-          vm.showModal()
         }, function failure() {
           vm.modal.content = 'An error has occurred. Please try again.'
           vm.showModal()
@@ -70,7 +82,7 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
       } else if(button == 'right') {
         vm.currentIndex += 1
       }
-      $state.go('pending-crew', {id: vm.currentIndex})
+      $state.go('pending-crew', {id: vm.pendingList[vm.currentIndex]})
     }
 
     vm.compareDate = function(date){
@@ -88,6 +100,15 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
 
     vm.closeModal = function(){
       vm.modal.show = false
+    }
+
+    vm.showModal2 = function(user){
+      vm.modal2.content = 'Are you sure you want to decline ' + user.first_name.capitalize() + ' ' + user.last_name.capitalize() + ' as an approved contact.'
+      vm.modal2.show = true
+    }
+
+    vm.closeModal2 = function(){
+      vm.modal2.show = false
     }
 
     String.prototype.capitalize = function() {

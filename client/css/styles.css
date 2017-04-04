@@ -10,6 +10,16 @@ body.bottom-padding {
 a, a:hover, a:link {
   text-decoration: none; }
 
+#left-arrow {
+  height: 50px;
+  width: 50px;
+  float: left; }
+
+#right-arrow {
+  height: 50px;
+  width: 50px;
+  float: right; }
+
 table td {
   border-top: none !important; }
 

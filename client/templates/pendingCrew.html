@@ -97,12 +97,12 @@
 
         <div class="col-sm-12 padding20">
           <div class="col-sm-6 text-right">
-            <button class="btn btn-default" ng-if="pendingCrewCtrl.leftButton" ng-click="pendingCrewCtrl.changeProfile('left')">Left</button>
-            <a class="btn default-btn x-padding" ng-click="pendingCrewCtrl.updateContactStatus('decline', pendingCrewCtrl.user)">Decline</a>
+            <img id="left-arrow" src="./img/left-arrow.png" class="btn btn-default" ng-if="pendingCrewCtrl.leftButton" ng-click="pendingCrewCtrl.changeProfile('left')"></img>
+            <a class="btn default-btn x-padding" ng-click="pendingCrewCtrl.showModal2(pendingCrewCtrl.user)">Decline</a>
           </div>
           <div class="col-sm-6 text-left">
             <a class="btn approval-btn x-padding" ng-click="pendingCrewCtrl.updateContactStatus('approve', pendingCrewCtrl.user)">Accept</a>
-            <button class="btn btn-default" ng-if="pendingCrewCtrl.rightButton" ng-click="pendingCrewCtrl.changeProfile('right')">Right</button>
+            <img id="right-arrow" src="./img/right-arrow.png" class="btn btn-default" ng-if="pendingCrewCtrl.rightButton" ng-click="pendingCrewCtrl.changeProfile('right')"></img>
           </div>
         </div>
       </div>
@@ -143,6 +143,18 @@
         <h1><i class="fa fa-check"></i></h1>
         <p>{{ pendingCrewCtrl.modal.content }}</p>
         <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-show="pendingCrewCtrl.modal2.show">
+  <div id="modal-container" ng-click="pendingCrewCtrl.closeModal2()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-check"></i></h1>
+        <p>{{ pendingCrewCtrl.modal2.content }}</p>
+        <p><a ng-click="pendingCrewCtrl.closeModal2()" class="btn btn-danger">No</a><a ng-click="pendingCrewCtrl.updateContactStatus('decline', pendingCrewCtrl.user)" class="btn approval-btn">Yes</a></p>
       </div>
     </div>
   </div>
