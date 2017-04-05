@@ -40,12 +40,20 @@ a, a:hover, a:link{
   height: 50px;
   width: 50px;
   float: left;
+  background-color: #333333;
+  border: 0px;
+  top: -13px;
+  position: relative;
 }
 
 #right-arrow {
   height: 50px;
   width: 50px;
   float: right;
+  background-color: #333333;
+  border: 0px;
+  top: -15px;
+  position: relative;
 }
 
 table td {
