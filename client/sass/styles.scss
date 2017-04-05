@@ -40,7 +40,6 @@ a, a:hover, a:link{
 }
 
 .cast-crew-table {
-  // border-bottom: 2px solid white;
   margin-bottom: 20px;
 }
 
@@ -64,6 +63,17 @@ a, a:hover, a:link{
   top: -15px;
   position: relative;
   display:inline-block;
+}
+
+.no-collapse {
+  min-width: 150px;
+}
+
+.white-space {
+  height: inherit;
+  overflow: inherit;
+  word-break: break-all;
+  white-space:pre-wrap;
 }
 
 table td {
@@ -761,7 +771,7 @@ nav ul li ul li {
   height: inherit;
   overflow: inherit;
   word-break: break-all;
-  white-space:pre-wrap;
+  white-space: pre-wrap;
 }
 // Media Queries
 @media screen and (max-width : 767px) {

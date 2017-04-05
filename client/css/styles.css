@@ -33,6 +33,15 @@ a, a:hover, a:link {
   position: relative;
   display: inline-block; }
 
+.no-collapse {
+  min-width: 150px; }
+
+.white-space {
+  height: inherit;
+  overflow: inherit;
+  word-break: break-all;
+  white-space: pre-wrap; }
+
 table td {
   border-top: none !important; }
 
