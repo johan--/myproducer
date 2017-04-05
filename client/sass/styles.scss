@@ -44,6 +44,7 @@ a, a:hover, a:link{
   border: 0px;
   top: -13px;
   position: relative;
+  display:inline-block;
 }
 
 #right-arrow {
@@ -54,9 +55,8 @@ a, a:hover, a:link{
   border: 0px;
   top: -15px;
   position: relative;
+  display:inline-block;
 }
-
-
 
 table td {
   border-top: none !important; }

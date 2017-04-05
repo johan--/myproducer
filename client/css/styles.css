@@ -17,7 +17,8 @@ a, a:hover, a:link {
   background-color: #333333;
   border: 0px;
   top: -13px;
-  position: relative; }
+  position: relative;
+  display: inline-block; }
 
 #right-arrow {
   height: 50px;
@@ -26,7 +27,8 @@ a, a:hover, a:link {
   background-color: #333333;
   border: 0px;
   top: -15px;
-  position: relative; }
+  position: relative;
+  display: inline-block; }
 
 table td {
   border-top: none !important; }

@@ -11,7 +11,7 @@
         </form>
       </div>
     </div>
-    <div class="col-sm-12 no-padding">
+    <div class="col-md-12 no-padding">
       <!-- <div class="line-item">
         <div class="col-xs-2">
           <p class="no-margin strong">Date</p>
@@ -74,23 +74,23 @@
 
   <div class="past-productions-view col-sm-12 section">
     <div class="">
-      <div class="col-sm-12"><h4>Past Productions</h4></div>
+      <div class="col-md-12"><h4>Past Productions</h4></div>
     </div>
     <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.currentUser.allProductions">
       <div class="">
-        <div class="col-xs-2 start-date">
+        <div class="col-md-2 start-date">
           <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
-        <div class="col-xs-2 end-date">
+        <div class="col-md-2 end-date">
           <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
         </div>
-        <div class="col-xs-2">
+        <div class="col-md-2">
           <p class="no-margin">{{ 'Day ' + production.productionDay}}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
-        <div class="col-xs-3 text-right no-padding">
+        <div class="col-md-3 text-right no-padding">
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
             <!-- <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a> -->
