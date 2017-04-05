@@ -1,0 +1,161 @@
+<div ng-if="pendingCrewCtrl.ready">
+  <div class="profile-view col-sm-8">
+    <div class="section bottom-padding x-padding">
+      <div class="profile-view-content">
+        <!-- <form ng-submit="otherProfileCtrl.editUser()"> -->
+          <div class="col-sm-12">
+            <br>
+          </div>
+          <div class="profile-view-left col-sm-4 right-border">
+            <div class="profile-picture-other-profile round">
+              <img id="profile-picture" class="img-responsive round" ng-src="{{pendingCrewCtrl.profilePicture}}">
+            </div>
+            <div class="profile-name">
+              <h3 class="sub-title text-vw">{{ pendingCrewCtrl.user.first_name + ' ' + pendingCrewCtrl.user.last_name | uppercase }}</h3>
+              <!-- <h3 ng-hide="editingState">{{ otherProfileCtrl.user.first_name || "FIRST" }}</h3>
+              <label ng-show="editingState" for="userFirstName">First</label>
+              <input ng-show="editingState" ng-model="otherProfileCtrl.user.first_name" class="form-control" id="userFirstName">
+              <h3 ng-hide="editingState">{{ otherProfileCtrl.user.last_name || "LAST" }}</h3>
+              <label ng-show="editingState" for="userLastName">LAST</label>
+              <input ng-show="editingState" ng-model="otherProfileCtrl.user.last_name" class="form-control" id="userName"> -->
+            </div>
+            <!-- <div class="form-group">
+              <label for="userRole">Role</label>
+              <input ng-show="editingState" ng-model="otherProfileCtrl.user.role[0]" class="form-control" id="userRole">
+              <p ng-hide="editingState"> {{otherProfileCtrl.user.role[0] || 'Role'}} </p>
+            </div> -->
+            <div class="form-group">
+              <h5 class="field-title"><label for="userLocation">Location</label></h4>
+              <p class="disabled-form-control"> {{pendingCrewCtrl.user.location}} </p>
+            </div>
+            <div class="form-group">
+              <h5 class="field-title"><label for="userTitle">Title</label></h4>
+              <p class="disabled-form-control"> {{pendingCrewCtrl.user.title}} </p>
+            </div>
+            <div class="form-group">
+              <h5 class="field-title"><label>Email Address</label></h4>
+              <a target="_blank" href="mailto:{{pendingCrewCtrl.user.username}}?subject=Message from myproducer.io" class="emailLink form-control"> {{pendingCrewCtrl.user.username}} </a>
+            </div>
+            <div class="form-group">
+              <h5 class="field-title"><label for="userPhone">Phone Number</label></h4>
+              <p class="disabled-form-control"> {{pendingCrewCtrl.user.phone}} </p>
+            </div>
+            <div class="form-group">
+              <h5 class="field-title"><label for="userWebsite">Website</label></h4>
+              <a id="notes" class="form-control emailLink" target="_blank" href="{{pendingCrewCtrl.user.website}}">{{pendingCrewCtrl.user.website}}</a>
+            </div>
+          </div>
+          <div class="profile-view-right col-sm-8">
+            <div class="profile-bio form-group">
+              <h4 class="sub-title">Bio</h4>
+              <p>{{pendingCrewCtrl.user.bio}}</p>
+            </div>
+            <div class="profile-skills form-group">
+              <h4 class="sub-title">Skills</h4>
+              <ul>
+                <li ng-if="pendingCrewCtrl.user.skills[0]">
+                  {{pendingCrewCtrl.user.skills[0]}}
+                </li>
+                <li ng-if="pendingCrewCtrl.user.skills[1]">
+                  {{pendingCrewCtrl.user.skills[1]}}
+                </li>
+                <li ng-if="pendingCrewCtrl.user.skills[2]">
+                  {{pendingCrewCtrl.user.skills[2]}}
+                </li>
+                <li ng-if="pendingCrewCtrl.user.skills[3]">
+                  {{pendingCrewCtrl.user.skills[3]}}
+                </li>
+              </ul>
+            </div>
+            <div class="profile-equipment form-group">
+              <h4 class="sub-title">Equipment</h4>
+              <ul>
+                <li ng-if="pendingCrewCtrl.user.equipment[0]">
+                  {{pendingCrewCtrl.user.equipment[0]}}
+                </li>
+                <li ng-if="pendingCrewCtrl.user.equipment[1]">
+                  {{pendingCrewCtrl.user.equipment[1]}}
+                </li>
+                <li ng-if="pendingCrewCtrl.user.equipment[2]">
+                  {{pendingCrewCtrl.user.equipment[2]}}
+                </li>
+                <li ng-if="pendingCrewCtrl.user.equipment[3]">
+                  {{pendingCrewCtrl.user.equipment[3]}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        <!-- </form> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="production-quick-view col-sm-4">
+    <div class="section" ng-if="pendingCrewCtrl.isPending">
+      <div class="productions-current">
+        <h4 class="title">Applicant Review</h4>
+
+        <div class="col-sm-12 padding20">
+          <div class="col-sm-6 text-right">
+            <img id="left-arrow" src="./img/left-arrow.png" class="btn btn-default" ng-if="pendingCrewCtrl.leftButton" ng-click="pendingCrewCtrl.changeProfile('left')"></img>
+            <a class="btn default-btn x-padding" ng-click="pendingCrewCtrl.showModal2(pendingCrewCtrl.user)">Decline</a>
+          </div>
+          <div class="col-sm-6 text-left">
+            <a class="btn approval-btn x-padding" ng-click="pendingCrewCtrl.updateContactStatus('approve', pendingCrewCtrl.user)">Accept</a>
+            <img id="right-arrow" src="./img/right-arrow.png" class="btn btn-default" ng-if="pendingCrewCtrl.rightButton" ng-click="pendingCrewCtrl.changeProfile('right')"></img>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" ng-if="!pendingCrewCtrl.isPending">
+      <div class="productions-current">
+        <h4 class="title">Current Productions</h4>
+        <div class="group">
+          <!-- If they're a producer show their productions -->
+          <div class="line-item" ng-repeat="production in pendingCrewCtrl.user.productions" ng-if="production.active && pendingCrewCtrl.compareDate(production.date)">
+            <p class="float-left no-margin strong">{{ production.name }}</p>
+            <p class="float-right no-margin"><a class="btn default-btn" ui-sref="production({id: production._id})">View</a></p>
+          </div>
+          <!-- If they're crew show their accepted productions -->
+          <!-- <li ng-repeat="offer in otherProfileCtrl.user.offersReceived" ng-show="offer.offer.status != 'Accepted'">{{ offer.offer.position }} <a ui-sref="offer({id: offer._id})">View</a></li> -->
+        </div>
+      </div>
+    </div>
+    <div class="section" ng-if="!pendingCrewCtrl.isPending">
+      <div class="productions-past">
+        <h4 class="title">Past Productions</h4>
+        <div>
+          <div class="line-item" ng-repeat=" production in pendingCrewCtrl.user.productions" ng-if="production.active && !pendingCrewCtrl.compareDate(production.date)">
+            <p class="float-left no-margin strong">{{ production.name }}</p>
+            <p class="float-right no-margin"><a class="btn default-btn" ui-sref="production({id: production._id})">View</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="modal-root" ng-show="pendingCrewCtrl.modal.show">
+  <div id="modal-container" ng-click="pendingCrewCtrl.closeModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-check"></i></h1>
+        <p>{{ pendingCrewCtrl.modal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-show="pendingCrewCtrl.modal2.show">
+  <div id="modal-container" ng-click="pendingCrewCtrl.closeModal2()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-check"></i></h1>
+        <p>{{ pendingCrewCtrl.modal2.content }}</p>
+        <p><a ng-click="pendingCrewCtrl.closeModal2()" class="btn btn-danger">No</a><a ng-click="pendingCrewCtrl.updateContactStatus('decline', pendingCrewCtrl.user)" class="btn approval-btn">Yes</a></p>
+      </div>
+    </div>
+  </div>
+</div>

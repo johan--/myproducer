@@ -84,6 +84,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       templateUrl: 'templates/offer.html',
       controller: 'offerController as offerCtrl'
     })
+    .state('pending-crew', {
+      url: '/profile/pending/:id',
+      templateUrl: 'templates/pendingCrew.html',
+      controller: 'pendingCrewController as pendingCrewCtrl',
+      restricted: true
+    })
 
 }])
 
