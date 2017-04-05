@@ -48,10 +48,12 @@
           <div class="profile-view-right col-sm-8">
             <div class="profile-bio form-group">
               <h4 class="sub-title">Bio</h4>
+              <hr class="hr-sub">
               <p>{{otherProfileCtrl.user.bio}}</p>
             </div>
             <div class="profile-skills form-group">
               <h4 class="sub-title">Skills</h4>
+              <hr class="hr-sub">
               <ul>
                 <li ng-if="otherProfileCtrl.user.skills[0]">
                   {{otherProfileCtrl.user.skills[0]}}
@@ -69,6 +71,7 @@
             </div>
             <div class="profile-equipment form-group">
               <h4 class="sub-title">Equipment</h4>
+              <hr class="hr-sub">
               <ul>
                 <li ng-if="otherProfileCtrl.user.equipment[0]">
                   {{otherProfileCtrl.user.equipment[0]}}

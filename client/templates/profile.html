@@ -172,15 +172,15 @@
         <hr>
         <div class="profile-view-left col-sm-12">
           <div class="profile-picture round" ng-click="postCtrl.openModal2()">
-            <img class="img-responsive round" id="profile-pic-preview" ng-src="{{myCroppedImage}}">
+            <img class="img-responsive round" id="profile-pic-preview" ng-src="{{postCtrl.profilePicture}}">
           </div>
           <br>
-          <div class="cropArea">
+          <!-- <div class="cropArea">
             <img-crop id="crop-image" image="myImage" result-image="myCroppedImage" result-image-quality="1.0"></img-crop>
-          </div>
+          </div> -->
         <br>
         <label class="btn btn-default btn-file margin10 width50">Select Image
-          <input type="file" id="file-input" style="display: none;">
+          <input type="file" id="file-input" onchange="angular.element(this).scope().file_changed(this)" accept="image/*"  style="display: none;">
         </label>
         <br>
         <a class="btn error-btn margin10 width30" ng-click="postCtrl.closeModal2()">Cancel</a>

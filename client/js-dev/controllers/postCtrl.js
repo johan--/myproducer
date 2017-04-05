@@ -20,25 +20,25 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   };
 
   // image cropping
-  $scope.myImage = '';
-  $scope.myCroppedImage = '';
+  // $scope.myImage = '';
+  // $scope.myCroppedImage = '';
 
-  $scope.init = function() {
-    var file = angular.element(document.getElementById("file-input"));
-    file.on('change', handleFileSelect)
-}
+//   $scope.init = function() {
+//     var file = angular.element(document.getElementById("file-input"));
+//     file.on('change', handleFileSelect)
+// }
 
-  var handleFileSelect=function(evt) {
-    console.log("handle file hit");
-    var file=evt.currentTarget.files[0];
-    var reader = new FileReader();
-    reader.onload = function (evt) {
-      $scope.$apply(function($scope){
-        $scope.myImage=evt.target.result;
-      });
-    };
-    reader.readAsDataURL(file);
-  };
+  // var handleFileSelect=function(evt) {
+  //   console.log("handle file hit");
+  //   var file=evt.currentTarget.files[0];
+  //   var reader = new FileReader();
+  //   reader.onload = function (evt) {
+  //     $scope.$apply(function($scope){
+  //       $scope.myImage=evt.target.result;
+  //     });
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
 
 
   $rootScope.activeTab = {}
@@ -135,7 +135,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
    start upload procedure by asking for a signed request from the app.
   */
   vm.initUpload = function(){
-  // 
+  //
   //   var dataURItoBlob = function(dataURI) {
   //   var binary = atob(dataURI.split(',')[1]);
   //   var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
