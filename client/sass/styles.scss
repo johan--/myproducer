@@ -644,6 +644,8 @@ nav ul li ul li {
   max-height: 150px;
   margin: 0 auto;
   overflow: hidden;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 .profile-picture-other-profile {
@@ -659,6 +661,7 @@ nav ul li ul li {
 #profile-picture {
   height: 148px;
   width: 148px;
+  object-fit: cover;
 }
 
 #invitation {

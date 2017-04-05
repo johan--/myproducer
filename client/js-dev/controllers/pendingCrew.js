@@ -65,8 +65,25 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
           if(status == 'approve'){
             vm.modal.content = 'You have added ' + user.first_name.capitalize() + ' ' + user.last_name.capitalize() + ' as an approved contact.'
             vm.showModal()
+            // redirect them to the next profile after updating contact status
+            setTimeout(function(){
+              if(vm.currentIndex == 0 && vm.pendingList.length == 1){
+                $state.go('crew-list')
+              } else if(vm.currentIndex == vm.pendingList.length - 1) {
+                $state.go('pending-crew', {id: vm.pendingList[0]})
+              } else {
+              $state.go('pending-crew', {id: vm.pendingList[vm.currentIndex + 1]})
+            }
+          },2000)
           } else {
-          vm.closeModal2()
+              vm.closeModal2()
+              if(vm.currentIndex == 0 && vm.pendingList.length == 1){
+                $state.go('crew-list')
+              } else if(vm.currentIndex == vm.pendingList.length - 1) {
+                $state.go('pending-crew', {id: vm.pendingList[0]})
+              } else {
+                $state.go('pending-crew', {id: vm.pendingList[vm.currentIndex + 1]})
+              }
           }
           vm.isPending = false
         }, function failure() {
