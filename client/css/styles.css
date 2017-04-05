@@ -10,6 +10,9 @@ body.bottom-padding {
 a, a:hover, a:link {
   text-decoration: none; }
 
+.cast-crew-table {
+  margin-bottom: 20px; }
+
 #left-arrow {
   height: 50px;
   width: 50px;
@@ -95,8 +98,7 @@ table td {
 
 #crew-title {
   float: left;
-  position: relative;
-  left: -3%; }
+  position: relative; }
 
 .align-center {
   text-align: center; }

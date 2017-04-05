@@ -79,7 +79,7 @@
   <div class="crew-view col-sm-9" ng-init="showModal=false">
     <div class="container-fluid bottom-border no-padding">
       <div class="col-sm-6 no-padding section">
-        <h3 id="crew-title" class="stick-bottom title">CAST AND CREW</h3>
+        <h3 id="crew-title" class="thumb-margin stick-bottom title">CAST AND CREW</h3>
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid cast-crew-table">
       <p id="production-error" ng-show="productionCtrl.error" class="alert alert-danger">{{ productionCtrl.errorMessage }}</p>
     </div>
 
@@ -104,7 +104,7 @@
               <td class="container col-md-2"><a target="_blank" href="/#/profile/{{crew.to._id}}" id="production-crew-link" class="production-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</a></td>
 
               <!-- Select/Show Role-->
-              <td class="container col-md-3 align-left"><div class="dropdown">
+              <td class="container col-md-4 align-left"><div class="dropdown">
                 <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
                           <option value="Actor">Actor</option>
                           <option value="Actress">Actress</option>
@@ -180,7 +180,7 @@
               </div></td>
 
               <!-- Buttons -->
-              <td class="container align-right col-md-2"><div ng-if="productionCtrl.isProducer">
+              <td class="container align-right col-md-3"><div ng-if="productionCtrl.isProducer">
                 <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)" class="btn main-btn production-margin">Hire</a>
                 <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn remove-btn-hover production-margin">Pending</a>
                 <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover production-margin">Declined</a>

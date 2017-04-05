@@ -20,6 +20,9 @@ $error: #FF584B;
 $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 // STYLES --------------------------------------------
+// html, body {
+//   min-width: 1200px;
+// }
 
 body {
   font-family: $font-stack;
@@ -34,6 +37,11 @@ body.bottom-padding{
 
 a, a:hover, a:link{
   text-decoration: none;
+}
+
+.cast-crew-table {
+  // border-bottom: 2px solid white;
+  margin-bottom: 20px;
 }
 
 #left-arrow {
@@ -126,8 +134,7 @@ table td {
 
 #crew-title {
   float: left;
-  position: relative;
-  left: -3%; }
+  position: relative; }
 
 .align-center {
   text-align: center; }
