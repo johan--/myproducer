@@ -7,6 +7,8 @@ premiumController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthServic
 function premiumController($rootScope, $state, $stateParams, AuthService) {
   var vm = this
 
+  console.log($stateParams);
+
   $rootScope.activeTab = {}
 
   if($rootScope.isLoggedIn) {
@@ -25,7 +27,7 @@ function premiumController($rootScope, $state, $stateParams, AuthService) {
     // call register from service
     AuthService.registerPremium(vm.registerForm, $stateParams.ur, $stateParams)
       // handle success
-      .then(function () {
+      .then(function() {
         $state.go('stripe')
         vm.disabled = false
         vm.registerForm = {}

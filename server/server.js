@@ -36,6 +36,7 @@ var userRoutes = require('./routes/users.js')
 var productionRoutes = require('./routes/productions.js')
 var crewRoutes = require('./routes/crew.js')
 var uploadRoutes = require('./routes/fileUploads.js')
+var stripeRoutes = require('./routes/stripe.js')
 
 // define middleware
 app.use(express.static(path.join(__dirname, '../client')))
@@ -59,6 +60,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/productions', productionRoutes)
 app.use('/api/crew', crewRoutes)
 app.use('/uploads', uploadRoutes)
+app.use('/stripe', stripeRoutes)
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'))

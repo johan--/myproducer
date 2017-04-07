@@ -137,32 +137,29 @@ angular.module('myApp')
 
       // create a new instance of deferred
       var deferred = $q.defer()
+      const path = '/user/register'
 
-      console.log(user);
-      console.log(role);
-      console.log(params);
+      $http.post(path, {
+        username: user.username,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        password: user.password,
+        role: role
+      })
+      .success(function (data, status) {
+        console.log("success");
+        if(status === 200 && data.status){
+          deferred.resolve()
+        } else {
+          deferred.reject()
+        }
+      })
+      // handle error
+      .error(function (data) {
+        deferred.reject()
+      })
 
-      // if producerId is provided, append it to register api path
-      // console.log(path);
-
-      // send a post request to the server
-      // $http.post(path,
-      //   {username: user.username, first_name: user.first_name, last_name: user.last_name, password: user.password, role: role})
-      //   // handle success
-      //   .success(function (data, status) {
-      //     if(status === 200 && data.status){
-      //       deferred.resolve()
-      //     } else {
-      //       deferred.reject()
-      //     }
-      //   })
-      //   // handle error
-      //   .error(function (data) {
-      //     deferred.reject()
-      //   })
-      //
-      // // return promise object
-      // return deferred.promise
+      return deferred.promise
 
     }
 
