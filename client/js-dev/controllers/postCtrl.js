@@ -19,6 +19,8 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     vm.showSaveButton = false;
   };
 
+/////////////////// ng img crop code //////////////////////
+
   // image cropping
   // $scope.myImage = '';
   // $scope.myCroppedImage = '';
@@ -39,6 +41,10 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   //   };
   //   reader.readAsDataURL(file);
   // };
+
+
+
+  ////////////////////////// end of ng img crop code ///////////
 
 
   $rootScope.activeTab = {}
@@ -135,7 +141,10 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
    start upload procedure by asking for a signed request from the app.
   */
   vm.initUpload = function(){
-  //
+
+  //////////////// code to change base64 to BLOB //////////////
+
+
   //   var dataURItoBlob = function(dataURI) {
   //   var binary = atob(dataURI.split(',')[1]);
   //   var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -147,6 +156,11 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   // };
   //
   //   var blob = dataURItoBlob($scope.myCroppedImage)
+
+
+  ////////////// end of blob code //////////////////////////////
+
+
 
     var files = document.getElementById('file-input').files;
     // var file = files[0];

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="col-md-4 col-centered">
+    <h3 class="text-center bottom-padding">NEW ACCOUNT</h3>
+    <div ng-show="premiumCtrl.error" class="alert alert-danger">{{premiumCtrl.errorMessage}}</div>
+    <form class="form" ng-submit="premiumCtrl.register()">
+      <div class="form-group">
+        <input type="email" class="form-control out" name="email"
+         ng-model="premiumCtrl.registerForm.username" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control out"
+         ng-model="premiumCtrl.registerForm.first_name" placeholder="First Name" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control out"
+         ng-model="premiumCtrl.registerForm.last_name" placeholder="Last Name" required>
+      </div>
+      <div class="form-group">
+          <input type="password" class="form-control out" name="password" ng-model="premiumCtrl.registerForm.password" placeholder="Password" required>
+        </div>
+        <div>
+          <button type="submit" class="btn approval-btn full-width" ng-disabled="premiumCtrl.disabled">Register</button>
+        </div>
+    </form>
+  </div>
+
+</div>

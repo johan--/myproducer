@@ -11,6 +11,7 @@ angular.module('myApp')
       login: login,
       logout: logout,
       register: register,
+      registerPremium: registerPremium,
       forgotPassword: forgotPassword,
       checkToken: checkToken,
       resetPassword: resetPassword,
@@ -129,6 +130,39 @@ angular.module('myApp')
 
       // return promise object
       return deferred.promise
+
+    }
+
+    function registerPremium(user, role, params) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer()
+
+      console.log(user);
+      console.log(role);
+      console.log(params);
+
+      // if producerId is provided, append it to register api path
+      // console.log(path);
+
+      // send a post request to the server
+      // $http.post(path,
+      //   {username: user.username, first_name: user.first_name, last_name: user.last_name, password: user.password, role: role})
+      //   // handle success
+      //   .success(function (data, status) {
+      //     if(status === 200 && data.status){
+      //       deferred.resolve()
+      //     } else {
+      //       deferred.reject()
+      //     }
+      //   })
+      //   // handle error
+      //   .error(function (data) {
+      //     deferred.reject()
+      //   })
+      //
+      // // return promise object
+      // return deferred.promise
 
     }
 

@@ -28,6 +28,16 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       templateUrl: 'templates/register.html',
       controller: 'registerController as registerCtrl'
     })
+    .state('premium-register', {
+      url: '/register/premium?p&r&ur',
+      templateUrl: 'templates/premium.html',
+      controller: 'premiumController as premiumCtrl'
+    })
+    .state('stripe', {
+      url: '/premium-payment',
+      templateUrl: 'templates/stripe.html',
+      controller: 'stripeController as stripeCtrl'
+    })
     .state('complete-registration',{
       url: '/complete-registration/:token',
       templateUrl: 'templates/complete-registration.html',

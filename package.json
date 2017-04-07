@@ -22,7 +22,8 @@
     "nodemailer": "^2.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^4.0.0"
+    "passport-local-mongoose": "^4.0.0",
+    "stripe": "^4.17.1"
   },
   "devDependencies": {
     "browser-sync": "^2.17.5",
