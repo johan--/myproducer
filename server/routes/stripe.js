@@ -4,8 +4,7 @@ var User = require('../models/User.js')
 var dotenv = require('dotenv').load({silent: true})
 var stripe = require('stripe')(process.env.STRIPE_TEST_SECRET_KEY)
 
-app.get('/register', function(req,res, email, plan) {
-
+app.get('/register', function(req, res) {
   var customer = stripe.customers.create({
     email: req.body.email,
     plan: req.body.plan,
@@ -14,26 +13,28 @@ app.get('/register', function(req,res, email, plan) {
   })
 })
 
-// var premiumPlan = stripe.plan.create({
-//   name: "Premium Plan",
-//   id: "premium-monthly",
-//   interval: "month",
-//   currency: "usd",
-//   amount: 25
-// }, function(err,plan){
-//   // asynchronously called
-//   if(err) {return err}
-//   console.log(plan);
-// })
-//
-// var proPlan = stripe.plan.create({
-//   name: "Pro Plan",
-//   id: "pro-monthly",
-//   interval: "month",
-//   currency: "usd",
-//   amount: 50
-// }, function(err,plan){
-//   // asynchronously called
-//   if(err) {return err}
-//   console.log(plan);
-// })
+var premiumPlan = stripe.plans.create({
+  name: "Premium Plan",
+  id: "premium-monthly",
+  interval: "month",
+  currency: "usd",
+  amount: 25
+}, function(err,plan){
+  // asynchronously called
+  if(err) {return err}
+  console.log(plan);
+})
+
+var proPlan = stripe.plans.create({
+  name: "Pro Plan",
+  id: "pro-monthly",
+  interval: "month",
+  currency: "usd",
+  amount: 50
+}, function(err,plan){
+  // asynchronously called
+  if(err) {return err}
+  console.log(plan);
+})
+
+module.exports = app
