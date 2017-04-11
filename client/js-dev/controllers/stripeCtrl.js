@@ -40,15 +40,15 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
 card.mount('#card-element');
 
 function setOutcome(result) {
-  var successElement = document.querySelector('.success');
-  var errorElement = document.querySelector('.error');
+  var successElement = document.querySelector('.stripe-success');
+  var errorElement = document.querySelector('.stripe-error');
   successElement.classList.remove('visible');
   errorElement.classList.remove('visible');
 
   if (result.token) {
     // Use the token to create a charge or a customer
     // https://stripe.com/docs/charges
-    successElement.querySelector('.token').textContent = result.token.id;
+    successElement.querySelector('.stripe-token').textContent = result.token.id;
     successElement.classList.add('visible');
     vm.makeStripeSubscription(result.token.id)
   } else if (result.error) {
