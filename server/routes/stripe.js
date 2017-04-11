@@ -35,7 +35,7 @@ app.patch('/register/:id/:plan', function(req, res) {
   var plan = stripeData.plan
   if(plan === 'pro'){
     plan = "pro-monthly"
-  } else if(plan === 'prem'){
+  } else if(plan === 'premium'){
     plan = "premium-monthly"
   }
 
@@ -51,7 +51,16 @@ app.patch('/register/:id/:plan', function(req, res) {
     }, function(err, subscription){
       if(err) return console.log(err);
       User.findOne({_id: stripeData.user._id}, function(err, user) {
-        res.json(user)
+        var newUser = user
+        newUser.stripePlan = subscription
+        newUser.save()
+
+        const newStripeData = {
+          stripeAccount: stripeAcc,
+          subscription: subscription,
+          user: newUser
+        }
+        res.json(newStripeData)
       })
     })
   })
