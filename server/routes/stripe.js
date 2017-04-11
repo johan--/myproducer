@@ -2,7 +2,7 @@
 var app = require('express')()
 var User = require('../models/User.js')
 var dotenv = require('dotenv').load({silent: true})
-var stripe = require('stripe')(process.env.STRIPE_TEST_SECRET_KEY)
+var stripe = require('stripe')(process.env.STRIPE_LIVE_SECRET_KEY)
 
 var premiumPlan = stripe.plans.create({
   name: "Premium Plan",
@@ -50,11 +50,10 @@ app.patch('/register/:plan', function(req, res) {
       User.findOne({_id: stripeData.user._id}, function(err, user) {
         var newUser = user
         newUser.stripePlan = subscription
+        newUser.stripeAccount = stripeAcc
         newUser.save()
 
         const newStripeData = {
-          stripeAccount: stripeAcc,
-          subscription: subscription,
           user: newUser
         }
         res.json(newStripeData)

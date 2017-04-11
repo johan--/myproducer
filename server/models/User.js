@@ -26,6 +26,7 @@ var User = new Schema({
   active: {type: Boolean, default: true},
   picture: String,
   stripePlan: Object,
+  stripeAccount: Object
 }, {timestamps: true})
 
 User.plugin(passportLocalMongoose)
