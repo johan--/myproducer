@@ -31,14 +31,20 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
     .state('premium-register', {
       url: '/register/premium?plan&ur',
       templateUrl: 'templates/premium.html',
-      controller: 'premiumController as premiumCtrl'
+      controller: 'premiumController as premiumCtrl',
+      params: {
+        error: false
+      }
     })
     .state('stripe', {
-      url: '/premium-payment/:id/:plan',
+      url: '/premium-payment/:plan',
       templateUrl: 'templates/stripe.html',
-      controller: 'stripeController as stripeCtrl'
+      controller: 'stripeController as stripeCtrl',
+      params: {
+        form: null
+      }
     })
-    .state('complete-registration',{
+    .state('complete-registration', {
       url: '/complete-registration/:token',
       templateUrl: 'templates/complete-registration.html',
       controller: 'completeRegistrationController as compRegCtrl'

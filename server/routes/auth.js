@@ -24,9 +24,6 @@ router.post('/register', function(req, res) {
       })
     }
 
-
-    console.log(req.query)
-
     // Add to newly registered user to another user's contact list
     if(req.query.addTo){
 
@@ -57,7 +54,10 @@ router.post('/register', function(req, res) {
       })
     }
 
-    passport.authenticate('local')(req, res, function () {
+    // start promise if they're subscribing
+    // wait for them to make stripe acc/subscription to return the user object and store them in the session
+    if(req.body.plan){
+      passport.authenticate('local')(req, res, function () {
         // nodemailer variables
         var toEmail = account.username
         var toName = account.first_name + ' '
@@ -79,6 +79,29 @@ router.post('/register', function(req, res) {
         plan: req.body.plan
       })
     })
+  } else {
+    passport.authenticate('local')(req, res, function () {
+      // nodemailer variables
+      var toEmail = account.username
+      var toName = account.first_name + ' '
+
+      // send welcome email
+      mailer.send(
+        'welcome',
+        {
+          recipient: toName
+        },
+        {
+          to: toEmail,
+          subject: 'Welcome to myproducer.io!'
+        }
+      )
+    return res.status(200).json({
+      status: 'Registration successful!',
+      user: account
+    })
+  })
+  }
   })
 })
 

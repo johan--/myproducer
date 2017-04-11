@@ -5,6 +5,8 @@ stripeController.$inject = ['$rootScope', '$state', '$http', '$stateParams', 'Au
 
 function stripeController($rootScope, $state, $http, $stateParams, AuthService) {
   var vm = this
+  vm.premiumForm = $state.params.form
+
 
   // when there is a post request, go to stripe ctrl in backend
 
@@ -71,46 +73,32 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
   // make stripe API request
   vm.makeStripeSubscription = function(token) {
+  //
+    AuthService.registerPremium(vm.premiumForm, $stateParams.ur, $state.params.plan)
+      // handle success
+      .then(function(data) {
+          vm.disabled = false
+          vm.premiumForm = {}
 
-    const stripeData = {
-      email: vm.currentUser.username,
-      plan: $stateParams.plan,
-      user: vm.currentUser,
-      source: token
-    }
+          const stripeData = {
+            email: vm.premiumForm.username,
+            plan: $state.params.plan,
+            source: token,
+            user: data.user
+          }
 
-    $http.patch('/stripe/register/' + vm.currentUser._id + '/' + $stateParams.plan, {stripeData: stripeData})
-      .success(function(data) {
-        console.log("stripe api successful");
-        console.log(data);
-        $state.go('home')
+          $http.patch('/stripe/register/' + stripeData.plan, {stripeData: stripeData})
+            .success(function(data) {
+              $state.go('profile')
+            })
+      })
+      // handle error
+      .catch(function () {
+        $state.go('premium-register', {plan: $state.params.plan, ur: 'producer', error: true })
       })
 
-  //   const xhr = new XMLHttpRequest()
-  //   vm.disabled = true
-  //   vm.error = false
-  //
-  //   xhr.open('PATCH', '/stripe/register/:id/:plan', {email: vm.currentUser.username, plan: $stateParams.plan, user: vm.currentUser})
-  //   xhr.onreadystatechange = function() {
-  //     if(xhr.readyState === 4){
-  //       if(xhr.status === 200){
-  //         $state.go('home')
-  //       }
-  //     }
-  //   }
+      $rootScope.activeTab = {}
+
   }
-
-  // vm.resolve = function(email,id) {
-  //   return new Promise(function(resolve,reject) {
-  //     // promise that user will complete credit card info
-  //     // when they do, sign them up
-  //     AuthService.makeStripeSubscription(email,id)
-  //     .then(function(data) {
-  //
-  //     })
-  //   })
-  // }
-
-  $rootScope.activeTab = {}
 
 }

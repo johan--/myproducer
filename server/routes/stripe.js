@@ -11,7 +11,6 @@ var premiumPlan = stripe.plans.create({
   currency: "usd",
   amount: 25
 }, function(err,plan){
-  // asynchronously called
   if(err) {return err}
   console.log("premium plan was made");
 })
@@ -23,12 +22,11 @@ var proPlan = stripe.plans.create({
   currency: "usd",
   amount: 50
 }, function(err,plan){
-  // asynchronously called
   if(err) {return err}
   console.log("pro plan was made");
 })
 
-app.patch('/register/:id/:plan', function(req, res) {
+app.patch('/register/:plan', function(req, res) {
 
   const stripeData = req.body.stripeData
 
@@ -44,7 +42,6 @@ app.patch('/register/:id/:plan', function(req, res) {
     source: stripeData.source
   }, function(err, stripeAcc){
     if(err) return console.log(err);
-    console.log("made new stripe user. making subscription now");
     stripe.subscriptions.create({
       customer: stripeAcc.id,
       plan: plan

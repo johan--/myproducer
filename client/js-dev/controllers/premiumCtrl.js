@@ -9,6 +9,12 @@ function premiumController($rootScope, $state, $stateParams, AuthService) {
 
   $rootScope.activeTab = {}
 
+  if($state.params.error){
+    vm.error = true
+    vm.errorMessage = "Something went wrong!"
+    vm.disabled = false
+  }
+
   if($rootScope.isLoggedIn) {
     // console.log('go to proile');
     $state.go('profile')
@@ -17,43 +23,7 @@ function premiumController($rootScope, $state, $stateParams, AuthService) {
   }
 
   vm.register = function () {
-
-    // initial values
-    vm.error = false
-    vm.disabled = true
-
-    // call register from service
-    AuthService.registerPremium(vm.registerForm, $stateParams.ur, $stateParams, $stateParams.plan)
-      // handle success
-      .then(function(data) {
-        // return new Promise(function(resolve,reject){
-          // $stateProvider.state('stripe', {
-          //   url: '/premium-payment',
-          //   templateUrl: 'templates/stripe.html',
-          //   controller: 'stripeController as stripeCtrl',
-          //   resolve: stripeController.resolve
-          // })
-          $state.go('stripe', {id: data.user._id, plan: data.plan})
-          vm.disabled = false
-          vm.registerForm = {}
-        //   .resolve(function(data){
-        //     return console.log(data);
-        //   })
-        //   .reject(function(data){
-        //     return console.log(data);
-        //   })
-        // })
-      })
-      // handle error
-      .catch(function () {
-        vm.error = true
-        vm.errorMessage = "Something went wrong!"
-        vm.disabled = false
-        vm.registerForm.username = ''
-        vm.registerForm.password = ''
-      })
+    // service route to return just the plan and the signup form values.
+    $state.go('stripe', {plan: $stateParams.plan, form: vm.registerForm})
   }
-  // vm.login = function() {
-  //   $state.go('login')
-  // }
 }

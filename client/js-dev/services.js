@@ -134,14 +134,12 @@ angular.module('myApp')
 
     }
 
-    function registerPremium(user, role, params, plan) {
+    function registerPremium(user, role, plan) {
 
       // create a new instance of deferred
       var deferred = $q.defer()
       const path = '/user/register'
       const planChosen = plan
-
-      console.log(plan);
 
       $http.post(path, {
         username: user.username,
