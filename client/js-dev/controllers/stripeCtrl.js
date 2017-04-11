@@ -6,19 +6,20 @@ stripeController.$inject = ['$rootScope', '$state', '$http', '$stateParams', 'Au
 function stripeController($rootScope, $state, $http, $stateParams, AuthService) {
   var vm = this
 
+  // when there is a post request, go to stripe ctrl in backend
+
   AuthService.getUserStatus()
     .then(function(data){
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data) {
           vm.currentUser = data
-          console.log(vm.currentUser);
         })
     })
 
-    var stripe = Stripe('pk_test_mHR67JgxkZZ0hWKaTQfWCmwS');
-var elements = stripe.elements();
+  var stripe = Stripe('pk_test_mHR67JgxkZZ0hWKaTQfWCmwS');
+  var elements = stripe.elements();
 
-var card = elements.create('card', {
+  var card = elements.create('card', {
   style: {
     base: {
       iconColor: '#666EE8',
@@ -47,6 +48,7 @@ function setOutcome(result) {
     // https://stripe.com/docs/charges
     successElement.querySelector('.token').textContent = result.token.id;
     successElement.classList.add('visible');
+    vm.makeStripeSubscription(result.token.id)
   } else if (result.error) {
     errorElement.textContent = result.error.message;
     errorElement.classList.add('visible');
@@ -67,21 +69,47 @@ document.querySelector('form').addEventListener('submit', function(e) {
 });
 
 
-  vm.makeStripeSubscription = function() {
+  // make stripe API request
+  vm.makeStripeSubscription = function(token) {
 
-    const xhr = new XMLHttpRequest()
-    vm.disabled = true
-    vm.error = false
-
-    xhr.open('GET', '/stripe/register', {user: vm.currentUser })
-    xhr.onreadystatechange = function() {
-      if(xhr.readyState === 4){
-        if(xhr.status === 200){
-
-        }
-      }
+    const stripeData = {
+      email: vm.currentUser.username,
+      plan: $stateParams.plan,
+      user: vm.currentUser,
+      source: token
     }
+
+    $http.patch('/stripe/register/' + vm.currentUser._id + '/' + $stateParams.plan, {stripeData: stripeData})
+      .success(function(data) {
+        console.log("stripe api successful");
+        console.log(data);
+        $state.go('home')
+      })
+
+  //   const xhr = new XMLHttpRequest()
+  //   vm.disabled = true
+  //   vm.error = false
+  //
+  //   xhr.open('PATCH', '/stripe/register/:id/:plan', {email: vm.currentUser.username, plan: $stateParams.plan, user: vm.currentUser})
+  //   xhr.onreadystatechange = function() {
+  //     if(xhr.readyState === 4){
+  //       if(xhr.status === 200){
+  //         $state.go('home')
+  //       }
+  //     }
+  //   }
   }
+
+  // vm.resolve = function(email,id) {
+  //   return new Promise(function(resolve,reject) {
+  //     // promise that user will complete credit card info
+  //     // when they do, sign them up
+  //     AuthService.makeStripeSubscription(email,id)
+  //     .then(function(data) {
+  //
+  //     })
+  //   })
+  // }
 
   $rootScope.activeTab = {}
 

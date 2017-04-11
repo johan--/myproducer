@@ -29,12 +29,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       controller: 'registerController as registerCtrl'
     })
     .state('premium-register', {
-      url: '/register/premium?pro&prem&p&ur',
+      url: '/register/premium?plan&ur',
       templateUrl: 'templates/premium.html',
       controller: 'premiumController as premiumCtrl'
     })
     .state('stripe', {
-      url: '/premium-payment',
+      url: '/premium-payment/:id/:plan',
       templateUrl: 'templates/stripe.html',
       controller: 'stripeController as stripeCtrl'
     })

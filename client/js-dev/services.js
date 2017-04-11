@@ -17,7 +17,8 @@ angular.module('myApp')
       resetPassword: resetPassword,
       completeRegistration: completeRegistration,
       checkCompRegToken: checkCompRegToken,
-      getCrewStatus: getCrewStatus
+      getCrewStatus: getCrewStatus,
+      makeStripeSubscription: makeStripeSubscription
     })
 
     function isLoggedIn() {
@@ -133,23 +134,26 @@ angular.module('myApp')
 
     }
 
-    function registerPremium(user, role, params) {
+    function registerPremium(user, role, params, plan) {
 
       // create a new instance of deferred
       var deferred = $q.defer()
       const path = '/user/register'
+      const planChosen = plan
+
+      console.log(plan);
 
       $http.post(path, {
         username: user.username,
         first_name: user.first_name,
         last_name: user.last_name,
         password: user.password,
-        role: role
+        role: 'producer',
+        plan: planChosen
       })
       .success(function (data, status) {
-        console.log("success");
         if(status === 200 && data.status){
-          deferred.resolve()
+          deferred.resolve(data)
         } else {
           deferred.reject()
         }
@@ -282,6 +286,19 @@ angular.module('myApp')
       })
 
       return deferred.promise
+    }
+
+
+    // get request to stripe backend
+    function makeStripeSubscription(email, id) {
+      // $http.get('/stripe/new', {email: email, id: id})
+      // .success(function(data) {
+      //
+      // })
+      // .error(function(data){
+      //
+      // })
+
     }
 
 

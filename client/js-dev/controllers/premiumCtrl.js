@@ -7,8 +7,6 @@ premiumController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthServic
 function premiumController($rootScope, $state, $stateParams, AuthService) {
   var vm = this
 
-  console.log($stateParams);
-
   $rootScope.activeTab = {}
 
   if($rootScope.isLoggedIn) {
@@ -25,12 +23,26 @@ function premiumController($rootScope, $state, $stateParams, AuthService) {
     vm.disabled = true
 
     // call register from service
-    AuthService.registerPremium(vm.registerForm, $stateParams.ur, $stateParams)
+    AuthService.registerPremium(vm.registerForm, $stateParams.ur, $stateParams, $stateParams.plan)
       // handle success
-      .then(function() {
-        $state.go('stripe')
-        vm.disabled = false
-        vm.registerForm = {}
+      .then(function(data) {
+        // return new Promise(function(resolve,reject){
+          // $stateProvider.state('stripe', {
+          //   url: '/premium-payment',
+          //   templateUrl: 'templates/stripe.html',
+          //   controller: 'stripeController as stripeCtrl',
+          //   resolve: stripeController.resolve
+          // })
+          $state.go('stripe', {id: data.user._id, plan: data.plan})
+          vm.disabled = false
+          vm.registerForm = {}
+        //   .resolve(function(data){
+        //     return console.log(data);
+        //   })
+        //   .reject(function(data){
+        //     return console.log(data);
+        //   })
+        // })
       })
       // handle error
       .catch(function () {

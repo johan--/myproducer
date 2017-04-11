@@ -74,7 +74,9 @@ router.post('/register', function(req, res) {
           }
         )
       return res.status(200).json({
-        status: 'Registration successful!'
+        status: 'Registration successful!',
+        user: account,
+        plan: req.body.plan
       })
     })
   })
