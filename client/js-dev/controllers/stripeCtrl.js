@@ -48,7 +48,6 @@ function setOutcome(result) {
   if (result.token) {
     // Use the token to create a charge or a customer
     // https://stripe.com/docs/charges
-    successElement.querySelector('.stripe-token').textContent = result.token.id;
     successElement.classList.add('visible');
     vm.makeStripeSubscription(result.token.id)
   } else if (result.error) {
@@ -70,7 +69,6 @@ document.querySelector('form').addEventListener('submit', function(e) {
   stripe.createToken(card, extraDetails).then(setOutcome);
 });
 
-
   // make stripe API request
   vm.makeStripeSubscription = function(token) {
   //
@@ -90,6 +88,9 @@ document.querySelector('form').addEventListener('submit', function(e) {
           $http.patch('/stripe/register/' + stripeData.plan, {stripeData: stripeData})
             .success(function(data) {
               $state.go('profile')
+            })
+            .error(function(){
+              $state.go('premium-register', {plan: $state.params.plan, ur: 'producer', error: true })
             })
       })
       // handle error

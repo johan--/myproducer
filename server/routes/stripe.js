@@ -9,9 +9,9 @@ var premiumPlan = stripe.plans.create({
   id: "premium-monthly",
   interval: "month",
   currency: "usd",
-  amount: 25
+  amount: 2500
 }, function(err,plan){
-  if(err) {return err}
+  if(err) {return console.log(err)}
   console.log("premium plan was made");
 })
 
@@ -20,9 +20,9 @@ var proPlan = stripe.plans.create({
   id: "pro-monthly",
   interval: "month",
   currency: "usd",
-  amount: 50
+  amount: 5000
 }, function(err,plan){
-  if(err) {return err}
+  if(err) {return console.log(err)}
   console.log("pro plan was made");
 })
 
