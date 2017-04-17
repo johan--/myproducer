@@ -15,12 +15,12 @@ function premiumController($rootScope, $state, $stateParams, AuthService) {
     vm.disabled = false
   }
 
-  if($rootScope.isLoggedIn) {
-    // console.log('go to proile');
-    $state.go('profile')
-  } else if ($stateParams.ur === undefined) {
-    $state.go('home', {reg: true})
-  }
+  // if($rootScope.isLoggedIn) {
+  //   // console.log('go to proile');
+  //   $state.go('profile')
+  // } else if ($stateParams.ur === undefined) {
+  //   $state.go('home', {reg: true})
+  // }
 
   vm.register = function () {
     // service route to return just the plan and the signup form values.
