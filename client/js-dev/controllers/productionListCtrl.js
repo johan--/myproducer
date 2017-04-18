@@ -7,6 +7,7 @@ productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$sta
 
 function productionListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
   var vm = this
+  vm.upgradeModal = {}
   vm.notifModal = {}
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
@@ -29,8 +30,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
-          // console.log(vm.currentUser.allProductions[17].by_);
-          // console.log(vm.currentUser._id);
           vm.ready = true
 
           if (vm.currentUser.role === 'producer') {
@@ -65,11 +64,11 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.addProduction = function(){
     // code to restrict free accounts
     // if current user did not subscribe, restrict from making a production
-    
+
     if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount) {
-      vm.notifModal.isFailure = true
-      vm.notifModal.content = 'You must upgrade your account to do that'
-      vm.notifModal.show = true
+      vm.upgradeModal.isFailure = true
+      vm.upgradeModal.content = 'You must upgrade your account to do that'
+      vm.upgradeModal.show = true
       return
     }
 
@@ -130,6 +129,16 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     vm.notifModal.show = false
     vm.notifModal.isSuccess = false
     vm.notifModal.isFailure = false
+  }
+
+  vm.openUpgradeModal = function() {
+    vm.upgradeModal.show = true
+  }
+
+  vm.closeUpgradeModal = function() {
+    vm.upgradeModal.show = false
+    vm.upgradeModal.isSuccess = false
+    vm.upgradeModal.isFailure = false
   }
 
   vm.compareDate = function(date){

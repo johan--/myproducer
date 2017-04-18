@@ -115,6 +115,19 @@
   </div>
 </div>
 
+<div id="modal-root" ng-if="productionListCtrl.upgradeModal.show">
+  <div id="modal-container" ng-click="productionListCtrl.closeUpgradeModal()">
+    <div id="modal-sm" class="section">
+      <div class="padding20 text-center">
+        <h1><i ng-if="productionListCtrl.upgradeModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
+        <h1><i ng-if="productionListCtrl.upgradeModal.isFailure" class="fa fa-times-circle-o"></i></h1>
+        <p>{{ productionListCtrl.upgradeModal.content }}</p>
+        <p><a href="/#/subscribe/pro" class="btn approval-btn">Pro</a><a href="/#/subscribe/premium" class="btn approval-btn">Premium</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="modal-root" ng-if="productionListCtrl.showDeleteProductionModal">
   <div id="modal-container" ng-click="productionListCtrl.closeDeleteProductionModal()">
     <div id="modal-md" class="section">

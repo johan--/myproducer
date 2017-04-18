@@ -37,7 +37,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       }
     })
     .state('stripe', {
-      url: '/premium-payment/:plan',
+      url: '/subscribe/:plan',
       templateUrl: 'templates/stripe.html',
       controller: 'stripeController as stripeCtrl',
       params: {

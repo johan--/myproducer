@@ -18,7 +18,7 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
         })
     })
 
-  var stripe = Stripe('pk_live_ia7M8gOjBo86Njp9ETWDxw1m');
+  var stripe = Stripe('pk_test_mHR67JgxkZZ0hWKaTQfWCmwS');
   var elements = stripe.elements();
 
   var card = elements.create('card', {
@@ -71,7 +71,26 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
   // make stripe API request
   vm.makeStripeSubscription = function(token) {
-  //
+
+    if(vm.currentUser){
+      console.log("user is logged in");
+      console.log($state.params.plan);
+      const stripeData = {
+        email: vm.currentUser.username,
+        plan: $state.params.plan,
+        source: token,
+        user: vm.currentUser
+      }
+
+      $http.patch('/stripe/register/' + stripeData.plan, {stripeData: stripeData})
+        .success(function(data) {
+          console.log(data);
+          $state.go('profile')
+        })
+        .error(function(){
+          $state.go('stripe', {plan: $state.params.plan})
+        })
+    } else {
     AuthService.registerPremium(vm.premiumForm, $stateParams.ur, $state.params.plan)
       // handle success
       .then(function(data) {
@@ -100,6 +119,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
       $rootScope.activeTab = {}
 
+    }
   }
 
 }
