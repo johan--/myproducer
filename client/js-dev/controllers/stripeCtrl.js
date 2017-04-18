@@ -46,8 +46,6 @@ function setOutcome(result) {
   errorElement.classList.remove('visible');
 
   if (result.token) {
-    // Use the token to create a charge or a customer
-    // https://stripe.com/docs/charges
     successElement.classList.add('visible');
     vm.makeStripeSubscription(result.token.id)
   } else if (result.error) {
@@ -72,6 +70,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
   // make stripe API request
   vm.makeStripeSubscription = function(token) {
 
+    // handles when a free account wants to upgrade
     if(vm.currentUser){
       const stripeData = {
         email: vm.currentUser.username,
@@ -87,11 +86,10 @@ document.querySelector('form').addEventListener('submit', function(e) {
         .error(function(){
           $state.go('stripe', {plan: $state.params.plan})
         })
-        
     } else {
-    AuthService.registerPremium(vm.premiumForm, $stateParams.ur, $state.params.plan)
-      // handle success
-      .then(function(data) {
+      AuthService.registerPremium(vm.premiumForm, $stateParams.ur, $state.params.plan)
+        // handle success
+        .then(function(data) {
           vm.disabled = false
           vm.premiumForm = {}
 
@@ -109,14 +107,12 @@ document.querySelector('form').addEventListener('submit', function(e) {
             .error(function(){
               $state.go('premium-register', {plan: $state.params.plan, ur: 'producer', error: true })
             })
-      })
-      // handle error
-      .catch(function () {
-        $state.go('premium-register', {plan: $state.params.plan, ur: 'producer', error: true })
-      })
-
-      $rootScope.activeTab = {}
-
+        })
+        // handle error
+        .catch(function () {
+          $state.go('premium-register', {plan: $state.params.plan, ur: 'producer', error: true })
+        })
+        $rootScope.activeTab = {}
     }
   }
 
