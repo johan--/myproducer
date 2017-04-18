@@ -15,19 +15,14 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
 
   AuthService.getUserStatus()
     .then(function(data){
-      // vm.currentUser = data.data.user
-      // console.log(data.data.user)
       $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
-
           if (vm.currentUser.role === 'crew') {
             $state.go('profile')
           }
-
           vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id + '&ur=crew'
           vm.ready = true
-          // console.log(data);
         })
   })
 
@@ -40,7 +35,6 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
         vm.newContact.email = ''
         vm.newContact.first_name = ''
         vm.newContact.last_name = ''
-        // console.log(data);
         $mixpanel.track('Add Contact Clicked', {"user" : vm.currentUser.username})
 
         if(data) {
