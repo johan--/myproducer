@@ -6,7 +6,6 @@ productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$sta
 // PRODUCTIONS
 
 function productionListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
-  console.log("productionListController instantiated");
   var vm = this
   vm.notifModal = {}
   $rootScope.activeTab = {}
@@ -64,6 +63,16 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.addProduction = function(){
+    // code to restrict free accounts
+    // if current user did not subscribe, restrict from making a production
+    
+    if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount) {
+      vm.notifModal.isFailure = true
+      vm.notifModal.content = 'You must upgrade your account to do that'
+      vm.notifModal.show = true
+      return
+    }
+
     if((new Date(vm.dateFrom)) > (new Date(vm.dateTo)) )
     {
       vm.dateTo = undefined
