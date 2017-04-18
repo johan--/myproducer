@@ -154,9 +154,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     vm.productionName = name
     vm.productionID = id
     vm.$index = index
-    console.log(vm.productionName);
-    console.log(vm.productionID);
-    console.log(vm.$index);
     vm.showDeleteProductionModal = true;
   }
 

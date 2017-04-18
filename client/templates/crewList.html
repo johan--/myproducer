@@ -74,8 +74,8 @@
       <div class="group">
         <div class="line-item y-padding" ng-repeat="pendingContact in crewListCtrl.currentUser.pendingContacts">
           <div class="col-xs-2 text-left">
-            <img class="thumb round" ng-show="!crew.picture" ng-src="./img/profile_default.png">
-            <img class="thumb round" ng-show="crew.picture" ng-src={{crew.picture}}>
+            <img class="thumb round" ng-show="!pendingContact.picture" ng-src="./img/profile_default.png">
+            <img class="thumb round" ng-show="pendingContact.picture" ng-src={{pendingContact.picture}}>
             <!-- <img ui-sref="" ng-src=""> -->
           </div>
           <div class="col-xs-6">

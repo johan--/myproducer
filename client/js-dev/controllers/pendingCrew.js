@@ -39,9 +39,6 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
             vm.rightButton = false
           }
 
-          console.log(vm.currentIndex);
-          console.log(vm.pendingList.length - 1);
-
           // get user that current user is viewing
           $http.get('/api/users/' + $stateParams.id + '/profile')
             .then(function(data){
