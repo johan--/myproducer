@@ -73,8 +73,6 @@ document.querySelector('form').addEventListener('submit', function(e) {
   vm.makeStripeSubscription = function(token) {
 
     if(vm.currentUser){
-      console.log("user is logged in");
-      console.log($state.params.plan);
       const stripeData = {
         email: vm.currentUser.username,
         plan: $state.params.plan,
@@ -84,12 +82,12 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
       $http.patch('/stripe/register/' + stripeData.plan, {stripeData: stripeData})
         .success(function(data) {
-          console.log(data);
           $state.go('profile')
         })
         .error(function(){
           $state.go('stripe', {plan: $state.params.plan})
         })
+        
     } else {
     AuthService.registerPremium(vm.premiumForm, $stateParams.ur, $state.params.plan)
       // handle success
