@@ -105,6 +105,26 @@ body.bottom-padding {
 a, a:hover, a:link {
   text-decoration: none; }
 
+.upgrade-options {
+  height: 100%;
+  width: 100%; }
+
+.upgrade-buttons {
+  position: relative;
+  top: -10%; }
+
+.free-btn {
+  position: relative;
+  left: -25%; }
+
+.premium-btn {
+  position: relative;
+  left: -4%; }
+
+.pro-btn {
+  position: relative;
+  left: 21%; }
+
 .onboard-question-mark {
   width: 20px;
   height: 20px;
@@ -317,6 +337,13 @@ table td {
   color: #FFFFFF; }
   .main-btn:hover {
     background-color: #00AEEF;
+    color: #FFFFFF; }
+
+.pro-btn {
+  background-color: #00AEEF;
+  color: #FFFFFF; }
+  .pro-btn:hover {
+    background-color: #4dcfff;
     color: #FFFFFF; }
 
 .approval-btn {
@@ -561,7 +588,15 @@ img.profile {
 
 #modal-md {
   color: #FFF;
-  width: 450px;
+  width: 500px;
+  margin: 0 auto;
+  background: #333333;
+  float: none;
+  padding-bottom: 20px; }
+
+#modal-lg {
+  color: #FFF;
+  width: 700px;
   margin: 0 auto;
   background: #333333;
   float: none;

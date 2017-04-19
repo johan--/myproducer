@@ -117,12 +117,14 @@
 
 <div id="modal-root" ng-if="productionListCtrl.upgradeModal.show">
   <div id="modal-container" ng-click="productionListCtrl.closeUpgradeModal()">
-    <div id="modal-sm" class="section">
+    <div id="modal-lg" class="section">
       <div class="padding20 text-center">
         <h1><i ng-if="productionListCtrl.upgradeModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
         <h1><i ng-if="productionListCtrl.upgradeModal.isFailure" class="fa fa-times-circle-o"></i></h1>
         <p>{{ productionListCtrl.upgradeModal.content }}</p>
-        <p><a href="/#/subscribe/premium" class="btn-margin btn approval-btn">Premium</a><a href="/#/subscribe/pro" class="btn-margin btn main-btn">Pro</a></p>
+        <br>
+        <img class="upgrade-options" src="./img/upgradeProPre.png">
+        <p><a href="#" class="free-btn approval-btn btn">Current Plan</a><a href="/#/subscribe/premium" class="premium-btn btn main-btn">Premium</a><a href="/#/subscribe/pro" class="pro-btn btn">Pro</a></p>
       </div>
     </div>
   </div>
