@@ -211,13 +211,14 @@ a, a:hover, a:link{
 }
 
 .onboard-box {
-  opacity: 0.85;
   background-color: #00adf0;
   max-width: 215px;
+  -moz-box-shadow:2px 2px 2px rgba(0,0,0,0.2);
+  -webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.2);
+  box-shadow:2px 2px 2px rgba(0,0,0,0.2);
 }
 
 .onboard-hire-box {
-  opacity: 0.85;
   background-color: #00adf0;
   max-width: 260px;
 }
@@ -309,6 +310,7 @@ a, a:hover, a:link{
   z-index: 2;
   left: 80%;
   top: 30px;
+  padding: 2px;
 }
 
 .cast-crew-table {
