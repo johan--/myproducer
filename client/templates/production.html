@@ -80,6 +80,8 @@
     <div class="container-fluid bottom-border no-padding">
       <div class="col-sm-6 no-padding section">
         <h3 id="crew-title" class="thumb-margin stick-bottom title">CAST AND CREW</h3>
+        <img src="./img/question-mark.png" class="onboard-question-mark" ng-mouseover="productionCtrl.hoverHire = true" ng-mouseleave="productionCtrl.hoverHire = false"/>
+        <div ng-if="productionCtrl.hoverHire" class="onboard-box onboard-production"><p>Start adding crew members to your production</p></div>
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">

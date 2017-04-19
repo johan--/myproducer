@@ -12,6 +12,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
 
+  vm.hoverHire = false
+
   vm.notifModal = {}
 
   vm.editingState = false

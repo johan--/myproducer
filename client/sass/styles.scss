@@ -166,6 +166,31 @@ a, a:hover, a:link{
   text-decoration: none;
 }
 
+.onboard-question-mark {
+  width: 20px;
+  height: 20px;
+  margin-top: 15px;
+}
+
+.onboard-box {
+  opacity: 0.85;
+  background-color: #00adf0;
+  max-width: 200px;
+}
+
+.onboard-box p {
+  font-size: 13px;
+  white-space: pre-wrap;
+  overflow: visible;
+}
+
+.onboard-production {
+  display: inline-block;
+  position: absolute;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
 .cast-crew-table {
   margin-bottom: 20px;
 }
@@ -358,7 +383,7 @@ table td {
 }
 
 .logo a img{
-  max-width: 300px;
+  max-width: 250px;
 }
 
 .navleft{
@@ -556,7 +581,7 @@ select.subtle-border-2{
 }
 
 .navbar{
-  font-size: 18px;
+  font-size: 16px;
 
   .nav-currentuser{
 
