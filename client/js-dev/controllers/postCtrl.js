@@ -7,6 +7,9 @@ postController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'Auth
 
 function postController($rootScope, $http, $stateParams, $state, AuthService, $scope, $mixpanel){
   var vm = this
+  vm.hoverPending = false
+  vm.hoverCurrent = false
+  vm.hoverPast = false
   vm.currentUser = {}
   vm.editingState = false;
   vm.fileInput = document.getElementById('file-input')

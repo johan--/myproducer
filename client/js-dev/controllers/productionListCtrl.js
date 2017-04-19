@@ -7,6 +7,7 @@ productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$sta
 
 function productionListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
   var vm = this
+  vm.hoverCreate = false
   vm.upgradeModal = {}
   vm.notifModal = {}
   $rootScope.activeTab = {}

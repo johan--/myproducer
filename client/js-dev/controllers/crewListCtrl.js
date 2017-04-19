@@ -9,6 +9,8 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
   var vm = this
   vm.showModal = false;
   vm.notifModal = {}
+  vm.hoverApprovedCrew = false
+  vm.hoverPendingCrew = false
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.crewList = true

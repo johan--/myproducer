@@ -194,26 +194,121 @@ a, a:hover, a:link{
 .onboard-question-mark {
   width: 20px;
   height: 20px;
+}
+
+.onboard-question-down {
+  position: relative;
+  top: 2px;
+}
+
+.onboard-question-up {
+  position: relative;
+  top: -2px;
+}
+
+.margin-top-question {
   margin-top: 15px;
 }
 
 .onboard-box {
   opacity: 0.85;
   background-color: #00adf0;
-  max-width: 200px;
+  max-width: 215px;
+}
+
+.onboard-hire-box {
+  opacity: 0.85;
+  background-color: #00adf0;
+  max-width: 260px;
 }
 
 .onboard-box p {
   font-size: 13px;
   white-space: pre-wrap;
   overflow: visible;
+  margin: 1px;
+}
+
+.onboard-hire-box p {
+  font-size: 13px;
+  white-space: pre-wrap;
+  overflow: visible;
+  margin: 1px;
 }
 
 .onboard-production {
   display: inline-block;
   position: absolute;
-  margin-left: 5px;
-  margin-top: 5px;
+  margin-left: 15px;
+  margin-top: 10px;
+  padding: 1px;
+}
+
+.onboard-pending {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  margin-top: 2px;
+  left: 51%;
+  top: 1px;
+  padding: 2px;
+}
+
+.onboard-approved-crew {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  margin-top: 2px;
+  left: 28%;
+  top: 6px;
+  padding: 2px;
+}
+
+.onboard-pending-crew {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  margin-top: 2px;
+  left: 27%;
+  top: 1px;
+  padding: 2px;
+}
+
+.onboard-hire {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  left: 51%;
+  top: 10px;
+  margin: -7px;
+  overflow: hidden;
+}
+
+.onboard-current {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  left: 51%;
+  padding: 2px;
+  margin: -7px;
+}
+
+.onboard-past {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  margin-top: 2px;
+  left: 46%;
+  padding: 2px;
+  margin: -7px;
+}
+
+.onboard-create {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  left: 80%;
+  top: 30px;
 }
 
 .cast-crew-table {

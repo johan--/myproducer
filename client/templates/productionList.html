@@ -7,7 +7,8 @@
             <input class="bg-transparent subtle-border padding5 top-margin2" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name" required>
             <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
             <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
-          <button type="submit" class="btn default-btn">+ Create New</button>
+          <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" type="submit" class="btn default-btn">+ Create New</button>
+          <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Offers for positions on upcoming productions will appear here</p></div>
         </form>
       </div>
     </div>
