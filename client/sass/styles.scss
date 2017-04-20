@@ -158,8 +158,13 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
 }
 
-.stripe-diff-plan:hover {
-  text-decoration: none;
+.stripe-diff-plan-span {
+  text-decoration: underline;
+  color: white;
+}
+
+.stripe-diff-plan-span:hover {
+  text-decoration: underline;
   color: $highlight
 }
 
@@ -178,6 +183,11 @@ body.bottom-padding{
 
 a, a:hover, a:link{
   text-decoration: none;
+}
+
+.thin {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 }
 
 .upgrade-options {

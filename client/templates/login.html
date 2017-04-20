@@ -9,10 +9,10 @@
       <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
     <form class="form" ng-submit="loginCtrl.login()">
       <div class="form-group">
-        <input type="text" class="form-control out highlight-specific" name="email" ng-model="loginCtrl.loginForm.username" placeholder="Email" required>
+        <input type="text" class="login form-control out highlight-specific" name="email" ng-model="loginCtrl.loginForm.username" placeholder="Email" required>
       </div>
       <div class="form-group">
-          <input type="password" class="form-control out highlight-specific" name="password" ng-model="loginCtrl.loginForm.password" placeholder="Password" required>
+          <input type="password" class="login form-control out highlight-specific" name="password" ng-model="loginCtrl.loginForm.password" placeholder="Password" required>
         </div>
         <div>
           <p>
