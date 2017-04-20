@@ -75,6 +75,9 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       url: '/productions',
       templateUrl: 'templates/productionList.html',
       controller: 'productionListController as productionListCtrl',
+      params: {
+        upgradeModal: false
+      },
       restricted: true
     })
     .state('profile', {

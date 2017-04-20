@@ -93,6 +93,17 @@
   font-weight: 500;
   font-size: 13px; }
 
+.stripe-header {
+  text-align: center; }
+
+.stripe-diff-plan {
+  text-decoration: none;
+  color: white; }
+
+.stripe-diff-plan:hover {
+  text-decoration: none;
+  color: #00AEEF; }
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #0A0A0A;

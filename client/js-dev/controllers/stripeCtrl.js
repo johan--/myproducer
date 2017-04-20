@@ -6,7 +6,24 @@ stripeController.$inject = ['$rootScope', '$state', '$http', '$stateParams', 'Au
 function stripeController($rootScope, $state, $http, $stateParams, AuthService) {
   var vm = this
   vm.premiumForm = $state.params.form
+  vm.planAmount = ''
 
+  if($state.params.plan === 'pro'){
+    vm.planAmount = '$50'
+  } else if($state.params.plan === 'premium'){
+    vm.planAmount = '$25'
+  }
+
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  vm.plan = capitalizeFirstLetter($state.params.plan)
+
+  vm.chooseDifferentPlan = function() {
+    $state.go('production-list', {upgradeModal: true})
+  }
 
   // when there is a post request, go to stripe ctrl in backend
 

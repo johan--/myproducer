@@ -149,6 +149,20 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
 
+.stripe-header {
+  text-align: center;
+}
+
+.stripe-diff-plan {
+  text-decoration: none;
+  color: white;
+}
+
+.stripe-diff-plan:hover {
+  text-decoration: none;
+  color: $highlight
+}
+
 // STRIPE CSS /////////////////////
 
 body {

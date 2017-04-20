@@ -13,6 +13,10 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
 
+  if($state.params.upgradeModal === true) {
+    vm.upgradeModal.show = true
+  }
+
   AuthService.getUserStatus()
     .then(function(data){
       // vm.currentUser = data.data.user

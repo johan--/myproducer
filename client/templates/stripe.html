@@ -1,3 +1,8 @@
+<div class="stripe-header">
+  <h4>Cool Move! The {{ stripeCtrl.plan }} Plan!</h4>
+  <a href="#" class="stripe-diff-plan" ng-click="stripeCtrl.chooseDifferentPlan()">Choose a different plan</a>
+</div>
+
 <form class="stripe-form">
   <div class="stripe-group">
     <label class="stripe-label">
@@ -15,7 +20,12 @@
       <div id="card-element" class="stripe-field"></div>
     </label>
   </div>
-  <button class="stripe-button" type="submit">CHECKOUT</button>
+
+  <div class="stripe-header">
+    <p>You will be charged {{stripeCtrl.planAmount}}/mo</p>
+  </div>
+
+  <button class="stripe-button" type="submit">UPGRADE</button>
   <div class="stripe-outcome">
     <div class="stripe-error"></div>
     <div class="stripe-success">
