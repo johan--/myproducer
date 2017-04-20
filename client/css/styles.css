@@ -155,13 +155,15 @@ a, a:hover, a:link {
   font-size: 13px;
   white-space: pre-wrap;
   overflow: visible;
-  margin: 1px; }
+  margin: 1px;
+  font-size: 11px; }
 
 .onboard-hire-box p {
   font-size: 13px;
   white-space: pre-wrap;
   overflow: visible;
-  margin: 1px; }
+  margin: 1px;
+  font-size: 11px; }
 
 .onboard-production {
   display: inline-block;
@@ -175,8 +177,8 @@ a, a:hover, a:link {
   position: absolute;
   z-index: 2;
   margin-top: 2px;
-  left: 51%;
-  top: 1px;
+  left: 250px;
+  top: 8px;
   padding: 2px; }
 
 .onboard-approved-crew {
@@ -184,7 +186,7 @@ a, a:hover, a:link {
   position: absolute;
   z-index: 2;
   margin-top: 2px;
-  left: 28%;
+  left: 135px;
   top: 6px;
   padding: 2px; }
 
@@ -193,7 +195,7 @@ a, a:hover, a:link {
   position: absolute;
   z-index: 2;
   margin-top: 2px;
-  left: 27%;
+  left: 120px;
   top: 1px;
   padding: 2px; }
 
@@ -210,7 +212,7 @@ a, a:hover, a:link {
   display: inline-block;
   position: absolute;
   z-index: 2;
-  left: 51%;
+  left: 250px;
   padding: 2px;
   margin: -7px; }
 
@@ -219,17 +221,17 @@ a, a:hover, a:link {
   position: absolute;
   z-index: 2;
   margin-top: 2px;
-  left: 46%;
+  left: 222px;
   padding: 2px;
   margin: -7px; }
 
 .onboard-create {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   z-index: 2;
-  left: 80%;
-  top: 30px;
-  padding: 2px; }
+  left: 85%;
+  top: 69px;
+  text-align: center; }
 
 .cast-crew-table {
   margin-bottom: 20px; }

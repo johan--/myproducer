@@ -1,4 +1,5 @@
  <div ng-show="productionListCtrl.ready">
+       <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Offers for positions on upcoming productions will appear here</p></div>
   <div class="productions-view col-sm-12 section">
     <div class="header-row">
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
@@ -8,7 +9,6 @@
             <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
             <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
           <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" type="submit" class="btn default-btn">+ Create New</button>
-          <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Offers for positions on upcoming productions will appear here</p></div>
         </form>
       </div>
     </div>

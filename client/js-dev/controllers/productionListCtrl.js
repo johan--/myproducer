@@ -68,7 +68,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
     if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount) {
       vm.upgradeModal.isFailure = true
-      vm.upgradeModal.content = 'You must upgrade your account to do that'
+      vm.upgradeModal.content = 'Oops! You must upgrade your account to do that'
       vm.upgradeModal.show = true
       return
     }
