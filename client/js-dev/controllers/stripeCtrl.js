@@ -35,7 +35,7 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
         })
     })
 
-  var stripe = Stripe('pk_test_mHR67JgxkZZ0hWKaTQfWCmwS');
+  var stripe = Stripe('pk_live_ia7M8gOjBo86Njp9ETWDxw1m');
   var elements = stripe.elements();
 
   var card = elements.create('card', {

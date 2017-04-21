@@ -2,7 +2,7 @@
 var app = require('express')()
 var User = require('../models/User.js')
 var dotenv = require('dotenv').load({silent: true})
-var stripe = require('stripe')(process.env.STRIPE_TEST_SECRET_KEY)
+var stripe = require('stripe')(process.env.STRIPE_LIVE_SECRET_KEY)
 
 var premiumPlan = stripe.plans.create({
   name: "Premium Plan",
