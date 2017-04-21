@@ -1,6 +1,6 @@
 <div class="stripe-header">
   <h1 class="thin">Cool Move! The {{ stripeCtrl.plan }} Plan!</h1>
-  <a href="#" class="thin stripe-diff-plan" ng-click="stripeCtrl.chooseDifferentPlan()"><span class="stripe-diff-plan-span">Choose a different plan</span></a>
+  <a ng-if="stripeCtrl.currentUser" href="#" class="thin stripe-diff-plan" ng-click="stripeCtrl.chooseDifferentPlan()"><span class="stripe-diff-plan-span">Choose a different plan</span></a>
 </div>
 
 <form class="stripe-form">
