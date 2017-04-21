@@ -21,10 +21,6 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
 
   vm.plan = capitalizeFirstLetter($state.params.plan)
 
-  vm.chooseDifferentPlan = function() {
-    $state.go('production-list', {upgradeModal: true})
-  }
-
   // when there is a post request, go to stripe ctrl in backend
 
   AuthService.getUserStatus()
