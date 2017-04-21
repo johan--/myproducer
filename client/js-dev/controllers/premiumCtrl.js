@@ -6,6 +6,7 @@ premiumController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthServic
 // REGISTER CONTROLLER:
 function premiumController($rootScope, $state, $stateParams, AuthService) {
   var vm = this
+  vm.plan = $stateParams.plan.toUpperCase()
 
   $rootScope.activeTab = {}
 

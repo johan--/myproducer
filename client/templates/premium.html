@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-md-4 col-centered">
-    <h3 class="text-center bottom-padding">NEW ACCOUNT</h3>
+    <h3 class="text-center bottom-padding">NEW {{premiumCtrl.plan}} ACCOUNT</h3>
     <div ng-show="premiumCtrl.error" class="alert alert-danger">{{premiumCtrl.errorMessage}}</div>
     <form class="form" ng-submit="premiumCtrl.register()">
       <div class="form-group">
