@@ -1,6 +1,9 @@
 <p>Hi <%= locals.recipient %>,</p>
 
-<p><%= locals.sender %> from myproducer.io would like to offer you a position on one of their upcoming productions.</p>
+<p><%= locals.sender %> is using myproducer.io to manage an upcoming production on <%= locals.productionDate %></p>
+
+<p><%= locals.senderFirstName %> has created a personalized offer for your review.</p>
 
 <p>View the offer and let them know if you would like to accept</p>
+
 <a href="<%= locals.offerURL %>"><button>View Offer</button></a>

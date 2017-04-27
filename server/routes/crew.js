@@ -87,7 +87,6 @@ router.get('/:id', function(req, res){
 })
 
 router.patch('/:id', function(req, res){
-  console.log(req.body);
   Crew.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, crew){
     if(err) return console.log(err)
 
@@ -95,11 +94,15 @@ router.patch('/:id', function(req, res){
     var offerURL = 'http://www.myproducer.io/#/offer/' + crew._id
     var fromEmail =req.user.username
     var fromName = req.user.first_name + ' ' + req.user.last_name
+    var fromFirstName = req.user.first_name
     User.findById(crew.to).exec(function(err, user){
       var toEmail = user.username
       var toName = user.first_name
 
-      console.log(offerURL, fromEmail, toEmail) //mail test
+    Production.findById(crew.production, function(err, production){
+      if(err) return console.log(err);
+      console.log('production that was found:');
+      var productionDate = production.date.toDateString()
 
       // send mail
         mailer.send(
@@ -107,7 +110,9 @@ router.patch('/:id', function(req, res){
           {
             recipient: toName,
             sender: fromName,
-            offerURL: offerURL
+            senderFirstName: fromFirstName,
+            offerURL: offerURL,
+            productionDate: productionDate
           },
           {
             to: toEmail,
@@ -117,6 +122,7 @@ router.patch('/:id', function(req, res){
       })
 
     res.json(crew)
+    })
   })
 })
 
