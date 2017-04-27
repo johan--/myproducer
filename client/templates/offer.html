@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="col-sm-12 padding20" ng-if="offerCtrl.isCrew && offerCtrl.crew.offer.status == 'Pending' && offerCtrl.compareDate(offerCtrl.crew.production.date)">
+      <div class="col-sm-12 padding20" ng-if="!offerCtrl.isProducer && offerCtrl.crew.offer.status == 'Pending' && offerCtrl.compareDate(offerCtrl.crew.production.date)">
         <div class="col-sm-6 text-right">
           <a class="btn default-btn x-padding" ng-click="offerCtrl.updateOfferStatus('Declined')">Decline</a>
         </div>

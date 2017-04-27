@@ -19,16 +19,21 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
             console.log("data line 19");
             console.log(data);
           })
+      } else if(vm.currentUser === undefined) {
+        vm.currentUser = {_id: ''}
       }
 
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
               // console.log(crew.message[0]._by.picture);
               vm.crew = crew
-              vm.isCrew = vm.crew
+              vm.isCrew = vm.crew.to
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
               // vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id || vm.crew
               vm.ready = true
+              console.log(vm.crew.offer.status);
+              console.log('vm.isCrew: ' + vm.isCrew);
+              console.log('vm.isProducer: ' + vm.isProducer);
               // console.log("Crew from get", vm.crew)
             })
     })
