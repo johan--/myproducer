@@ -31,10 +31,6 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
               // vm.isCrew = vm.crew.production.by_._id !== vm.currentUser._id || vm.crew
               vm.ready = true
-              console.log(vm.crew.offer.status);
-              console.log('vm.isCrew: ' + vm.isCrew);
-              console.log('vm.isProducer: ' + vm.isProducer);
-              // console.log("Crew from get", vm.crew)
             })
     })
 
@@ -62,7 +58,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
   }
 
   vm.updateOfferStatus = function(status) {
-    if(!vm.currentUser) {
+    if(vm.currentUser._id == '') {
       return vm.showVerificationModal = true
     } else {
 
@@ -95,7 +91,9 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
   }
 
   vm.redirectCompReg = function() {
-    $state.go('complete-registration', {token: vm.crew.to.resetPasswordToken})
+    console.log(vm.crew);
+    console.log(vm.crew.to.resetPasswordToken);
+    // $state.go('complete-registration', {token: vm.crew.to.resetPasswordToken})
   }
 
 }
