@@ -91,9 +91,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
   }
 
   vm.redirectCompReg = function() {
-    console.log(vm.crew);
-    console.log(vm.crew.to.resetPasswordToken);
-    // $state.go('complete-registration', {token: vm.crew.to.resetPasswordToken})
+    $state.go('complete-registration', {token: vm.crew.to.resetPasswordToken})
   }
 
 }
