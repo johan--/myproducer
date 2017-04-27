@@ -31,7 +31,7 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
         })
     })
 
-  var stripe = Stripe('pk_live_ia7M8gOjBo86Njp9ETWDxw1m');
+  var stripe = Stripe('pk_test_mHR67JgxkZZ0hWKaTQfWCmwS');
   var elements = stripe.elements();
 
   var card = elements.create('card', {
@@ -94,6 +94,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
       $http.patch('/stripe/register/' + stripeData.plan, {stripeData: stripeData})
         .success(function(data) {
+          console.log(data);
           $state.go('profile')
         })
         .error(function(){
