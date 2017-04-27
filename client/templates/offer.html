@@ -84,7 +84,7 @@
         <h1>Oops!</h1>
         <p>You must be logged in to do that.</p>
         <br>
-        <p><a class="btn approval-btn" ui-sref="login">Login</a>
+        <p><a ng-if="!offerCtrl.crew.to.resetPasswordToken" class="btn approval-btn" ui-sref="login">Login</a>
           <a class="btn error-btn" ng-click="offerCtrl.redirectCompReg()" ng-if="offerCtrl.crew.to.resetPasswordToken">Complete Registration</a></p>
       </div>
     </div>
