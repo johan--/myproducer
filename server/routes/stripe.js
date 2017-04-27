@@ -2,7 +2,7 @@
 var app = require('express')()
 var User = require('../models/User.js')
 var dotenv = require('dotenv').load({silent: true})
-var stripe = require('stripe')(process.env.STRIPE_TEST_SECRET_KEY)
+var stripe = require('stripe')(process.env.STRIPE_LIVE_SECRET_KEY)
 
 // var premiumPlan = stripe.plans.create({
 //   name: "Premium Plan",
@@ -26,6 +26,33 @@ var stripe = require('stripe')(process.env.STRIPE_TEST_SECRET_KEY)
 //   console.log("pro plan was made");
 // })
 
+// route for making coupons
+app.patch('/coupon', function(req, res){
+  const user = req.body.user
+
+  var customer = stripe.customers.create({
+    email: user.username
+  }, function(err, stripeAcc){
+      if(err) res.json(err);
+      stripe.subscriptions.create({
+        customer: stripeAcc.id,
+        plan: 'pro-monthly',
+        coupon: 'mpstaff'
+      }, function(err, subscription){
+        if(err) return res.json(err);
+        User.findOne({_id: user._id}, function(err, mpuser){
+          var mpstaffuser = mpuser
+          mpstaffuser.stripeAccount = stripeAcc,
+          mpstaffuser.stripePlan = subscription
+          mpstaffuser.save()
+
+          res.json(mpstaffuser)
+        })
+      })
+    })
+})
+
+// route to make new customers
 app.patch('/register/:plan', function(req, res) {
 
   const stripeData = req.body.stripeData

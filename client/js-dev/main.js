@@ -44,6 +44,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
         form: null
       }
     })
+    .state('stripe-coupon', {
+      url: '/mpstaff',
+      templateUrl: 'templates/stripe-coupon.html',
+      controller: 'stripeCouponController as stripeCouponCtrl',
+      restricted: true
+    })
     .state('complete-registration', {
       url: '/complete-registration/:token',
       templateUrl: 'templates/complete-registration.html',
