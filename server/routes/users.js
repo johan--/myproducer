@@ -197,6 +197,10 @@ router.get('/:id', function(req, res){
 router.patch('/:id', function(req, res){
   User.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, user){
     if(err) return console.log(err)
+    if(req.body.googleLocation){
+      user.location = req.body.googleLocation
+      user.save()
+    }
     res.json(user)
   })
 })

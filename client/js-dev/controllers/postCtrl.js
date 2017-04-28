@@ -15,6 +15,33 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.fileInput = document.getElementById('file-input')
   vm.modal = {}
   vm.showSaveButton = true;
+  vm.googleLocation = ''
+
+    ///////////////// GOOGLE PLACES API //////////////////
+
+    vm.loadGooglePlaces = function(){
+      vm.locationInput = document.getElementById('userLocation');
+      var options = {
+        types: ['geocode']
+      };
+
+      var autocomplete = new google.maps.places.Autocomplete(vm.locationInput, options);
+
+      autocomplete.addListener('place_changed', function(){
+        const placeChosen = autocomplete.getPlace()
+        vm.googleLocation = placeChosen.formatted_address
+      })
+
+    }
+
+  // var input = document.getElementById('userLocation');
+  // var options = {
+  //   types: ['establishment']
+  // };
+  //
+  // var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+
 
   $scope.file_changed = function(element) {
     document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
@@ -81,16 +108,9 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
   // EDIT USER
   vm.editUser = function() {
-    $http.patch('/api/users/'+ vm.currentUser._id, vm.currentUser)
+    $http.patch('/api/users/'+ vm.currentUser._id, {googleLocation: vm.googleLocation})
       .success(function(data) {
-        // // vm.currentUser.productions = data.productions
-        // // vm.currentUser.offersReceived = data.offersReceived
-        // vm.currentUser = data
-        // console.log(vm.currentUser);
-        // console.log(vm.currentUser.offersReceived);
-        // console.log(vm.currentUser.productions);
-        // vm.modal.isSuccess = true
-        // // vm.modal.content = 'You have successfully updated your profile.'
+        vm.currentUser.location = data.location
       })
       .error(function(data) {
         vm.modal.isFailure = true
