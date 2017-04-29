@@ -11,12 +11,44 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   vm.currentUser = {}
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
-
   vm.hoverHire = false
-
   vm.notifModal = {}
-
   vm.editingState = false
+  vm.googleLocation1 = ''
+  vm.googleLocation2 = ''
+
+  ////////////////// GOOGLE PLACES API ///////////////
+
+  vm.loadGooglePlaces = function(){
+    // get initial values of the location input fields
+    vm.location1 = document.getElementById('location1').innerHTML
+    vm.location2 = document.getElementById('location2').innerHTML
+    vm.googleLocations = [vm.location1, vm.location2]
+
+    vm.locationInput1 = document.getElementById('production1Location');
+
+    vm.locationInput2 = document.getElementById('production2Location');
+
+    console.log(vm.locationInput1.value);
+    console.log(vm.locationInput2.value);
+
+    var autocomplete1 = new google.maps.places.Autocomplete(vm.locationInput1);
+
+    var autocomplete2 = new google.maps.places.Autocomplete(vm.locationInput2);
+
+    autocomplete1.addListener('place_changed', function(){
+      const placeChosen1 = autocomplete1.getPlace()
+      vm.googleLocation1 = placeChosen1.formatted_address
+      vm.googleLocations[0] = vm.googleLocation1
+    })
+
+    autocomplete2.addListener('place_changed', function(){
+      const placeChosen2 = autocomplete2.getPlace()
+      vm.googleLocation2 = placeChosen2.formatted_address
+      vm.googleLocations[1] = vm.googleLocation2
+    })
+
+  }
 
   AuthService.getUserStatus()
     .then(function(data){
@@ -40,7 +72,10 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   })
 
     vm.editProduction = function(){
-      $http.patch('/api/productions/' + $stateParams.id, vm.production)
+      // if a location is deleted
+      
+
+      $http.patch('/api/productions/' + $stateParams.id, {googleLocations: vm.googleLocations})
         .success(function(data) {
           vm.editingState = false
           // console.log(data);

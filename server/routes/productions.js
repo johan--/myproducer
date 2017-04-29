@@ -92,6 +92,10 @@ router.get('/:id', function show(req, res){
 router.patch('/:id', function show(req, res){
   Production.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, production) {
     if(err) return console.log(err)
+    if(req.body.googleLocations){
+      production.location = req.body.googleLocations
+      production.save()
+    }
     res.json(production)
   })
 })

@@ -31,17 +31,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
         const placeChosen = autocomplete.getPlace()
         vm.googleLocation = placeChosen.formatted_address
       })
-
     }
-
-  // var input = document.getElementById('userLocation');
-  // var options = {
-  //   types: ['establishment']
-  // };
-  //
-  // var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-
 
   $scope.file_changed = function(element) {
     document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
