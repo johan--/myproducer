@@ -29,7 +29,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
       autocomplete.addListener('place_changed', function(){
         const placeChosen = autocomplete.getPlace()
-        vm.googleLocation = placeChosen.formatted_address
+        vm.googleLocation = vm.locationInput.value
       })
     }
 
@@ -98,6 +98,8 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
   // EDIT USER
   vm.editUser = function() {
+    vm.googleLocation = vm.locationInput.value
+
     $http.patch('/api/users/'+ vm.currentUser._id, {googleLocation: vm.googleLocation})
       .success(function(data) {
         vm.currentUser.location = data.location

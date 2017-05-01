@@ -29,9 +29,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
     vm.locationInput2 = document.getElementById('production2Location');
 
-    console.log(vm.locationInput1.value);
-    console.log(vm.locationInput2.value);
-
     var autocomplete1 = new google.maps.places.Autocomplete(vm.locationInput1);
 
     var autocomplete2 = new google.maps.places.Autocomplete(vm.locationInput2);
@@ -73,7 +70,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
     vm.editProduction = function(){
       // if a location is deleted
-      
+      vm.googleLocations[0] = vm.locationInput1.value
+      vm.googleLocations[1] = vm.locationInput2.value
 
       $http.patch('/api/productions/' + $stateParams.id, {googleLocations: vm.googleLocations})
         .success(function(data) {
