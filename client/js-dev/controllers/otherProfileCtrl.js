@@ -28,6 +28,8 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
           $http.get('/api/users/' + $stateParams.id + '/profile')
             .then(function(data){
               vm.user = data.data
+              vm.first_name = vm.user.first_name.charAt(0).toUpperCase() + vm.user.first_name.slice(1)
+              vm.resume = vm.user.resume || ''
               if(vm.user.website){
                 var http = 'http://'
                 if(vm.user.website[0] && vm.user.website[1] &&  vm.user.website[2] === 'w') {
