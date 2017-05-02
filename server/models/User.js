@@ -17,6 +17,7 @@ var User = new Schema({
   title: String,
   phone: String,
   website: String,
+  resume: String,
   bio: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}],
   offersSent: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],

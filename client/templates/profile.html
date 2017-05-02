@@ -110,6 +110,7 @@
               <label class="btn btn-default btn-file margin10">Upload Resume
                 <input type="file" id="file-input" onchange="angular.element(this).scope().resume_chosen(this)" accept=".pdf"  style="display: none;">
               </label>
+              <iframe id="resumeElement" ng-src="{{postCtrl.resumeUrl}}" width="400px" height="500px"></iframe>
             </div>
           </div>
         </form>

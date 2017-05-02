@@ -16,6 +16,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.modal = {}
   vm.showSaveButton = true;
   vm.googleLocation = ''
+  vm.resumeUrl = ''
 
     ///////////////// GOOGLE PLACES API //////////////////
 
@@ -72,7 +73,9 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
     xhr.onreadystatechange = function(){
       if(xhr.readyState === 4){
         if(xhr.status === 200){
-          console.log("success uploading", file);
+          vm.resumeUrl = url
+          document.getElementById('resumeElement').src = vm.resumeUrl
+          vm.currentUser.resume = vm.resumeUrl
         }
         else{
           // console.log(xhr.status);
