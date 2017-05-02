@@ -16,85 +16,17 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.modal = {}
   vm.showSaveButton = true;
   vm.googleLocation = ''
-  vm.resumeUrl = ''
-
-    ///////////////// GOOGLE PLACES API //////////////////
-
-    vm.loadGooglePlaces = function(){
-      vm.locationInput = document.getElementById('userLocation');
-      var options = {
-        types: ['geocode']
-      };
-
-      var autocomplete = new google.maps.places.Autocomplete(vm.locationInput, options);
-
-      autocomplete.addListener('place_changed', function(){
-        const placeChosen = autocomplete.getPlace()
-        vm.googleLocation = vm.locationInput.value
-      })
-    }
-
-  // when a user chooses a picture to upload
-  $scope.file_changed = function(element) {
-    document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
-    vm.showSaveButton = false;
-  };
-
-  $scope.resume_chosen = function(resume) {
-    vm.resumeFile = resume.files[0]
-    console.log(vm.resumeFile.type);
-    vm.resumeFile.randomName = vm.currentUser._id + '.' + Date.now() + '.pdf'
-    vm.resumeSignedRequest(vm.resumeFile)
-  }
-
-  vm.resumeSignedRequest = function (file){
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '/uploads/sign-s3?file-name='+ file.randomName+ '&file-type=' + file.type);
-    // xhr.open('GET', '/uploads/test')
-    xhr.onreadystatechange = function(){
-      if(xhr.readyState === 4){
-        if(xhr.status === 200){
-          const response = JSON.parse(xhr.responseText);
-          vm.avatarUrl = response.url
-          vm.uploadResume(file, response.signedRequest, response.url);
-          $mixpanel.track('Resume Uploaded', {"user" : vm.currentUser.username})
-        }
-        else{
-          alert('Could not get signed URL.');
-        }
-      }
-    };
-    xhr.send();
-  }
-
-  vm.uploadResume = function (file, signedRequest, url){
-    const xhr = new XMLHttpRequest();
-    xhr.open('PUT', signedRequest);
-    xhr.onreadystatechange = function(){
-      if(xhr.readyState === 4){
-        if(xhr.status === 200){
-          vm.resumeUrl = url
-          document.getElementById('resumeElement').src = vm.resumeUrl
-          vm.currentUser.resume = vm.resumeUrl
-        }
-        else{
-          // console.log(xhr.status);
-          alert('Could not upload file.');
-        }
-      }
-    };
-    xhr.send(file);
-  }
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.profile = true
 
-  // vm.currentUser.productions = []
   AuthService.getUserStatus()
     .then(function(data){
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data){
           vm.currentUser = data
+          vm.first_name = vm.currentUser.first_name.charAt(0).toUpperCase() + vm.currentUser.first_name.slice(1)
+          vm.resume = vm.currentUser.resume || ''
           initialRows(vm.currentUser.bio)
           // get all productions where I am a crew member
           var otherProductions = []
@@ -114,6 +46,79 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
           vm.ready = true
         })
   })
+
+  ///////////////// GOOGLE PLACES API //////////////////
+
+  vm.loadGooglePlaces = function(){
+    vm.locationInput = document.getElementById('userLocation');
+    var options = {
+      types: ['geocode']
+    };
+
+    var autocomplete = new google.maps.places.Autocomplete(vm.locationInput, options);
+
+    autocomplete.addListener('place_changed', function(){
+      const placeChosen = autocomplete.getPlace()
+      vm.googleLocation = vm.locationInput.value
+    })
+  }
+
+// when a user chooses a picture to upload
+$scope.file_changed = function(element) {
+  document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
+  vm.showSaveButton = false;
+};
+
+$scope.resume_chosen = function(resume) {
+  const resumeFile = resume.files[0]
+  resumeFile.randomName = vm.currentUser._id + '.' + Date.now() + '.pdf'
+  vm.resumeSignedRequest(resumeFile)
+}
+
+vm.resumeSignedRequest = function (file){
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/uploads/sign-s3?file-name='+ file.randomName+ '&file-type=' + file.type);
+  // xhr.open('GET', '/uploads/test')
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        const response = JSON.parse(xhr.responseText);
+        vm.avatarUrl = response.url
+        vm.uploadResume(file, response.signedRequest, response.url);
+        $mixpanel.track('Resume Uploaded', {"user" : vm.currentUser.username})
+      }
+      else{
+        alert('Could not get signed URL.');
+      }
+    }
+  };
+  xhr.send();
+}
+
+vm.uploadResume = function (file, signedRequest, url){
+  const xhr = new XMLHttpRequest();
+  xhr.open('PUT', signedRequest);
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        vm.resumeUrl = url
+        vm.addResumeToProfile()
+      }
+      else{
+        // console.log(xhr.status);
+        alert('Could not upload file.');
+      }
+    }
+  };
+  xhr.send(file);
+}
+
+vm.addResumeToProfile = function(){
+  $http.patch('/api/users/' + vm.currentUser._id, {resume: vm.resumeUrl})
+    .then(function(data){
+      vm.resume = data.data.resume
+    })
+}
 
   // EDIT USER
   vm.editUser = function() {
@@ -141,6 +146,10 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       })
   }
 
+  vm.setIframeSrc = function(){
+    document.getElementById('resumeElement').src = vm.resume
+  }
+
   vm.openModal = function() {
     vm.modal.show = true
   }
@@ -148,6 +157,10 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.openModal2 = function() {
     vm.modal.show2 = true
     vm.showSaveButton = true;
+  }
+
+  vm.openModal3 = function() {
+    vm.modal.show3 = true
   }
 
   vm.closeModal = function() {
@@ -159,6 +172,10 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
   vm.closeModal2 = function() {
     vm.modal.show2 = false
+  }
+
+  vm.closeModal3 = function() {
+    vm.modal.show3 = false
   }
 
   vm.compareDate = function(date){
