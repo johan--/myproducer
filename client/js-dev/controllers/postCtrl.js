@@ -33,10 +33,55 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       })
     }
 
+  // when a user chooses a picture to upload
   $scope.file_changed = function(element) {
     document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
     vm.showSaveButton = false;
   };
+
+  $scope.resume_chosen = function(resume) {
+    vm.resumeFile = resume.files[0]
+    console.log(vm.resumeFile.type);
+    vm.resumeFile.randomName = vm.currentUser._id + '.' + Date.now() + '.pdf'
+    vm.resumeSignedRequest(vm.resumeFile)
+  }
+
+  vm.resumeSignedRequest = function (file){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/uploads/sign-s3?file-name='+ file.randomName+ '&file-type=' + file.type);
+    // xhr.open('GET', '/uploads/test')
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          const response = JSON.parse(xhr.responseText);
+          vm.avatarUrl = response.url
+          vm.uploadResume(file, response.signedRequest, response.url);
+          $mixpanel.track('Resume Uploaded', {"user" : vm.currentUser.username})
+        }
+        else{
+          alert('Could not get signed URL.');
+        }
+      }
+    };
+    xhr.send();
+  }
+
+  vm.uploadResume = function (file, signedRequest, url){
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', signedRequest);
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          console.log("success uploading", file);
+        }
+        else{
+          // console.log(xhr.status);
+          alert('Could not upload file.');
+        }
+      }
+    };
+    xhr.send(file);
+  }
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.profile = true
@@ -127,7 +172,6 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
    start upload procedure by asking for a signed request from the app.
   */
   vm.initUpload = function(){
-
     var files = document.getElementById('file-input').files;
     file = files[0];
     file.randomName = vm.currentUser._id + "." + file.name.split('.').pop()
