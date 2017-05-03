@@ -584,10 +584,10 @@ table td {
 }
 
 .upgrade-btn {
-  background-color: #00AEEF;
+  background-color: $background;
+  border: 1px solid #00AEEF;
   margin-right: 10px;
-  opacity: 0.5;
-  color: white;
+  color: #00AEEF;
 }
 
 .upgrade-btn:hover {

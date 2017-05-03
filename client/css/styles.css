@@ -460,10 +460,10 @@ table td {
     color: #FFFFFF; }
 
 .upgrade-btn {
-  background-color: #00AEEF;
+  background-color: #0A0A0A;
+  border: 1px solid #00AEEF;
   margin-right: 10px;
-  opacity: 0.5;
-  color: white; }
+  color: #00AEEF; }
 
 .upgrade-btn:hover {
   background-color: #00AEEF;
