@@ -7,6 +7,7 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
   var vm = this
   vm.premiumForm = $state.params.form
   vm.planAmount = ''
+  vm.coupon = ''
 
   if($state.params.plan === 'pro'){
     vm.planAmount = '$50'
@@ -31,7 +32,7 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
         })
     })
 
-  var stripe = Stripe('pk_live_ia7M8gOjBo86Njp9ETWDxw1m');
+  var stripe = Stripe('pk_test_mHR67JgxkZZ0hWKaTQfWCmwS');
   var elements = stripe.elements();
 
   var card = elements.create('card', {
@@ -83,13 +84,20 @@ document.querySelector('form').addEventListener('submit', function(e) {
   // make stripe API request
   vm.makeStripeSubscription = function(token) {
 
+    const couponCode = document.getElementById('coupon').value
+
+    if(couponCode === 'beta'){
+      vm.coupon = 'alpha-coupon'
+    }
+
     // handles when a free account wants to upgrade
     if(vm.currentUser){
       const stripeData = {
         email: vm.currentUser.username,
         plan: $state.params.plan,
         source: token,
-        user: vm.currentUser
+        user: vm.currentUser,
+        coupon: vm.coupon
       }
 
       $http.patch('/stripe/register/' + stripeData.plan, {stripeData: stripeData})
@@ -111,7 +119,8 @@ document.querySelector('form').addEventListener('submit', function(e) {
             email: vm.premiumForm.username,
             plan: $state.params.plan,
             source: token,
-            user: data.user
+            user: data.user,
+            coupon: vm.coupon
           }
 
           $http.patch('/stripe/register/' + stripeData.plan, {stripeData: stripeData})
