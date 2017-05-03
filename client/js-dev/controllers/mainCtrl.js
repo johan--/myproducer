@@ -9,11 +9,16 @@ function mainController($rootScope, $state, AuthService, $location) {
   vm.isNotLogin = true
   vm.isLogin = false
   vm.dropDown = false
+  vm.upgradeable = true
 
   vm.showDropdown = function(){
     if(vm.dropDown == false){vm.dropDown = true
     } else {vm.dropDown = false}
 
+  }
+
+  vm.upgradeAccount = function() {
+    $state.go('profile', {upgradeModal: true})
   }
 
   $rootScope.activeTab = {}
@@ -23,6 +28,9 @@ function mainController($rootScope, $state, AuthService, $location) {
     AuthService.getUserStatus()
       .then(function(data){
         vm.currentUser = data.data.user
+        if(vm.currentUser.stripceAccount || vm.currentUser.stripePlan){
+          vm.upgradeable = false
+        }
         if (vm.currentUser) {
           $rootScope.isLoggedIn = true
         }

@@ -90,7 +90,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       url: '/profile',
       templateUrl: 'templates/profile.html',
       controller: 'postController as postCtrl',
-      restricted: true
+      restricted: true,
+      params: {
+        upgradeModal: false
+      }
     })
     .state('account-settings', {
       url: '/account-settings',

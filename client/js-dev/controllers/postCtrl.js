@@ -16,9 +16,14 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
   vm.modal = {}
   vm.showSaveButton = true;
   vm.googleLocation = ''
+  vm.upgradeModal = {}
 
   $rootScope.activeTab = {}
   $rootScope.activeTab.profile = true
+
+  if($state.params.upgradeModal === true) {
+    vm.upgradeModal.show = true
+  }
 
   AuthService.getUserStatus()
     .then(function(data){
@@ -176,6 +181,16 @@ vm.addResumeToProfile = function(){
 
   vm.closeModal3 = function() {
     vm.modal.show3 = false
+  }
+
+  vm.openUpgradeModal = function() {
+    vm.upgradeModal.show = true
+  }
+
+  vm.closeUpgradeModal = function() {
+    vm.upgradeModal.show = false
+    vm.upgradeModal.isSuccess = false
+    vm.upgradeModal.isFailure = false
   }
 
   vm.compareDate = function(date){
