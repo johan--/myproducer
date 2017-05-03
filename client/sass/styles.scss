@@ -584,7 +584,17 @@ table td {
 }
 
 .upgrade-btn {
-  background-color: #00AEEF
+  background-color: #00AEEF;
+  margin-right: 10px;
+  opacity: 0.5;
+  color: white;
+}
+
+.upgrade-btn:hover {
+  background-color: #00AEEF;
+  margin-right: 10px;
+  opacity: 1;
+  color: white;
 }
 
 .pro-btn{
