@@ -87,6 +87,16 @@
                 </li>
               </ul>
             </div>
+            <div class="form-group">
+              <h4 class="sub-title sub-inline">Resume</h4>
+              <hr class="hr-sub">
+              <div style="text-align: center; float: left;">
+                <a id="other-profile-resume" ng-if="otherProfileCtrl.resume != '' " ng-click="otherProfileCtrl.openModal3()">
+                  <img height="75px" width="75px" src="/img/whitepdf.png">
+                </a>
+                <p style="font-size: 10px" ng-if="otherProfileCtrl.resume != '' ">{{otherProfileCtrl.first_name}}'s Resume</p>
+              </div>
+            </div>
           </div>
         <!-- </form> -->
       </div>
@@ -141,6 +151,17 @@
       <div class="padding20 text-center">
         <h1><i class="fa fa-check"></i></h1>
         <p>{{ otherProfileCtrl.modal.content }}</p>
+        <p><a class="btn approval-btn">Close</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="otherProfileCtrl.modal.show3">
+  <div id="modal-container" ng-click="otherProfileCtrl.closeModal3()">
+    <div id="modal-lg" class="section">
+      <div class="padding20 text-center">
+          <iframe ng-init="otherProfileCtrl.setIframeSrc()" id="resumeElement" width="650px" height="700px"></iframe>
         <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>

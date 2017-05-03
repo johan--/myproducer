@@ -75,8 +75,20 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
     return new Date() < date
   }
 
+  vm.setIframeSrc = function(){
+    document.getElementById('resumeElement').src = vm.resume
+  }
+
   vm.showModal = function(){
     vm.modal.show = true
+  }
+
+  vm.openModal3 = function() {
+    vm.modal.show3 = true
+  }
+
+  vm.closeModal3 = function() {
+    vm.modal.show3 = false
   }
 
   vm.closeModal = function(){
