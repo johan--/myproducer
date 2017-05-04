@@ -28,9 +28,11 @@ function mainController($rootScope, $state, AuthService, $location) {
     AuthService.getUserStatus()
       .then(function(data){
         vm.currentUser = data.data.user
-        if(vm.currentUser.stripceAccount || vm.currentUser.stripePlan){
+        if(vm.currentUser != undefined){
+          if(vm.currentUser.stripeAccount || vm.currentUser.stripePlan){
           vm.upgradeable = false
         }
+      }
         if (vm.currentUser) {
           $rootScope.isLoggedIn = true
         }
