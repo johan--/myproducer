@@ -4,12 +4,7 @@
     <div class="header-row">
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
       <div class="col-sm-9" ng-show="productionListCtrl.currentUser.role === 'producer'">
-        <form class="text-right" ng-submit="productionListCtrl.addProduction()">
-            <input class="bg-transparent subtle-border padding5 top-margin2" ng-model="productionListCtrl.newProduction.name" type="text" placeholder="Production Name" required>
-            <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
-            <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
-          <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" type="submit" class="btn default-btn">+ Create New</button>
-        </form>
+          <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" ng-click="productionListCtrl.openCreateProdModal()" type="submit" class="create-new-prod btn default-btn">+ Create New</button>
       </div>
     </div>
     <div class="col-md-12 no-padding">
@@ -139,6 +134,28 @@
         <p>Are you sure you want to delete {{ productionListCtrl.productionName }}?</p>
         <br>
         <p><a class="btn approval-btn" ng-click="productionListCtrl.deleteProduction(productionListCtrl.productionName, productionListCtrl.productionID, productionListCtrl.$index)">Yes</a> <a class="btn error-btn" ng-click="productionListCtrl.closeDeleteProductionModal()">Cancel</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionListCtrl.showCreateProdModal">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <form class="text-right" ng-submit="productionListCtrl.addProduction()">
+          <h4 style="float: left;">Production Name</h4>
+        <input id="prod-name-input" class="bg-transparent subtle-border padding5 top-margin2 form-control" ng-model="productionListCtrl.newProduction.name" type="text" required>
+        <br>
+        <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
+        <h5 class="prod-date-from">Start</h5>
+        <input ng-init="productionListCtrl.updateMinDateTo()" class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
+        <h5 class="prod-date-to">End</h5>
+      <div class="align-center">
+        <button ng-click="productionListCtrl.closeCreateProdModal()" class="btn btn-danger">Cancel</button>
+        <button type="submit" class=" btn main-btn">Create</button>
+      </div>
+    </form>
       </div>
     </div>
   </div>
