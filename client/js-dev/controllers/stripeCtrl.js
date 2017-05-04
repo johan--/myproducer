@@ -32,6 +32,17 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
         })
     })
 
+  vm.applyCoupon = function() {
+
+    const couponCode = document.getElementById('coupon').value
+
+    if(couponCode === 'beta' && $state.params.plan === 'pro'){
+      vm.planAmount = '$37.50'
+    } else if(couponCode === 'beta' && $state.params.plan === 'premium'){
+      vm.planAmount = '$18.75'
+    }
+  }
+
   var stripe = Stripe('pk_live_ia7M8gOjBo86Njp9ETWDxw1m');
   var elements = stripe.elements();
 

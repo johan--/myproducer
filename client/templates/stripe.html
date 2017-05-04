@@ -18,10 +18,13 @@
       <div id="card-element" class="stripe-field"></div>
     </label>
   </div>
-  <div class="stripe-group">
+  <div id="stripe-coupon-input" class="stripe-group">
     <label class="stripe-label">
-      <span class="stripe-span">Coupon</span>
-      <input id="coupon" class="stripe-field" type="text" />
+      <div>
+        <span class="stripe-span">Coupon</span>
+        <input id="coupon" class="stripe-field" type="text" />
+        <a ng-click="stripeCtrl.applyCoupon()" class="stripe-coupon btn main-btn">Apply</a>
+    </div>
     </label>
   </div>
 

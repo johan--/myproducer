@@ -25,6 +25,11 @@
   text-align: right;
   float: left; }
 
+.stripe-coupon {
+  position: absolute;
+  left: 108%;
+  margin-top: 2%; }
+
 .stripe-field {
   background: transparent;
   font-weight: 300;
@@ -107,6 +112,9 @@
 .stripe-diff-plan-span:hover {
   text-decoration: underline;
   color: #00AEEF; }
+
+#stripe-coupon-input {
+  width: 80%; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

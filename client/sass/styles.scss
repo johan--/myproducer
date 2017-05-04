@@ -75,6 +75,12 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   float: left;
 }
 
+.stripe-coupon {
+  position: absolute;
+  left: 108%;
+  margin-top: 2%;
+}
+
 .stripe-field {
   background: transparent;
   font-weight: 300;
@@ -166,6 +172,10 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 .stripe-diff-plan-span:hover {
   text-decoration: underline;
   color: $highlight
+}
+
+#stripe-coupon-input {
+  width: 80%;
 }
 
 // STRIPE CSS /////////////////////
