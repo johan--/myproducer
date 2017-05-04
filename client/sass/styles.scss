@@ -77,8 +77,14 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 .stripe-coupon {
   position: absolute;
-  left: 108%;
-  margin-top: 2%;
+  left: 105%;
+  height: 40px;
+  text-align: center;
+}
+
+.coupon-p {
+  margin-top: 15%;
+  font-size: 15px;
 }
 
 .stripe-field {

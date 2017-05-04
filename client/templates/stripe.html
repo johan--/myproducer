@@ -23,7 +23,7 @@
       <div>
         <span class="stripe-span">Coupon</span>
         <input id="coupon" class="stripe-field" type="text" />
-        <a ng-click="stripeCtrl.applyCoupon()" class="stripe-coupon btn main-btn">Apply</a>
+        <a  ng-click="stripeCtrl.applyCoupon()" class="stripe-coupon btn main-btn"><p class="coupon-p">Apply</p></a>
     </div>
     </label>
   </div>
@@ -32,7 +32,7 @@
     <h4 class="thin">You will be charged {{stripeCtrl.planAmount}}/mo</h4>
   </div>
 
-  <button class="stripe-button" type="submit">CHECKOUT</button>
+  <button class="stripe-button" type="submit">REGISTER</button>
   <div class="stripe-outcome">
     <div class="stripe-error"></div>
     <div class="stripe-success">
