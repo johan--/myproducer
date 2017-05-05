@@ -125,6 +125,15 @@ vm.addResumeToProfile = function(){
     })
 }
 
+vm.deleteResume = function() {
+  const resume = ''
+
+  $http.patch('/api/users/' + vm.currentUser._id, {resume: resume})
+    .then(function(data){
+      vm.resume = ''
+    })
+}
+
   // EDIT USER
   vm.editUser = function() {
     vm.googleLocation = vm.locationInput.value

@@ -112,9 +112,15 @@
                   <img height="75px" width="75px" src="/img/whitepdf.png" alt="">
                 </a>
                 <p style="font-size: 10px" ng-if="postCtrl.resume != '' ">{{postCtrl.first_name}}'s Resume</p>
-                <label class="btn btn-default btn-file margin10">Update Resume
+                <a ng-click="postCtrl.deleteResume()" ng-if="postCtrl.resume != '' " class="btn btn-danger">Delete</a>
+
+                <label ng-if="postCtrl.resume == '' " class="btn btn-default btn-file margin10">Upload Resume
                   <input type="file" id="file-input" onchange="angular.element(this).scope().resume_chosen(this)" accept=".pdf"  style="display: none;">
               </label>
+                <label ng-if="postCtrl.resume != '' " class="btn btn-default btn-file margin10">Update Resume
+                  <input type="file" id="file-input" onchange="angular.element(this).scope().resume_chosen(this)" accept=".pdf"  style="display: none;">
+              </label>
+
             </div>
             </div>
           </div>
