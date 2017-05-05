@@ -9,11 +9,11 @@ var Production = new Schema({
   weather: String,
   hospital: String,
   parking: String,
-  notes: String,
   date: Date,
   crewCall: Date,
-  productionDay: Number,
   crew: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
+  notes: String,
+  productionDay: Number,
   active: {type: Boolean, default: true},
 }, {timestamps: true})
 

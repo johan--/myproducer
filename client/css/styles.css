@@ -164,6 +164,15 @@ a, a:hover, a:link {
   width: 20px;
   height: 20px; }
 
+.offer-status {
+  position: relative;
+  width: 105%;
+  left: -2.5%; }
+
+#offer-to {
+  position: relative;
+  top: 10px; }
+
 .onboard-question-down {
   position: relative;
   top: 2px; }

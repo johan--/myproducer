@@ -1,9 +1,8 @@
 <!-- <div ng-if="offerCtrl.ready"> -->
   <div class="section bottom-padding">
     <div class="col-sm-6 col-centered">
-      <h3 ng-if="offerCtrl.isProducer">OFFER TO {{offerCtrl.crew.to.first_name + ' ' + offerCtrl.crew.to.last_name | uppercase}}</h3>
-      <h3 ng-if="offerCtrl.isCrew">OFFER FROM {{offerCtrl.crew.production.by_.first_name + ' ' + offerCtrl.crew.production.by_.last_name | uppercase}}</h3>
-      <h4>for <a ui-sref="production({id: offerCtrl.crew.production._id})">{{ offerCtrl.crew.production.name }}</a></h4>
+      <h3 id="offer-to" ng-if="offerCtrl.isProducer">OFFER TO {{offerCtrl.crew.to.first_name + ' ' + offerCtrl.crew.to.last_name | uppercase}}</h3>
+      <p><h6 style="display: inline-block" ng-if="offerCtrl.isCrew">from {{offerCtrl.crew.production.by_.first_name + ' ' + offerCtrl.crew.production.by_.last_name}}</h6> <h6 style="display: inline-block">for <a style="display: inline-block" ui-sref="production({id: offerCtrl.crew.production._id})">{{ offerCtrl.crew.production.name }}</a></h6></p>
 
       <div class="line-item">
         <div class="form-group">
@@ -43,7 +42,7 @@
         <div class="text-center">
           <p class="padding10 error-btn" ng-if="offerCtrl.crew.offer.status === 'Declined'">Offer {{ offerCtrl.crew.offer.status }}</p>
           <p class="padding10 approval-alt-btn" ng-if="offerCtrl.crew.offer.status === 'Accepted'">Offer {{ offerCtrl.crew.offer.status }}</p>
-          <p class="padding10 approval-btn" ng-if="offerCtrl.crew.offer.status === 'Pending'">Offer {{ offerCtrl.crew.offer.status }}</p>
+          <p class="offer-status padding10 approval-btn" ng-if="offerCtrl.crew.offer.status === 'Pending'">Offer {{ offerCtrl.crew.offer.status }}</p>
           <!-- <a class="btn approval-btn x-padding"> {{ offerCtrl.crew.offer.status }} </a> -->
         </div>
       </div>
