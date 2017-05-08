@@ -5,8 +5,6 @@ completeRegistrationController.$inject = ['$rootScope', '$state', '$stateParams'
 
 // Complete Registration CONTROLLER
 function completeRegistrationController($rootScope, $state, $stateParams, AuthService){
-  console.log("completeRegistrationController instantiated");
-  console.log($stateParams.token);
   var vm = this
   vm.modalOpen = false
 
