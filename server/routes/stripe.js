@@ -37,7 +37,7 @@ app.patch('/coupon', function(req, res){
       stripe.subscriptions.create({
         customer: stripeAcc.id,
         plan: 'pro-monthly',
-        coupon: 'mpstaff'
+        coupon: 'mp'
       }, function(err, subscription){
         if(err) return res.json(err);
         User.findOne({_id: user._id}, function(err, mpuser){
