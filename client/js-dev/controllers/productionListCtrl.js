@@ -24,7 +24,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
-
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
@@ -37,9 +36,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
           vm.ready = true
 
-          if (vm.currentUser.role === 'producer') {
-            vm.updateMinDateTo()
-          }
+          // if (vm.currentUser.role === 'producer') {
+          //   vm.updateMinDateTo()
+          // }
         })
   })
 
@@ -101,6 +100,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // // redirect them to production view
           // // $state.go('production')
           $mixpanel.track('New Production Added', {"user" : vm.currentUser.username, "length" : data.length})
+          vm.closeCreateProdModal()
         })
     }
   }
@@ -124,6 +124,14 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         // .finally(function() {
         //   vm.openNotifModal()
         // })
+  }
+
+  vm.openCreateProdModal = function(){
+    vm.showCreateProdModal = true
+  }
+
+  vm.closeCreateProdModal = function(){
+    vm.showCreateProdModal = false
   }
 
   vm.openNotifModal = function() {

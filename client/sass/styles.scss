@@ -220,6 +220,38 @@ a, a:hover, a:link{
   cursor: pointer;
 }
 
+#prod-date-from {
+  position: relative;
+  left: -55%;
+  top: 27px;
+}
+.prod-date-from {
+  position: relative;
+  left: -70%;
+  top: 27px;
+}
+
+#prod-date-to {
+  position: relative;
+  top: -45px;
+  left: -9%;
+}
+
+.prod-date-to {
+  position: relative;
+  top: -45px;
+  left: -23%;
+}
+
+.create-new-prod {
+  float: right;
+  margin-top: 0.7%;
+}
+
+#prod-name-input {
+  height: 33px;
+}
+
 .free-btn {
   position: relative;
   left: -25%;
