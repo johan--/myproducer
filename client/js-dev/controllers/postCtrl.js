@@ -30,6 +30,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
       $http.get('/api/users/' + data.data.user._id + '/profile')
         .success(function(data){
           vm.currentUser = data
+          console.log(vm.currentUser);
           vm.first_name = vm.currentUser.first_name.charAt(0).toUpperCase() + vm.currentUser.first_name.slice(1)
           vm.resume = vm.currentUser.resume || ''
           initialRows(vm.currentUser.bio)

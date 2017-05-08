@@ -330,8 +330,8 @@ router.patch('/compReg/:token', function(req, res) {
 
         user.setPassword(req.body.registerForm.password, function(){
           user.resetPasswordToken = undefined;
-          user.first_name = req.body.registerForm.first_name
-          user.last_name = req.body.registerForm.last_name
+          // user.first_name = req.body.registerForm.first_name
+          // user.last_name = req.body.registerForm.last_name
           user.picture = "./img/profile_default.png"
           user.save(function(err){
             done(err, user)
