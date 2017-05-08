@@ -23,7 +23,7 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
           if (vm.currentUser.role === 'crew') {
             $state.go('profile')
           }
-          vm.inviteUrl = 'http://myproducer.io/#/register?r=' + data._id + '&ur=crew'
+          vm.inviteUrl = 'https://app.myproducer.io/#/register?r=' + data._id + '&ur=crew'
           vm.ready = true
         })
   })
