@@ -70,6 +70,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     // if current user did not subscribe, restrict from making a production
 
     if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount) {
+      vm.showCreateProdModal = false
       vm.upgradeModal.isFailure = true
       vm.upgradeModal.content = 'Oops! You must upgrade your account to do that'
       vm.upgradeModal.show = true
