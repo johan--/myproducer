@@ -91,7 +91,7 @@ router.patch('/:id', function(req, res){
     if(err) return console.log(err)
 
     // variables for NODEMAILER
-    var offerURL = 'http://www.myproducer.io/#/offer/' + crew._id
+    var offerURL = 'https://app.myproducer.io/#/offer/' + crew._id
     var fromEmail =req.user.username
     var fromName = req.user.first_name + ' ' + req.user.last_name
     var fromFirstName = req.user.first_name
