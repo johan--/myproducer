@@ -143,12 +143,6 @@ router.patch('/updateContact', function(req, res){
 
 // Remove contact route
 router.patch('/delete-contact', function(req, res){
-  console.log("delete-contact hit");
-  console.log("contact on line 148 users route");
-  console.log(req.body.contact);
-  console.log("currentUser._id on line 149");
-  console.log(req.body.currentUser._id);
-
   User.findById(req.body.currentUser._id, function(err, user){
     contact = req.body.contact
     position = user.contacts.indexOf(contact)
@@ -197,10 +191,10 @@ router.get('/:id', function(req, res){
 router.patch('/:id', function(req, res){
   User.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, user){
     if(err) return console.log(err)
-    // if(req.body.googleLocation){
+    if(req.body.googleLocation){
       user.location = req.body.googleLocation
       user.save()
-    // }
+    }
     res.json(user)
   })
 })
