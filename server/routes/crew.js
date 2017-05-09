@@ -135,7 +135,6 @@ router.patch('/:id/status', function(req, res){
 })
 
 router.post('/:id/message', function(req, res){
-  console.log(req.params.id)
   Crew.findById(req.params.id, function(err, crew){
     if(err) return console.log(err)
 
@@ -170,7 +169,7 @@ router.post('/:id/message', function(req, res){
         // console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
 
         var offerId = newCrew._id
-        var offerURL = 'http://www.myproducer.io/#/offer/' + offerId
+        var offerURL = 'https://app.myproducer.io/#/offer/' + offerId
 
         mailer.send(
           'message',

@@ -12,6 +12,14 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.notifModal = {}
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
+  vm.productionsDraggable = []
+  vm.productionsDroppable = []
+
+  $('.draggable').each(function(){
+    $(this).on('click', function(){
+      console.log('clicked');
+    })
+  })
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
