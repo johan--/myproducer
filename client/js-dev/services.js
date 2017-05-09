@@ -249,8 +249,6 @@ angular.module('myApp')
 
     function completeRegistration(token, registerForm){
       var deferred = $q.defer()
-      console.log("registerForm from services line 218");
-      console.log(registerForm);
       $http.patch('/user/compReg/' + token, {registerForm: registerForm})
       .success(function (data, status) {
         if(status === 200){

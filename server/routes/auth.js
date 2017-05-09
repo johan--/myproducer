@@ -311,8 +311,6 @@ router.post('/reset/:token', function(req, res) {
 });
 
 router.patch('/compReg/:token', function(req, res) {
-  console.log("Req.body from line 266");
-  console.log(req.body);
   async.waterfall([
     function(done) {
       User.findOne({ resetPasswordToken: req.params.token}, function(err, user) {
