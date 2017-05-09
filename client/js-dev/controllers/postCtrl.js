@@ -138,9 +138,10 @@ vm.deleteResume = function() {
   vm.editUser = function() {
     if(vm.locationInput){
       vm.googleLocation = vm.locationInput.value
+      vm.currentUser.location = vm.locationInput.value
     }
 
-    $http.patch('/api/users/'+ vm.currentUser._id, {googleLocation: vm.googleLocation, user: vm.currentUser})
+    $http.patch('/api/users/'+ vm.currentUser._id, vm.currentUser)
       .success(function(data) {
         console.log(data);
         vm.currentUser.location = data.location
