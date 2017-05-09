@@ -169,7 +169,6 @@ router.post('/forgot-password', function(req, res, next) {
           // req.flash('error', 'No account with that email address exists.');
           return res.json({user: false})
         }
-        console.log("reset token");
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
@@ -196,7 +195,7 @@ router.post('/forgot-password', function(req, res, next) {
         to: user.username,
         from: '"myproducer.io" <donotreply@myproducer.io>',
         subject: 'myproducer.io Password Reset Request',
-        text: `Hey there,\n\nSomeone requested a new password for your myproducer.io account. \n\nhttp://${process.env.HEADER_HOST}/#/reset-password/${token}\n\nIf you did not make this request, then you can ignore this e-mail.\n\n--myproducer.io Team\n\n P.S. You can learn how best to use your account at our support page. Go to support.myproducer.io`
+        text: `Hey there,\n\nSomeone requested a new password for your myproducer.io account. \n\nhttps://app.myproducer.io/#/reset-password/${token}\n\nIf you did not make this request, then you can ignore this e-mail.\n\n--myproducer.io Team\n\n P.S. You can learn how best to use your account at our support page. Go to support.myproducer.io`
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         // req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
@@ -210,7 +209,6 @@ router.post('/forgot-password', function(req, res, next) {
 });
 
 router.post('/check-token', function(req, res) {
-
   User.findOne({ resetPasswordToken: req.body.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (err) {
       console.log("User Not Found");
@@ -224,7 +222,6 @@ router.post('/check-token', function(req, res) {
 });
 
 router.get('/check-token', function(req,res) {
-  console.log("back end check token route hit");
   User.find({ resetPasswordToken: req.body.token }, function(err, user) {
     if(err) {
       console.log("User not found")
@@ -237,10 +234,6 @@ router.get('/check-token', function(req,res) {
 })
 
 router.post('/check-reg-token', function(req, res) {
-
-  console.log("token in auth.js")
-  console.log(req.body.token)
-
   User.findOne({ resetPasswordToken: req.body.token}, function(err, user) {
     if (err) {
       console.log("User Not Found");
@@ -380,14 +373,11 @@ router.patch('/compReg/:token', function(req, res) {
       });
     }
   ], function(err) {
-    console.log("res.redirect /#/r?req hit");
     res.json({message: 'Account registration complete'});
   });
 });
 
 router.post('/changePassword', function(req, res){
-  console.log(req.body);
-
   User.findById(req.body.user._id, function(err, user){
     user.setPassword(req.body.password, function(){
       user.save(function(err){
