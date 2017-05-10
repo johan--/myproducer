@@ -5,18 +5,17 @@ angular.module('myApp')
       if(scope.$last){
         var draggables = []
         draggables.push($('.draggable'))
-        // for (var i = 0; i<draggables[0].length; i++){
-        //   draggables[0][i].addEventListener('click', function(){
-        //     this.draggable()
-        //   })
-        // }
-        draggables[0].each(function(index){
-          console.log(draggables[0][index])
-          draggables[0][index].draggable()
+        draggables[0].each(function(){
+          $(this).draggable({
+            axis: 'y',
+            containment: 'parent',
+            zIndex: 100
+          })
         })
+        // var first = draggables[0].first()
+        // first.draggable()
       }
     }
-
   })
 
 productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
