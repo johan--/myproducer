@@ -25,7 +25,7 @@
           <p class="no-margin strong">Actions</p>
         </div>
       </div> -->
-      <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'">
+      <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'" my-repeat-directive>
         <!-- make each production draggable and droppable -->
         <!-- when dropped, make a new group with a dropdown -->
         <div class="col-md-2 start-date">

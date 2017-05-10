@@ -1,5 +1,20 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
+  .directive('myRepeatDirective', function(){
+    return function(scope, element, attrs){
+      if(scope.$last){
+        var draggables = []
+        draggables.push($('.draggable'))
+        for (var i = 0; i<draggables[0].length; i++){
+          console.log(draggables[0][i]);
+          draggables[0][i].addEventListener('click', function(){
+            console.log(this);
+          })
+        }
+      }
+    }
+
+  })
 
 productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
@@ -15,11 +30,11 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.productionsDraggable = []
   vm.productionsDroppable = []
 
-  $('.draggable').each(function(){
-    $(this).on('click', function(){
-      console.log('clicked');
-    })
-  })
+  // vm.addClickToDraggables = function(){
+  //   var draggables = []
+  //   draggables.push($('.draggable'))
+  //   console.log(draggables[0]);
+  // }
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
