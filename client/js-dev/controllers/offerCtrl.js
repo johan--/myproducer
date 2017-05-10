@@ -35,7 +35,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     })
 
   vm.addMessage = function(message) {
-    if(!vm.currentUser) {
+    if(vm.currentUser._id == '') {
       return vm.showVerificationModal = true
     } else {
 
