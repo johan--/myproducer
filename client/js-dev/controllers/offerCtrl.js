@@ -34,8 +34,16 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
             })
     })
 
+    vm.checkIfLoggedIn = function(){
+      if(vm.currentUser._id == '') {
+        return vm.showVerificationModal = true
+      } else {
+        $state.go('production',{id: vm.crew.production._id})
+      }
+    }
+
   vm.addMessage = function(message) {
-    if(!vm.currentUser) {
+    if(vm.currentUser._id == '') {
       return vm.showVerificationModal = true
     } else {
 

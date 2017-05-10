@@ -2,7 +2,7 @@
   <div class="section bottom-padding">
     <div class="col-sm-6 col-centered">
       <h3 id="offer-to">OFFER TO {{offerCtrl.crew.to.first_name + ' ' + offerCtrl.crew.to.last_name | uppercase}}</h3>
-      <p><h6 style="display: inline-block">from {{offerCtrl.crew.production.by_.first_name + ' ' + offerCtrl.crew.production.by_.last_name}}</h6> <h6 style="display: inline-block">for <a style="display: inline-block" ui-sref="production({id: offerCtrl.crew.production._id})">{{ offerCtrl.crew.production.name }}</a></h6></p>
+      <p><h6 style="display: inline-block">from {{offerCtrl.crew.production.by_.first_name + ' ' + offerCtrl.crew.production.by_.last_name}}</h6> <h6 style="display: inline-block">for <a style="display: inline-block" ng-click="offerCtrl.checkIfLoggedIn()">{{ offerCtrl.crew.production.name }}</a></h6></p>
 
       <div class="line-item">
         <div class="form-group">
