@@ -209,6 +209,15 @@ button.accordion.active, button.accordion:hover {
   display: none;
   top: auto !important;
 }
+
+#directive-modal {
+  display: none;
+  min-width: 100%;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 ////////// END ACCORDION CSS ///////////
 
 body {

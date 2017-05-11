@@ -19,12 +19,19 @@ angular.module('myApp')
                 $(this).parent().append(ui.draggable)
               } else{
               // make a new group with the 2 production days
-              // TODO before grouping, prompt user to input a tag and title
-
-              
-
               var accordionLocation = $('#accordionLocation')
-              var newAccordion = $('<button class="accordion">Production Group Name</button>')
+              var newAccordion = $('<button class="accordion"><p id="p-tag"></p></button>')
+              var productionGroupModal = $('#directive-modal')
+              productionGroupModal.css('display', 'table')
+              var productionGroupInput = $('#directive-modal-input')
+              var productionGroupButton = $('#directive-modal-button')
+
+              productionGroupButton.on('click', function(){
+                var productionName = productionGroupInput.val()
+                $('#p-tag')[0].innerText = productionName
+                productionGroupModal.css('display', 'none')
+              })
+
 
               $(this).addClass('accordion-panel')
               $(this).draggable('disable')
