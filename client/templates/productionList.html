@@ -25,9 +25,12 @@
           <p class="no-margin strong">Actions</p>
         </div>
       </div> -->
+      <div id="accordionLocation"></div>
+
       <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'" my-repeat-directive>
         <!-- make each production draggable and droppable -->
         <!-- when dropped, make a new group with a dropdown -->
+        <div>
         <div class="col-md-2 start-date">
           <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
@@ -47,7 +50,9 @@
           </p>
         </div>
       </div>
+      </div>
     </div>
+  </div>
     <!-- TODO This is dummy content to adjust styling while I'm not logged in. Will remove later -->
     <div class="list-group-item" ng-hide="main.currentUser.username">
       <div class="row">

@@ -4,16 +4,62 @@ angular.module('myApp')
     return function(scope, element, attrs){
       if(scope.$last){
         var draggables = []
+        var droppables = []
+
+        droppables.push($('.droppable'))
+        droppables[0].each(function(){
+          $(this).droppable({
+            drop: function(event,ui){
+
+              // if user is dropping production day into a group
+              if($(this).parent().is('button')){
+                ui.draggable.addClass('accordion-panel')
+                ui.draggable.draggable('disable')
+                ui.draggable.css('display', 'block')
+                $(this).parent().append(ui.draggable)
+              } else{
+              // make a new group with the 2 production days
+              // TODO before grouping, prompt user to input a tag and title
+
+              
+
+              var accordionLocation = $('#accordionLocation')
+              var newAccordion = $('<button class="accordion">Production Group Name</button>')
+
+              $(this).addClass('accordion-panel')
+              $(this).draggable('disable')
+              newAccordion.append($(this))
+
+              ui.draggable.addClass('accordion-panel')
+              ui.draggable.draggable('disable')
+              newAccordion.append(ui.draggable)
+
+              newAccordion.droppable()
+              accordionLocation.append(newAccordion)
+
+              // show production days on click of the button
+              newAccordion.on('click', function(){
+                this.classList.toggle('active')
+
+                if(this.classList.contains('active')){
+                  $('.accordion-panel').show()
+                } else {
+                  $('.accordion-panel').hide()
+                }
+              })
+            }
+            }
+          })
+        })
+
+        // grab all production days and make them draggable
         draggables.push($('.draggable'))
         draggables[0].each(function(){
           $(this).draggable({
             axis: 'y',
-            containment: 'parent',
-            zIndex: 100
+            containment: 'parent'
           })
         })
-        // var first = draggables[0].first()
-        // first.draggable()
       }
     }
   })
@@ -37,6 +83,10 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   //   draggables.push($('.draggable'))
   //   console.log(draggables[0]);
   // }
+
+  vm.testfunction = function(){
+    console.log('function was hit');
+  }
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true

@@ -42,6 +42,8 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 //   width: 100%;
 // }
 //
+
+//////// STRIPE CSS //////////
 .stripe-form {
   width: 480px;
   margin: 20px auto;
@@ -183,8 +185,31 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 #stripe-coupon-input {
   width: 80%;
 }
+/////////// END STRIPE CSS /////////////////
 
-// STRIPE CSS /////////////////////
+////////// ACCORDION CSS ///////////////
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+.accordion-panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  top: auto !important;
+}
+////////// END ACCORDION CSS ///////////
 
 body {
   font-family: $font-stack;

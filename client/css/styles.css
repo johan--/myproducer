@@ -121,6 +121,25 @@
 #stripe-coupon-input {
   width: 80%; }
 
+button.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s; }
+
+button.accordion.active, button.accordion:hover {
+  background-color: #ddd; }
+
+.accordion-panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  top: auto !important; }
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #0A0A0A;
