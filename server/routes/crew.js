@@ -170,7 +170,7 @@ router.post('/:id/message', function(req, res){
         // console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
 
         var offerId = newCrew._id
-        var offerURL = 'http://www.myproducer.io/#/offer/' + offerId
+        var offerURL = 'http://app.myproducer.io/#/offer/' + offerId
 
         mailer.send(
           'message',
