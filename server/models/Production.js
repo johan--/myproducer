@@ -15,6 +15,7 @@ var Production = new Schema({
   notes: String,
   productionDay: Number,
   active: {type: Boolean, default: true},
+  // tag: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}]
 }, {timestamps: true})
 
 module.exports = mongoose.model('Production', Production)

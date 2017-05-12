@@ -113,7 +113,7 @@ router.delete('/:id', function show(req, res){
 router.get('/:id/notify', function show(req, res){
   Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).exec(function(err, production) {
     if(err) return console.log(err)
-    var productionURL = 'http://www.myproducer.io/#/production/' + production._id
+    var productionURL = 'http://app.myproducer.io/#/production/' + production._id
     var fromEmail = req.user.username
     var fromName = req.user.first_name + ' ' + req.user.last_name
     // build an array of users in crew
