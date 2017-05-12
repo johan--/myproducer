@@ -79,13 +79,13 @@
   <div class="crew-view col-sm-9" ng-init="showModal=false">
     <div class="container-fluid bottom-border no-padding">
       <div class="col-sm-6 no-padding section">
-        <h3 id="crew-title" class="thumb-margin stick-bottom title">CAST AND CREW</h3>
+        <h3 id="crew-title" class="thumb-margin stick-bottom title">STAFFING</h3>
         <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-down margin-top-question" ng-mouseover="productionCtrl.hoverHire = true" ng-mouseleave="productionCtrl.hoverHire = false"/>
         <div ng-if="productionCtrl.hoverHire" class="onboard-hire-box onboard-hire"><p>After adding crew members, e-mail each job offer by choosing a role, rate, and hours and then clicking "hire"</p></div>
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
-          <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add Crew</a>
+          <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add</a>
         </div>
       </div>
     </div>
@@ -171,13 +171,13 @@
 
               <!-- Offer Rate $$$ -->
               <td class="col-md-1 container align-left"><div ng-if="productionCtrl.isProducer">
-                <input ng-hide="crew.offer.rate" class=" form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].rate" placeholder="Rate" required></input>
+                <input ng-hide="crew.offer.rate" class="production-input form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].rate" placeholder="Rate" required></input>
                 <p class="production-margin" ng-show="crew.offer.rate"> {{ crew.offer.rate | currency:"$":0}} </p>
               </div></td>
 
               <!-- Hours -->
               <td class="col-md-1 container align-left"><div>
-                <input ng-hide="crew.offer.hours" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].hours" placeholder="Hours" required></input>
+                <input ng-hide="crew.offer.hours" class="production-input form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].hours" placeholder="Hours" required></input>
                 <p class="production-margin" ng-show="crew.offer.hours"> {{ crew.offer.hours }} hour<span ng-if="crew.offer.hours != 1">s</span> </p>
               </div></td>
 

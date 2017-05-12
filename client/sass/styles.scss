@@ -377,7 +377,7 @@ a, a:hover, a:link{
   display: inline-block;
   position: absolute;
   z-index: 2;
-  left: 51%;
+  left: 31%;
   top: 10px;
   margin: -7px;
   overflow: hidden;
@@ -512,7 +512,12 @@ table td {
   padding: 1px;
   margin-left: 5px;
   float: right;
-  position: absolute; }
+  position: relative;
+  top: -2px; }
+
+.production-input {
+  min-width: 90px;
+}
 
 .production-margin {
   margin-top: 12px; }
@@ -532,6 +537,10 @@ table td {
 
 .other-background {
   background-color: #595959; }
+
+.contact-list-text {
+  font-size: 13px;
+}
 
 .cropArea {
   position: relative;
@@ -716,8 +725,8 @@ table td {
 }
 
 .y-padding{
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .padding5{
@@ -834,6 +843,8 @@ select.subtle-border-2{
     p{
       padding-top: 10px;
       padding-bottom: 10px;
+      position: relative;
+      left: 2%;
     }
   }
 

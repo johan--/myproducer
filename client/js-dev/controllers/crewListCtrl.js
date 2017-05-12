@@ -42,8 +42,10 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
         if(data) {
           if(data.success) {
             vm.notifModal.isSuccess = true
-            var username = data.data.username
-            vm.notifModal.content = 'You have successfully added ' + username + ' to your crew list.'
+            vm.notifModal.isFailure = false
+            var firstName = data.data.first_name
+            var lastName = data.data.last_name
+            vm.notifModal.content = 'You have successfully added ' + firstName + ' ' + lastName + ' to your approved contact list.'
             vm.currentUser.contacts.push(data.data)
           } else if(data.newSuccess){
             vm.notifModal.isSuccess = true

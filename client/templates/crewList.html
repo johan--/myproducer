@@ -38,20 +38,20 @@
           </div>
         </div>
         <div class="line-item y-padding" ng-repeat="crew in crewListCtrl.currentUser.contacts | filter:crewFilter">
-          <div class="col-xs-1 text-left">
+          <div class="col-md-1 text-left">
             <img class="thumb round" ng-show="!crew.picture" ng-src="./img/profile_default.png">
             <img class="thumb round" ng-show="crew.picture" ng-src={{crew.picture}}>
           </div>
-          <div class="col-xs-3">
-            <p class="strong no-margin">{{crew.first_name + ' ' + crew.last_name}}</p>
+          <div class="col-md-3">
+            <p class="contact-list-text strong no-margin">{{crew.first_name + ' ' + crew.last_name}}</p>
           </div>
-          <div class="col-xs-3">
-            <p class="no-margin">{{crew.title || 'Role'}}</p>
+          <div class="col-md-2">
+            <p class="contact-list-text no-margin">{{crew.title || 'Role'}}</p>
           </div>
-          <div class="col-xs-2">
-            <p class="no-margin">{{crew.location || 'Location'}}</p>
+          <div class="col-md-3">
+            <p class="contact-list-text no-margin">{{crew.location || 'Location'}}</p>
           </div>
-          <div class="col-xs-3 text-right">
+          <div class="col-md-3 text-right">
             <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
             <button ng-click="crewListCtrl.handleAddToButton(crew._id, crew.username)" class="btn main-btn">+ Add To</button> <a ng-click="crewListCtrl.openDeleteContactModal(crew)"><i class="fa fa-times"></i></a></p>
           </div>
@@ -79,7 +79,7 @@
             <!-- <img ui-sref="" ng-src=""> -->
           </div>
           <div class="col-xs-6">
-            <p class="no-margin">{{ pendingContact.first_name + ' ' + pendingContact.last_name }}</p>
+            <p class="contact-list-text no-margin">{{ pendingContact.first_name + ' ' + pendingContact.last_name }}</p>
           </div>
           <div class="col-xs-4 text-right">
             <p class="no-margin">
@@ -136,7 +136,7 @@
 
 <div id="modal-root" ng-if="crewListCtrl.notifModal.show">
   <div id="modal-container" ng-click="crewListCtrl.closeNotifModal()">
-    <div id="modal-sm" class="section">
+    <div id="modal-md" class="section">
       <div class="padding20 text-center">
         <h1><i ng-if="crewListCtrl.notifModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
         <h1><i ng-if="crewListCtrl.notifModal.isFailure" class="fa fa-times-circle-o"></i></h1>
