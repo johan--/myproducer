@@ -70,12 +70,10 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
     vm.editProduction = function(){
       // if a location is deleted
-      console.log(vm.locationInput1);
+      if(vm.locationInput1 || vm.locationInput2){    
       vm.production.location[0] = vm.locationInput1.value
       vm.production.location[1] = vm.locationInput2.value
-
-      // vm.googleLocations[0] = vm.locationInput1.value
-      // vm.googleLocations[1] = vm.locationInput2.value
+    }
 
       $http.patch('/api/productions/' + $stateParams.id, vm.production)
         .success(function(data) {
