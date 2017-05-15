@@ -135,10 +135,56 @@ router.patch('/:id/status', function(req, res){
 })
 
 router.post('/:id/message', function(req, res){
-  console.log(req.params.id)
   Crew.findById(req.params.id, function(err, crew){
     if(err) return console.log(err)
+    // if no one is logged in, hard code who the email is from and who the sender is
+    if(!req.user){
+      User.find({username: req.query.crew}, function(err,fromUser){
+        if(err) return console.log(err);
 
+      var fromEmail = req.query.crew
+      var toEmail = req.query.producer
+      var messageContent = req.body.content
+      var fromName = fromUser[0].first_name + ' ' + fromUser[0].last_name
+
+      var message = new Message()
+      message._by = fromUser[0]._id
+      message.content = messageContent
+
+      message.save(function(err, newMessage) {
+        crew.message.push(newMessage)
+
+        crew.save(function(err,newCrew){
+          if(err) return console.log(err)
+
+          var offerId = newCrew._id
+          var offerURL = 'https://app.myproducer.io/#/offer/' + offerId
+
+          mailer.send(
+            'message',
+            {
+              recipient: toEmail,
+              sender: fromName,
+              message: messageContent,
+              offerURL: offerURL
+            },
+            {
+              to: toEmail,
+              subject: 'New message from myproducer.io'
+            }
+          )
+
+          Crew.populate(newCrew, {path: 'message', populate: {path: '_by'}}, function(err, populatedCrew) {
+            if(err) return console.log(err)
+
+            res.json(populatedCrew.message)
+          })
+
+        })
+      })
+    })
+
+    } else {
     // variables for NODEMAILER
 
     // the email the message is from
@@ -170,7 +216,7 @@ router.post('/:id/message', function(req, res){
         // console.log(fromEmail + ' -> ' + toEmail) // here to test emails are going in the right direction
 
         var offerId = newCrew._id
-        var offerURL = 'http://app.myproducer.io/#/offer/' + offerId
+        var offerURL = 'https://app.myproducer.io/#/offer/' + offerId
 
         mailer.send(
           'message',
@@ -193,6 +239,7 @@ router.post('/:id/message', function(req, res){
         })
       })
     })
+  }
   })
 })
 

@@ -43,11 +43,6 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     }
 
   vm.addMessage = function(message) {
-    if(vm.currentUser._id == '') {
-      return vm.showVerificationModal = true
-    } else {
-
-
     vm.messageBox = document.getElementById('message-box')
     vm.message = {
         content : message || vm.newMessage
@@ -56,12 +51,12 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     if(vm.message.content){
       $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
         .success(function(data) {
+          console.log(data);
           vm.crew.message = data
           vm.newMessage = ''
           vm.messageBox.focus()
-          $mixpanel.track('Chat Message Sent', {"user" : vm.currentUser.username})
+          // $mixpanel.track('Chat Message Sent', {"user" : vm.currentUser.username})
         })
-    }
     }
   }
 
