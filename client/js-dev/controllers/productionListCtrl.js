@@ -27,6 +27,7 @@ angular.module('myApp')
               var productionGroupButton = $('#directive-modal-button')
 
               productionGroupButton.on('click', function(){
+                // create Tag object in backend
                 var productionName = productionGroupInput.val()
                 $('#p-tag')[0].innerText = productionName
                 productionGroupModal.css('display', 'none')
