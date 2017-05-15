@@ -176,6 +176,7 @@ router.post('/:id/message', function(req, res){
 
           Crew.populate(newCrew, {path: 'message', populate: {path: '_by'}}, function(err, populatedCrew) {
             if(err) return console.log(err)
+            console.log('populated crew:', populatedCrew);
 
             res.json(populatedCrew.message)
           })
