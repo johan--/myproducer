@@ -8,6 +8,6 @@ var Tag = new Schema({
   taggedItems: [{type: Schema.Types.ObjectId, ref: 'PolymorphicTag'}]
 }, {timestamps: true})
 
-PolymorphicTag.discriminator('Production', Production)
+// PolymorphicTag.discriminator('Production', Production)
 
 module.exports = mongoose.model('Tag', Tag)
