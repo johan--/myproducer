@@ -42,10 +42,16 @@
           <img ng-src="./img/mpio-logo.png" alt="">
         </a>
       </div>
+      <div id="navbar-center" class="align-center navigation-tabs">
+        <p class="no-margin">
+          <a ng-class="{active: activeTab.profile}" ui-sref="profile">PROFILE</a>
+          <a ng-if="main.currentUser.role === 'producer'" ng-class="{active: activeTab.crewList}" ui-sref="crew-list">CONTACTS</a>
+          <a ng-class="{active: activeTab.production}" ui-sref="production-list">PRODUCTIONS</a></p>
+      </div>
       <div class="navright text-right">
         <div class="nav-currentuser">
           <div class="col-sm-8"></div>
-          <div class="col-sm-4 no-padding">
+          <div id="navbar-right" class="col-sm-4 no-padding">
             <div class="col-sm-11 no-padding">
               <p class="no-margin"><button ng-if="main.upgradeable" ng-click="main.upgradeAccount()" class="btn upgrade-btn">Upgrade</button><span class="strong">Hello, </span>{{ main.currentUser.first_name }}</p>
             </div>
@@ -64,12 +70,6 @@
               </nav>
             </div>
           </div>
-        </div>
-        <div class="navigation-tabs">
-          <p class="no-margin">
-            <a ng-class="{active: activeTab.profile}" ui-sref="profile">PROFILE</a>
-            <a ng-if="main.currentUser.role === 'producer'" ng-class="{active: activeTab.crewList}" ui-sref="crew-list">CONTACTS</a>
-            <a ng-class="{active: activeTab.production}" ui-sref="production-list">PRODUCTIONS</a></p>
         </div>
       </div>
     </div>
