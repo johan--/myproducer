@@ -614,7 +614,7 @@ table td {
 }
 
 .logo a img{
-  max-width: 222px;
+  max-width: 200px;
 }
 
 .navleft{
@@ -837,17 +837,16 @@ select.subtle-border-2{
 
 #navbar-right {
   position: relative;
-  top: -27px;
+  top: -30px;
 }
 
 #navbar-center {
   position:relative;
-  top: 15px;
-  left: -135px;
+  top: 11px;
 }
 
 .navbar{
-  font-size: 16px;
+  font-size: 15px;
 
   .nav-currentuser{
 
@@ -867,7 +866,7 @@ select.subtle-border-2{
       a{
         margin-left: 20px;
         color: $text;
-        font-weight: bold;
+        // font-weight: bold;
         padding-bottom: 5px;
       }
 

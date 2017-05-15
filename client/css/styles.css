@@ -485,7 +485,7 @@ table td {
   margin-bottom: 0px; }
 
 .logo a img {
-  max-width: 222px; }
+  max-width: 200px; }
 
 .navleft {
   float: left; }
@@ -664,15 +664,14 @@ select.subtle-border-2 {
 
 #navbar-right {
   position: relative;
-  top: -27px; }
+  top: -30px; }
 
 #navbar-center {
   position: relative;
-  top: 15px;
-  left: -135px; }
+  top: 11px; }
 
 .navbar {
-  font-size: 16px; }
+  font-size: 15px; }
   .navbar .nav-currentuser p {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -684,7 +683,6 @@ select.subtle-border-2 {
     .navbar .navigation-tabs p a {
       margin-left: 20px;
       color: #FFFFFF;
-      font-weight: bold;
       padding-bottom: 5px; }
     .navbar .navigation-tabs p a.active {
       border-bottom: 5px solid #00AEEF; }
