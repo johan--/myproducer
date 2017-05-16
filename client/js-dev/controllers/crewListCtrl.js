@@ -58,15 +58,22 @@ vm.processData = function(csv){
     var csvContent = lines[i].split(',')
     for(var c = 0; c<csvContent.length; c++){
       if(csvContent[c] != ''){
-        var newContact = {
-          first_name: csvContent[0],
-          last_name: csvContent[1],
-          email: csvContent[2]
+        // email validation
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        console.log(re.test(csvContent[2]));
+        if(re.test(csvContent[2])){
+          console.log(csvContent[2]);
+          var newContact = {
+            first_name: csvContent[0],
+            last_name: csvContent[1],
+            email: csvContent[2]
+          }
         }
       }
     }
-    vm.csvContacts.push(newContact)
   }
+  console.log('pushingggggg');
+  vm.csvContacts.push(newContact)
   // TODO: separate into new functions being called
   for(var a = 0; a<vm.csvContacts.length; a++){
     $http.post('/api/users/addcontact', vm.csvContacts[a])
