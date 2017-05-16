@@ -33,8 +33,6 @@ router.post('/addcontact', function(req, res){
   User.findById(req.user._id, function(err, user){ // find logged in user from database
     if(err) return console.log(err)
 
-    console.log('users being created:', req.body);
-
     User.findOne({username: req.body.email}, function(err, contact){
       if(err) return console.log(err)
 
