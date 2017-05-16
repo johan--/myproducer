@@ -70,6 +70,16 @@ vm.processData = function(csv){
   // TODO: separate into new functions being called
   // next step: take the array of objects and create new contacts with that info
   console.log(vm.csvContacts);
+  for(var a = 0; a<vm.csvContacts.length; a++){
+    $http.post('/api/users/addcontact', vm.csvContacts[a])
+      .success(function(data){
+        if(data){
+          if(data.success){
+            vm.currentUser.contacts.push(data.data)
+          }    
+        }
+      })
+  }
 }
 
 
