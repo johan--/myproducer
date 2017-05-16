@@ -16,8 +16,8 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
       if(data.data.status == true) {
         $http.get('/api/users/' + vm.currentUser._id)
           .success(function(data){
-            console.log("data line 19");
-            console.log(data);
+            // console.log("data line 19");
+            // console.log(data);
           })
       } else if(vm.currentUser === undefined) {
         vm.currentUser = {_id: ''}
@@ -26,6 +26,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
               // console.log(crew.message[0]._by.picture);
+              console.log(crew);
               vm.crew = crew
               vm.isCrew = vm.crew.to
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
