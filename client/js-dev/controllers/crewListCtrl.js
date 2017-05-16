@@ -1,11 +1,11 @@
 angular.module('myApp')
   .controller('crewListController', crewListController)
 
-crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
+crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel', '$scope']
 
 // PRODUCTIONS
 
-function crewListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
+function crewListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $scope){
   var vm = this
   vm.showModal = false;
   vm.notifModal = {}
@@ -27,6 +27,57 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
           vm.ready = true
         })
   })
+
+  $scope.csv_chosen = function(csv){
+    const csvFile = csv.files[0]
+    const csvReader = new FileReader()
+
+    csvReader.readAsText(csvFile)
+    csvReader.onload = vm.loadHandler;
+    csvReader.onerror = vm.errorHandler;
+}
+
+vm.loadHandler = function(event){
+  var csv = event.target.result
+  vm.processData(csv)
+}
+
+vm.processData = function(csv){
+  var allTextLines = csv.split(/\r\n|\n/);
+  var lines = [];
+  for (var i=0; i<allTextLines.length; i++) {
+    var data = allTextLines[i].split(';');
+      for (var j=0; j<data.length; j++) {
+        if(data[j][0] != ','){
+          lines.push(data[j]);
+        }
+      }
+  }
+  vm.csvContacts = []
+  for(var i = 0; i<lines.length; i++){
+    var csvContent = lines[i].split(',')
+    for(var c = 0; c<csvContent.length; c++){
+      if(csvContent[c] != ''){
+        var newContact = {
+          first_name: csvContent[0],
+          last_name: csvContent[1],
+          email: csvContent[2]
+        }
+      }
+    }
+    vm.csvContacts.push(newContact)
+  }
+  // TODO: separate into new functions being called
+  // next step: take the array of objects and create new contacts with that info
+  console.log(vm.csvContacts);
+}
+
+
+vm.errorHandler = function(evt){
+  if(evt.target.error.name == "NotReadableError") {
+      alert("Canno't read file !");
+  }
+}
 
   // ADD USER TO CONTACTS
 
