@@ -43,6 +43,8 @@ vm.loadHandler = function(event){
 }
 
 vm.processData = function(csv){
+  // parse csv file
+  vm.csvContacts = []
   var allTextLines = csv.split(/\r\n|\n/);
   var lines = [];
   for (var i=0; i<allTextLines.length; i++) {
@@ -53,29 +55,25 @@ vm.processData = function(csv){
         }
       }
   }
-  vm.csvContacts = []
+
   for(var i = 0; i<lines.length; i++){
     var csvContent = lines[i].split(',')
-    for(var c = 0; c<csvContent.length; c++){
-      if(csvContent[c] != ''){
-        // email validation
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        console.log(re.test(csvContent[2]));
-        if(re.test(csvContent[2])){
-          console.log(csvContent[2]);
-          var newContact = {
-            first_name: csvContent[0],
-            last_name: csvContent[1],
-            email: csvContent[2]
-          }
-        }
+    csvContent.splice(3)
+    // csvContent should be an array with only 3 strings
+    // email validation
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      // if the 3rd field is a valid email create a new contact
+    if(re.test(csvContent[2])){
+      var newContact = {
+        first_name: csvContent[0],
+        last_name: csvContent[1],
+        email: csvContent[2]
       }
+      vm.csvContacts.push(newContact)
     }
   }
-  console.log('pushingggggg');
-  vm.csvContacts.push(newContact)
   // TODO: separate into new functions being called
-  for(var a = 0; a<vm.csvContacts.length; a++){
+  for(var a = 0; a < vm.csvContacts.length; a++){
     $http.post('/api/users/addcontact', vm.csvContacts[a])
       .success(function(data){
         if(data){
@@ -85,6 +83,7 @@ vm.processData = function(csv){
         }
       })
   }
+
 }
 
 
