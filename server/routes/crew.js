@@ -79,6 +79,7 @@ router.get('/:id', function(req, res){
     if(err) return console.log(err)
 
     if(crew.active) {
+      console.log('crew in back end', crew);
       res.json(crew)
     } else {
       res.json(null)

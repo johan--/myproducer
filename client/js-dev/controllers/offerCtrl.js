@@ -26,6 +26,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
               // console.log(crew.message[0]._by.picture);
+              console.log(crew);
               vm.crew = crew
               vm.isCrew = vm.crew.to
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
@@ -39,21 +40,20 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
       return vm.showVerificationModal = true
     } else {
 
+      vm.messageBox = document.getElementById('message-box')
+      vm.message = {
+          content : message || vm.newMessage
+      }
 
-    vm.messageBox = document.getElementById('message-box')
-    vm.message = {
-        content : message || vm.newMessage
-    }
-
-    if(vm.message.content){
-      $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
-        .success(function(data) {
-          vm.crew.message = data
-          vm.newMessage = ''
-          vm.messageBox.focus()
-          $mixpanel.track('Chat Message Sent', {"user" : vm.currentUser.username})
-        })
-    }
+      if(vm.message.content){
+        $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
+          .success(function(data) {
+            vm.crew.message = data
+            vm.newMessage = ''
+            vm.messageBox.focus()
+            $mixpanel.track('Chat Message Sent', {"user" : vm.currentUser.username})
+          })
+      }
     }
   }
 
