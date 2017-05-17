@@ -40,12 +40,14 @@ var stripeRoutes = require('./routes/stripe.js')
 
 // define middleware
 // https
-app.get('*',function(req,res,next){
-  if(req.headers['x-forwarded-proto']!='https')
-    res.redirect('https://app.myproducer.io'+req.url)
-  else
-    next()
-})
+var forceSsl = function (req, res, next) {
+   if (req.headers['x-forwarded-proto'] !== 'https') {
+       return res.redirect(['https://', req.get('Host'), req.url].join(''));
+   }
+   return next();
+};
+
+app.use(forceSsl)
 app.use(express.static(path.join(__dirname, '../client')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
