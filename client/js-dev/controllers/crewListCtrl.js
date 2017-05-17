@@ -8,6 +8,7 @@ crewListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', '
 function crewListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $scope){
   var vm = this
   vm.showModal = false;
+  vm.showModal2 = false;
   vm.notifModal = {}
   vm.hoverApprovedCrew = false
   vm.hoverPendingCrew = false
@@ -82,6 +83,9 @@ vm.processData = function(csv){
           }
         }
       })
+      .finally(function(){
+        vm.closeModal2()
+      })
   }
 
 }
@@ -150,6 +154,14 @@ vm.errorHandler = function(evt){
 
   vm.openModal = function() {
     vm.showModal = true;
+  }
+
+  vm.openModal2 = function() {
+    vm.showModal2 = true;
+  }
+
+  vm.closeModal2 = function(){
+    vm.showModal2 = false
   }
 
   vm.openDeleteContactModal = function(contact){

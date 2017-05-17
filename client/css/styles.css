@@ -137,6 +137,16 @@ a, a:hover, a:link {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300; }
 
+#csv-img {
+  height: 200px;
+  width: 400px; }
+
+#csv-head {
+  font-size: 23px; }
+
+#csv-body {
+  font-size: 13px; }
+
 .upgrade-options {
   height: 100%;
   width: 100%; }
