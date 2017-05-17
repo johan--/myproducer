@@ -669,6 +669,8 @@ table td {
   border: 1px solid #00AEEF;
   margin-right: 10px;
   color: #00AEEF;
+  position: relative;
+  top: -2px;
 }
 
 .upgrade-btn:hover {
@@ -676,6 +678,8 @@ table td {
   margin-right: 10px;
   opacity: 1;
   color: white;
+  position: relative;
+  top: -2px;
 }
 
 .pro-btn{
@@ -1073,7 +1077,14 @@ nav ul li ul li {
 
 }
 
+#import-csv {
+  position: relative;
+  left: 23%;
+}
+
 #cog {
+  position: relative;
+  left: -22%;
   margin-top: 13px;
   color: $highlight;
   cursor: pointer;
