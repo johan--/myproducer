@@ -137,6 +137,16 @@ a, a:hover, a:link {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300; }
 
+#csv-img {
+  height: 200px;
+  width: 400px; }
+
+#csv-head {
+  font-size: 23px; }
+
+#csv-body {
+  font-size: 13px; }
+
 .upgrade-options {
   height: 100%;
   width: 100%; }
@@ -519,13 +529,17 @@ table td {
   background-color: #0A0A0A;
   border: 1px solid #00AEEF;
   margin-right: 10px;
-  color: #00AEEF; }
+  color: #00AEEF;
+  position: relative;
+  top: -2px; }
 
 .upgrade-btn:hover {
   background-color: #00AEEF;
   margin-right: 10px;
   opacity: 1;
-  color: white; }
+  color: white;
+  position: relative;
+  top: -2px; }
 
 .pro-btn {
   background-color: #00AEEF;
@@ -834,7 +848,13 @@ nav ul li ul li {
 .menu-dropdown a {
   color: white; }
 
+#import-csv {
+  position: relative;
+  left: 23%; }
+
 #cog {
+  position: relative;
+  left: -22%;
   margin-top: 13px;
   color: #00AEEF;
   cursor: pointer; }

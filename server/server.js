@@ -39,6 +39,13 @@ var uploadRoutes = require('./routes/fileUploads.js')
 var stripeRoutes = require('./routes/stripe.js')
 
 // define middleware
+// https
+app.get('*',function(req,res,next){
+  if(req.headers['x-forwarded-proto']!='https')
+    res.redirect('https://app.myproducer.io'+req.url)
+  else
+    next()
+})
 app.use(express.static(path.join(__dirname, '../client')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
@@ -65,8 +72,6 @@ app.use('/stripe', stripeRoutes)
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'))
 })
-
-
 
 // error hndlers
 app.use(function(req, res, next) {

@@ -54,7 +54,6 @@ router.post('/addcontact', function(req, res){
             // do next functions here: add newContact to user.contacts
 
               var found = user.contacts.find(function(c) {
-                console.log(c, contact._id);
                 return c == contact._id.toString()
               })
 
@@ -95,7 +94,6 @@ router.post('/addcontact', function(req, res){
       } else { // if user exists
 
         var found = user.contacts.find(function(c) {
-          console.log(c, contact._id);
           return c == contact._id.toString()
         })
 

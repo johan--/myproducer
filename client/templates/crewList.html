@@ -20,19 +20,23 @@
             <p ng-if="crewListCtrl.currentUser.contacts.length < 5" class="strong no-margin" style="margin-left: 31px;">Add contacts so that you can begin building productions!</p>
             <form ng-submit="crewListCtrl.addContact()">
               <div class="col-xs-10">
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                   <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.first_name" type="text" placeholder="First Name"></p>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                   <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.last_name" type="text" placeholder="Last Name"></p>
                 </div>
                 <div class="col-xs-4">
                   <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.email" type="email" placeholder="Email"></p>
                 </div>
+                <div class="col-xs-2">
+                  <p class="no-margin"><button ng-disabled="!crewListCtrl.newContact.email || !crewListCtrl.newContact.first_name || !crewListCtrl.newContact.last_name" type"submit" class="btn main-btn">Add New Contact</button></p>
+                </div>
               </div>
 
               <div class="col-xs-2 text-right">
-                <p class="no-margin"><button ng-disabled="!crewListCtrl.newContact.email || !crewListCtrl.newContact.first_name || !crewListCtrl.newContact.last_name" type"submit" class="btn main-btn">Add New Contact</button></p>
+                <p id="import-csv" class="no-margin">
+                <label ng-click="crewListCtrl.openModal2()" class="btn approval-btn">Import Contacts</label></p>
               </div>
             </form>
           </div>
@@ -161,6 +165,23 @@
         <p>You can always add them back later.</p>
         <br>
         <p><a class="btn approval-btn" ng-click="crewListCtrl.deleteContact(crewListCtrl.contact._id)">Yes</a> <a class="btn error-btn" ng-click="crewListCtrl.closeDeleteContactModal()">Cancel</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="crewListCtrl.showModal2">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <br>
+        <p id="csv-head">Upload a .csv to import your contacts.</p>
+        <p id="csv-body">Make the first 3 columns in your document match the order below.</p>
+        <img id="csv-img" src="./img/csv.png">
+        <br>
+        <p></p>
+        <p><label class="btn main-btn">Import<input type="file" id="import-csv" onchange="angular.element(this).scope().csv_chosen(this)" accept=".csv" style="display: none;"></label>
+        <a class="btn approval-btn" ng-click="crewListCtrl.closeModal2()">Close</a></p>
       </div>
     </div>
   </div>
