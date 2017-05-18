@@ -20,6 +20,8 @@ util.inherits(BaseSchema, Schema)
 
 var tagSchema = new BaseSchema()
 
-// var Tag = mongoose.model('Tag', tagSchema)
+var Tag = mongoose.model('Tag', tagSchema)
 
-module.exports = mongoose.model('Tag', tagSchema)
+// Tag.discriminator('Production', Production)
+
+// module.exports = mongoose.model('Tag', tagSchema)
