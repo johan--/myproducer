@@ -1,13 +1,25 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 var Production = require('./Production.js')
-var PolymorphicTag = require('./PolymorphicTag.js')
+var util = require('util')
 
-var Tag = new Schema({
+var PolymorphicTag = new Schema({
   label: String,
-  taggedItems: [{type: Schema.Types.ObjectId, ref: 'PolymorphicTag'}]
-}, {timestamps: true})
+  tags: [{'type': Schema.Types.ObjectId, 'ref': 'Tag'}]
+})
 
-// PolymorphicTag.discriminator('Production', Production)
+function BaseSchema(){
+  Schema.apply(this, arguments)
 
-module.exports = mongoose.model('Tag', Tag)
+  this.add({
+    'createdAt': {'type': Date, 'default': Date.now}
+  })
+}
+
+util.inherits(BaseSchema, Schema)
+
+var tagSchema = new BaseSchema()
+
+// var Tag = mongoose.model('Tag', tagSchema)
+
+module.exports = mongoose.model('Tag', tagSchema)
