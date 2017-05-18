@@ -67,6 +67,9 @@ vm.makeContactObject = function(line){
       email: line[2]
     }
     vm.pushToUserContacts(newContact)
+  } else if(re.test(line[2]) == false){
+    var failContact = {}
+    vm.pushToUserContacts(failContact)
   }
 }
 
@@ -78,6 +81,11 @@ vm.pushToUserContacts = function(contact){
           vm.currentUser.contacts.push(data.data)
         }
       }
+    })
+    .error(function(data){
+      vm.notifModal.isFailure = true
+      vm.notifModal.content = 'An error has occurred. Please double check your csv format.'
+      vm.notifModal.show = true
     })
     .finally(function(){
       vm.closeModal2()
