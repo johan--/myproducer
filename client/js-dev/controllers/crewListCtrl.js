@@ -29,67 +29,60 @@ function crewListController($rootScope, $http, $stateParams, $state, AuthService
         })
   })
 
-  $scope.csv_chosen = function(csv){
+  $scope.parse_file = function(csv){
     const csvFile = csv.files[0]
-    const csvReader = new FileReader()
+    const config = {
+      complete: function(results, file) {
+	       vm.handleCsvResults(results.data)
+       }
+    }
 
-    csvReader.readAsText(csvFile)
-    csvReader.onload = vm.loadHandler;
-    csvReader.onerror = vm.errorHandler;
+    Papa.parse(csvFile, config)
+
 }
 
-vm.loadHandler = function(event){
-  var csv = event.target.result
-  vm.processData(csv)
-}
-
-vm.processData = function(csv){
-  // parse csv file
-  vm.csvContacts = []
-  var allTextLines = csv.split(/\r\n|\n/);
-  var lines = [];
-  for (var i=0; i<allTextLines.length; i++) {
-    var data = allTextLines[i].split(';');
-      for (var j=0; j<data.length; j++) {
-        if(data[j][0] != ','){
-          lines.push(data[j]);
-        }
-      }
+vm.handleCsvResults = function(results){
+  for(var i=0; i<results.length; i++){
+    vm.checkForEmptyField(results[i])
   }
+}
 
-  for(var i = 0; i<lines.length; i++){
-    var csvContent = lines[i].split(',')
-    csvContent.splice(3)
-    // csvContent should be an array with only 3 strings
-    // email validation
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      // if the 3rd field is a valid email create a new contact
-    if(re.test(csvContent[2])){
-      var newContact = {
-        first_name: csvContent[0],
-        last_name: csvContent[1],
-        email: csvContent[2]
-      }
-      vm.csvContacts.push(newContact)
+vm.checkForEmptyField = function(array){
+  var line = []
+  for(var i=0; i<array.length; i++){
+    if(array[i] != ""){
+      line.push(array[i])
     }
   }
-  // TODO: separate into new functions being called
-  for(var a = 0; a < vm.csvContacts.length; a++){
-    $http.post('/api/users/addcontact', vm.csvContacts[a])
-      .success(function(data){
-        if(data){
-          if(data.success){
-            vm.currentUser.contacts.push(data.data)
-          }
-        }
-      })
-      .finally(function(){
-        vm.closeModal2()
-      })
-  }
-
+  return vm.makeContactObject(line)
 }
 
+vm.makeContactObject = function(line){
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if(line.length != 0 && re.test(line[2])){
+    var newContact = {
+      first_name: line[0],
+      last_name: line[1],
+      email: line[2]
+    }
+    vm.pushToUserContacts(newContact)
+  }
+}
+
+vm.pushToUserContacts = function(contact){
+  $http.post('/api/users/addcontact', contact)
+    .success(function(data){
+      if(data){
+        if(data.success){
+          vm.currentUser.contacts.push(data.data)
+        }
+      }
+    })
+    .finally(function(){
+      vm.closeModal2()
+    })
+}
 
 vm.errorHandler = function(evt){
   if(evt.target.error.name == "NotReadableError") {
