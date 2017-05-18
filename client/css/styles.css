@@ -850,7 +850,11 @@ nav ul li ul li {
 
 #import-csv {
   position: relative;
-  left: 23%; }
+  left: 33%;
+  text-align: center; }
+
+#csv-btn-text {
+  overflow: hidden; }
 
 #cog {
   position: relative;

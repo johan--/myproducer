@@ -1074,12 +1074,16 @@ nav ul li ul li {
 
 .menu-dropdown a {
   color: white;
-
 }
 
 #import-csv {
   position: relative;
-  left: 23%;
+  left: 33%;
+  text-align: center;
+}
+
+#csv-btn-text {
+  overflow: hidden;
 }
 
 #cog {
