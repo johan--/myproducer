@@ -180,7 +180,7 @@
         <img id="csv-img" src="./img/csv.png">
         <br>
         <p></p>
-        <p><label class="btn main-btn">Import<input type="file" id="import-csv" onchange="angular.element(this).scope().csv_chosen(this)" accept=".csv" style="display: none;"></label>
+        <p><label class="btn main-btn">Import<input type="file" id="import-csv" onchange="angular.element(this).scope().parse_file(this)" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display: none;"></label>
         <a class="btn approval-btn" ng-click="crewListCtrl.closeModal2()">Close</a></p>
       </div>
     </div>
