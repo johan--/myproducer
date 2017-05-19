@@ -555,6 +555,10 @@ table td {
     background-color: #4dcfff;
     color: #FFFFFF; }
 
+.btn.nohover:hover {
+  color: white;
+  cursor: default !important; }
+
 .approval-btn {
   background-color: #00937D;
   color: #FFFFFF; }

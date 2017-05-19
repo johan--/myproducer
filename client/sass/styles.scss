@@ -698,6 +698,11 @@ table td {
   }
 }
 
+.btn.nohover:hover {
+  color: white;
+  cursor:default !important;
+}
+
 .approval-btn{
   background-color: $approval;
   color: $text;
