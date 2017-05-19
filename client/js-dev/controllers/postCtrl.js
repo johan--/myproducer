@@ -216,6 +216,28 @@ vm.deleteResume = function() {
     return new Date() < date
   }
 
+  // function to print out view offer buttons
+  // user is not stored into the production model so have to loop through 2 models
+  vm.getOfferId = function(production){
+    var id = ''
+    for(var i=0; i<vm.currentUser.offersReceived.length; i++){
+      if(vm.checkIdMatching(vm.currentUser.offersReceived[i]._id, production)){
+        // id that was matched
+        id = vm.checkIdMatching(vm.currentUser.offersReceived[i]._id, production)
+      }
+    }
+
+    return id
+  }
+
+  vm.checkIdMatching = function(id, production){
+    for(var i=0; i<production.crew.length; i++){
+      if(id == production.crew[i]){
+        return id
+      }
+    }
+  }
+
   /*
    Function called when file input updated. If there is a file selected, then
    start upload procedure by asking for a signed request from the app.

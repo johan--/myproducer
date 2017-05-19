@@ -3,6 +3,14 @@ var dotenv = require('dotenv').load({silent: true})
 var nodemailer = require('nodemailer')
 var EmailTemplate = require('email-templates').EmailTemplate
 var ejs = require('ejs')
+var mg = require('nodemailer-mailgun-transport')
+
+var auth = {
+  auth: {
+    api_key: '',
+    domain: 'domain listed in mailgun site'
+  }
+}
 
 var smtpConfig = {
   host: process.env.NODEMAILER_HOST,

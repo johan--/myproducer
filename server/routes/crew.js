@@ -77,7 +77,6 @@ router.post('/', function(req, res){
 router.get('/:id', function(req, res){
   Crew.findById(req.params.id).populate({path: 'message', populate: {path: '_by', select: 'username first_name last_name picture'}}).populate({path: 'production', populate: {path: 'by_'}}).populate({path: 'to'}).exec(function(err, crew){
     if(err) return console.log(err)
-    console.log('crew before check',crew);
     if(crew){
       if(crew.active) {
         res.json(crew)
