@@ -608,7 +608,14 @@ table td {
   font-size: 1.5vw;
 }
 
+#approved-list-header {
+  position: relative;
+  left: -3.5%;
+}
 
+#csv-btn-text {
+  margin-left: 11px;
+}
 
 .line-item {
   background-color: $line-item;

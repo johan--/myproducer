@@ -222,7 +222,7 @@
 </div>
 
 <div id="modal-root" ng-if="postCtrl.upgradeModal.show">
-  <div id="modal-container">
+  <div id="modal-container" ng-click="postCtrl.closeUpgradeModal()">
     <div id="modal-lg" class="section">
       <div class="padding20 text-center">
         <h1><i ng-if="postCtrl.upgradeModal.isSuccess" class="fa fa-check-circle-o"></i></h1>
