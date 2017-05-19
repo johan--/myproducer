@@ -7,30 +7,26 @@ var mg = require('nodemailer-mailgun-transport')
 
 var auth = {
   auth: {
-    api_key: '',
-    domain: 'domain listed in mailgun site'
+    api_key: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN
   }
 }
 
-var smtpConfig = {
-  host: process.env.NODEMAILER_HOST,
-  port: process.env.NODEMAILER_PORT,
-  secure: false, // use SSL
-  auth: {
-      user: process.env.NODEMAILER_USER,
-      pass: process.env.NODEMAILER_PASS
-  },
-  tls: {
-      rejectUnauthorized: false
-  }
-};
+// var smtpConfig = {
+//   host: process.env.NODEMAILER_HOST,
+//   port: process.env.NODEMAILER_PORT,
+//   secure: false, // use SSL
+//   auth: {
+//       user: process.env.NODEMAILER_USER,
+//       pass: process.env.NODEMAILER_PASS
+//   },
+//   tls: {
+//       rejectUnauthorized: false
+//   }
+// };
 
-// change the smtpconfig here
-// use the ng mailgun package auth
-// create new domain for development
-// mg = require('nodemailer-mailgun-transport');
 // var nodemailerMailgun = nodemailer.createTransport(mg(auth));
-var transporter = nodemailer.createTransport(smtpConfig);
+var transporter = nodemailer.createTransport(mg(auth));
 
 var mailer = {}
 mailer.send = function(mailTemplate, locals, options) {
