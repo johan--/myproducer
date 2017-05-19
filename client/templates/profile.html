@@ -150,7 +150,10 @@
           <div class="line-item" ng-repeat="production in postCtrl.currentUser.allProductions" ng-if="production.active && postCtrl.compareDate(production.date)">
             <p class="float-left no-margin strong">{{ production.name + ' - ' }} {{ production.date | date:'shortDate' }}</p>
             <p class="float-right no-margin"><a class="btn default-btn" ui-sref="production({id: production._id})">View</a></p>
+          <div ng-repeat="offer in postCtrl.currentUser.offersReceived">
+            <a ng-if="offer.offer.status == 'Accepted' && postCtrl.currentUser._id == offer.to" ui-sref="offer({id: offer._id})">View Offer</a>
           </div>
+        </div>
           <!-- If they're crew show their accepted productions -->
           <!-- <li ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-show="offer.offer.status != 'Accepted'">{{ offer.offer.position }} <a ui-sref="offer({id: offer._id})">View</a></li> -->
         </div>

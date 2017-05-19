@@ -17,6 +17,11 @@ var smtpConfig = {
   }
 };
 
+// change the smtpconfig here
+// use the ng mailgun package auth
+// create new domain for development
+// mg = require('nodemailer-mailgun-transport');
+// var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 var transporter = nodemailer.createTransport(smtpConfig);
 
 var mailer = {}

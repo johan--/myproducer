@@ -47,7 +47,8 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
-
+          // console.log(vm.currentUser.allProductions);
+          console.log(vm.currentUser);
           vm.ready = true
         })
   })
