@@ -484,7 +484,11 @@ table td {
 
 #approved-list-header {
   position: relative;
-  left: -3.5%; }
+  left: -3.5%;
+  width: 107%; }
+
+#crewlist-column {
+  width: 105%; }
 
 #csv-btn-text {
   margin-left: 11px; }

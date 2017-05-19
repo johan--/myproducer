@@ -19,17 +19,17 @@
           <div id="approved-list-header" class="col-sm-12 bg-transparent">
             <p ng-if="crewListCtrl.currentUser.contacts.length < 5" class="strong no-margin" style="margin-left: 31px;">Add contacts so that you can begin building productions!</p>
             <form ng-submit="crewListCtrl.addContact()">
-              <div class="col-xs-12">
-                <div class="col-xs-3">
+              <div id="crewlist-column" class="col-xs-12">
+                <div class="col-xs-2">
                   <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.first_name" type="text" placeholder="First Name"></p>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-2">
                   <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.last_name" type="text" placeholder="Last Name"></p>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-4">
                   <p class="no-margin"><input class="form-control bg-transparent subtle-border" ng-model="crewListCtrl.newContact.email" type="email" placeholder="Email"></p>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-4">
                   <p class="no-margin"><button ng-disabled="!crewListCtrl.newContact.email || !crewListCtrl.newContact.first_name || !crewListCtrl.newContact.last_name" type"submit" class="btn main-btn">Add New Contact</button><label id="csv-btn-text" ng-click="crewListCtrl.openModal2()" class="btn approval-btn">Import .csv</label></p>
                 </div>
               </div>
