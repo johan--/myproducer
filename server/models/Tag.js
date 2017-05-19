@@ -1,27 +1,13 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
-var Production = require('./Production.js')
-var util = require('util')
+const mongoose = require('mongoose'),
+  Schema = mongoose.Schema,
+  Production = require('./Production.js'),
+  util = require('util')
 
-var PolymorphicTag = new Schema({
+// named taggables to make it polymorphic in the future
+// will use mongoose discriminator method
+var Tag = new Schema({
   label: String,
-  tags: [{'type': Schema.Types.ObjectId, 'ref': 'Tag'}]
+  taggables: [{'type': mongoose.Schema.Types.ObjectId, 'ref': 'Production'}]
 })
 
-function BaseSchema(){
-  Schema.apply(this, arguments)
-
-  this.add({
-    'createdAt': {'type': Date, 'default': Date.now}
-  })
-}
-
-util.inherits(BaseSchema, Schema)
-
-var tagSchema = new BaseSchema()
-
-var Tag = mongoose.model('Tag', tagSchema)
-
-// Tag.discriminator('Production', Production)
-
-// module.exports = mongoose.model('Tag', tagSchema)
+module.exports = mongoose.model('Tag', Tag)
