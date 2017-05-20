@@ -1,10 +1,20 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
-  .directive('myRepeatDirective', function(){
+  .directive('myRepeatDirective', myRepeatDirective)
+
+  productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
+
+  myRepeatDirective.$inject = ['$http']
+
+  function myRepeatDirective($http){
     return function(scope, element, attrs){
       if(scope.$last){
         var draggables = []
         var droppables = []
+        var tagModel = {
+          label: '',
+          productions: []
+        }
 
         droppables.push($('.droppable'))
         droppables[0].each(function(){
@@ -19,6 +29,7 @@ angular.module('myApp')
                 $(this).parent().append(ui.draggable)
               } else{
               // make a new group with the 2 production days
+
               var accordionLocation = $('#accordionLocation')
               var newAccordion = $('<button class="accordion"><p id="p-tag"></p></button>')
               var productionGroupModal = $('#directive-modal')
@@ -26,11 +37,24 @@ angular.module('myApp')
               var productionGroupInput = $('#directive-modal-input')
               var productionGroupButton = $('#directive-modal-button')
 
+              tagModel.productions.push($(this).children()[0].id)
+              tagModel.productions.push(ui.draggable.children()[0].id)
+              
               productionGroupButton.on('click', function(){
                 // create Tag object in backend
                 var productionName = productionGroupInput.val()
                 $('#p-tag')[0].innerText = productionName
                 productionGroupModal.css('display', 'none')
+
+                tagModel.label = productionName
+
+                // console.log($(this).children()[0].id);
+                // console.log(ui.draggable.children()[0].id);
+
+                $http.post('/api/tag/newtag', tagModel)
+                  .success(function(data){
+                    console.log(data);
+                  })
               })
 
 
@@ -70,9 +94,7 @@ angular.module('myApp')
         })
       }
     }
-  })
-
-productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
+  }
 
 // PRODUCTIONS
 
