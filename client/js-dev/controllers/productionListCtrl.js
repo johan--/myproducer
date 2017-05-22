@@ -39,7 +39,7 @@ angular.module('myApp')
 
               tagModel.productions.push($(this).children()[0].id)
               tagModel.productions.push(ui.draggable.children()[0].id)
-              
+
               productionGroupButton.on('click', function(){
                 // create Tag object in backend
                 var productionName = productionGroupInput.val()
@@ -47,9 +47,6 @@ angular.module('myApp')
                 productionGroupModal.css('display', 'none')
 
                 tagModel.label = productionName
-
-                // console.log($(this).children()[0].id);
-                // console.log(ui.draggable.children()[0].id);
 
                 $http.post('/api/tag/newtag', tagModel)
                   .success(function(data){
