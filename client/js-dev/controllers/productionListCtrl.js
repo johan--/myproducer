@@ -126,6 +126,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
+          console.log(vm.currentUser);
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
