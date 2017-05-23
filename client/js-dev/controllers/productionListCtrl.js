@@ -155,16 +155,28 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     }
   }
 
-  vm.checkIfGrouped = function(production){
+  vm.checkIfTagged = function(production){
+    var tagged = false
+
     for(var i=0; i<vm.userTaggables.length; i++){
-      if(vm.userTaggables[i].taggables.length > 0){
-        if(vm.userTaggables[i].taggables.includes(production._id)){
-          return false
-        } else {
-          return true
-        }
+      if(vm.compareDate(production.date)){
+        tagged = vm.checkTagArray(production, vm.userTaggables[i])
       }
     }
+
+    return tagged
+  }
+
+  vm.checkTagArray = function(obj, tag){
+    var tagged = false
+
+    for(var i=0; i<tag.taggables.length; i++){
+      if(tag.taggables[i]._id == obj._id){
+        tagged = true
+      }
+    }
+
+    return tagged
   }
 
   vm.deleteTags = function(){
