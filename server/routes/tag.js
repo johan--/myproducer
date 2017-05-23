@@ -6,24 +6,23 @@ const
   User = require('../models/User.js')
 
 router.post('/newtag', function(req,res){
-  var user = req.user
+  // need check functionality here
+  // create Tag object before storing it into User
   Tag.create(req.body, function(err, tag){
+    if(err) return console.log(err)
+    tag._creator = req.user
     tag.taggables.push(req.body.productions[0])
     tag.taggables.push(req.body.productions[1])
-    tag._creator = req.user
-    User.findById(tag._creator._id).populate({path: 'taggables'}).exec(function(err,user){
-      user.taggables.push(tag)
-      user.save()
-      res.json(user)
-      // user.populate(tag, {path: 'taggables'}, function(err, newUser){
-      //   res.json(newUser)
-      // })
-      // user.taggables.push(tag)
-      // console.log('user found:', user);
-      // console.log('tag created',tag);
+    tag.save()
+        User.findById(tag._creator._id).populate({path: 'taggables'}).exec(function(err,user){
+          if(err) return console.log(err)
+          console.log('tag being saved to user: ', tag);
+          user.taggables.push(tag)
+          user.save()
+          res.json(user)
+        })
+      })
     })
-  })
-})
 
 router.delete('/deletetags', function(req,res){
   User.findOne({_id: req.user._id}, function(err,user){

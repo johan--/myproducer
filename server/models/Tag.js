@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
   User = require('./User.js')
 
 // named taggables to make it polymorphic in the future
-// will use mongoose discriminator method
+// taggables should reference ObjectId's. Currently just pushing Model Objects into array. need to change and populate later
 var Tag = new Schema({
   label: String,
   taggables: [{'type': mongoose.Schema.Types.ObjectId, 'ref': 'Production'}],

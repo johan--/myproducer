@@ -10,24 +10,32 @@
       </div>
     </div>
     <div class="col-md-12 no-padding">
-      <!-- <div class="line-item">
-        <div class="col-xs-2">
-          <p class="no-margin strong">Date</p>
-        </div>
-        <div class="col-xs-2">
-          <p class="no-margin strong">Name</p>
-        </div>
-        <div class="col-xs-2">
-          <p class="no-margin strong"></p>
-        </div>
-        <div class="col-xs-3">
-          <p class="no-margin strong">Location</p>
-        </div>
-        <div class="col-xs-3 text-right">
-          <p class="no-margin strong">Actions</p>
-        </div>
-      </div> -->
-      <div id="accordionLocation"></div>
+      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in productionListCtrl.userTaggables">
+        <button class="accordion" ng-click="productionListCtrl.accordionClick($event)">
+          <p id="p-tag" class="accordion">{{ tag.label }}</p>
+          <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item draggable droppable accordion-panel" ng-repeat="production in tag.taggables">
+            <div class="col-md-2 start-date">
+              <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+            </div>
+            <div class="col-md-2">
+              <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
+            </div>
+            <div class="col-md-2 end-date">
+              <p class="no-margin">{{ production.productionDay ? "Day " + production.productionDay : ''}}</p>
+            </div>
+            <div class="col-md-3 nowrap">
+              <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
+            </div>
+            <div class="col-md-3 text-right no-padding">
+              <p class="no-margin">
+                <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
+                <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+              </p>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
 
       <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'" my-repeat-directive>
         <!-- make each production draggable and droppable -->

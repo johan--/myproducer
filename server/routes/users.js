@@ -11,6 +11,7 @@ var crypto = require('crypto')
 // MODELS
 
 var User = require('../models/User.js')
+var Tag = require('../models/Tag.js')
 
 // get list of all users
 router.get('/', function(req, res){
@@ -172,8 +173,9 @@ router.get('/:id/contacts', function(req, res){
   })
 })
 
+// populate user with data for front end rendering
 router.get('/:id/productions', function(req, res){
-  User.findById(req.params.id).populate({path: 'productions', select: '-createdAt -updatedAt -__v'}).populate({path: 'offersReceived', populate: {path: 'production'}}).exec(function(err, user){
+  User.findById(req.params.id).populate({path: 'productions', select: '-createdAt -updatedAt -__v'}).populate({path: 'offersReceived', populate: {path: 'production'}}).populate({path: 'taggables', populate: {path: 'taggables'}}).exec(function(err, user){
     if(err) return console.log(err)
     res.json(user)
   })

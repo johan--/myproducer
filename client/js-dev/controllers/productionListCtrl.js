@@ -43,7 +43,7 @@ angular.module('myApp')
               productionGroupButton.on('click', function(){
                 // create Tag object in backend
                 var productionName = productionGroupInput.val()
-                $('#p-tag')[0].innerText = productionName
+                $('#p-tag').innerText = productionName
                 productionGroupModal.css('display', 'none')
 
                 tagModel.label = productionName
@@ -105,12 +105,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.productionsDraggable = []
   vm.productionsDroppable = []
 
-  // vm.addClickToDraggables = function(){
-  //   var draggables = []
-  //   draggables.push($('.draggable'))
-  //   console.log(draggables[0]);
-  // }
-
   vm.deleteTags = function(){
     $http.delete('/api/tag/deletetags')
     .success(function(data){
@@ -129,7 +123,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
+          vm.userTaggables = vm.currentUser.taggables
           console.log(vm.currentUser);
+          // console.log(vm.currentUser);
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
@@ -147,6 +143,36 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // }
         })
   })
+
+// function that handles multi day productions
+  vm.accordionClick = function($event){
+    const button = $event.target
+    button.classList.toggle('active')
+    if(button.classList.contains('active')){
+      $('.accordion-panel').show()
+    } else {
+      $('.accordion-panel').hide()
+    }
+  }
+
+  vm.checkIfGrouped = function(production){
+    for(var i=0; i<vm.userTaggables.length; i++){
+      if(vm.userTaggables[i].taggables.length > 0){
+        if(vm.userTaggables[i].taggables.includes(production._id)){
+          return false
+        } else {
+          return true
+        }
+      }
+    }
+  }
+
+  vm.deleteTags = function(){
+    $http.delete('/api/tag/deletetags')
+    .success(function(data){
+      console.log(data);
+    })
+  }
 
   var dateToday = new Date(Date.now())
   vm.dateFrom = dateToday
