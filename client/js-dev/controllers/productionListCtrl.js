@@ -20,7 +20,6 @@ angular.module('myApp')
         droppables[0].each(function(){
           $(this).droppable({
             drop: function(event,ui){
-
               // if user is dropping production day into a group
               if($(this).parent().is('button')){
                 ui.draggable.addClass('accordion-panel')
@@ -29,7 +28,6 @@ angular.module('myApp')
                 $(this).parent().append(ui.draggable)
               } else{
               // make a new group with the 2 production days
-
               var accordionLocation = $('#accordionLocation')
               var newAccordion = $('<button class="accordion"><p id="p-tag"></p></button>')
               var productionGroupModal = $('#directive-modal')
@@ -105,13 +103,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.productionsDraggable = []
   vm.productionsDroppable = []
 
-  vm.deleteTags = function(){
-    $http.delete('/api/tag/deletetags')
-    .success(function(data){
-      console.log(data);
-    })
-  }
-
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
   }
@@ -124,8 +115,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         .success(function(data){
           vm.currentUser = data
           vm.userTaggables = vm.currentUser.taggables
-          console.log(vm.currentUser);
-          // console.log(vm.currentUser);
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
@@ -144,38 +133,34 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         })
   })
 
-// function that handles multi day productions
+// multi day productions
   vm.accordionClick = function($event){
     const button = $event.target
     button.classList.toggle('active')
     if(button.classList.contains('active')){
-      $('.accordion-panel').show()
+      $(button).children().show()
     } else {
-      $('.accordion-panel').hide()
+      $(button).children().not('p').hide()
     }
   }
 
   vm.checkIfTagged = function(production){
-    var tagged = false
-
     for(var i=0; i<vm.userTaggables.length; i++){
       if(vm.compareDate(production.date)){
-        tagged = vm.checkTagArray(production, vm.userTaggables[i])
+        var tagged = vm.checkTagArray(production, vm.userTaggables[i])
       }
     }
-
     return tagged
   }
 
   vm.checkTagArray = function(obj, tag){
     var tagged = false
-
     for(var i=0; i<tag.taggables.length; i++){
       if(tag.taggables[i]._id == obj._id){
+        console.log('matched');
         tagged = true
       }
     }
-
     return tagged
   }
 

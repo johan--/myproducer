@@ -1,18 +1,19 @@
-<button ng-click="productionListCtrl.deleteTags()">delete tags</button>
+<!-- <button ng-click="productionListCtrl.deleteTags()">delete tags</button> -->
 
- <div ng-show="productionListCtrl.ready">
-       <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Creates a production for each day in your date range</p></div>
+<div ng-show="productionListCtrl.ready">
+  <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Creates a production for each day in your date range</p></div>
   <div class="productions-view col-sm-12 section">
     <div class="header-row">
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
       <div class="col-sm-9" ng-show="productionListCtrl.currentUser.role === 'producer'">
-          <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" ng-click="productionListCtrl.openCreateProdModal()" type="submit" class="create-new-prod btn default-btn">+ Create New</button>
+        <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" ng-click="productionListCtrl.openCreateProdModal()" type="submit" class="create-new-prod btn default-btn">+ Create New</button>
       </div>
     </div>
+
     <div class="col-md-12 no-padding">
       <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in productionListCtrl.userTaggables">
         <button class="accordion" ng-click="productionListCtrl.accordionClick($event)">
-          <p id="p-tag" class="accordion">{{ tag.label }}</p>
+          <p id="{{tag._id}}" class="accordion-p">{{ tag.label }}</p>
           <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item draggable droppable accordion-panel" ng-repeat="production in tag.taggables">
             <div class="col-md-2 start-date">
               <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
@@ -37,10 +38,10 @@
       </div>
     </div>
 
-      <div ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'" my-repeat-directive>
+    <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions | orderBy: 'date'" ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" my-repeat-directive>
         <!-- make each production draggable and droppable -->
         <!-- when dropped, make a new group with a dropdown -->
-        <div id="{{production._id}}">
+      <div id="{{production._id}}">
         <div class="col-md-2 start-date">
           <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
@@ -60,9 +61,9 @@
           </p>
         </div>
       </div>
-      </div>
     </div>
   </div>
+</div>
     <!-- TODO This is dummy content to adjust styling while I'm not logged in. Will remove later -->
     <div class="list-group-item" ng-hide="main.currentUser.username">
       <div class="row">
@@ -83,7 +84,6 @@
         </div>
       </div>
     </div>
-  </div>
 
   <div class="past-productions-view col-sm-12 section">
     <div class="">
@@ -113,7 +113,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <div id="modal-root" ng-if="productionListCtrl.notifModal.show">
   <div id="modal-container" ng-click="productionListCtrl.closeNotifModal()">
