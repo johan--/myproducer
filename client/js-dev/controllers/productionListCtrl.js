@@ -111,8 +111,11 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   //   console.log(draggables[0]);
   // }
 
-  vm.testfunction = function(){
-    console.log('function was hit');
+  vm.deleteTags = function(){
+    $http.delete('/api/tag/deletetags')
+    .success(function(data){
+      console.log(data);
+    })
   }
 
   if($state.params.upgradeModal === true) {

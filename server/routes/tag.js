@@ -25,4 +25,12 @@ router.post('/newtag', function(req,res){
   })
 })
 
+router.delete('/deletetags', function(req,res){
+  User.findOne({_id: req.user._id}, function(err,user){
+    user.taggables = []
+    user.save()
+    res.json(user)
+  })
+})
+
   module.exports = router
