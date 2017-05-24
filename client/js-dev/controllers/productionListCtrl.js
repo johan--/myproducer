@@ -4,9 +4,9 @@ angular.module('myApp')
 
   productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
-  myRepeatDirective.$inject = ['$http']
+  myRepeatDirective.$inject = ['$http', 'AuthService']
 
-  function myRepeatDirective($http){
+  function myRepeatDirective($http, AuthService){
     return function(scope, element, attrs){
       if(scope.$last){
         var draggables = []
@@ -28,26 +28,27 @@ angular.module('myApp')
                 $(this).parent().append(ui.draggable)
               } else{
               // make a new group with the 2 production days
-              var accordionLocation = $('#accordionLocation')
-              var newAccordion = $('<button class="accordion"><p id="p-tag"></p></button>')
+              // var accordionLocation = $('#accordionLocation')
+              // var newAccordion = $('<button class="accordion"><p id="p-tag"></p></button>')
               var productionGroupModal = $('#directive-modal')
               productionGroupModal.css('display', 'table')
               var productionGroupInput = $('#directive-modal-input')
               var productionGroupButton = $('#directive-modal-button')
 
-              tagModel.productions.push($(this).children()[0].id)
-              tagModel.productions.push(ui.draggable.children()[0].id)
 
               productionGroupButton.on('click', function(){
                 // create Tag object in backend
                 var productionName = productionGroupInput.val()
-                $('#p-tag').innerText = productionName
+                // $('#p-tag').innerText = productionName
                 productionGroupModal.css('display', 'none')
 
                 tagModel.label = productionName
+                tagModel.productions.push($(this).children()[0].id)
+                tagModel.productions.push(ui.draggable.children()[0].id)
 
                 $http.post('/api/tag/newtag', tagModel)
                   .success(function(data){
+                    // update current user tag array to render new Tag
                     console.log(data);
                   })
               })
@@ -84,7 +85,9 @@ angular.module('myApp')
         draggables[0].each(function(){
           $(this).draggable({
             axis: 'y',
-            containment: 'parent'
+            containment: 'parent',
+            snap: true,
+            snapMode: 'inner'
           })
         })
       }

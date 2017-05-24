@@ -10,11 +10,12 @@
       </div>
     </div>
 
+<!-- GROUPED TAGS-->
     <div class="col-md-12 no-padding">
       <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in productionListCtrl.userTaggables">
         <button class="accordion" ng-click="productionListCtrl.accordionClick($event)">
           <p id="{{tag._id}}" class="accordion-p">{{ tag.label }}</p>
-          <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item draggable droppable accordion-panel" ng-repeat="production in tag.taggables">
+          <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item accordion-panel" ng-repeat="production in tag.taggables">
             <div class="col-md-2 start-date">
               <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
             </div>
@@ -38,6 +39,7 @@
       </div>
     </div>
 
+<!-- SINGLE DAY PRODUCTIONS -->
     <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions track by $index | orderBy: 'date' " ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" my-repeat-directive>
         <!-- make each production draggable and droppable -->
         <!-- when dropped, make a new group with a dropdown -->
