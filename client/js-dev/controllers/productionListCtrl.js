@@ -115,6 +115,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         .success(function(data){
           vm.currentUser = data
           vm.userTaggables = vm.currentUser.taggables
+          console.log(vm.currentUser);
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
@@ -145,21 +146,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.checkIfTagged = function(production){
-    for(var i=0; i<vm.userTaggables.length; i++){
-      if(vm.compareDate(production.date)){
-        var tagged = vm.checkTagArray(production, vm.userTaggables[i])
-      }
-    }
-    return tagged
-  }
-
-  vm.checkTagArray = function(obj, tag){
     var tagged = false
-    for(var i=0; i<tag.taggables.length; i++){
-      if(tag.taggables[i]._id == obj._id){
-        console.log('matched');
-        tagged = true
-      }
+    if(production.tag.length > 0){
+      tagged = true
     }
     return tagged
   }

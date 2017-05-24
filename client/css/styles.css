@@ -149,7 +149,7 @@ button.accordion.active, button.accordion:hover {
   left: 0; }
 
 .accordion-p {
-  width: 20px; }
+  width: 20%; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
