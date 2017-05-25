@@ -4,9 +4,9 @@ angular.module('myApp')
 
   productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
-  myRepeatDirective.$inject = ['$http', 'AuthService']
+  myRepeatDirective.$inject = ['$http', 'AuthService', '$rootScope']
 
-  function myRepeatDirective($http, AuthService){
+  function myRepeatDirective($http, AuthService, $rootScope){
     return function(scope, element, attrs){
       if(scope.$last){
         var draggables = []
@@ -15,6 +15,10 @@ angular.module('myApp')
           label: '',
           productions: []
         }
+
+        var controllerElement = document.querySelector('body');
+        var controllerScope = angular.element(controllerElement).scope();
+        console.log('userTaggables:',controllerScope.userTaggables);
 
         droppables.push($('.droppable'))
         droppables[0].each(function(){
@@ -35,6 +39,8 @@ angular.module('myApp')
               var productionGroupInput = $('#directive-modal-input')
               var productionGroupButton = $('#directive-modal-button')
 
+              tagModel.productions.push($(this).children()[0].id)
+              tagModel.productions.push(ui.draggable.children()[0].id)
 
               productionGroupButton.on('click', function(){
                 // create Tag object in backend
@@ -43,38 +49,37 @@ angular.module('myApp')
                 productionGroupModal.css('display', 'none')
 
                 tagModel.label = productionName
-                tagModel.productions.push($(this).children()[0].id)
-                tagModel.productions.push(ui.draggable.children()[0].id)
 
                 $http.post('/api/tag/newtag', tagModel)
                   .success(function(data){
                     // update current user tag array to render new Tag
-                    console.log(data);
+                    controllerScope.userTaggables = data.taggables
                   })
               })
 
 
-              $(this).addClass('accordion-panel')
-              $(this).draggable('disable')
-              newAccordion.append($(this))
+              // $(this).addClass('accordion-panel')
+              // $(this).draggable('disable')
+              // newAccordion.append($(this))
+              //
+              // ui.draggable.addClass('accordion-panel')
+              // ui.draggable.draggable('disable')
+              // newAccordion.append(ui.draggable)
+              //
+              // newAccordion.droppable()
+              // accordionLocation.append(newAccordion)
+              //
+              // // show production days on click of the button
+              // newAccordion.on('click', function(){
+              //   this.classList.toggle('active')
+              //
+              //   if(this.classList.contains('active')){
+              //     $('.accordion-panel').show()
+              //   } else {
+              //     $('.accordion-panel').hide()
+              //   }
+              // })
 
-              ui.draggable.addClass('accordion-panel')
-              ui.draggable.draggable('disable')
-              newAccordion.append(ui.draggable)
-
-              newAccordion.droppable()
-              accordionLocation.append(newAccordion)
-
-              // show production days on click of the button
-              newAccordion.on('click', function(){
-                this.classList.toggle('active')
-
-                if(this.classList.contains('active')){
-                  $('.accordion-panel').show()
-                } else {
-                  $('.accordion-panel').hide()
-                }
-              })
             }
             }
           })
@@ -118,7 +123,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         .success(function(data){
           vm.currentUser = data
           vm.userTaggables = vm.currentUser.taggables
-          console.log(vm.currentUser);
+          $rootScope.userTaggables = vm.userTaggables
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {

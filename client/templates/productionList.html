@@ -12,7 +12,7 @@
 
 <!-- GROUPED TAGS-->
     <div class="col-md-12 no-padding">
-      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in productionListCtrl.userTaggables">
+      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in userTaggables">
         <button class="accordion" ng-click="productionListCtrl.accordionClick($event)">
           <p id="{{tag._id}}" class="accordion-p">{{ tag.label }}</p>
           <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item accordion-panel" ng-repeat="production in tag.taggables">
