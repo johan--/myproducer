@@ -18,18 +18,30 @@ angular.module('myApp')
 
         var controllerElement = document.querySelector('body');
         var controllerScope = angular.element(controllerElement).scope();
-        console.log('userTaggables:',controllerScope.userTaggables);
+        // console.log('userTaggables:',controllerScope.userTaggables);
 
         droppables.push($('.droppable'))
         droppables[0].each(function(){
           $(this).droppable({
             drop: function(event,ui){
+              const tagData = {
+                productionId: '',
+                tagId: ''
+              }
+              tagData.productionId = ui.draggable.children()[0].id
+              tagData.tagId = $(this).parent().children('p')[0].id
               // if user is dropping production day into a group
               if($(this).parent().is('button')){
                 ui.draggable.addClass('accordion-panel')
                 ui.draggable.draggable('disable')
                 ui.draggable.css('display', 'block')
                 $(this).parent().append(ui.draggable)
+
+                $http.patch('/api/tag/addproduction', tagData)
+                  .success(function(data){
+                    console.log(data);
+                  })
+
               } else{
               // make a new group with the 2 production days
               // var accordionLocation = $('#accordionLocation')

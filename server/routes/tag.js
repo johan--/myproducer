@@ -33,6 +33,20 @@ router.post('/newtag', function(req,res){
     })
   })
 
+router.patch('/addproduction', function(req,res){
+  Production.findById(req.body.productionId, function(err,production){
+    if(err) return console.log(err);
+    production.tag.push(req.body.tagId)
+    production.save()
+    Tag.findById(req.body.tagId, function(err,tag){
+      if(err) return console.log(err);
+      tag.taggables.push(req.body.productionId)
+      tag.save()
+      res.json(tag)
+    })
+  })
+})
+
 router.delete('/deletetags', function(req,res){
   User.findOne({_id: req.user._id}, function(err,user){
     user.taggables = []
