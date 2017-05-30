@@ -228,6 +228,16 @@ button.accordion.active, button.accordion:hover {
 
 .accordion-img {
   width: 20px;
+  -ms-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.accordion-img.active {
+  width: 20px;
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 ////////// END ACCORDION CSS ///////////
 

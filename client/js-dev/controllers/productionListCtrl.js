@@ -157,8 +157,12 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 // multi day productions
   vm.wholeAccordionClick = function($event){
     if($event.target.type){
+      const arrow = $($event.target).children('p').children('img')[0]
       const button = $event.target
+
+      arrow.classList.toggle('active')
       button.classList.toggle('active')
+      
       if(button.classList.contains('active')){
         $(button).children().show()
       } else {
@@ -168,10 +172,12 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.arrowAccordionClick = function($event){
-    console.log('arrow clicked');
     const arrow = $event.target
     const accordion = $(arrow).parent().parent()[0]
+
+    arrow.classList.toggle('active')
     accordion.classList.toggle('active')
+
     if(accordion.classList.contains('active')){
       $(accordion).children().show()
     } else {
