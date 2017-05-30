@@ -4,9 +4,9 @@ angular.module('myApp')
 
   productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
-  myRepeatDirective.$inject = ['$http', 'AuthService', '$rootScope']
+  myRepeatDirective.$inject = ['$http', 'AuthService', '$rootScope', '$state']
 
-  function myRepeatDirective($http, AuthService, $rootScope){
+  function myRepeatDirective($http, AuthService, $rootScope, $state){
     return function(scope, element, attrs){
       if(scope.$last){
         var draggables = []
@@ -66,6 +66,8 @@ angular.module('myApp')
                   .success(function(data){
                     // update current user tag array to render new Tag
                     controllerScope.userTaggables = data.taggables
+
+                    $state.go($state.current, {}, {reload: true})
                   })
               })
 
@@ -162,7 +164,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
       arrow.classList.toggle('active')
       button.classList.toggle('active')
-      
+
       if(button.classList.contains('active')){
         $(button).children().show()
       } else {
