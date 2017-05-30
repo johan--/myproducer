@@ -122,8 +122,8 @@
   width: 80%; }
 
 button.accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: #e3e3e3;
+  color: white;
   cursor: pointer;
   width: 100%;
   text-align: left;
@@ -132,7 +132,7 @@ button.accordion {
   transition: 0.4s; }
 
 button.accordion.active, button.accordion:hover {
-  background-color: #ddd; }
+  background-color: lightgrey; }
 
 .accordion-panel {
   padding: 0 18px;
@@ -149,7 +149,13 @@ button.accordion.active, button.accordion:hover {
   left: 0; }
 
 .accordion-p {
-  width: 20%; }
+  width: 11%;
+  color: black;
+  font-weight: bold;
+  font-size: 16px; }
+
+.accordion-img {
+  width: 20px; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

@@ -155,14 +155,32 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   })
 
 // multi day productions
-  vm.accordionClick = function($event){
-    const button = $event.target
-    button.classList.toggle('active')
-    if(button.classList.contains('active')){
-      $(button).children().show()
-    } else {
-      $(button).children().not('p').hide()
+  vm.wholeAccordionClick = function($event){
+    if($event.target.type){
+      const button = $event.target
+      button.classList.toggle('active')
+      if(button.classList.contains('active')){
+        $(button).children().show()
+      } else {
+        $(button).children().not('p').hide()
+      }
     }
+  }
+
+  vm.arrowAccordionClick = function($event){
+    console.log('arrow clicked');
+    const arrow = $event.target
+    const accordion = $(arrow).parent().parent()[0]
+    accordion.classList.toggle('active')
+    if(accordion.classList.contains('active')){
+      $(accordion).children().show()
+    } else {
+      $(accordion).children().not('p').hide()
+    }
+  }
+
+  vm.accordionTextClick = function(){
+    console.log('text clicked');
   }
 
   vm.checkIfTagged = function(production){
