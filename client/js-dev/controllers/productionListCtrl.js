@@ -29,9 +29,9 @@ angular.module('myApp')
                 tagId: ''
               }
               tagData.productionId = ui.draggable.children()[0].id
-              tagData.tagId = $(this).parent().children('p')[0].id
               // if user is dropping production day into a group
               if($(this).parent().is('button')){
+                tagData.tagId = $(this).parent().children('p')[0].id
                 ui.draggable.addClass('accordion-panel')
                 ui.draggable.draggable('disable')
                 ui.draggable.css('display', 'block')
