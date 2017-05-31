@@ -42,6 +42,8 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 //   width: 100%;
 // }
 //
+
+//////// STRIPE CSS //////////
 .stripe-form {
   width: 480px;
   margin: 20px auto;
@@ -183,8 +185,73 @@ $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 #stripe-coupon-input {
   width: 80%;
 }
+/////////// END STRIPE CSS /////////////////
 
-// STRIPE CSS /////////////////////
+////////// ACCORDION CSS ///////////////
+button.accordion {
+    background-color: #e3e3e3;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: lightgrey;
+}
+
+.accordion-panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  top: auto !important;
+}
+
+#directive-modal {
+  display: none;
+  min-width: 100%;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.accordion-p {
+  width: 20%;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 1%;
+  margin-top: 8px;
+}
+
+.accordion-img {
+  width: 20px;
+  -ms-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.accordion-img.active {
+  width: 20px;
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.accordion-dates {
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+.inline {
+  display: inline-block;
+}
+////////// END ACCORDION CSS ///////////
 
 body {
   font-family: $font-stack;

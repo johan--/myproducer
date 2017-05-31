@@ -121,6 +121,61 @@
 #stripe-coupon-input {
   width: 80%; }
 
+button.accordion {
+  background-color: #e3e3e3;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s; }
+
+button.accordion.active, button.accordion:hover {
+  background-color: lightgrey; }
+
+.accordion-panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  top: auto !important; }
+
+#directive-modal {
+  display: none;
+  min-width: 100%;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+.accordion-p {
+  width: 20%;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 1%;
+  margin-top: 8px; }
+
+.accordion-img {
+  width: 20px;
+  -ms-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg); }
+
+.accordion-img.active {
+  width: 20px;
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg); }
+
+.accordion-dates {
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 10px; }
+
+.inline {
+  display: inline-block; }
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #0A0A0A;

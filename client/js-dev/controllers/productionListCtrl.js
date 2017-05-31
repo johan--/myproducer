@@ -1,7 +1,117 @@
 angular.module('myApp')
   .controller('productionListController', productionListController)
+  .directive('myRepeatDirective', myRepeatDirective)
 
-productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
+  productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
+
+  myRepeatDirective.$inject = ['$http', 'AuthService', '$rootScope', '$state']
+
+  function myRepeatDirective($http, AuthService, $rootScope, $state){
+    return function(scope, element, attrs){
+      if(scope.$last){
+        var draggables = []
+        var droppables = []
+        var tagModel = {
+          label: '',
+          productions: []
+        }
+
+        var controllerElement = document.querySelector('body');
+        var controllerScope = angular.element(controllerElement).scope();
+        // console.log('userTaggables:',controllerScope.userTaggables);
+
+        droppables.push($('.droppable'))
+        droppables[0].each(function(){
+          $(this).droppable({
+            drop: function(event,ui){
+              const tagData = {
+                productionId: '',
+                tagId: ''
+              }
+              tagData.productionId = ui.draggable.children()[0].id
+              // if user is dropping production day into a group
+              if($(this).parent().is('button')){
+                tagData.tagId = $(this).parent().children('p')[0].id
+                ui.draggable.addClass('accordion-panel')
+                ui.draggable.draggable('disable')
+                ui.draggable.css('display', 'block')
+                $(this).parent().append(ui.draggable)
+
+                $http.patch('/api/tag/addproduction', tagData)
+                  .success(function(data){
+                    console.log(data);
+                  })
+
+              } else{
+              // make a new group with the 2 production days
+              // var accordionLocation = $('#accordionLocation')
+              // var newAccordion = $('<button class="accordion"><p id="p-tag"></p></button>')
+              var productionGroupModal = $('#directive-modal')
+              productionGroupModal.css('display', 'table')
+              var productionGroupInput = $('#directive-modal-input')
+              var productionGroupButton = $('#directive-modal-button')
+
+              tagModel.productions.push($(this).children()[0].id)
+              tagModel.productions.push(ui.draggable.children()[0].id)
+
+              productionGroupButton.on('click', function(){
+                // create Tag object in backend
+                var productionName = productionGroupInput.val()
+                // $('#p-tag').innerText = productionName
+                productionGroupModal.css('display', 'none')
+
+                tagModel.label = productionName
+
+                $http.post('/api/tag/newtag', tagModel)
+                  .success(function(data){
+                    // update current user tag array to render new Tag
+                    controllerScope.userTaggables = data.taggables
+
+                    $state.go($state.current, {}, {reload: true})
+                  })
+              })
+
+
+              // $(this).addClass('accordion-panel')
+              // $(this).draggable('disable')
+              // newAccordion.append($(this))
+              //
+              // ui.draggable.addClass('accordion-panel')
+              // ui.draggable.draggable('disable')
+              // newAccordion.append(ui.draggable)
+              //
+              // newAccordion.droppable()
+              // accordionLocation.append(newAccordion)
+              //
+              // // show production days on click of the button
+              // newAccordion.on('click', function(){
+              //   this.classList.toggle('active')
+              //
+              //   if(this.classList.contains('active')){
+              //     $('.accordion-panel').show()
+              //   } else {
+              //     $('.accordion-panel').hide()
+              //   }
+              // })
+
+            }
+            }
+          })
+        })
+
+        // grab all production days and make them draggable
+        draggables.push($('.draggable'))
+        draggables[0].each(function(){
+          $(this).draggable({
+            axis: 'y',
+            containment: 'parent',
+            snap: true,
+            snapMode: 'inner'
+          })
+        })
+      }
+    }
+  }
 
 // PRODUCTIONS
 
@@ -12,6 +122,8 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.notifModal = {}
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
+  vm.productionsDraggable = []
+  vm.productionsDroppable = []
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
@@ -24,6 +136,8 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
+          vm.userTaggables = vm.currentUser.taggables
+          $rootScope.userTaggables = vm.userTaggables
           // get all productions where I am a crew member
           var otherProductions = []
           data.offersReceived.forEach(function(crew) {
@@ -41,6 +155,52 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // }
         })
   })
+
+// multi day productions
+  vm.wholeAccordionClick = function($event){
+    if($event.target.type){
+      const arrow = $($event.target).children('p').children('img')[0]
+      const button = $event.target
+
+      arrow.classList.toggle('active')
+      button.classList.toggle('active')
+
+      if(button.classList.contains('active')){
+        $(button).children().show()
+      } else {
+        $(button).children().not('p').hide()
+      }
+    }
+  }
+
+  vm.arrowAccordionClick = function($event){
+    const arrow = $event.target
+    const accordion = $(arrow).parent().parent()[0]
+
+    arrow.classList.toggle('active')
+    accordion.classList.toggle('active')
+
+    if(accordion.classList.contains('active')){
+      $(accordion).children().show()
+    } else {
+      $(accordion).children().not('p').hide()
+    }
+  }
+
+  vm.checkIfTagged = function(production){
+    var tagged = false
+    if(production.tag.length > 0){
+      tagged = true
+    }
+    return tagged
+  }
+
+  vm.deleteTags = function(){
+    $http.delete('/api/tag/deletetags')
+    .success(function(data){
+      console.log(data);
+    })
+  }
 
   var dateToday = new Date(Date.now())
   vm.dateFrom = dateToday

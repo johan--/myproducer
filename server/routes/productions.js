@@ -9,6 +9,7 @@ var mailer = require('../nodemailer/mailer.js')
 
 var Production = require('../models/Production.js')
 
+var Tag = require('../models/Tag.js')
 // PRODUCTION ROUTES
 
 // get a particular users productions
