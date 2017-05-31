@@ -272,7 +272,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     tag = tag.taggables.filter(function(t,i){
       return t._id != production._id
     })
-    console.log(tag);
     return tag
   }
 
