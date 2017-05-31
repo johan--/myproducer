@@ -20,6 +20,16 @@ angular.module('myApp')
         var controllerScope = angular.element(controllerElement).scope();
         // console.log('userTaggables:',controllerScope.userTaggables);
 
+        draggables.push($('.draggable'))
+        draggables[0].each(function(){
+          $(this).draggable({
+            axis: 'y',
+            containment: 'parent',
+            snap: true,
+            snapMode: 'inner'
+          })
+        })
+
         droppables.push($('.droppable'))
         droppables[0].each(function(){
           $(this).droppable({
@@ -96,17 +106,6 @@ angular.module('myApp')
 
             }
             }
-          })
-        })
-
-        // grab all production days and make them draggable
-        draggables.push($('.draggable'))
-        draggables[0].each(function(){
-          $(this).draggable({
-            axis: 'y',
-            containment: 'parent',
-            snap: true,
-            snapMode: 'inner'
           })
         })
       }
