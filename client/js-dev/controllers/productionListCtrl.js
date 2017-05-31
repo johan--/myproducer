@@ -268,10 +268,33 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     }
   }
 
+  vm.filterTag = function(tag, production){
+    tag = tag.taggables.filter(function(t,i){
+      return t._id != production._id
+    })
+    console.log(tag);
+    return tag
+  }
+
   vm.deleteProduction = function(name, id) {
       $http.patch('/api/productions/' + id, {active: false})
         .success(function(data) {
-          // console.log(data);
+          if(data.tag){
+            for(var i=0; i<$rootScope.userTaggables.length; i++){
+              $rootScope.userTaggables[i].taggables = vm.filterTag($rootScope.userTaggables[i], data)
+            }
+          }
+
+          // if(data.tag){
+          //   for(var i=0; i<vm.userTaggables.length; i++){
+          //     console.log('tag before filter' + i, vm.userTaggables[i]);
+          //     vm.userTaggables[i] = vm.filterTag(vm.userTaggables[i], id)
+          //     console.log('tag after filter' + i,vm.userTaggables[i]);
+          //   }
+          //   console.log(vm.userTaggables);
+          //   return vm.userTaggables
+          // }
+
           vm.currentUser.allProductions = vm.currentUser.allProductions.filter(function(p, i) {
             return p._id.toString() != id
           })
@@ -288,6 +311,10 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         //   vm.openNotifModal()
         // })
   }
+
+  // vm.deleteProductionFromTag = function(name, id){
+  //   $http.patch('/api/productions/tag/' + id, {active: false})
+  // }
 
   vm.openCreateProdModal = function(){
     vm.showCreateProdModal = true

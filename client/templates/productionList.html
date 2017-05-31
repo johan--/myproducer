@@ -1,4 +1,4 @@
-<!-- <button ng-click="productionListCtrl.deleteTags()">delete tags</button> -->
+<button ng-click="productionListCtrl.deleteTags()">delete tags</button>
 
 <div ng-show="productionListCtrl.ready">
   <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Creates a production for each day in your date range</p></div>
@@ -12,14 +12,14 @@
 
 <!-- GROUPED TAGS-->
     <div class="col-md-12 no-padding">
-      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in userTaggables">
+      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables && tag.taggables" ng-repeat="tag in userTaggables track by $index">
         <button class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
           <p id="{{tag._id}}" class="accordion-p" ng-click="accordionTextClick()"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }}</p>
 
             <!-- <p>{{tag.minDate | date:'shortDate' || 'mm/dd/yyyy'}} - {{tag.maxDate | date:'shortDate' || 'mm/dd/yyyy'}}</p>
 
             <p>{{tag.taggables.length}} Production Days</p> -->
-          <div ng-if="productionListCtrl.compareDate(production.date)" class="line-item accordion-panel droppable" ng-repeat="production in tag.taggables | orderBy: 'date'">
+          <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item accordion-panel droppable" ng-repeat="production in tag.taggables | orderBy: 'date'">
             <div class="col-md-2 start-date">
               <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
             </div>
