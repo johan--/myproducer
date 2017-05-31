@@ -149,10 +149,12 @@ button.accordion.active, button.accordion:hover {
   left: 0; }
 
 .accordion-p {
-  width: 11%;
+  width: 20%;
   color: black;
   font-weight: bold;
-  font-size: 16px; }
+  font-size: 16px;
+  margin-left: 1%;
+  margin-top: 8px; }
 
 .accordion-img {
   width: 20px;
@@ -165,6 +167,14 @@ button.accordion.active, button.accordion:hover {
   -ms-transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg); }
+
+.accordion-dates {
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 10px; }
+
+.inline {
+  display: inline-block; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

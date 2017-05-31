@@ -5,6 +5,28 @@ const
   Production = require('../models/Production.js'),
   User = require('../models/User.js')
 
+function setMinDate(date1,date2){
+  const compareDate1 = new Date(date1).getTime()
+  const compareDate2 = new Date(date2).getTime()
+
+  if(compareDate1 < compareDate2){
+    return compareDate1
+  } else {
+    return compareDate2
+  }
+}
+
+function setMaxDate(date1,date2){
+  const compareDate1 = new Date(date1).getTime()
+  const compareDate2 = new Date(date2).getTime()
+
+  if(compareDate1 > compareDate2){
+    return compareDate1
+  } else {
+    return compareDate2
+  }
+}
+
 router.post('/newtag', function(req,res){
   // need check functionality here
   // create Tag object before storing it into User
@@ -24,6 +46,9 @@ router.post('/newtag', function(req,res){
             production2.save()
             User.findById(tag._creator._id).populate({path: 'taggables'}).exec(function(err,user){
               if(err) return console.log(err)
+              tag.minDate = setMinDate(production.date, production2.date)
+              tag.maxDate = setMaxDate(production.date, production2.date)
+              tag.save()
               user.taggables.push(tag)
               user.save()
               res.json(user)

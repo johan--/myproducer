@@ -187,10 +187,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     }
   }
 
-  vm.accordionTextClick = function(){
-    console.log('text clicked');
-  }
-
   vm.checkIfTagged = function(production){
     var tagged = false
     if(production.tag.length > 0){
