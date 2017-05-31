@@ -9,7 +9,7 @@ angular.module('myApp')
   function myRepeatDirective($http, AuthService, $rootScope, $state){
     return function(scope, element, attrs){
       console.log('checking for scope.last');
-      if(scope.$last || scope.$parent.$last){
+      if(scope.$last || scope.userTaggables.length > 1){
         console.log('directive instantiated');
 
         var draggables = []
@@ -21,7 +21,6 @@ angular.module('myApp')
 
         var controllerElement = document.querySelector('body');
         var controllerScope = angular.element(controllerElement).scope();
-        // console.log('userTaggables:',controllerScope.userTaggables);
 
         draggables.push($('.draggable'))
         draggables[0].each(function(){
@@ -32,6 +31,7 @@ angular.module('myApp')
             snapMode: 'inner'
           })
         })
+        console.log(draggables);
 
         droppables.push($('.droppable'))
         droppables[0].each(function(){
@@ -54,11 +54,7 @@ angular.module('myApp')
                   .success(function(data){
                     console.log(data);
                   })
-
               } else{
-              // make a new group with the 2 production days
-              // var accordionLocation = $('#accordionLocation')
-              // var newAccordion = $('<button class="accordion"><p id="p-tag"></p></button>')
               var productionGroupModal = $('#directive-modal')
               productionGroupModal.css('display', 'table')
               var productionGroupInput = $('#directive-modal-input')
@@ -70,7 +66,6 @@ angular.module('myApp')
               productionGroupButton.on('click', function(){
                 // create Tag object in backend
                 var productionName = productionGroupInput.val()
-                // $('#p-tag').innerText = productionName
                 productionGroupModal.css('display', 'none')
 
                 tagModel.label = productionName
