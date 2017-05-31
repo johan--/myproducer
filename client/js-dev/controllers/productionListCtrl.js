@@ -4,24 +4,29 @@ angular.module('myApp')
 
   productionListController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
 
-  myRepeatDirective.$inject = ['$http', 'AuthService', '$rootScope', '$state']
+  myRepeatDirective.$inject = ['$http', 'AuthService', '$rootScope', '$state', '$timeout']
 
-  function myRepeatDirective($http, AuthService, $rootScope, $state){
-    return function(scope, element, attrs){
-      console.log('checking for scope.last');
-      if(scope.$last || scope.userTaggables.length > 1){
-        console.log('directive instantiated');
-
+  function myRepeatDirective($http, AuthService, $rootScope, $state, $timeout){
+    return function(scope, element, attr){
+      var timeoutID = [];
+        $timeout.cancel(timeoutID[attr.myRepeatDirectiveIndex]);
+        timeoutID[attr.myRepeatDirectiveIndex] = $timeout(function () {
+          scope.$eval(attr.myRepeatDirective);
+        }, attr.myRepeatDirectiveLength * 1.5);
+      // console.log('checking for scope.last');
+      // if(scope.$last){
+      //   console.log('directive instantiated');
+      //
         var draggables = []
         var droppables = []
         var tagModel = {
           label: '',
           productions: []
         }
-
+      //
         var controllerElement = document.querySelector('body');
         var controllerScope = angular.element(controllerElement).scope();
-
+      //
         draggables.push($('.draggable'))
         draggables[0].each(function(){
           $(this).draggable({
@@ -31,8 +36,8 @@ angular.module('myApp')
             snapMode: 'inner'
           })
         })
-        console.log(draggables);
-
+      //   console.log(draggables);
+      //
         droppables.push($('.droppable'))
         droppables[0].each(function(){
           $(this).droppable({
@@ -42,7 +47,7 @@ angular.module('myApp')
                 tagId: ''
               }
               tagData.productionId = ui.draggable.children()[0].id
-              // if user is dropping production day into a group
+      //         // if user is dropping production day into a group
               if($(this).parent().is('button')){
                 tagData.tagId = $(this).parent().children('p')[0].id
                 ui.draggable.addClass('accordion-panel')
@@ -78,37 +83,37 @@ angular.module('myApp')
                     $state.go($state.current, {}, {reload: true})
                   })
               })
-
-
-              // $(this).addClass('accordion-panel')
-              // $(this).draggable('disable')
-              // newAccordion.append($(this))
-              //
-              // ui.draggable.addClass('accordion-panel')
-              // ui.draggable.draggable('disable')
-              // newAccordion.append(ui.draggable)
-              //
-              // newAccordion.droppable()
-              // accordionLocation.append(newAccordion)
-              //
-              // // show production days on click of the button
-              // newAccordion.on('click', function(){
-              //   this.classList.toggle('active')
-              //
-              //   if(this.classList.contains('active')){
-              //     $('.accordion-panel').show()
-              //   } else {
-              //     $('.accordion-panel').hide()
-              //   }
-              // })
-
+      //
+      //
+      //         // $(this).addClass('accordion-panel')
+      //         // $(this).draggable('disable')
+      //         // newAccordion.append($(this))
+      //         //
+      //         // ui.draggable.addClass('accordion-panel')
+      //         // ui.draggable.draggable('disable')
+      //         // newAccordion.append(ui.draggable)
+      //         //
+      //         // newAccordion.droppable()
+      //         // accordionLocation.append(newAccordion)
+      //         //
+      //         // // show production days on click of the button
+      //         // newAccordion.on('click', function(){
+      //         //   this.classList.toggle('active')
+      //         //
+      //         //   if(this.classList.contains('active')){
+      //         //     $('.accordion-panel').show()
+      //         //   } else {
+      //         //     $('.accordion-panel').hide()
+      //         //   }
+      //         // })
+      //
             }
             }
           })
         })
       }
     }
-  }
+  // }
 
 // PRODUCTIONS
 
