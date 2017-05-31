@@ -87,6 +87,16 @@
                 </li>
               </ul>
             </div>
+            <div class="form-group">
+              <h4 class="sub-title sub-inline">Resume</h4>
+              <hr class="hr-sub">
+              <div style="text-align: center; float: left;">
+                <a id="other-profile-resume" ng-if="pendingCrewCtrl.resume != '' " ng-click="pendingCrewCtrl.openModal3()">
+                  <img height="75px" width="75px" src="/img/whitepdf.png">
+                </a>
+                <p style="font-size: 10px" ng-if="pendingCrewCtrl.resume != '' ">{{pendingCrewCtrl.first_name}}'s Resume</p>
+              </div>
+            </div>
           </div>
         <!-- </form> -->
       </div>
@@ -158,6 +168,17 @@
         <h1><i class="fa fa-check"></i></h1>
         <p>{{ pendingCrewCtrl.modal2.content }}</p>
         <p><a ng-click="pendingCrewCtrl.updateContactStatus('decline', pendingCrewCtrl.user)" class="btn approval-btn" style="margin-right: 5px;">Yes</a><a ng-click="pendingCrewCtrl.closeModal2()" class="btn btn-danger" style="margin-left: 5px;">No</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="pendingCrewCtrl.modal.show3">
+  <div id="modal-container" ng-click="pendingCrewCtrl.closeModal3()">
+    <div id="modal-lg" class="section">
+      <div class="padding20 text-center">
+          <iframe ng-init="pendingCrewCtrl.setIframeSrc()" id="resumeElement" width="650px" height="700px"></iframe>
+        <p><a class="btn approval-btn">Close</a></p>
       </div>
     </div>
   </div>

@@ -20,7 +20,6 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
       $http.get('/api/users/' + data.data.user._id + '/contacts')
         .success(function(data) {
           vm.currentUser = data
-
           // push each contact id to a new array
           vm.currentUser.pendingContacts.forEach(function(c) {
             vm.pendingList.push(c._id)
@@ -43,6 +42,8 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
           $http.get('/api/users/' + $stateParams.id + '/profile')
             .then(function(data){
               vm.user = data.data
+              vm.first_name = vm.user.first_name.charAt(0).toUpperCase() + vm.user.first_name.slice(1)
+              vm.resume = vm.user.resume || ''
               if(vm.user.picture){
                 vm.profilePicture = vm.user.picture
               }else {
@@ -123,6 +124,18 @@ function pendingCrewController($rootScope, $http, $stateParams, $state, AuthServ
 
     vm.closeModal2 = function(){
       vm.modal2.show = false
+    }
+
+    vm.setIframeSrc = function(){
+      document.getElementById('resumeElement').src = vm.resume
+    }
+
+    vm.openModal3 = function() {
+      vm.modal.show3 = true
+    }
+
+    vm.closeModal3 = function() {
+      vm.modal.show3 = false
     }
 
     String.prototype.capitalize = function() {
