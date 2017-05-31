@@ -8,7 +8,8 @@ angular.module('myApp')
 
   function myRepeatDirective($http, AuthService, $rootScope, $state){
     return function(scope, element, attrs){
-      if(scope.$last){
+      console.log('checking for scope.last');
+      if(scope.$last || scope.$parent.$last){
         console.log('directive instantiated');
 
         var draggables = []

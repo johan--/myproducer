@@ -55,8 +55,8 @@ var forceSsl = function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, '../client')))
 app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({limit: '5mb'}))
+app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }))
 // app.use(cookieParser())
 app.use(require('express-session')({
     secret: 'keyboard cat',
