@@ -12,7 +12,7 @@
 
 <!-- GROUPED TAGS-->
     <div class="col-md-12 no-padding">
-      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in userTaggables">
+      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables" ng-repeat="tag in userTaggables" my-repeat-directive>
         <button class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
           <p id="{{tag._id}}" class="accordion-p" ng-click="accordionTextClick()"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }}</p>
 
