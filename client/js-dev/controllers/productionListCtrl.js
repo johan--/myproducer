@@ -9,6 +9,8 @@ angular.module('myApp')
   function myRepeatDirective($http, AuthService, $rootScope, $state){
     return function(scope, element, attrs){
       if(scope.$last){
+        console.log('directive instantiated');
+
         var draggables = []
         var droppables = []
         var tagModel = {
