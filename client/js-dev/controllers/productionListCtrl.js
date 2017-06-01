@@ -43,12 +43,13 @@ angular.module('myApp')
                 tagId: ''
               }
               tagData.productionId = ui.draggable.children()[0].id
-              // if user is dropping production day into a group
+              // if user is dropping production day into a tag group
               if($(this).parent().is('div') && $(this).parent()[0].classList.contains('accordion')){
                 tagData.tagId = $(this).parent().children('p')[0].id
                 ui.draggable.addClass('accordion-panel')
                 ui.draggable.draggable('disable')
                 ui.draggable.css('display', 'block')
+                ui.draggable.css('left', 0)
                 $(this).parent().append(ui.draggable)
 
                 $http.patch('/api/tag/addproduction', tagData)
@@ -332,7 +333,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         console.log(data);
         vm.currentUser.taggables = data.taggables
         $rootScope.userTaggables = data.taggables
-        
+
         var otherProductions = []
         data.offersReceived.forEach(function(crew) {
           if(crew.offer.status === 'Accepted') {

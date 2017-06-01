@@ -1,4 +1,4 @@
-<button ng-click="productionListCtrl.deleteTags()">delete tags</button>
+<!-- <button ng-click="productionListCtrl.deleteTags()">delete tags</button> -->
 
 <div ng-show="productionListCtrl.ready">
   <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Creates a production for each day in your date range</p></div>
@@ -203,8 +203,8 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
-        <h4>Name Your Production Group</h4>
-        <input id="directive-modal-input" type="text" placeholder="Production Name" style="color: black">
+        <h4>You Are Creating A Production Group</h4>
+        <input id="directive-modal-input" type="text" placeholder="Name" style="color: black">
         <button style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Create</button>
         <br>
       </div>
@@ -216,9 +216,9 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
-        <h4>Name Your Production Group</h4>
+        <h4>Rename Your Production Group</h4>
         <input id="editTag-modal-input" type="text" value="{{productionListCtrl.editingTagName}}" style="color: black">
-        <button ng-click="productionListCtrl.renameTag()" style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Create</button>
+        <button ng-click="productionListCtrl.renameTag()" style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Save</button>
         <br>
       </div>
     </div>
