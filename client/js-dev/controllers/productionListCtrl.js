@@ -77,7 +77,7 @@ angular.module('myApp')
                   .success(function(data){
                     // update current user tag array to render new Tag
                     controllerScope.userTaggables = data.taggables
-
+                    // update rootscope usertaggables here
                     $state.go($state.current, {}, {reload: true})
                   })
               })
@@ -137,7 +137,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
           vm.currentUser = data
-          console.log(vm.currentUser);
           vm.userTaggables = vm.currentUser.taggables
           $rootScope.userTaggables = vm.userTaggables
           // get all productions where I am a crew member
@@ -219,9 +218,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
   vm.deleteTags = function(){
     $http.delete('/api/tag/deletetags')
-    .success(function(data){
-      console.log(data);
-    })
+      .success(function(data){
+        $state.go($state.current, {}, {reload: true})
+      })
   }
 
   var dateToday = new Date(Date.now())
@@ -331,14 +330,16 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     $http.patch('/api/tag/' + id, tagData)
       .success(function(data){
         console.log(data);
+        vm.currentUser.taggables = data.taggables
         $rootScope.userTaggables = data.taggables
+        
         var otherProductions = []
         data.offersReceived.forEach(function(crew) {
           if(crew.offer.status === 'Accepted') {
             otherProductions.push(crew.production)
           }
         })
-        // combine my productions and other productions where I am crew member
+        // // combine my productions and other productions where I am crew member
         vm.currentUser.allProductions = data.productions.concat(otherProductions)
       })
   }
@@ -395,10 +396,10 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     vm.showDeleteProductionModal = false;
   }
 
-  vm.openDeleteTagModal = function(name, id, index){
+  vm.openDeleteTagModal = function(name, id){
     vm.tagName = name
     vm.tagID = id
-    vm.tagIndex = index
+    // vm.tagIndex = index
     vm.showDeleteTagModal = true
   }
 

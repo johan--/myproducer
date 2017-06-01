@@ -81,17 +81,20 @@ router.patch('/:id', function(req,res){
         if(err) return console.log(err);
         production.tag = []
         production.save()
-        tag.taggables = []
-        tag.save()
     })
   })
+  tag.taggables = []
+  tag.save()
 
     User.findById(req.user._id).populate({path: 'taggables', populate: {path: 'taggables'}}).populate({path: 'productions'}).exec(function(err, user){
       if(err) return console.log(err);
-      console.log(user);
-      var index = user.taggables.indexOf(tag._id)
-      user.taggables.splice(index,1)
-      user.save()
+      user.taggables.forEach(function(p){
+        if(p._id === tag._id){
+          var index = user.taggables.indexOf(p)
+          user.taggables.splice(index,1)
+          user.save()
+        }
+      })
       res.json(user)
     })
   })
