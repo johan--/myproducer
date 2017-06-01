@@ -97,6 +97,20 @@ router.patch('/:id', function(req,res){
   })
 })
 
+router.patch('/edit/:id', function(req,res){
+  Tag.findById(req.body.id).populate({path: 'taggables'}).exec(function(err,tag){
+    if(err) return console.log(err);
+    tag.label = req.body.name
+    tag.save()
+    // res.json(tag)
+    User.findById(req.user._id).populate({path: 'taggables', populate: {path: 'taggables'}}).exec(function(err,user){
+      if(err) return console.log(err);
+      console.log(user)
+      res.json(user)
+    })
+  })
+})
+
 router.delete('/deletetags', function(req,res){
   User.findOne({_id: req.user._id}, function(err,user){
     user.taggables = []

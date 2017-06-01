@@ -1,4 +1,4 @@
-<button ng-click="productionListCtrl.deleteTags()">delete tags</button>
+<!-- <button ng-click="productionListCtrl.deleteTags()">delete tags</button> -->
 
 <div ng-show="productionListCtrl.ready">
   <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Creates a production for each day in your date range</p></div>
@@ -14,9 +14,9 @@
     <div class="col-md-12 no-padding">
       <div id="accordionLocation" ng-if="productionListCtrl.userTaggables && tag.taggables" ng-repeat="tag in userTaggables track by $index">
         <div class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
-          <button class="btn main-btn accordion-edit">Edit</button>
+          <button ng-click="productionListCtrl.editTag($event, tag._id)" class="btn approval-btn accordion-edit">Edit</button>
           <button class="accordion-delete" ng-click="productionListCtrl.openDeleteTagModal(tag.label, tag._id, $index)"><i class="fa fa-times"></i></button>
-          <p id="{{tag._id}}" class="accordion-p" ng-click="accordionTextClick()"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }} </p>
+          <p id="{{tag._id}}" class="accordion-p"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }} </p>
 
             <!-- <p>{{tag.minDate | date:'shortDate' || 'mm/dd/yyyy'}} - {{tag.maxDate | date:'shortDate' || 'mm/dd/yyyy'}}</p>
 
@@ -206,6 +206,19 @@
         <h4>Name Your Production Group</h4>
         <input id="directive-modal-input" type="text" placeholder="Production Name" style="color: black">
         <button style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Create</button>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionListCtrl.editingTag">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h4>Name Your Production Group</h4>
+        <input id="editTag-modal-input" type="text" value="{{productionListCtrl.editingTagName}}" style="color: black">
+        <button ng-click="productionListCtrl.renameTag()" style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Create</button>
         <br>
       </div>
     </div>

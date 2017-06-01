@@ -124,6 +124,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   $rootScope.activeTab.production = true
   vm.productionsDraggable = []
   vm.productionsDroppable = []
+  vm.editingTag = false
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
@@ -194,6 +195,26 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       tagged = true
     }
     return tagged
+  }
+
+  vm.editTag = function($event, id){
+    vm.editingTag = true
+    vm.editingTagId = id
+    vm.editingTagName = $($event.target).parent().children('p')[0].innerText
+  }
+
+  vm.renameTag = function(){
+    const newTagName = $('#editTag-modal-input').val()
+    const editTagData = {
+      id: vm.editingTagId,
+      name: newTagName
+    }
+
+    $http.patch('/api/tag/edit/:id', editTagData)
+      .success(function(data){
+        vm.editingTag = false
+        $rootScope.userTaggables = data.taggables
+      })
   }
 
   vm.deleteTags = function(){
