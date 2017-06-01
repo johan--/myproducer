@@ -13,20 +13,17 @@ angular.module('myApp')
         timeoutID[attr.myRepeatDirectiveIndex] = $timeout(function () {
           scope.$eval(attr.myRepeatDirective);
         }, attr.myRepeatDirectiveLength * 1.5);
-      // console.log('checking for scope.last');
-      // if(scope.$last){
-      //   console.log('directive instantiated');
-      //
+
         var draggables = []
         var droppables = []
         var tagModel = {
           label: '',
           productions: []
         }
-      //
+
         var controllerElement = document.querySelector('body');
         var controllerScope = angular.element(controllerElement).scope();
-      //
+
         draggables.push($('.draggable'))
         draggables[0].each(function(){
           $(this).draggable({
@@ -36,8 +33,7 @@ angular.module('myApp')
             snapMode: 'inner'
           })
         })
-      //   console.log(draggables);
-      //
+
         droppables.push($('.droppable'))
         droppables[0].each(function(){
           $(this).droppable({
@@ -47,8 +43,8 @@ angular.module('myApp')
                 tagId: ''
               }
               tagData.productionId = ui.draggable.children()[0].id
-      //         // if user is dropping production day into a group
-              if($(this).parent().is('button')){
+              // if user is dropping production day into a group
+              if($(this).parent().is('div') && $(this).parent()[0].classList.contains('accordion')){
                 tagData.tagId = $(this).parent().children('p')[0].id
                 ui.draggable.addClass('accordion-panel')
                 ui.draggable.draggable('disable')
@@ -64,6 +60,8 @@ angular.module('myApp')
               productionGroupModal.css('display', 'table')
               var productionGroupInput = $('#directive-modal-input')
               var productionGroupButton = $('#directive-modal-button')
+
+              console.log($(this).children());
 
               tagModel.productions.push($(this).children()[0].id)
               tagModel.productions.push(ui.draggable.children()[0].id)
@@ -160,9 +158,10 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
 // multi day productions
   vm.wholeAccordionClick = function($event){
-    if($event.target.type){
-      const arrow = $($event.target).children('p').children('img')[0]
+    console.log($event.target.type);
+    if($event.target.type == undefined){
       const button = $event.target
+      const arrow = $($event.target).children('p').children('img')[0]
 
       arrow.classList.toggle('active')
       button.classList.toggle('active')
@@ -170,7 +169,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       if(button.classList.contains('active')){
         $(button).children().show()
       } else {
-        $(button).children().not('p').hide()
+        $(button).children().not('p').not('button').hide()
       }
     }
   }
@@ -185,7 +184,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     if(accordion.classList.contains('active')){
       $(accordion).children().show()
     } else {
-      $(accordion).children().not('p').hide()
+      $(accordion).children().not('p').not('button').hide()
     }
   }
 

@@ -13,8 +13,10 @@
 <!-- GROUPED TAGS-->
     <div class="col-md-12 no-padding">
       <div id="accordionLocation" ng-if="productionListCtrl.userTaggables && tag.taggables" ng-repeat="tag in userTaggables track by $index">
-        <button class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
-          <p id="{{tag._id}}" class="accordion-p" ng-click="accordionTextClick()"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }}</p>
+        <div class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
+          <button class="btn main-btn accordion-edit">Edit</button>
+          <button class="accordion-delete"><i class="fa fa-times"></i></button>
+          <p id="{{tag._id}}" class="accordion-p" ng-click="accordionTextClick()"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }} </p>
 
             <!-- <p>{{tag.minDate | date:'shortDate' || 'mm/dd/yyyy'}} - {{tag.maxDate | date:'shortDate' || 'mm/dd/yyyy'}}</p>
 
@@ -39,7 +41,7 @@
               </p>
             </div>
           </div>
-        </button>
+        </div>
       </div>
     </div>
 
