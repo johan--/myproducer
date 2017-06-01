@@ -38,6 +38,25 @@ angular.module('myApp')
         droppables[0].each(function(){
           $(this).droppable({
             drop: function(event,ui){
+
+              if(ui.draggable[0].classList.contains('chosen')){
+                const chosenProductionData = {
+                  chosenIds: [],
+                  tagId: ''
+                }
+
+                $('.chosen').each(function(index){
+                  chosenProductionData.chosenIds.push($(this).children()[0].id)
+                })
+
+                chosenProductionData.tagId = $(this).parent().children('p')[0].id
+
+                $http.patch('/api/tag/addmultiple', chosenProductionData)
+                  .success(function(data){
+                    console.log(data);
+                  })
+
+              } else {
               const tagData = {
                 productionId: '',
                 tagId: ''
@@ -108,6 +127,7 @@ angular.module('myApp')
       //
             }
             }
+          }
           })
         })
       }
@@ -123,6 +143,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.notifModal = {}
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
+  vm.selectedProductions = []
   vm.productionsDraggable = []
   vm.productionsDroppable = []
   vm.editingTag = false
@@ -348,9 +369,58 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       })
   }
 
-  // vm.deleteProductionFromTag = function(name, id){
-  //   $http.patch('/api/productions/tag/' + id, {active: false})
-  // }
+  vm.addToGroup = function($event){
+    var target = $event.target
+    var id = $(target).parent().parent()[0].id || $(target).children()[0].id
+    var targetedProduction
+    var chosenProductions = []
+
+    if($(target)[0].classList.contains('line-item')){
+      targetedProduction = $(target)[0]
+      chosenProductions.push(targetedProduction)
+    } else if($(target).parent().parent().parent()[0].classList.contains('line-item')){
+      targetedProduction = $(target).parent().parent().parent()[0]
+      chosenProductions.push(targetedProduction)
+    }
+
+    if(vm.selectedProductions.indexOf(id) != -1){
+      var index = vm.selectedProductions.indexOf(id)
+      vm.selectedProductions.splice(index,1)
+    } else {
+      vm.selectedProductions.push(id)
+    }
+
+    // targetedProduction.classList.toggle('chosen')
+    var selectedClass = 'chosen',
+        clickDelay = 500,     // click time (milliseconds)
+        lastClick,
+        diffClick; // timestamps
+
+    $('.line-item')
+      .bind('mousedown mouseup', function(e){
+        if (e.type=="mousedown") {
+          lastClick = e.timeStamp; // get mousedown time
+        } else {
+          diffClick = e.timeStamp - lastClick;
+          if ( diffClick < clickDelay ) {
+              // add selected class to group draggable objects
+              $(this).toggleClass(selectedClass);
+          }
+        }
+      })
+      .draggable({
+        revertDuration: 10,
+        containment: '.demo',
+
+        drag: function(e, ui) {
+          $('.' + selectedClass).css({
+            top : ui.position.top,
+            left: ui.position.left
+          })
+        }
+      })
+
+  }
 
   vm.openCreateProdModal = function(){
     vm.showCreateProdModal = true

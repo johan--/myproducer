@@ -47,7 +47,7 @@
     </div>
 
 <!-- SINGLE DAY PRODUCTIONS -->
-    <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions track by $index | orderBy: 'date' " ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" my-repeat-directive>
+    <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions track by $index | orderBy: 'date' " ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" ng-click="productionListCtrl.addToGroup($event)" my-repeat-directive>
         <!-- make each production draggable and droppable -->
         <!-- when dropped, make a new group with a dropdown -->
       <div id="{{production._id}}">

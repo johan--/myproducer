@@ -58,7 +58,25 @@ router.post('/newtag', function(req,res){
     })
   })
 
+  router.patch('/addmultiple', function(req,res){
+    Tag.findById(req.body.tagId, function(err,tag){
+      if(err) return console.log(err);
+      req.body.chosenIds.forEach(function(p){
+        Production.findById(p, function(err,production){
+          if(err) return console.log(err);
+          production.tag.push(req.body.tagId)
+          production.save()
+        })
+        tag.taggables.push(p)
+        tag.save()
+      })
+      res.json(tag)
+    })
+  })
+
+
 router.patch('/addproduction', function(req,res){
+  console.log('hit this route somehow');
   Production.findById(req.body.productionId, function(err,production){
     if(err) return console.log(err);
     production.tag.push(req.body.tagId)
