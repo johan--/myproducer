@@ -72,6 +72,31 @@ router.patch('/addproduction', function(req,res){
   })
 })
 
+router.patch('/:id', function(req,res){
+  // find tag
+  Tag.findById(req.body.id, function(err,tag){
+    if(err) return console.log(err);
+    tag.taggables.forEach(function(t){
+      Production.findById(t, function(err, production){
+        if(err) return console.log(err);
+        production.tag = []
+        production.save()
+        tag.taggables = []
+        tag.save()
+    })
+  })
+
+    User.findById(req.user._id).populate({path: 'taggables', populate: {path: 'taggables'}}).populate({path: 'productions'}).exec(function(err, user){
+      if(err) return console.log(err);
+      console.log(user);
+      var index = user.taggables.indexOf(tag._id)
+      user.taggables.splice(index,1)
+      user.save()
+      res.json(user)
+    })
+  })
+})
+
 router.delete('/deletetags', function(req,res){
   User.findOne({_id: req.user._id}, function(err,user){
     user.taggables = []

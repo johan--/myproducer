@@ -15,7 +15,7 @@
       <div id="accordionLocation" ng-if="productionListCtrl.userTaggables && tag.taggables" ng-repeat="tag in userTaggables track by $index">
         <div class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
           <button class="btn main-btn accordion-edit">Edit</button>
-          <button class="accordion-delete"><i class="fa fa-times"></i></button>
+          <button class="accordion-delete" ng-click="productionListCtrl.openDeleteTagModal(tag.label, tag._id, $index)"><i class="fa fa-times"></i></button>
           <p id="{{tag._id}}" class="accordion-p" ng-click="accordionTextClick()"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }} </p>
 
             <!-- <p>{{tag.minDate | date:'shortDate' || 'mm/dd/yyyy'}} - {{tag.maxDate | date:'shortDate' || 'mm/dd/yyyy'}}</p>
@@ -164,6 +164,19 @@
   </div>
 </div>
 
+<div id="modal-root" ng-if="productionListCtrl.showDeleteTagModal">
+  <div id="modal-container" ng-click="productionListCtrl.closeDeleteTagModal()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-times-circle"></i></h1>
+        <p>Are you sure you want to delete {{ productionListCtrl.tagName }}?</p>
+        <br>
+        <p><a class="btn approval-btn" ng-click="productionListCtrl.deleteTag(productionListCtrl.tagName, productionListCtrl.tagID, productionListCtrl.tagIndex)">Yes</a> <a class="btn error-btn" ng-click="productionListCtrl.closeDeleteTagModal()">Cancel</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="modal-root" ng-if="productionListCtrl.showCreateProdModal">
   <div id="modal-container">
     <div id="modal-md" class="section">
@@ -190,8 +203,9 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
+        <h4>Name Your Production Group</h4>
         <input id="directive-modal-input" type="text" placeholder="Production Name" style="color: black">
-        <button id="directive-modal-button" class="btn main-btn">Create</button>
+        <button style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Create</button>
         <br>
       </div>
     </div>
