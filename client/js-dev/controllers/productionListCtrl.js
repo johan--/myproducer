@@ -329,18 +329,20 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     }
     $http.patch('/api/tag/' + id, tagData)
       .success(function(data){
-        console.log(data);
-        vm.currentUser.taggables = data.taggables
-        $rootScope.userTaggables = data.taggables
 
-        var otherProductions = []
-        data.offersReceived.forEach(function(crew) {
-          if(crew.offer.status === 'Accepted') {
-            otherProductions.push(crew.production)
-          }
-        })
-        // // combine my productions and other productions where I am crew member
-        vm.currentUser.allProductions = data.productions.concat(otherProductions)
+        $state.go($state.current, {}, {reload: true})
+        // console.log(data);
+        // vm.currentUser.taggables = data.taggables
+        // $rootScope.userTaggables = data.taggables
+        //
+        // var otherProductions = []
+        // data.offersReceived.forEach(function(crew) {
+        //   if(crew.offer.status === 'Accepted') {
+        //     otherProductions.push(crew.production)
+        //   }
+        // })
+        // // // combine my productions and other productions where I am crew member
+        // vm.currentUser.allProductions = data.productions.concat(otherProductions)
       })
   }
 
