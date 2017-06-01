@@ -331,7 +331,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       .success(function(data){
 
         $state.go($state.current, {}, {reload: true})
-        // console.log(data);
+
+        // code below should re render single day productions. small bug on it that needs to be fixed
+
         // vm.currentUser.taggables = data.taggables
         // $rootScope.userTaggables = data.taggables
         //
