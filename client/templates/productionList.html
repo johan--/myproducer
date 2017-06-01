@@ -1,4 +1,4 @@
-<button ng-click="productionListCtrl.deleteTags()">delete tags</button>
+<!-- <button ng-click="productionListCtrl.deleteTags()">delete tags</button> -->
 
 <div ng-show="productionListCtrl.ready">
   <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Creates a production for each day in your date range</p></div>
@@ -12,9 +12,11 @@
 
 <!-- GROUPED TAGS-->
     <div class="col-md-12 no-padding">
-      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables && tag.taggables" ng-repeat="tag in userTaggables track by $index">
-        <button class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
-          <p id="{{tag._id}}" class="accordion-p" ng-click="accordionTextClick()"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }}</p>
+      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables && tag.taggables.length > 0" ng-repeat="tag in userTaggables">
+        <div class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
+          <button ng-click="productionListCtrl.editTag($event, tag._id)" class="btn approval-btn accordion-edit">Edit</button>
+          <button class="accordion-delete" ng-click="productionListCtrl.openDeleteTagModal(tag.label, tag._id)"><i class="fa fa-times"></i></button>
+          <p id="{{tag._id}}" class="accordion-p"><img class="accordion-img" src="./img/accordionArrow.png" ng-click="productionListCtrl.arrowAccordionClick($event)"/> {{ tag.label }} </p>
 
             <!-- <p>{{tag.minDate | date:'shortDate' || 'mm/dd/yyyy'}} - {{tag.maxDate | date:'shortDate' || 'mm/dd/yyyy'}}</p>
 
@@ -39,7 +41,7 @@
               </p>
             </div>
           </div>
-        </button>
+        </div>
       </div>
     </div>
 
@@ -162,6 +164,19 @@
   </div>
 </div>
 
+<div id="modal-root" ng-if="productionListCtrl.showDeleteTagModal">
+  <div id="modal-container" ng-click="productionListCtrl.closeDeleteTagModal()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-times-circle"></i></h1>
+        <p>Are you sure you want to delete {{ productionListCtrl.tagName }}?</p>
+        <br>
+        <p><a class="btn approval-btn" ng-click="productionListCtrl.deleteTag(productionListCtrl.tagName, productionListCtrl.tagID, productionListCtrl.tagIndex)">Yes</a> <a class="btn error-btn" ng-click="productionListCtrl.closeDeleteTagModal()">Cancel</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="modal-root" ng-if="productionListCtrl.showCreateProdModal">
   <div id="modal-container">
     <div id="modal-md" class="section">
@@ -188,8 +203,22 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
-        <input id="directive-modal-input" type="text" placeholder="Production Name" style="color: black">
-        <button id="directive-modal-button" class="btn main-btn">Create</button>
+        <h4>You Are Creating A Production Group</h4>
+        <input id="directive-modal-input" type="text" placeholder="Name" style="color: black">
+        <button style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Create</button>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionListCtrl.editingTag">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h4>Rename Your Production Group</h4>
+        <input id="editTag-modal-input" type="text" value="{{productionListCtrl.editingTagName}}" style="color: black">
+        <button ng-click="productionListCtrl.renameTag()" style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Save</button>
         <br>
       </div>
     </div>

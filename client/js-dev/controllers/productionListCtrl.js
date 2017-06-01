@@ -13,20 +13,17 @@ angular.module('myApp')
         timeoutID[attr.myRepeatDirectiveIndex] = $timeout(function () {
           scope.$eval(attr.myRepeatDirective);
         }, attr.myRepeatDirectiveLength * 1.5);
-      // console.log('checking for scope.last');
-      // if(scope.$last){
-      //   console.log('directive instantiated');
-      //
+
         var draggables = []
         var droppables = []
         var tagModel = {
           label: '',
           productions: []
         }
-      //
+
         var controllerElement = document.querySelector('body');
         var controllerScope = angular.element(controllerElement).scope();
-      //
+
         draggables.push($('.draggable'))
         draggables[0].each(function(){
           $(this).draggable({
@@ -36,8 +33,7 @@ angular.module('myApp')
             snapMode: 'inner'
           })
         })
-      //   console.log(draggables);
-      //
+
         droppables.push($('.droppable'))
         droppables[0].each(function(){
           $(this).droppable({
@@ -47,12 +43,13 @@ angular.module('myApp')
                 tagId: ''
               }
               tagData.productionId = ui.draggable.children()[0].id
-      //         // if user is dropping production day into a group
-              if($(this).parent().is('button')){
+              // if user is dropping production day into a tag group
+              if($(this).parent().is('div') && $(this).parent()[0].classList.contains('accordion')){
                 tagData.tagId = $(this).parent().children('p')[0].id
                 ui.draggable.addClass('accordion-panel')
                 ui.draggable.draggable('disable')
                 ui.draggable.css('display', 'block')
+                ui.draggable.css('left', 0)
                 $(this).parent().append(ui.draggable)
 
                 $http.patch('/api/tag/addproduction', tagData)
@@ -64,6 +61,8 @@ angular.module('myApp')
               productionGroupModal.css('display', 'table')
               var productionGroupInput = $('#directive-modal-input')
               var productionGroupButton = $('#directive-modal-button')
+
+              console.log($(this).children());
 
               tagModel.productions.push($(this).children()[0].id)
               tagModel.productions.push(ui.draggable.children()[0].id)
@@ -79,7 +78,7 @@ angular.module('myApp')
                   .success(function(data){
                     // update current user tag array to render new Tag
                     controllerScope.userTaggables = data.taggables
-
+                    // update rootscope usertaggables here
                     $state.go($state.current, {}, {reload: true})
                   })
               })
@@ -126,6 +125,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   $rootScope.activeTab.production = true
   vm.productionsDraggable = []
   vm.productionsDroppable = []
+  vm.editingTag = false
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
@@ -160,9 +160,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
 // multi day productions
   vm.wholeAccordionClick = function($event){
-    if($event.target.type){
-      const arrow = $($event.target).children('p').children('img')[0]
+    if($event.target.type == undefined){
       const button = $event.target
+      const arrow = $($event.target).children('p').children('img')[0]
 
       arrow.classList.toggle('active')
       button.classList.toggle('active')
@@ -170,7 +170,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       if(button.classList.contains('active')){
         $(button).children().show()
       } else {
-        $(button).children().not('p').hide()
+        $(button).children().not('p').not('button').hide()
       }
     }
   }
@@ -185,7 +185,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     if(accordion.classList.contains('active')){
       $(accordion).children().show()
     } else {
-      $(accordion).children().not('p').hide()
+      $(accordion).children().not('p').not('button').hide()
     }
   }
 
@@ -197,11 +197,31 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     return tagged
   }
 
+  vm.editTag = function($event, id){
+    vm.editingTag = true
+    vm.editingTagId = id
+    vm.editingTagName = $($event.target).parent().children('p')[0].innerText
+  }
+
+  vm.renameTag = function(){
+    const newTagName = $('#editTag-modal-input').val()
+    const editTagData = {
+      id: vm.editingTagId,
+      name: newTagName
+    }
+
+    $http.patch('/api/tag/edit/:id', editTagData)
+      .success(function(data){
+        vm.editingTag = false
+        $rootScope.userTaggables = data.taggables
+      })
+  }
+
   vm.deleteTags = function(){
     $http.delete('/api/tag/deletetags')
-    .success(function(data){
-      console.log(data);
-    })
+      .success(function(data){
+        $state.go($state.current, {}, {reload: true})
+      })
   }
 
   var dateToday = new Date(Date.now())
@@ -278,21 +298,12 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.deleteProduction = function(name, id) {
       $http.patch('/api/productions/' + id, {active: false})
         .success(function(data) {
+          // if deleting a production within a Tag
           if(data.tag){
             for(var i=0; i<$rootScope.userTaggables.length; i++){
               $rootScope.userTaggables[i].taggables = vm.filterTag($rootScope.userTaggables[i], data)
             }
           }
-
-          // if(data.tag){
-          //   for(var i=0; i<vm.userTaggables.length; i++){
-          //     console.log('tag before filter' + i, vm.userTaggables[i]);
-          //     vm.userTaggables[i] = vm.filterTag(vm.userTaggables[i], id)
-          //     console.log('tag after filter' + i,vm.userTaggables[i]);
-          //   }
-          //   console.log(vm.userTaggables);
-          //   return vm.userTaggables
-          // }
 
           vm.currentUser.allProductions = vm.currentUser.allProductions.filter(function(p, i) {
             return p._id.toString() != id
@@ -309,6 +320,28 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         // .finally(function() {
         //   vm.openNotifModal()
         // })
+  }
+
+  vm.deleteTag = function(name, id){
+    const tagData = {
+      name: name,
+      id: id
+    }
+    $http.patch('/api/tag/' + id, tagData)
+      .success(function(data){
+        console.log(data);
+        vm.currentUser.taggables = data.taggables
+        $rootScope.userTaggables = data.taggables
+
+        var otherProductions = []
+        data.offersReceived.forEach(function(crew) {
+          if(crew.offer.status === 'Accepted') {
+            otherProductions.push(crew.production)
+          }
+        })
+        // // combine my productions and other productions where I am crew member
+        vm.currentUser.allProductions = data.productions.concat(otherProductions)
+      })
   }
 
   // vm.deleteProductionFromTag = function(name, id){
@@ -361,5 +394,16 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
   vm.closeDeleteProductionModal = function(){
     vm.showDeleteProductionModal = false;
+  }
+
+  vm.openDeleteTagModal = function(name, id){
+    vm.tagName = name
+    vm.tagID = id
+    // vm.tagIndex = index
+    vm.showDeleteTagModal = true
+  }
+
+  vm.closeDeleteTagModal = function(){
+    vm.showDeleteTagModal = false
   }
 }

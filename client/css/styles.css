@@ -121,18 +121,22 @@
 #stripe-coupon-input {
   width: 80%; }
 
-button.accordion {
+div.accordion {
   background-color: #e3e3e3;
   color: white;
   cursor: pointer;
-  width: 100%;
+  width: 99.99%;
   text-align: left;
   border: none;
-  margin-bottom: 5px;
-  outline: none;
-  transition: 0.4s; }
+  margin-bottom: -3px;
+  outline: none; }
 
-button.accordion.active, button.accordion:hover {
+div.accordion.active {
+  background-color: lightgrey;
+  padding: 5px;
+  margin-bottom: 10px; }
+
+div.accordion:hover {
   background-color: lightgrey; }
 
 .accordion-panel {
@@ -140,6 +144,20 @@ button.accordion.active, button.accordion:hover {
   background-color: white;
   display: none;
   top: auto !important; }
+
+.accordion-delete {
+  position: relative;
+  left: 95.3%;
+  top: 12px;
+  border: none;
+  background: transparent; }
+
+.accordion-edit {
+  position: relative;
+  left: 95.4%;
+  top: 11px;
+  border: none;
+  background: transparent; }
 
 #directive-modal {
   display: none;
@@ -155,7 +173,8 @@ button.accordion.active, button.accordion:hover {
   font-weight: bold;
   font-size: 16px;
   margin-left: 1%;
-  margin-top: 8px; }
+  position: relative;
+  top: -13px; }
 
 .accordion-img {
   width: 20px;
