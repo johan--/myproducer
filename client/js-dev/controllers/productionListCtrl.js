@@ -51,10 +51,17 @@ angular.module('myApp')
 
                 chosenProductionData.tagId = $(this).parent().children('p')[0].id
 
-                $http.patch('/api/tag/addmultiple', chosenProductionData)
-                  .success(function(data){
-                    console.log(data);
-                  })
+                $('.chosen').each(function(index){
+                  var tagData = {
+                    productionId: chosenProductionData.chosenIds[index],
+                    tagId: chosenProductionData.tagId
+                  }
+
+                  $http.patch('/api/tag/addproduction', tagData)
+                    .success(function(data){
+                      console.log(data);
+                    })
+                })
 
               } else {
               const tagData = {
@@ -158,6 +165,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       // console.log(data.data.user)
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
+          console.log(data.taggables);
           vm.currentUser = data
           vm.userTaggables = vm.currentUser.taggables
           $rootScope.userTaggables = vm.userTaggables
@@ -238,12 +246,12 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       })
   }
 
-  vm.deleteTags = function(){
-    $http.delete('/api/tag/deletetags')
-      .success(function(data){
-        $state.go($state.current, {}, {reload: true})
-      })
-  }
+  // vm.deleteTags = function(){
+  //   $http.delete('/api/tag/deletetags')
+  //     .success(function(data){
+  //       $state.go($state.current, {}, {reload: true})
+  //     })
+  // }
 
   var dateToday = new Date(Date.now())
   vm.dateFrom = dateToday

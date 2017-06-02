@@ -76,7 +76,6 @@ router.post('/newtag', function(req,res){
 
 
 router.patch('/addproduction', function(req,res){
-  console.log('hit this route somehow');
   Production.findById(req.body.productionId, function(err,production){
     if(err) return console.log(err);
     production.tag.push(req.body.tagId)
