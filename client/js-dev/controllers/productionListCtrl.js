@@ -38,7 +38,11 @@ angular.module('myApp')
         droppables[0].each(function(){
           $(this).droppable({
             drop: function(event,ui){
+              if($(this).parent().is('div') && $(this).parent()[0].classList.contains('accordion')){
+                var location = $(this)
+              }
 
+              // multiple productions dropped into group
               if(ui.draggable[0].classList.contains('chosen')){
                 const chosenProductionData = {
                   chosenIds: [],
@@ -47,6 +51,11 @@ angular.module('myApp')
 
                 $('.chosen').each(function(index){
                   chosenProductionData.chosenIds.push($(this).children()[0].id)
+                  $(this).addClass('accordion-panel')
+                  $(this).draggable('disable')
+                  $(this).css('display', 'block')
+                  $(this).css('left', 0)
+                  $(location).parent().append($(this))
                 })
 
                 chosenProductionData.tagId = $(this).parent().children('p')[0].id
@@ -62,84 +71,56 @@ angular.module('myApp')
                       console.log(data);
                     })
                 })
-
               } else {
-              const tagData = {
-                productionId: '',
-                tagId: ''
+                  const tagData = {
+                    productionId: '',
+                    tagId: ''
+                  }
+                  tagData.productionId = ui.draggable.children()[0].id
+                  // single production dropped into group
+                  if($(this).parent().is('div') && $(this).parent()[0].classList.contains('accordion')){
+                    tagData.tagId = $(this).parent().children('p')[0].id
+                    ui.draggable.addClass('accordion-panel')
+                    ui.draggable.draggable('disable')
+                    ui.draggable.css('display', 'block')
+                    ui.draggable.css('left', 0)
+                    $(this).parent().append(ui.draggable)
+
+                    $http.patch('/api/tag/addproduction', tagData)
+                      .success(function(data){
+                        console.log(data);
+                      })
+                  } else {
+                      var productionGroupModal = $('#directive-modal')
+                      productionGroupModal.css('display', 'table')
+                      var productionGroupInput = $('#directive-modal-input')
+                      var productionGroupButton = $('#directive-modal-button')
+
+                      tagModel.productions.push($(this).children()[0].id)
+                      tagModel.productions.push(ui.draggable.children()[0].id)
+
+                      productionGroupButton.on('click', function(){
+                        // create Tag object in backend
+                        var productionName = productionGroupInput.val()
+                        productionGroupModal.css('display', 'none')
+
+                        tagModel.label = productionName
+
+                        $http.post('/api/tag/newtag', tagModel)
+                          .success(function(data){
+                            // update current user tag array to render new Tag
+                            controllerScope.userTaggables = data.taggables
+                            // update rootscope usertaggables here
+                            $state.go($state.current, {}, {reload: true})
+                  })
+                })
               }
-              tagData.productionId = ui.draggable.children()[0].id
-              // if user is dropping production day into a tag group
-              if($(this).parent().is('div') && $(this).parent()[0].classList.contains('accordion')){
-                tagData.tagId = $(this).parent().children('p')[0].id
-                ui.draggable.addClass('accordion-panel')
-                ui.draggable.draggable('disable')
-                ui.draggable.css('display', 'block')
-                ui.draggable.css('left', 0)
-                $(this).parent().append(ui.draggable)
-
-                $http.patch('/api/tag/addproduction', tagData)
-                  .success(function(data){
-                    console.log(data);
-                  })
-              } else{
-              var productionGroupModal = $('#directive-modal')
-              productionGroupModal.css('display', 'table')
-              var productionGroupInput = $('#directive-modal-input')
-              var productionGroupButton = $('#directive-modal-button')
-
-              console.log($(this).children());
-
-              tagModel.productions.push($(this).children()[0].id)
-              tagModel.productions.push(ui.draggable.children()[0].id)
-
-              productionGroupButton.on('click', function(){
-                // create Tag object in backend
-                var productionName = productionGroupInput.val()
-                productionGroupModal.css('display', 'none')
-
-                tagModel.label = productionName
-
-                $http.post('/api/tag/newtag', tagModel)
-                  .success(function(data){
-                    // update current user tag array to render new Tag
-                    controllerScope.userTaggables = data.taggables
-                    // update rootscope usertaggables here
-                    $state.go($state.current, {}, {reload: true})
-                  })
-              })
-      //
-      //
-      //         // $(this).addClass('accordion-panel')
-      //         // $(this).draggable('disable')
-      //         // newAccordion.append($(this))
-      //         //
-      //         // ui.draggable.addClass('accordion-panel')
-      //         // ui.draggable.draggable('disable')
-      //         // newAccordion.append(ui.draggable)
-      //         //
-      //         // newAccordion.droppable()
-      //         // accordionLocation.append(newAccordion)
-      //         //
-      //         // // show production days on click of the button
-      //         // newAccordion.on('click', function(){
-      //         //   this.classList.toggle('active')
-      //         //
-      //         //   if(this.classList.contains('active')){
-      //         //     $('.accordion-panel').show()
-      //         //   } else {
-      //         //     $('.accordion-panel').hide()
-      //         //   }
-      //         // })
-      //
-            }
             }
           }
-          })
         })
-      }
+      })
     }
-  // }
+  }
 
 // PRODUCTIONS
 
@@ -180,10 +161,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
           vm.ready = true
-
-          // if (vm.currentUser.role === 'producer') {
-          //   vm.updateMinDateTo()
-          // }
         })
   })
 
@@ -246,13 +223,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       })
   }
 
-  // vm.deleteTags = function(){
-  //   $http.delete('/api/tag/deletetags')
-  //     .success(function(data){
-  //       $state.go($state.current, {}, {reload: true})
-  //     })
-  // }
-
   var dateToday = new Date(Date.now())
   vm.dateFrom = dateToday
   vm.dateFrom.setHours(0)
@@ -306,11 +276,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       $http.post('/api/productions', newProduction)
         .success(function(data){
           vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
-          // console.log(vm.currentUser)
-          // vm.currentUser.productions.push(data)
-          // vm.newProduction = {}
-          // // redirect them to production view
-          // // $state.go('production')
           $mixpanel.track('New Production Added', {"user" : vm.currentUser.username, "length" : data.length})
           vm.closeCreateProdModal()
         })
@@ -342,13 +307,9 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           $mixpanel.track('Production Deleted', {"user" : vm.currentUser.username})
         })
         .error(function(data) {
-          // console.log(data);
           vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
-        // .finally(function() {
-        //   vm.openNotifModal()
-        // })
   }
 
   vm.deleteTag = function(name, id){
@@ -398,11 +359,10 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       vm.selectedProductions.push(id)
     }
 
-    // targetedProduction.classList.toggle('chosen')
     var selectedClass = 'chosen',
-        clickDelay = 500,     // click time (milliseconds)
+        clickDelay = 500,
         lastClick,
-        diffClick; // timestamps
+        diffClick;
 
     $('.line-item')
       .bind('mousedown mouseup', function(e){
@@ -481,7 +441,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.openDeleteTagModal = function(name, id){
     vm.tagName = name
     vm.tagID = id
-    // vm.tagIndex = index
     vm.showDeleteTagModal = true
   }
 
