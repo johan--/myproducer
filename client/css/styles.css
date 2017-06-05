@@ -466,7 +466,7 @@ table td {
   color: #1898D8; }
 
 .emailLink:active {
-  color: #1898D8; }
+  text-decoration: none; }
 
 .production-width {
   max-width: 1920px;
@@ -580,10 +580,6 @@ table td {
     padding-top: 5px;
     padding-bottom: 5px; }
 
-.line-item.chosen {
-  background-color: lightgrey;
-  opacity: 0.5; }
-
 .line-item:last-of-type {
   margin-bottom: 0px; }
 
@@ -619,10 +615,24 @@ table td {
     color: #FFFFFF; }
 
 .upgrade-btn {
-  background-color: #0A0A0A;
+  background-color: transparent;
   border: 1px solid #00AEEF;
   margin-right: 10px;
   color: #00AEEF;
+  position: relative;
+  top: -2px; }
+
+.upgrade-btn2 {
+  background-color: transparent;
+  border: 1px solid #00AEEF;
+  color: #00AEEF;
+  position: relative;
+  top: -2px; }
+
+.upgrade-btn2:hover {
+  background-color: #00AEEF;
+  opacity: 1;
+  color: white;
   position: relative;
   top: -2px; }
 

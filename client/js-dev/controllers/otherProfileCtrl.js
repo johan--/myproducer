@@ -34,6 +34,8 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
                 var http = 'http://'
                 if(vm.user.website[0] && vm.user.website[1] &&  vm.user.website[2] === 'w') {
                   vm.user.website = http + vm.user.website
+                } else if(vm.user.website[4] === 's'){
+                  vm.user.website = http + vm.user.website.slice(8)
                 }
               }
 
@@ -48,6 +50,13 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
             })
         })
   })
+
+  vm.removeHover = function($event){
+    // $($event.target).css('text-decoration', 'none')
+    // $($event.target).css('color', '#FFFFFF')
+    // $($event.target).removeClass('form-control')
+    $($event.target)
+  }
 
   vm.updateContactStatus = function(status, user) {
     // console.log(status);

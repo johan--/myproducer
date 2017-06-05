@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
               <h5 class="field-title"><label for="userWebsite">Website</label></h4>
-              <a id="notes" class="form-control emailLink" target="_blank" href="{{otherProfileCtrl.user.website}}">{{otherProfileCtrl.user.website}}</a>
+              <a id="notes" class="user-website form-control emailLink" target="_blank" href="{{otherProfileCtrl.user.website}}" ng-click="otherProfileCtrl.removeHover($event)">{{otherProfileCtrl.user.website}}</a>
             </div>
           </div>
           <div class="profile-view-right col-sm-8">
