@@ -76,7 +76,6 @@ router.post('/newtag', function(req,res){
 
 
 router.patch('/addproduction', function(req,res){
-  console.log('add production route hit');
   Production.findById(req.body.productionId, function(err,production){
     if(err) return console.log(err);
     production.tag.push(req.body.tagId)
@@ -126,7 +125,6 @@ router.patch('/edit/:id', function(req,res){
     // res.json(tag)
     User.findById(req.user._id).populate({path: 'taggables', populate: {path: 'taggables'}}).exec(function(err,user){
       if(err) return console.log(err);
-      console.log(user)
       res.json(user)
     })
   })

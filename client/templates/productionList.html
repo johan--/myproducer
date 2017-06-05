@@ -19,7 +19,7 @@
             <!-- <p>{{tag.minDate | date:'shortDate' || 'mm/dd/yyyy'}} - {{tag.maxDate | date:'shortDate' || 'mm/dd/yyyy'}}</p>
 
             <p>{{tag.taggables.length}} Production Days</p> -->
-          <div ng-if="production.active && productionListCtrl.compareDate(production.date)" class="line-item accordion-panel droppable" ng-repeat="production in tag.taggables | orderBy: 'date'">
+          <div class="line-item accordion-panel droppable" ng-repeat="production in tag.taggables | orderBy: 'date'">
             <div class="col-md-2 start-date">
               <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
             </div>
