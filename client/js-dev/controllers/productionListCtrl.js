@@ -127,6 +127,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   var vm = this
   vm.hoverCreate = false
   vm.upgradeModal = {}
+  vm.upgradeModalMessage = {}
   vm.notifModal = {}
   $rootScope.activeTab = {}
   $rootScope.activeTab.production = true
@@ -243,14 +244,25 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.addProduction = function(){
-    // code to restrict free accounts
-    // if current user did not subscribe, restrict from making a production
-
+    // check user account type
     if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount) {
-      vm.showCreateProdModal = false
-      vm.upgradeModal.isFailure = true
-      vm.upgradeModal.content = 'Oops! You must upgrade your account to do that'
-      vm.upgradeModal.show = true
+      // user that passes will be a free account
+      var newProduction = {
+        from: new Date(vm.dateFrom),
+        to: new Date(vm.dateTo),
+        by_ : vm.currentUser,
+        name: vm.newProduction.name
+      }
+      // create production if the start and end date equal each other
+      // TODO: check if that user has a production that is active
+      if(Number(newProduction.to) == Number(newProduction.from)){
+        $http.post('/api/productions', newProduction)
+        .success(function(data){
+          vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
+          $mixpanel.track('New Production Added', {"user" : vm.currentUser.username, "length" : data.length})
+          vm.closeCreateProdModal()
+        })
+      }
       return
     }
 
@@ -385,12 +397,40 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
   }
 
+  vm.checkIfFreeHasProduction = function(production){
+    if(vm.compareDate(production.date)){
+      return true
+    } else {
+      return false
+    }
+  }
+
   vm.openCreateProdModal = function(){
-    vm.showCreateProdModal = true
+    if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount){
+      // check if they have an active production day
+      console.log(vm.currentUser.allProductions);
+      for(var i=0; i<vm.currentUser.allProductions.length; i++){
+        if(vm.checkIfFreeHasProduction(vm.currentUser.allProductions[i]) === true){
+          vm.upgradeModalMessage.show = true
+          vm.showCreateProdModal = false
+          vm.upgradeModalMessage.isFailure = true
+          vm.upgradeModalMessage.content = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
+        } else if(vm.checkIfFreeHasProduction(vm.currentUser.allProductions[i]) === false){
+          vm.showCreateProdModal = true
+        }
+      }
+    } else {
+      vm.showCreateProdModal = true
+    }
+
   }
 
   vm.closeCreateProdModal = function(){
     vm.showCreateProdModal = false
+  }
+
+  vm.closeUpgradeModalMessage = function(){
+    vm.upgradeModalMessage.show = false
   }
 
   vm.openNotifModal = function() {
@@ -404,6 +444,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.openUpgradeModal = function() {
+    vm.upgradeModalMessage.show = false
     vm.upgradeModal.show = true
   }
 

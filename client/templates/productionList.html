@@ -10,7 +10,7 @@
 
 <!-- GROUPED TAGS-->
     <div class="col-md-12 no-padding">
-      <div id="accordionLocation" ng-if="productionListCtrl.userTaggables && tag.taggables.length > 0" ng-repeat="tag in userTaggables">
+      <div id="accordionLocation" ng-if="tag.taggables.length > 0" ng-repeat="tag in userTaggables">
         <div class="accordion" ng-click="productionListCtrl.wholeAccordionClick($event)">
           <button ng-click="productionListCtrl.editTag($event, tag._id)" class="btn approval-btn accordion-edit">Edit</button>
           <button class="accordion-delete" ng-click="productionListCtrl.openDeleteTagModal(tag.label, tag._id)"><i class="fa fa-times"></i></button>
@@ -220,6 +220,22 @@
         <input id="editTag-modal-input" type="text" value="{{productionListCtrl.editingTagName}}" style="color: black">
         <button ng-click="productionListCtrl.renameTag()" style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Save</button>
         <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionListCtrl.upgradeModalMessage.show">
+  <div id="modal-container" ng-click="productionListCtrl.closeUpgradeModalMessage()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h1><i class="fa fa-times-circle"></i></h1>
+        <h5>{{productionListCtrl.upgradeModalMessage.content}}</h5>
+        <br>
+        <div>
+        <button class="btn btn-danger" ng-click="productionListCtrl.closeUpgradeModalMessage()">Cancel</button>
+        <button class="btn approval-btn" ng-click="productionListCtrl.openUpgradeModal()">Upgrade</button>
+      </div>
       </div>
     </div>
   </div>
