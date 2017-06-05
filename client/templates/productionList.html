@@ -1,5 +1,3 @@
-<!-- <button ng-click="productionListCtrl.deleteTags()">delete tags</button> -->
-
 <div ng-show="productionListCtrl.ready">
   <div ng-if="productionListCtrl.hoverCreate" class="onboard-box onboard-create"><p>Creates a production for each day in your date range</p></div>
   <div class="productions-view col-sm-12 section">
@@ -47,7 +45,7 @@
     </div>
 
 <!-- SINGLE DAY PRODUCTIONS -->
-    <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions track by $index | orderBy: 'date' " ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" my-repeat-directive>
+    <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions track by $index | orderBy: 'date' " ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" ng-click="productionListCtrl.addToGroup($event)" my-repeat-directive>
         <!-- make each production draggable and droppable -->
         <!-- when dropped, make a new group with a dropdown -->
       <div id="{{production._id}}">
