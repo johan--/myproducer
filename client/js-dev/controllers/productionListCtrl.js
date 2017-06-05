@@ -258,7 +258,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       if(Number(newProduction.to) == Number(newProduction.from)){
         $http.post('/api/productions', newProduction)
         .success(function(data){
-          vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
+          vm.currentUser.allProductions = data
           $mixpanel.track('New Production Added', {"user" : vm.currentUser.username, "length" : data.length})
           vm.closeCreateProdModal()
         })
