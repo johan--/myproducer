@@ -55,22 +55,21 @@ angular.module('myApp')
                   $(this).draggable('disable')
                   $(this).css('display', 'block')
                   $(this).css('left', 0)
+                  $(this).removeClass('chosen')
                   $(location).parent().append($(this))
-                })
+                  chosenProductionData.tagId = $(this).parent().children('p')[0].id
 
-                chosenProductionData.tagId = $(this).parent().children('p')[0].id
-
-                $('.chosen').each(function(index){
                   var tagData = {
                     productionId: chosenProductionData.chosenIds[index],
                     tagId: chosenProductionData.tagId
                   }
 
                   $http.patch('/api/tag/addproduction', tagData)
-                    .success(function(data){
-                      console.log(data);
-                    })
+                  .success(function(data){
+                    console.log(data);
+                  })
                 })
+
               } else {
                   const tagData = {
                     productionId: '',
