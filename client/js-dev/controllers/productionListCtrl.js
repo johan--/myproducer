@@ -141,11 +141,8 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
   AuthService.getUserStatus()
     .then(function(data){
-      // vm.currentUser = data.data.user
-      // console.log(data.data.user)
       $http.get('/api/users/' + data.data.user._id + '/productions')
         .success(function(data){
-          console.log(data.taggables);
           vm.currentUser = data
           vm.userTaggables = vm.currentUser.taggables
           $rootScope.userTaggables = vm.userTaggables
@@ -271,7 +268,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         name: vm.newProduction.name
       }
 
-      // console.log(newProduction);
       $http.post('/api/productions', newProduction)
         .success(function(data){
           vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
