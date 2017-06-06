@@ -111,14 +111,16 @@ router.delete('/:id', function show(req, res){
 })
 
 // notify crew of production status
-router.get('/:id/notify', function show(req, res){
+router.post('/:id/notify', function show(req, res){
   Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).exec(function(err, production) {
     if(err) return console.log(err)
     var productionURL = 'http://app.myproducer.io/#/production/' + production._id
     var fromEmail = req.user.username
     var fromName = req.user.first_name + ' ' + req.user.last_name
+    var body = req.body.content
     // build an array of users in crew
     var crewArray  = production.crew
+    // console.log(body);
     // loop through users in crew building the toEmail string
     for(var i = 0; i < crewArray.length; i+=1){
       toEmail = crewArray[i].to.username
@@ -126,13 +128,14 @@ router.get('/:id/notify', function show(req, res){
       mailer.send(
         'productionChange',
         {
+          body: body,
           sender: fromName,
           recipient: toName,
           productionURL: productionURL
         },
         {
           to: toEmail,
-          subject: 'Production update from myproducer.io'
+          subject: 'Production update from ' + fromName // producer name
         }
       )
     }

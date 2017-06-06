@@ -67,7 +67,6 @@
             <!-- <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a> -->
             <button ng-show="productionCtrl.editingState" type="submit" class="btn default-btn">Update</button>
             <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn default-btn">Edit</a>
-            <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn approval-btn">Notify Crew</a>
           </div>
         </form>
       </div>
@@ -85,6 +84,7 @@
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
+          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn">Message Team</a>
           <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add</a>
         </div>
       </div>
@@ -292,11 +292,15 @@
 </div>
 
 <div id="modal-root" ng-if="productionCtrl.notifyCrewModal.show">
-  <div id="modal-container" ng-click="productionCtrl.closeNotifyCrewModal()">
-    <div id="modal-md" class="section">
+  <div id="modal-container">
+    <div id="modal-md2" class="section">
       <div class="padding20 text-center">
-        <h2>custom message</h2>
-        <input type="text">
+        <textarea id="custom-message" cols="60" rows="10"></textarea>
+        <p style="font-size: 11px">Message to everyone in this production</p>
+        <p id="message-buttons">
+          <button class="btn btn-danger" ng-click="productionCtrl.closeNotifyCrewModal()">Cancel</button>
+          <button class="btn approval-btn" ng-click="productionCtrl.notifyCrew()">Send</button>
+        </p>
       </div>
     </div>
   </div>

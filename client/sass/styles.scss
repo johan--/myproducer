@@ -351,6 +351,10 @@ a, a:hover, a:link{
   margin-top: 0.7%;
 }
 
+#custom-message {
+  color: black;
+}
+
 #prod-name-input {
   height: 33px;
 }
@@ -1172,6 +1176,13 @@ img.profile {
   float: none;
   padding-bottom: 20px;
 }
+#modal-md2{
+  color: #FFF;
+  width: 500px;
+  margin: 0 auto;
+  background: $section;
+  float: none;
+}
 
 #modal-lg{
   color: #FFF;
@@ -1180,6 +1191,11 @@ img.profile {
   background: $section;
   float: none;
   padding-bottom: 20px;
+}
+
+#message-buttons {
+  position: relative;
+  top: 7px;
 }
 
 .alert{

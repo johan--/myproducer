@@ -244,7 +244,12 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.notifyCrew = function() {
-      $http.get('/api/productions/' + $stateParams.id + '/notify')
+      vm.notifyCrewModal.show = false
+      var content = $('#custom-message').val()
+      var emailData = {
+        content: content
+      }
+      $http.post('/api/productions/' + $stateParams.id + '/notify', emailData)
         .success(function(data) {
           // console.log(data);
           vm.notifModal.isSuccess = true
