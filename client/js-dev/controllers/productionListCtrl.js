@@ -414,16 +414,20 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.openCreateProdModal = function(){
     if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount){
       // check if they have an active production day
-      for(var i=0; i<vm.currentUser.allProductions.length; i++){
-        if(vm.checkIfFreeHasProduction(vm.currentUser.allProductions[i])){
-          vm.upgradeModalMessage.content = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
-          vm.upgradeModalMessage.show = true
-          vm.showCreateProdModal = false
-          vm.upgradeModalMessage.isFailure = true
-          vm.createOneProdModalMessage = true
-        } else if(vm.checkIfFreeHasProduction(vm.currentUser.allProductions[i]) === false){
-          vm.showCreateProdModal = true
+      if(vm.currentUser.productions.length > 0){
+        for(var i=0; i<vm.currentUser.allProductions.length; i++){
+          if(vm.checkIfFreeHasProduction(vm.currentUser.allProductions[i])){
+            vm.upgradeModalMessage.content = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
+            vm.upgradeModalMessage.show = true
+            vm.showCreateProdModal = false
+            vm.upgradeModalMessage.isFailure = true
+            vm.createOneProdModalMessage = true
+          } else if(vm.checkIfFreeHasProduction(vm.currentUser.allProductions[i]) === false){
+            vm.showCreateProdModal = true
+          }
         }
+      } else {
+        vm.showCreateProdModal = true
       }
     } else {
       vm.showCreateProdModal = true
