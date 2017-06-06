@@ -13,6 +13,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   $rootScope.activeTab.production = true
   vm.hoverHire = false
   vm.notifModal = {}
+  vm.notifyCrewModal = {}
   vm.editingState = false
   vm.googleLocation1 = ''
   vm.googleLocation2 = ''
@@ -70,7 +71,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
     vm.editProduction = function(){
       // if a location is deleted
-      if(vm.locationInput1 || vm.locationInput2){    
+      if(vm.locationInput1 || vm.locationInput2){
       vm.production.location[0] = vm.locationInput1.value
       vm.production.location[1] = vm.locationInput2.value
     }
@@ -243,7 +244,12 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.notifyCrew = function() {
-      $http.get('/api/productions/' + $stateParams.id + '/notify')
+      vm.notifyCrewModal.show = false
+      var content = $('#custom-message').val()
+      var emailData = {
+        content: content
+      }
+      $http.post('/api/productions/' + $stateParams.id + '/notify', emailData)
         .success(function(data) {
           // console.log(data);
           vm.notifModal.isSuccess = true
@@ -291,6 +297,14 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         .finally(function() {
           vm.openNotifModal()
         })
+    }
+
+    vm.openNotifyCrewModal = function(){
+      vm.notifyCrewModal.show = true
+    }
+
+    vm.closeNotifyCrewModal = function(){
+      vm.notifyCrewModal.show = false
     }
 
     vm.openDeleteContactModal = function(contact){

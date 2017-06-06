@@ -257,6 +257,9 @@ a, a:hover, a:link {
   float: right;
   margin-top: 0.7%; }
 
+#custom-message {
+  color: black; }
+
 #prod-name-input {
   height: 33px; }
 
@@ -931,6 +934,13 @@ img.profile {
   float: none;
   padding-bottom: 20px; }
 
+#modal-md2 {
+  color: #FFF;
+  width: 500px;
+  margin: 0 auto;
+  background: #333333;
+  float: none; }
+
 #modal-lg {
   color: #FFF;
   width: 700px;
@@ -938,6 +948,10 @@ img.profile {
   background: #333333;
   float: none;
   padding-bottom: 20px; }
+
+#message-buttons {
+  position: relative;
+  top: 7px; }
 
 .alert {
   padding: 10px;
