@@ -189,6 +189,9 @@
         <h5 class="prod-date-from">Start</h5>
         <input ng-init="productionListCtrl.updateMinDateTo()" class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
         <h5 class="prod-date-to">End</h5>
+        <div class="create-one-message" ng-if="productionListCtrl.createOneProdModalMessage">
+          <p>You are using a free account which only includes 1 Active Production Day. Please <a class="upgrade-link" ng-click="productionListCtrl.openUpgradeModal()">upgrade</a> to add more Production days</p>
+        </div>
       <div class="align-center">
         <button ng-click="productionListCtrl.closeCreateProdModal()" class="btn btn-danger">Cancel</button>
         <button type="submit" class=" btn main-btn">Create</button>

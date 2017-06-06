@@ -258,15 +258,16 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       if(Number(newProduction.to) == Number(newProduction.from)){
         $http.post('/api/productions', newProduction)
         .success(function(data){
-          vm.currentUser.allProductions = data
+          vm.currentUser.allProductions = vm.currentUser.allProductions.concat(data)
           $mixpanel.track('New Production Added', {"user" : vm.currentUser.username, "length" : data.length})
           vm.closeCreateProdModal()
         })
       } else {
-        vm.upgradeModalMessage.show = true
-        vm.showCreateProdModal = false
-        vm.upgradeModalMessage.isFailure = true
-        vm.upgradeModalMessage.content = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
+        // vm.upgradeModalMessage.show = true
+        // vm.showCreateProdModal = false
+        // vm.upgradeModalMessage.isFailure = true
+        // vm.upgradeModalMessage.content = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
+        vm.createOneProdModalMessage = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
       }
       return
     }
@@ -418,7 +419,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           vm.upgradeModalMessage.show = true
           vm.showCreateProdModal = false
           vm.upgradeModalMessage.isFailure = true
-          vm.upgradeModalMessage.content = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
+          vm.createOneProdModalMessage = true
         } else if(vm.checkIfFreeHasProduction(vm.currentUser.allProductions[i]) === false){
           vm.showCreateProdModal = true
         }
@@ -448,6 +449,8 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.openUpgradeModal = function() {
+    vm.closeCreateProdModal()
+    vm.createOneProdModalMessage = false
     vm.upgradeModalMessage.show = false
     vm.upgradeModal.show = true
   }

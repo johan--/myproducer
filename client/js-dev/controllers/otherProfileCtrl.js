@@ -18,12 +18,9 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
-      // console.log(data.data.user)
       $http.get('/api/users/' + vm.currentUser._id)
         .success(function(data){
           vm.currentUser = data
-          // console.log(data);
-
 
           $http.get('/api/users/' + $stateParams.id + '/profile')
             .then(function(data){
@@ -52,16 +49,12 @@ function otherProfileController($rootScope, $http, $stateParams, $state, AuthSer
   })
 
   vm.removeHover = function($event){
-    // $($event.target).css('text-decoration', 'none')
-    // $($event.target).css('color', '#FFFFFF')
-    // $($event.target).removeClass('form-control')
-    $($event.target)
+    var target = $($event.target)
+    target.css('text-decoration', 'none')
+    target.css('color', '#FFFFFF')
   }
 
   vm.updateContactStatus = function(status, user) {
-    // console.log(status);
-    // console.log($stateParams.id);
-
     $http.patch('/api/users/updateContact?of=' + $stateParams.id + '&status=' + status)
       .then(function success(data){
         if(status == 'approve'){
