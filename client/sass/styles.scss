@@ -746,6 +746,11 @@ table td {
   }
 }
 
+.line-item.chosen{
+  background-color: lightgrey;
+  opacity: 0.5;
+}
+
 .line-item:last-of-type {
   margin-bottom: 0px;
 }
