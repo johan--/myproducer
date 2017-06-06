@@ -67,7 +67,7 @@
             <!-- <a ng-click="productionCtrl.deleteProduction()" class="btn btn-danger">Complete</a> -->
             <button ng-show="productionCtrl.editingState" type="submit" class="btn default-btn">Update</button>
             <a ng-hide="productionCtrl.editingState" ng-click="productionCtrl.editingState = !productionCtrl.editingState" class="btn default-btn">Edit</a>
-            <a ng-click="productionCtrl.notifyCrew()" class="btn approval-btn">Notify Crew</a>
+            <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn approval-btn">Notify Crew</a>
           </div>
         </form>
       </div>
@@ -286,6 +286,17 @@
         <p>You can always add them back later.</p>
         <br> -->
         <p><a class="btn approval-btn" ng-click="productionCtrl.removeFromCrew(productionCtrl.contact)">Yes</a> <a class="btn error-btn" ng-click="productionCtrl.closeDeleteContactModal()">Cancel</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionCtrl.notifyCrewModal.show">
+  <div id="modal-container" ng-click="productionCtrl.closeNotifyCrewModal()">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h2>custom message</h2>
+        <input type="text">
       </div>
     </div>
   </div>
