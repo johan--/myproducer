@@ -9,11 +9,13 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
   vm.planAmount = ''
   vm.coupon = ''
 
-  if($state.params.plan === 'pro'){
-    vm.planAmount = '$50'
-  } else if($state.params.plan === 'premium'){
-    vm.planAmount = '$25'
-  }
+  // if($state.params.plan === 'pro'){
+  //   vm.planAmount = '$50'
+  // } else if($state.params.plan === 'premium'){
+  //   vm.planAmount = '$25'
+  // }
+
+  vm.planAmount = '$10'
 
 
   function capitalizeFirstLetter(string) {
@@ -36,10 +38,8 @@ function stripeController($rootScope, $state, $http, $stateParams, AuthService) 
 
     const couponCode = document.getElementById('coupon').value
 
-    if(couponCode === 'beta' && $state.params.plan === 'pro'){
-      vm.planAmount = '$37.50'
-    } else if(couponCode === 'beta' && $state.params.plan === 'premium'){
-      vm.planAmount = '$18.75'
+    if(couponCode === 'beta'){
+      vm.planAmount = '$7.50'
     }
   }
 
