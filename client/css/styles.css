@@ -953,6 +953,10 @@ img.profile {
   position: relative;
   top: 7px; }
 
+.production-btn {
+  position: relative;
+  top: 2px; }
+
 .alert {
   padding: 10px;
   background-color: transparent;

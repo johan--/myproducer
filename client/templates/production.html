@@ -84,8 +84,8 @@
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
-          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn">Message Team</a>
-          <a class="btn default-btn" ng-click="productionCtrl.openModal()">+ Add</a>
+          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Team</a>
+          <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal()">+ Add</a>
         </div>
       </div>
     </div>
@@ -203,7 +203,7 @@
     <div id="modal" class="section">
       <div class="col-sm-12 padding20">
         <div class="col-sm-8 no-padding">
-          <h3 class="title">APPROVED CREW</h3>
+          <h3 class="title">APPROVED CONTACTS</h3>
         </div>
         <div class="col-sm-4 no-padding">
           <p class="title"><input type="text" class="form-control bg-transparent subtle-border padding15" placeholder="Search" ng-model="crewFilter"></p>
