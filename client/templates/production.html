@@ -314,7 +314,7 @@
           <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover production-margin">Declined</a>
           <a ng-if="crew.offer.status === 'Accepted'"  class="btn approval-alt-btn remove-btn-hover production-margin">Hired</a>
           <a ng-if="crew.offer.status === 'Pending' || crew.offer.status === 'Accepted' || crew.offer.status === 'Declined'" href="/#/offer/{{crew._id}}" class="btn default-btn production-margin">View Offer</a>
-          <a class="production-margin align-right x-button" ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.openDeleteContactModal(crew._id)"><i class="fa fa-times"></i></a>
+          <a class="production-margin align-right x-button" ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.openDeleteContactModal(crew._id, department._id)"><i class="fa fa-times"></i></a>
         </div></td>
       </div>
       </tr>
@@ -379,7 +379,7 @@
             </div>
             <div class="col-xs-3 text-right">
               <p class="no-margin"><a ng-href="/#/profile/{{crew._id}}" class="btn default-btn">View</a>
-              <a ng-click="productionCtrl.addToCrew(crew._id)" class="btn main-btn">Add</a><a ng-click="productionCtrl.openDeleteContactModal(crew)"><i class="fa fa-times"style="margin-left: 2px;"></i></a></p>
+              <a ng-click="productionCtrl.addToCrew(crew._id)" class="btn main-btn">Add</a></p>
             </div>
           </div>
         </div>
@@ -414,7 +414,7 @@
         <br>
         <p>You can always add them back later.</p>
         <br> -->
-        <p><a class="btn approval-btn" ng-click="productionCtrl.removeFromCrew(productionCtrl.contact)">Yes</a> <a class="btn error-btn" ng-click="productionCtrl.closeDeleteContactModal()">Cancel</a></p>
+        <p><a class="btn approval-btn" ng-click="productionCtrl.removeFromCrew(productionCtrl.contact, productionCtrl.department)">Yes</a> <a class="btn error-btn" ng-click="productionCtrl.closeDeleteContactModal()">Cancel</a></p>
       </div>
     </div>
   </div>

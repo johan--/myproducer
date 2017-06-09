@@ -151,7 +151,7 @@ router.post('/newdepartment', function(req,res){
       // console.log(department);
       Production.findById(req.body.production, function(err, production){
         production.departments.push(department._id)
-        production.populate({path: 'departments', populate: {path: 'users'}}, function(err){
+        production.populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}}, function(err){
           production.save()
           res.json(production)
         })
@@ -159,20 +159,5 @@ router.post('/newdepartment', function(req,res){
     })
   })
 })
-
-// router.post('/addToDepartment', function(req,res){
-//   Production.findById(req.body.productionId, function(err,production){
-//     if(err) return console.log(err);
-//     Department.findById(req.body.departmentId, function(err, department){
-//       if(err) return console.log(err);
-//       department.users.push(req.body.crewId)
-//       department.save()
-//       department.populate('users', function(err, populatedDepartment){
-//         if(err) return console.log(err);
-//         res.json(populatedDepartment)
-//       })
-//     })
-//   })
-// })
 
 module.exports = router

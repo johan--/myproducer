@@ -204,7 +204,7 @@ router.post('/:id/message', function(req, res){
 
           Crew.populate(newCrew, {path: 'message', populate: {path: '_by'}}, function(err, populatedCrew) {
             if(err) return console.log(err)
-            console.log('populated crew:', populatedCrew);
+            // console.log('populated crew:', populatedCrew);
 
             res.json(populatedCrew.message)
           })
@@ -272,11 +272,19 @@ router.post('/:id/message', function(req, res){
   })
 })
 
-router.delete('/:id', function(req, res){
+router.patch('/delete/:id', function(req, res){
   Crew.findByIdAndUpdate(req.params.id, { active: false }, { new: true },function(err, crew){
     if(err) return console.log(err)
-
-    res.json({ success: true })
+    Department.findById(req.body.department, function(err,department){
+      if(err) return console.log(err);
+      var index = department.crew.indexOf(crew._id)
+      department.crew[index] = crew._id
+      department.save()
+      department.populate({path: 'crew', populate: {path: 'to'}}, function(err, populatedDepartment){
+        if(err) return console.log(err);
+        res.json(populatedDepartment)
+      })
+    })
   })
 })
 

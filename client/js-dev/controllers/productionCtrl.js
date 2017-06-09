@@ -187,7 +187,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
       $http.post('/api/crew', departmentData)
         .success(function(data){
-
           for(var i=0; i<vm.departments.length; i++){
             if(vm.departments[i]._id === data._id){
               vm.departments[i] = data
@@ -196,51 +195,54 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           }
           vm.showModal = false
         })
-
-      // crewOffer = {
-      //   "to": id,
-      //   "production": $stateParams.id,
-      // }
-      // $http.post('/api/crew/', crewOffer)
-      //   .success(function(data) {
-      //     vm.production.crew = data
-      //     vm.notifModal.isSuccess = true
-      //     vm.notifModal.content = 'You have successfully added a new crew member.'
-      //     $mixpanel.track('Add Crew Clicked', {"user" : vm.currentUser.username})
-      //   })
-      //   .error(function(data) {
-      //     vm.notifModal.isFailure = true
-      //     vm.notifModal.content = 'An error has occurred. Please try again.'
-      //   })
-      //   .finally(function() {
-      //     vm.showModal = false
-      //     vm.openNotifModal()
-      //   })
-    }
-
-    vm.removeFromCrew = function(id, index) {
-      $http.delete('/api/crew/' + id)
-        .then(function(data) {
-          if(data.data.success){
-            vm.production.crew = vm.production.crew.filter(function(c) {
-              return c._id.toString() != id
-            })
-
-            vm.notifModal.isSuccess = true
-            vm.notifModal.content = 'You have successfully removed a crew member.'
-            // vm.production.crew.splice(index, 1)
-          } else {
-            vm.notifModal.isFailure = false
-            vm.notifModal.content = 'An error has occurred. Please try again.'
-          }
-        })
-        .catch(function(data) {
+        .error(function(data) {
           vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
         .finally(function() {
+          vm.showModal = false
           vm.openNotifModal()
         })
+    }
+
+    vm.removeFromCrew = function(crewId, departmentId) {
+
+      const deleteData = {
+        department: departmentId
+      }
+
+      $http.patch('/api/crew/delete/' + crewId, deleteData)
+        .success(function(data){
+          for(var i=0; i<vm.departments.length; i++){
+            if(vm.departments[i]._id == data._id){
+              vm.departments[i] = data
+            }
+          }
+        })
+        .error(function(err){
+          console.log(err);
+        })
+      //   .then(function(data) {
+      //     if(data.data.success){
+      //       vm.production.crew = vm.production.crew.filter(function(c) {
+      //         return c._id.toString() != id
+      //       })
+      //
+      //       vm.notifModal.isSuccess = true
+      //       vm.notifModal.content = 'You have successfully removed a crew member.'
+      //       // vm.production.crew.splice(index, 1)
+      //     } else {
+      //       vm.notifModal.isFailure = false
+      //       vm.notifModal.content = 'An error has occurred. Please try again.'
+      //     }
+      //   })
+      //   .catch(function(data) {
+      //     vm.notifModal.isFailure = true
+      //     vm.notifModal.content = 'An error has occurred. Please try again.'
+      //   })
+      //   .finally(function() {
+      //     vm.openNotifModal()
+      //   })
     }
 
     vm.closeModal = function(evt) {
@@ -332,7 +334,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
     vm.createDepartment = function(){
       const title = $('#department-title').val()
-      // console.log($stateParams.id);
       const departmentData = {
         title: title,
         production: $stateParams.id
@@ -340,7 +341,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
       $http.post('/api/productions/newdepartment', departmentData)
         .success(function(data){
-          console.log(data);
           vm.departmentModal.show = false
           vm.departments = data.departments
         })
@@ -362,8 +362,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       vm.notifyCrewModal.show = false
     }
 
-    vm.openDeleteContactModal = function(contact){
-      console.log(contact);
+    vm.openDeleteContactModal = function(contact, department){
+      vm.department = department
       vm.contact = contact
       vm.showDeleteContactModal = true;
     }
@@ -373,9 +373,10 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.deleteContact = function(contact){
-      $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser})
+      $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser, department: vm.department})
       .success(function(data){
-        vm.currentUser.contacts = data.user.contacts
+        console.log(data);
+        // vm.currentUser.contacts = data.user.contacts
       })
     }
 
