@@ -59,11 +59,11 @@ router.post('/', function(req, res){
               production.save(function(err, newProduction){
                 if(err) return console.log(err)
 
-                Department.findById(req.body.departmentId, function(err, department){
+                Department.findById(req.body.departmentId).populate({path: 'production'}).exec(function(err, department){
                   if(err) return console.log(err);
                   department.crew.push(crew)
                   department.save()
-                  department.populate('crew', function(err, populatedDepartment){
+                  department.populate({path: 'crew', populate: {path: 'to'}}, function(err, populatedDepartment){
                     if(err) return console.log(err);
                     res.json(populatedDepartment)
 

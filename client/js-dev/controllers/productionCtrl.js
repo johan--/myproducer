@@ -62,6 +62,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               // console.log(production);
               vm.production = production
               vm.departments = production.departments
+              // console.log(vm.departments);
+              // console.log(vm.production);
               // console.log("Production from the Factory", vm.production)
               // splitNotes(production.notes)
 
@@ -177,9 +179,11 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
       $http.post('/api/crew', departmentData)
         .success(function(data){
+
           for(var i=0; i<vm.departments.length; i++){
             if(vm.departments[i]._id === data._id){
               vm.departments[i] = data
+              vm.departments[i].crew = data.crew
             }
           }
           vm.showModal = false

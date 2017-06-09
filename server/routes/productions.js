@@ -78,7 +78,7 @@ router.post('/', function(req, res){
 
 // see one specific production
 router.get('/:id', function show(req, res){
-  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'by_', select: 'username first_name last_name'}).populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}}).exec(function(err, production) {
+  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'by_', select: 'username first_name last_name'}).populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}}).populate({path: 'departments', populate: {path: 'production', populate: {path: 'crew', populate: {path: 'to'}}}}).exec(function(err, production) {
     if(err) return console.log(err)
 
     if(production.active) {
