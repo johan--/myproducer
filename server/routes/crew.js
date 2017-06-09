@@ -137,7 +137,19 @@ router.patch('/:id', function(req, res){
         )
       })
 
-    res.json(crew)
+    // res.json(crew)
+      Department.findById(req.body.department, function(err, department){
+        if(err) return console.log(err);
+        var index = department.crew.indexOf(crew._id)
+        department.crew[index] = crew
+        department.save(function(err, newDepartment){
+          if(err) return console.log(err);
+          newDepartment.populate({path: 'crew', populate: {path: 'to'}}, function(err, populatedDepartment){
+            if(err) return console.log(err);
+            res.json(populatedDepartment)
+          })
+        })
+      })
     })
   })
 })

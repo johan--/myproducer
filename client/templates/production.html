@@ -309,7 +309,7 @@
 
         <!-- Buttons -->
         <td class="container align-right col-md-3"><div ng-if="productionCtrl.isProducer">
-          <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)" class="btn main-btn production-margin">Hire</a>
+          <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index, department._id)" class="btn main-btn production-margin">Hire</a>
           <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn remove-btn-hover production-margin">Pending</a>
           <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover production-margin">Declined</a>
           <a ng-if="crew.offer.status === 'Accepted'"  class="btn approval-alt-btn remove-btn-hover production-margin">Hired</a>

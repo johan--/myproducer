@@ -108,7 +108,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         })
     }
 
-    vm.makeOffer = function(id, $index) {
+    vm.makeOffer = function(id, $index, departmentId) {
       if(!vm.offers[$index]){
         vm.error = true
         vm.errorMessage = "Please Fill Out Entire Offer"
@@ -130,20 +130,28 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             position : newOffer.position,
             rate : newOffer.rate,
             hours : newOffer.hours
-          }
+          },
+          department: departmentId
         }
         // TODO this patches the offer, but somehow that doesn't reflect within the production object? Do we need to save the production as well on this patch?
         // TODO: Please confirm if the issue above has been fixed. -Kevin
         $http.patch('api/crew/' + id, vm.offer)
           .success(function(data) {
+            // console.log(data);
+            // need to update the departments crew instead of productions
 
-            vm.production.crew[$index].offer.hours = data.offer.hours
-            vm.production.crew[$index].offer.position = data.offer.position
-            vm.production.crew[$index].offer.rate = data.offer.rate
-            vm.production.crew[$index].offer.status = data.offer.status
+            for(var i=0; i<vm.departments.length; i++){
+              if(vm.departments[i]._id === data._id){
+                vm.departments[i] = data
+                vm.notifModal.isSuccess = true
+                vm.notifModal.content = 'You have successfully sent on offer to ' + vm.departments[i].crew[$index].to.username + '.'
+              }
+            }
 
-            vm.notifModal.isSuccess = true
-            vm.notifModal.content = 'You have successfully sent on offer to ' + vm.departments[index].crew[$index].to.username + '.'
+            // vm.production.crew[$index].offer.hours = data.offer.hours
+            // vm.production.crew[$index].offer.position = data.offer.position
+            // vm.production.crew[$index].offer.rate = data.offer.rate
+            // vm.production.crew[$index].offer.status = data.offer.status
 
             vm.message = {
                 content : 'I would like to invite you to be part of my production team.'
