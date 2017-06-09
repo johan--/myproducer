@@ -680,6 +680,13 @@ table td {
     background-color: #4dcfff;
     color: #FFFFFF; }
 
+.contact-btn {
+  background-color: #C2C1C3;
+  color: black; }
+  .contact-btn:hover {
+    background-color: #C2C1C3;
+    color: #FFFFFF; }
+
 .btn.nohover:hover {
   color: white;
   cursor: default !important; }

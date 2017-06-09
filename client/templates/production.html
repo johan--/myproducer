@@ -87,7 +87,7 @@
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
-          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Team</a>
+          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message</a>
           <a class="btn approval-btn production-btn" ng-click="productionCtrl.openDepartmentModal()">New Department</a>
           <!-- <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal()">+ Add</a> -->
         </div>
@@ -210,9 +210,9 @@
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer" class="align-right title">
-          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Department</a>
-          <a class="btn approval-btn production-btn" ng-click="productionCtrl.openDepartmentModal()">New Assignment</a>
-          <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal(department._id)">Add</a>
+          <!-- <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Department</a> -->
+          <a class="btn contact-btn production-btn" ng-click="productionCtrl.openTaskModal()">+ Contact</a>
+          <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal(department._id)">+ Offer</a>
         </div>
       </div>
     </div>
@@ -444,6 +444,29 @@
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeDepartmentModal()">Cancel</button>
           <button class="btn main-btn" ng-click="productionCtrl.createDepartment()">Create</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionCtrl.taskModal.show">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h4>Assignment</h4>
+        <input id="task-title" style="color: black" type="text">
+        <h4># of positions</h4>
+        <select id="task-select" style="color: black">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <p class="message-buttons">
+          <button class="btn btn-danger" ng-click="productionCtrl.closeTaskModal()">Cancel</button>
+          <button class="btn main-btn" ng-click="productionCtrl.createTask()">Create</button>
         </p>
       </div>
     </div>

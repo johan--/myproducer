@@ -15,6 +15,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   vm.notifModal = {}
   vm.notifyCrewModal = {}
   vm.departmentModal = {}
+  vm.taskModal = {}
   vm.editingState = false
   vm.googleLocation1 = ''
   vm.googleLocation2 = ''
@@ -201,6 +202,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         })
         .finally(function() {
           vm.showModal = false
+          vm.departmentId = ''
           // vm.openNotifModal()
         })
     }
@@ -218,13 +220,15 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             }
           }
           vm.notifModal.isSuccess = true
-          vm.notifModal.content = 'You have successfully removed a crew member.'
+          vm.notifModal.content = 'You have successfully removed this offer.'
         })
         .error(function(err){
           vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
         })
         .finally(function() {
+          vm.contact = {}
+          vm.department = {}
           vm.openNotifModal()
         })
     }
@@ -330,6 +334,32 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         })
     }
 
+    vm.createTask = function(){
+      const
+        position = $('#task-title').val()
+        count = parseInt($('#task-select').val()),
+        taskData = {
+          position: position,
+          production: $stateParams.id
+        }
+
+        for(var i=0; i<count; i++){
+          $http.post('/api/productions/newtask', taskData)
+            .success(function(data){
+              console.log(data);
+            })
+        }
+
+    }
+
+    vm.openTaskModal = function(){
+      vm.taskModal.show = true
+    }
+
+    vm.closeTaskModal = function(){
+      vm.taskModal.show = false
+    }
+
     vm.openDepartmentModal = function(){
       vm.departmentModal.show = true
     }
@@ -349,7 +379,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     vm.openDeleteContactModal = function(contact, department){
       vm.department = department
       vm.contact = contact
-      console.log(vm.contact);
       vm.showDeleteContactModal = true;
     }
 

@@ -8,6 +8,7 @@ var mailer = require('../nodemailer/mailer.js')
 // MODELS
 
 var Production = require('../models/Production.js')
+var Task = require('../models/Task.js')
 var Department = require('../models/Department.js')
 var Tag = require('../models/Tag.js')
 // PRODUCTION ROUTES
@@ -156,6 +157,23 @@ router.post('/newdepartment', function(req,res){
           res.json(production)
         })
       })
+    })
+  })
+})
+
+router.post('/newtask', function(req,res){
+  console.log('making new task');
+  Task.create({position: req.body.position, production: req.body.production, _creator: req.user._id}, function(err, task){
+    if(err) return console.log(err);
+    Production.findById(req.body.production, function(err, production){
+      if(err) return console.log(err);
+      console.log(production);
+      production.tasks.push(task._id)
+      production.populate({path: 'tasks'}, function(err, populatedProduction){
+        if(err) return console.log(err);
+        res.json(populatedProduction)
+      })
+
     })
   })
 })

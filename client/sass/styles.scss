@@ -849,6 +849,15 @@ table td {
   }
 }
 
+.contact-btn{
+  background-color: #C2C1C3;
+  color: black;
+  &:hover {
+    background-color: #C2C1C3;
+    color: $text;
+  }
+}
+
 .btn.nohover:hover {
   color: white;
   cursor:default !important;

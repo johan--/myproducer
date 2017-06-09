@@ -12,7 +12,7 @@ var Production = new Schema({
   date: Date,
   crewCall: Date,
   crew: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
-  assignments:[{type: mongoose.Schema.Types.ObjectId, ref: 'Assignment'}],
+  tasks:[{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}],
   departments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Department'}],
   notes: String,
   productionDay: Number,
