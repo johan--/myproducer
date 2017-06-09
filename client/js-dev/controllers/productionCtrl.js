@@ -201,48 +201,32 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         })
         .finally(function() {
           vm.showModal = false
-          vm.openNotifModal()
+          // vm.openNotifModal()
         })
     }
 
-    vm.removeFromCrew = function(crewId, departmentId) {
-
+    vm.removeFromCrew = function(crew, departmentId) {
       const deleteData = {
         department: departmentId
       }
 
-      $http.patch('/api/crew/delete/' + crewId, deleteData)
+      $http.patch('/api/crew/delete/' + crew._id, deleteData)
         .success(function(data){
           for(var i=0; i<vm.departments.length; i++){
             if(vm.departments[i]._id == data._id){
               vm.departments[i] = data
             }
           }
+          vm.notifModal.isSuccess = true
+          vm.notifModal.content = 'You have successfully removed a crew member.'
         })
         .error(function(err){
-          console.log(err);
+          vm.notifModal.isFailure = true
+          vm.notifModal.content = 'An error has occurred. Please try again.'
         })
-      //   .then(function(data) {
-      //     if(data.data.success){
-      //       vm.production.crew = vm.production.crew.filter(function(c) {
-      //         return c._id.toString() != id
-      //       })
-      //
-      //       vm.notifModal.isSuccess = true
-      //       vm.notifModal.content = 'You have successfully removed a crew member.'
-      //       // vm.production.crew.splice(index, 1)
-      //     } else {
-      //       vm.notifModal.isFailure = false
-      //       vm.notifModal.content = 'An error has occurred. Please try again.'
-      //     }
-      //   })
-      //   .catch(function(data) {
-      //     vm.notifModal.isFailure = true
-      //     vm.notifModal.content = 'An error has occurred. Please try again.'
-      //   })
-      //   .finally(function() {
-      //     vm.openNotifModal()
-      //   })
+        .finally(function() {
+          vm.openNotifModal()
+        })
     }
 
     vm.closeModal = function(evt) {
@@ -365,6 +349,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     vm.openDeleteContactModal = function(contact, department){
       vm.department = department
       vm.contact = contact
+      console.log(vm.contact);
       vm.showDeleteContactModal = true;
     }
 
