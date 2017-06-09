@@ -12,6 +12,8 @@ var Production = new Schema({
   date: Date,
   crewCall: Date,
   crew: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
+  assignments:[{type: mongoose.Schema.Types.ObjectId, ref: 'Assignment'}],
+  departments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Department'}],
   notes: String,
   productionDay: Number,
   active: {type: Boolean, default: true},

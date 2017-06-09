@@ -9,6 +9,7 @@ var Crew = require('../models/Crew.js')
 var User = require('../models/User.js')
 var Production = require('../models/Production.js')
 var Message = require('../models/Message.js')
+var Department = require('../models/Department.js')
 var mailer = require('../nodemailer/mailer.js')
 
 router.get('/', function(req, res){
@@ -23,12 +24,11 @@ router.post('/', function(req, res){
 
   // Create crew from req.body
   var newCrew = new Crew()
-  newCrew.to = req.body.to
-  newCrew.production = new mongoose.mongo.ObjectId(req.body.production)
+  newCrew.to = req.body.crewId
+  newCrew.production = new mongoose.mongo.ObjectId(req.body.productionId)
 
   newCrew.save(function(err, crew){
     if(err) return console.log(err)
-    console.log(crew);
     // Find user who submitted the crew
     User.findById(req.user._id, function(err, user){
       if(err) return console.log(err)
@@ -59,12 +59,24 @@ router.post('/', function(req, res){
               production.save(function(err, newProduction){
                 if(err) return console.log(err)
 
-                Production.populate(newProduction, {path: 'crew', populate: {path: 'to'}}, function(err, populatedProduction){
-                  if(err) return console.log(err)
+                Department.findById(req.body.departmentId, function(err, department){
+                  if(err) return console.log(err);
+                  department.crew.push(crew)
+                  department.save()
+                  department.populate('crew', function(err, populatedDepartment){
+                    if(err) return console.log(err);
+                    res.json(populatedDepartment)
 
-                  // / Return updated crew list
-                  res.json(populatedProduction.crew)
+                  })
+
                 })
+
+                // Production.populate(newProduction, {path: 'crew', populate: {path: 'to'}}, function(err, populatedProduction){
+                //   if(err) return console.log(err)
+                //
+                //   // / Return updated crew list
+                //   res.json(populatedProduction.crew)
+                // })
               })
             })
           })
@@ -105,7 +117,7 @@ router.patch('/:id', function(req, res){
 
     Production.findById(crew.production, function(err, production){
       if(err) return console.log(err);
-      console.log('production that was found:');
+      // console.log('production that was found:');
       var productionDate = production.date.toDateString()
 
       // send mail

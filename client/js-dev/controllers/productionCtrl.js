@@ -14,6 +14,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   vm.hoverHire = false
   vm.notifModal = {}
   vm.notifyCrewModal = {}
+  vm.departmentModal = {}
   vm.editingState = false
   vm.googleLocation1 = ''
   vm.googleLocation2 = ''
@@ -58,7 +59,9 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
+              // console.log(production);
               vm.production = production
+              vm.departments = production.departments
               // console.log("Production from the Factory", vm.production)
               // splitNotes(production.notes)
 
@@ -131,14 +134,14 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         // TODO: Please confirm if the issue above has been fixed. -Kevin
         $http.patch('api/crew/' + id, vm.offer)
           .success(function(data) {
-            // console.log(data);
+
             vm.production.crew[$index].offer.hours = data.offer.hours
             vm.production.crew[$index].offer.position = data.offer.position
             vm.production.crew[$index].offer.rate = data.offer.rate
             vm.production.crew[$index].offer.status = data.offer.status
 
             vm.notifModal.isSuccess = true
-            vm.notifModal.content = 'You have successfully sent on offer to ' + vm.production.crew[$index].to.username + '.'
+            vm.notifModal.content = 'You have successfully sent on offer to ' + vm.departments[index].crew[$index].to.username + '.'
 
             vm.message = {
                 content : 'I would like to invite you to be part of my production team.'
@@ -166,26 +169,41 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.addToCrew = function(id) {
-      console.log(id);
-      crewOffer = {
-        "to": id,
-        "production": $stateParams.id,
+      const departmentData = {
+        crewId: id,
+        departmentId: vm.departmentId,
+        productionId: $stateParams.id
       }
-      $http.post('/api/crew/', crewOffer)
-        .success(function(data) {
-          vm.production.crew = data
-          vm.notifModal.isSuccess = true
-          vm.notifModal.content = 'You have successfully added a new crew member.'
-          $mixpanel.track('Add Crew Clicked', {"user" : vm.currentUser.username})
-        })
-        .error(function(data) {
-          vm.notifModal.isFailure = true
-          vm.notifModal.content = 'An error has occurred. Please try again.'
-        })
-        .finally(function() {
+
+      $http.post('/api/crew', departmentData)
+        .success(function(data){
+          for(var i=0; i<vm.departments.length; i++){
+            if(vm.departments[i]._id === data._id){
+              vm.departments[i] = data
+            }
+          }
           vm.showModal = false
-          vm.openNotifModal()
         })
+
+      // crewOffer = {
+      //   "to": id,
+      //   "production": $stateParams.id,
+      // }
+      // $http.post('/api/crew/', crewOffer)
+      //   .success(function(data) {
+      //     vm.production.crew = data
+      //     vm.notifModal.isSuccess = true
+      //     vm.notifModal.content = 'You have successfully added a new crew member.'
+      //     $mixpanel.track('Add Crew Clicked', {"user" : vm.currentUser.username})
+      //   })
+      //   .error(function(data) {
+      //     vm.notifModal.isFailure = true
+      //     vm.notifModal.content = 'An error has occurred. Please try again.'
+      //   })
+      //   .finally(function() {
+      //     vm.showModal = false
+      //     vm.openNotifModal()
+      //   })
     }
 
     vm.removeFromCrew = function(id, index) {
@@ -220,7 +238,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       }
     }
 
-    vm.openModal = function() {
+    vm.openModal = function(id) {
+      vm.departmentId = id
       vm.showModal = true;
     }
 
@@ -297,6 +316,30 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         .finally(function() {
           vm.openNotifModal()
         })
+    }
+
+    vm.createDepartment = function(){
+      const title = $('#department-title').val()
+      // console.log($stateParams.id);
+      const departmentData = {
+        title: title,
+        production: $stateParams.id
+      }
+
+      $http.post('/api/productions/newdepartment', departmentData)
+        .success(function(data){
+          console.log(data);
+          vm.departmentModal.show = false
+          vm.departments = data.departments
+        })
+    }
+
+    vm.openDepartmentModal = function(){
+      vm.departmentModal.show = true
+    }
+
+    vm.closeDepartmentModal = function(){
+      vm.departmentModal.show = false
     }
 
     vm.openNotifyCrewModal = function(){

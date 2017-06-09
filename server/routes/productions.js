@@ -8,7 +8,7 @@ var mailer = require('../nodemailer/mailer.js')
 // MODELS
 
 var Production = require('../models/Production.js')
-
+var Department = require('../models/Department.js')
 var Tag = require('../models/Tag.js')
 // PRODUCTION ROUTES
 
@@ -78,7 +78,7 @@ router.post('/', function(req, res){
 
 // see one specific production
 router.get('/:id', function show(req, res){
-  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'by_', select: 'username first_name last_name'}).exec(function(err, production) {
+  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'by_', select: 'username first_name last_name'}).populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}}).exec(function(err, production) {
     if(err) return console.log(err)
 
     if(production.active) {
@@ -142,5 +142,37 @@ router.post('/:id/notify', function show(req, res){
   res.json({success : true})
   })
 })
+
+router.post('/newdepartment', function(req,res){
+  Department.create(req.body, function(err, department){
+    if(err) return console.log(err);
+    department.populate('production', function(err){
+      if(err) return console.log(err);
+      // console.log(department);
+      Production.findById(req.body.production, function(err, production){
+        production.departments.push(department._id)
+        production.populate({path: 'departments', populate: {path: 'users'}}, function(err){
+          production.save()
+          res.json(production)
+        })
+      })
+    })
+  })
+})
+
+// router.post('/addToDepartment', function(req,res){
+//   Production.findById(req.body.productionId, function(err,production){
+//     if(err) return console.log(err);
+//     Department.findById(req.body.departmentId, function(err, department){
+//       if(err) return console.log(err);
+//       department.users.push(req.body.crewId)
+//       department.save()
+//       department.populate('users', function(err, populatedDepartment){
+//         if(err) return console.log(err);
+//         res.json(populatedDepartment)
+//       })
+//     })
+//   })
+// })
 
 module.exports = router

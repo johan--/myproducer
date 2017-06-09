@@ -75,8 +75,8 @@
 
                 <!-- Cast & Crew entire table-->
                 <!-- <div class="other-background"> -->
-  <div class="crew-view col-sm-9" ng-init="showModal=false">
-    <div class="container-fluid bottom-border no-padding">
+  <div id="production-header" class="crew-view col-sm-9" ng-init="showModal=false">
+    <div class="container-fluid no-padding">
       <div class="col-sm-6 no-padding section">
         <h3 id="crew-title" class="thumb-margin stick-bottom title">STAFFING</h3>
         <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-down margin-top-question" ng-mouseover="productionCtrl.hoverHire = true" ng-mouseleave="productionCtrl.hoverHire = false"/>
@@ -85,7 +85,8 @@
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
           <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Team</a>
-          <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal()">+ Add</a>
+          <a class="btn approval-btn production-btn" ng-click="productionCtrl.openDepartmentModal()">New Department</a>
+          <!-- <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal()">+ Add</a> -->
         </div>
       </div>
     </div>
@@ -196,6 +197,124 @@
         </table>
     </div>
   </div>
+
+  <div class="crew-view col-sm-9 production-department" ng-if="productionCtrl.departments.length > 0" ng-repeat="department in productionCtrl.departments">
+    <div class="container-fluid no-padding">
+      <div class="col-sm-6 no-padding section">
+        <h3 class="thumb-margin stick-bottom title">{{department.title}}</h3>
+      </div>
+      <div class="col-sm-6 no-padding section">
+        <div ng-if="productionCtrl.isProducer" class="align-right title">
+          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Department</a>
+          <a class="btn approval-btn production-btn" ng-click="productionCtrl.openDepartmentModal()">New Assignment</a>
+          <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal(department._id)">Add</a>
+        </div>
+      </div>
+    </div>
+  <div class="other-background" ng-repeat="crew in department.crew" ng-if="crew.active && ((productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
+    <table class="table table-condensed">
+      <tbody>
+        <tr>
+          <div class="other-background container-fluid">
+        <!-- Avatar-->
+        <td class="container col-md-1"><img class="thumb round thumb-margin" ng-show="!crew.to.picture" ng-src="./img/profile_default.png">
+          <img class="thumb round thumb-margin" ng-show="crew.to.picture" ng-src={{crew.to.picture}}></td>
+
+        <!-- Name -->
+        <td class="container col-md-2"><a target="_blank" href="/#/profile/{{crew.to._id}}" id="production-crew-link" class="production-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</a></td>
+
+        <!-- Select/Show Role-->
+        <td class="container col-md-4 align-left"><div class="dropdown">
+          <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
+                    <option value="Actor">Actor</option>
+                    <option value="Actress">Actress</option>
+                    <option value="Extra">Extra</option>
+                    <option value="Extra">Editor</option>
+                    <option value="Extra">Junior Editor</option>
+                    <option value="Extra">Animator</option>
+                    <option value="Extra">Motion Graphics Artist</option>
+                    <option value="Extra">Compositor</option>
+                    <option value="Executive Producer">Executive Producer</option>
+                    <option value="Line Producer">Line Producer</option>
+                    <option value="Producer">Producer</option>
+                    <option value="Unit Production Manager">Unit Production Manager</option>
+                    <option value="Director">Director</option>
+                    <option value="2nd Unit Director">2nd Unit Director</option>
+                    <option value="Producer / Director">Producer / Director</option>
+                    <option value="Writer / Director">Writer / Director</option>
+                    <option value="1st Assistant Director">1st Assistant Director</option>
+                    <option value="2nd Assistant Director">2nd Assistant Director</option>
+                    <option value="2nd 2nd Assistant Director">2nd 2nd Assistant Director</option>
+                    <option value="Writer">Writer</option>
+                    <option value="Teleprompter Operator">Teleprompter Operator</option>
+                    <option value="Cinematographer">Cinematographer</option>
+                    <option value="Camera Operator">Camera Operator</option>
+                    <option value="Steadicam Operator">Steadicam Operator</option>
+                    <option value="Jib / Crane Operator">Jib / Crane Operator</option>
+                    <option value="Ronin / Movi Operator">Ronin / Movi Operator</option>
+                    <option value="Drone Operator">Drone Operator</option>
+                    <option value="Drone Assistant">Drone Assistant</option>
+                    <option value="1st Assistant Camera Operator">1st Assistant Camera Operator</option>
+                    <option value="2nd Assistant Camera Operator">2nd Assistant Camera Operator</option>
+                    <option value="A Camera Operator">"A" Camera Operator</option>
+                    <option value="A 1st Assistant Camera Operator">"A" 1st Assistant Camera Operator</option>
+                    <option value="A 2nd Assistant Camera Operator">"A" 2nd Assistant Camera Operator</option>
+                    <option value="B Camera Operator">"B" Camera Operator</option>
+                    <option value="B 1st Assistant Camera Operator">"B" 1st Assistant Camera Operator</option>
+                    <option value="B 2nd Assistant Camera Operator">"B" 2nd Assistant Camera Operator</option>
+                    <option value="Gaffer">Gaffer</option>
+                    <option value="Best Boy Electric">Best Boy Electric</option>
+                    <option value="Key Grip">Key Grip</option>
+                    <option value="Best Boy Grip">Best Boy Grip</option>
+                    <option value="Grip">Grip</option>
+                    <option value="Swing">Swing</option>
+                    <option value="Sound Mixer">Sound Mixer</option>
+                    <option value="Sound Operator">Sound Operator</option>
+                    <option value="Boom Operator">Boom Operator</option>
+                    <option value="Playback Operator">Playback Operator</option>
+                    <option value="Photographer">Photographer</option>
+                    <option value="Script Supervisor">Script Supervisor</option>
+                    <option value="Production Assistant">Production Assistant</option>
+                    <option value="Production Coordinator">Production Coordinator</option>
+                    <option value="Digital Imaging Technician">Digital Imaging Technician</option>
+                    <option value="Make Up Artist">Make Up Artist</option>
+                    <option value="Assistant Make Up Artist">Assistant Make Up Artist</option>
+                    <option value="Set Designer">Set Designer</option>
+                    <option value="Set Production Assistant">Set Production Assistant</option>
+                    <option value="Creative Director">Creative Director</option>
+                    <option value="Account Director">Account Director</option>
+                  </select>
+          <p class="production-margin" ng-show="crew.offer.position"> {{crew.offer.position}}</p>
+        </div></td>
+
+        <!-- Offer Rate $$$ -->
+        <td class="col-md-1 container align-left"><div ng-if="productionCtrl.isProducer">
+          <input ng-hide="crew.offer.rate" class="production-input form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].rate" placeholder="Rate" required></input>
+          <p class="production-margin" ng-show="crew.offer.rate"> {{ crew.offer.rate | currency:"$":0}} </p>
+        </div></td>
+
+        <!-- Hours -->
+        <td class="col-md-1 container align-left"><div>
+          <input ng-hide="crew.offer.hours" class="production-input form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].hours" placeholder="Hours" required></input>
+          <p class="production-margin" ng-show="crew.offer.hours"> {{ crew.offer.hours }} hour<span ng-if="crew.offer.hours != 1">s</span> </p>
+        </div></td>
+
+        <!-- Buttons -->
+        <td class="container align-right col-md-3"><div ng-if="productionCtrl.isProducer">
+          <a ng-if="crew.offer.status === 'None'" ng-click="productionCtrl.makeOffer(crew._id, $index)" class="btn main-btn production-margin">Hire</a>
+          <a ng-if="crew.offer.status === 'Pending'" class="btn approval-btn remove-btn-hover production-margin">Pending</a>
+          <a ng-if="crew.offer.status === 'Declined'" class="btn error-btn remove-btn-hover production-margin">Declined</a>
+          <a ng-if="crew.offer.status === 'Accepted'"  class="btn approval-alt-btn remove-btn-hover production-margin">Hired</a>
+          <a ng-if="crew.offer.status === 'Pending' || crew.offer.status === 'Accepted' || crew.offer.status === 'Declined'" href="/#/offer/{{crew._id}}" class="btn default-btn production-margin">View Offer</a>
+          <a class="production-margin align-right x-button" ng-if="productionCtrl.compareDate(productionCtrl.production.date)" ng-click="productionCtrl.openDeleteContactModal(crew._id)"><i class="fa fa-times"></i></a>
+        </div></td>
+      </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
 </div>
 
 <div id="modal-root" ng-show="productionCtrl.showModal">
@@ -297,9 +416,24 @@
       <div class="padding20 text-center">
         <textarea id="custom-message" cols="60" rows="10"></textarea>
         <p style="font-size: 11px">Message to everyone in this production</p>
-        <p id="message-buttons">
+        <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeNotifyCrewModal()">Cancel</button>
           <button class="btn approval-btn" ng-click="productionCtrl.notifyCrew()">Send</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionCtrl.departmentModal.show">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <h4>Department Title</h4>
+        <input id="department-title" type="text">
+        <p class="message-buttons">
+          <button class="btn btn-danger" ng-click="productionCtrl.closeDepartmentModal()">Cancel</button>
+          <button class="btn main-btn" ng-click="productionCtrl.createDepartment()">Create</button>
         </p>
       </div>
     </div>

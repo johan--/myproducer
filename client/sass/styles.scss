@@ -644,6 +644,15 @@ table td {
   min-width: 90px;
 }
 
+.production-department {
+  margin-top: 15px;
+  float: right;
+}
+
+#production-header {
+  height: 73px;
+}
+
 .production-margin {
   margin-top: 12px; }
 
@@ -1193,7 +1202,7 @@ img.profile {
   padding-bottom: 20px;
 }
 
-#message-buttons {
+.message-buttons {
   position: relative;
   top: 7px;
 }
@@ -1201,6 +1210,10 @@ img.profile {
 .production-btn {
   position: relative;
   top: 2px;
+}
+
+#department-title {
+  color: black;
 }
 
 .alert{
