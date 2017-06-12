@@ -52,6 +52,7 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     if(vm.message.content){
       $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
         .success(function(data) {
+          console.log(data);
           vm.crew.message = data
           vm.newMessage = ''
           vm.messageBox.focus()

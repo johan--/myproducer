@@ -1,11 +1,43 @@
 angular.module('myApp')
   .controller('productionController', productionController)
+  .directive('autocomplete', autocomplete)
 
-productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel']
+productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel', '$timeout', '$q', '$log']
+
+autocomplete.$inject = ['$rootScope', '$timeout', 'AuthService', '$http']
+
+function autocomplete($rootScope, $timeout, AuthService, $http){
+  var vm = this
+  AuthService.getUserStatus()
+    .then(function(data){
+      vm.currentUser = data.data.user
+      $http.get('/api/users/' + vm.currentUser._id + '/contacts')
+      .success(function(data){
+        vm.names = data.contacts.map(function(c){
+          return c.first_name + ' ' + c.last_name
+        })
+      })
+    })
+
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function(scope, iElement, iAttrs){
+      $(iElement).autocomplete({
+        source: vm.names,
+        select: function() {
+          $timeout(function(){
+            $(iElement).trigger('input')
+          }, 0)
+        }
+      })
+    }
+  }
+}
 
 // PRODUCTION CONTROLLER
 
-function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
+function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $timeout, $q, $log){
   var vm = this
   vm.offers = []
   vm.currentUser = {}
@@ -57,6 +89,10 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
+          $rootScope.contacts = vm.loadContacts()
+          vm.isDisabled = false
+          vm.simulateQuery = false
+
 
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
@@ -74,6 +110,47 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             })
         })
   })
+
+  vm.loadContacts = function(){
+    var allContacts = vm.currentUser.contacts
+    return allContacts.map(function(contact){
+      contact.display = contact.first_name + ' ' + contact.last_name
+      contact.value = contact.first_name.toLowerCase()
+      return contact
+    })
+  }
+
+  vm.newState = function(state) {
+  alert("Sorry! You'll need to create a Constitution for " + state + " first!");
+}
+
+  vm.querySearch = function(query) {
+    var results = query ? self.states.filter( createFilterFor(query) ) : self.states, deferred;
+      if (self.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {
+        return results;
+      }
+}
+
+  vm.searchTextChange = function(text) {
+  $log.info('Text changed to ' + text);
+  }
+
+  vm.selectedItemChange = function(item) {
+      $log.info('Item changed to ' + JSON.stringify(item));
+  }
+
+  vm.createFilterFor = function(query) {
+  var lowercaseQuery = angular.lowercase(query);
+
+  return function filterFn(contact) {
+    return (contact.value.indexOf(lowercaseQuery) === 0);
+  };
+
+}
 
     vm.editProduction = function(){
       // if a location is deleted
@@ -134,13 +211,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           },
           department: departmentId
         }
-        // TODO this patches the offer, but somehow that doesn't reflect within the production object? Do we need to save the production as well on this patch?
-        // TODO: Please confirm if the issue above has been fixed. -Kevin
         $http.patch('api/crew/' + id, vm.offer)
           .success(function(data) {
-            // console.log(data);
-            // need to update the departments crew instead of productions
-
             for(var i=0; i<vm.departments.length; i++){
               if(vm.departments[i]._id === data._id){
                 vm.departments[i] = data
@@ -154,18 +226,19 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             // vm.production.crew[$index].offer.rate = data.offer.rate
             // vm.production.crew[$index].offer.status = data.offer.status
 
-            vm.message = {
-                content : 'I would like to invite you to be part of my production team.'
-            }
+            // vm.message = {
+            //     content : 'I would like to invite you to be part of my production team.'
+            // }
+            //
+            // if(vm.message.content){
+            //   $http.post('/api/crew/' + id + '/message', vm.message)
+            //     .success(function(data) {
+            //       console.log(data);
+            //       // console.log(data);
+            //     })
+            // }
 
-            if(vm.message.content){
-              $http.post('/api/crew/' + id + '/message', vm.message)
-                .success(function(data) {
-                  // console.log(data);
-                })
-            }
-
-            $mixpanel.track('Hire Clicked', {"user" : vm.currentUser.username})
+            // $mixpanel.track('Hire Clicked', {"user" : vm.currentUser.username})
 
           })
           .error(function(data) {
@@ -206,6 +279,20 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           // vm.openNotifModal()
         })
     }
+
+    vm.getNumber = function(num){
+      return new Array(num)
+    }
+
+    vm.assignRoleUsers = function(){
+      vm.roleNumber = Number(vm.roleNumber)
+
+
+      // make strips with that role and number of positions
+
+    }
+
+
 
     vm.removeFromCrew = function(crew, departmentId) {
       const deleteData = {

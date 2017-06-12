@@ -211,7 +211,7 @@
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer" class="align-right title">
           <!-- <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Department</a> -->
-          <a class="btn contact-btn production-btn" ng-click="productionCtrl.openTaskModal()">+ Contact</a>
+          <a class="btn contact-btn production-btn" ng-click="productionCtrl.openTaskModal()">+ Role</a>
           <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal(department._id)">+ Offer</a>
         </div>
       </div>
@@ -454,16 +454,43 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
-        <h4>Assignment</h4>
-        <input id="task-title" style="color: black" type="text">
-        <h4># of positions</h4>
-        <select id="task-select" style="color: black">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
+        <p> Role
+          <input id="task-title" style="color: black" type="text">
+        </p>
+        <p> # of positions
+          <select ng-model="productionCtrl.roleNumber" ng-change="productionCtrl.assignRoleUsers()" id="task-select" style="color: black">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </p>
+        <p ng-if="productionCtrl.roleNumber" ng-repeat="i in productionCtrl.getNumber(productionCtrl.roleNumber) track by $index">
+          Assign to <input autocomplete ng-model="selectedContact" style="color: black">
+          <!-- <select style="color: black;">
+            <option ng-repeat="crew in productionCtrl.currentUser.contacts track by $index" value="crew._id">{{crew.first_name}} {{crew.last_name}}</option>
+          </select> -->
+
+          <!-- <md-content>
+            <form ng-submit="$event.preventDefault()">
+            <input md-autcomplete
+              ng-disabled="productionCtrl.isDisabled"
+              md-no-cache="productionCtrl.noCache"
+              md-selected-item="productionCtrl.selectedItem"
+              md-search-text-change="productionCtrl.searchTextChange(productionCtrl.searchText)"
+              md-search-text="productionCtrl.searchText"
+              md-selected-item-change="productionCtrl.selectedItemChange(item)"
+              md-items="item in productionCtrl.querySearch(productionCtrl.searchText)"
+              md-item-text="item.display"
+              md-min-length="0">
+              <md-item-template>
+                <span md-highlight-text="productionCtrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+              </md-item-template>
+            </input md-autcomplete>
+          </form>
+        </md-content> -->
+        </p>
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeTaskModal()">Cancel</button>
           <button class="btn main-btn" ng-click="productionCtrl.createTask()">Create</button>
