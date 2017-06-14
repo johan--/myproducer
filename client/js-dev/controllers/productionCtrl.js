@@ -8,6 +8,8 @@ autocomplete.$inject = ['$rootScope', '$timeout', 'AuthService', '$http']
 
 function autocomplete($rootScope, $timeout, AuthService, $http){
   var vm = this
+  vm.editingState = false
+  $rootScope.contactsChosenIds = []
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
@@ -15,8 +17,8 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
       .success(function(data){
         vm.contacts = data.contacts.map(function(c){
           return {
-            display: c.first_name + ' ' + c.last_name,
-            id: c._id
+            label: c.first_name + ' ' + c.last_name,
+            value: c._id
           }
         })
       })
@@ -27,12 +29,26 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
     require: 'ngModel',
     link: function(scope, iElement, iAttrs){
       $(iElement).autocomplete({
-        source: vm.contacts.map(function(n){
-          return n.display
-        }),
-        select: function() {
-          // console.log(vm.contacts);
-          // console.log($(iElement));
+        source: vm.contacts,
+        select: function(evt, ui) {
+          var target = $(evt.target)
+          target.css('display', 'none')
+          // after choosing a contact
+          vm.editingState = true
+          var newLi = $('<li></li>')
+          var pencil = $('<i></i>')
+          pencil.addClass('fa')
+          pencil.addClass('fa-pencil')
+
+          newLi.text(ui.item.label)
+          newLi.append(pencil)
+          pencil.on('click', function(){
+            $(this).parent().css('display', 'none')
+            target.css('display', 'inline-block')
+            target.val($(this).parent().text())
+          })
+
+          $('#role-ul').append(newLi)
           $timeout(function(){
             $(iElement).trigger('input')
           }, 0)
@@ -378,6 +394,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
     vm.createRole = function(){
       // console.log($('.contact-input'));
+      console.log($rootScope.contacts);
 
       const
         position = $('#task-title').val(),
@@ -389,7 +406,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             production: $stateParams.id,
             department: vm.departmentId,
             contactName: $('#' + i).val()
-            // contactId
+            // contactId: $rootScope.roles[i] ?
           }
 
           $http.post('/api/productions/newrole', roleData)

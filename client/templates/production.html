@@ -485,8 +485,12 @@
             <option value="5">5</option>
           </select>
         </p>
+        <p>
+          <ul id="role-ul"></ul>
+        </p>
         <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index">
-          Assign to <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black">
+          <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black" placeholder="Assign to">
+
         </p>
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
