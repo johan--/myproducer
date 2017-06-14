@@ -211,13 +211,32 @@
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer" class="align-right title">
           <!-- <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Department</a> -->
-          <a class="btn contact-btn production-btn" ng-click="productionCtrl.openTaskModal()">+ Role</a>
+          <a class="btn contact-btn production-btn" ng-click="productionCtrl.openRoleModal(department._id)">+ Role</a>
           <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal(department._id)">+ Offer</a>
         </div>
       </div>
     </div>
 
         <!-------------------- -------------------------->
+
+  <div ng-if="productionCtrl.roles.length > 0" ng-repeat="role in department.roles">
+    <div class="other-background">
+      <table class="table table-condensed">
+        <tbody>
+          <tr>
+            <div class="other-background container-fluid">
+              <td class="container col-md-6">
+                <p>{{role.position}}</p>
+              </td>
+              <td class="container col-md-6">
+                <button class="btn main-btn">Edit</button>
+              </td>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <div class="other-background" ng-repeat="crew in department.crew track by $index" ng-if="crew.active && ((productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
     <table class="table table-condensed">
@@ -450,7 +469,7 @@
   </div>
 </div>
 
-<div id="modal-root" ng-if="productionCtrl.taskModal.show">
+<div id="modal-root" ng-if="productionCtrl.roleModal.show">
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
@@ -466,34 +485,12 @@
             <option value="5">5</option>
           </select>
         </p>
-        <p ng-if="productionCtrl.roleNumber" ng-repeat="i in productionCtrl.getNumber(productionCtrl.roleNumber) track by $index">
-          Assign to <input autocomplete ng-model="selectedContact" style="color: black">
-          <!-- <select style="color: black;">
-            <option ng-repeat="crew in productionCtrl.currentUser.contacts track by $index" value="crew._id">{{crew.first_name}} {{crew.last_name}}</option>
-          </select> -->
-
-          <!-- <md-content>
-            <form ng-submit="$event.preventDefault()">
-            <input md-autcomplete
-              ng-disabled="productionCtrl.isDisabled"
-              md-no-cache="productionCtrl.noCache"
-              md-selected-item="productionCtrl.selectedItem"
-              md-search-text-change="productionCtrl.searchTextChange(productionCtrl.searchText)"
-              md-search-text="productionCtrl.searchText"
-              md-selected-item-change="productionCtrl.selectedItemChange(item)"
-              md-items="item in productionCtrl.querySearch(productionCtrl.searchText)"
-              md-item-text="item.display"
-              md-min-length="0">
-              <md-item-template>
-                <span md-highlight-text="productionCtrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-              </md-item-template>
-            </input md-autcomplete>
-          </form>
-        </md-content> -->
+        <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index">
+          Assign to <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black">
         </p>
         <p class="message-buttons">
-          <button class="btn btn-danger" ng-click="productionCtrl.closeTaskModal()">Cancel</button>
-          <button class="btn main-btn" ng-click="productionCtrl.createTask()">Create</button>
+          <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
+          <button class="btn main-btn" ng-click="productionCtrl.createRole()">Create</button>
         </p>
       </div>
     </div>

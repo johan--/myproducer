@@ -8,7 +8,7 @@ var mailer = require('../nodemailer/mailer.js')
 // MODELS
 
 var Production = require('../models/Production.js')
-var Task = require('../models/Task.js')
+var Role = require('../models/Role.js')
 var Department = require('../models/Department.js')
 var Tag = require('../models/Tag.js')
 // PRODUCTION ROUTES
@@ -79,7 +79,13 @@ router.post('/', function(req, res){
 
 // see one specific production
 router.get('/:id', function show(req, res){
-  Production.findById(req.params.id).populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'by_', select: 'username first_name last_name'}).populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}}).populate({path: 'departments', populate: {path: 'production', populate: {path: 'crew', populate: {path: 'to'}}}}).exec(function(err, production) {
+  Production.findById(req.params.id)
+  .populate({path: 'crew', populate: {path: 'to'}})
+  .populate({path: 'by_', select: 'username first_name last_name'})
+  .populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}})
+  .populate({path: 'departments', populate: {path: 'production', populate: {path: 'crew', populate: {path: 'to'}}}})
+  .populate({path: 'departments', populate: {path: 'roles'}})
+  .exec(function(err, production) {
     if(err) return console.log(err)
 
     if(production.active) {
@@ -161,21 +167,52 @@ router.post('/newdepartment', function(req,res){
   })
 })
 
-router.post('/newtask', function(req,res){
-  console.log('making new task');
-  Task.create({position: req.body.position, production: req.body.production, _creator: req.user._id}, function(err, task){
-    if(err) return console.log(err);
-    Production.findById(req.body.production, function(err, production){
-      if(err) return console.log(err);
-      console.log(production);
-      production.tasks.push(task._id)
-      production.populate({path: 'tasks'}, function(err, populatedProduction){
-        if(err) return console.log(err);
-        res.json(populatedProduction)
-      })
+router.post('/newrole', function(req,res){
+  // if(req.body.contactName == ''){
+  //   console.log('no contact name');
+  //   // make an empty Task
+  // } else {
+  //   console.log('contact name: ', req.body.contactName);
+  //   // User.find
+  // }
 
-    })
+  Department.findById(req.body.department, function(err, department){
+    if(err) return console.log(err);
+      Role.create({position: req.body.position, _creator: req.user._id}, function(err,role){
+        if(err) return console.log(err);
+        department.roles.push(role._id)
+        department.save(function(err, savedDepartment){
+          if(err) return console.log(err);
+          savedDepartment.populate({path: 'roles'}, function(err, populatedDepartment){
+            if(err) return console.log(err);
+            console.log(populatedDepartment);
+          })
+        })
+      })
+  //
+  // Production.findById(req.params.id, function(err, production){
+  //   if(err) return console.log(err);
+  //     production.roles.push(role._id)
+  //     production.save(function(err,savedProduction){
+  //       if(err) return console.log(err);
+  //       res.json(savedProduction)
+  //     })
+  //   })
   })
+
 })
+
+//   Role.create({position: req.body.position, production: req.body.production, _creator: req.user._id}, function(err, role){
+//     if(err) return console.log(err);
+//     Production.findById(req.body.production, function(err, production){
+//       if(err) return console.log(err);
+//       production.roles.push(role._id)
+//       production.populate({path: 'roles'}, function(err, populatedProduction){
+//         if(err) return console.log(err);
+//         res.json(populatedProduction)
+//       })
+//     })
+//   })
+// })
 
 module.exports = router

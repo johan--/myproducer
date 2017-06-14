@@ -13,8 +13,11 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
       vm.currentUser = data.data.user
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
       .success(function(data){
-        vm.names = data.contacts.map(function(c){
-          return c.first_name + ' ' + c.last_name
+        vm.contacts = data.contacts.map(function(c){
+          return {
+            display: c.first_name + ' ' + c.last_name,
+            id: c._id
+          }
         })
       })
     })
@@ -24,8 +27,12 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
     require: 'ngModel',
     link: function(scope, iElement, iAttrs){
       $(iElement).autocomplete({
-        source: vm.names,
+        source: vm.contacts.map(function(n){
+          return n.display
+        }),
         select: function() {
+          // console.log(vm.contacts);
+          // console.log($(iElement));
           $timeout(function(){
             $(iElement).trigger('input')
           }, 0)
@@ -47,7 +54,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   vm.notifModal = {}
   vm.notifyCrewModal = {}
   vm.departmentModal = {}
-  vm.taskModal = {}
+  vm.roleModal = {}
   vm.editingState = false
   vm.googleLocation1 = ''
   vm.googleLocation2 = ''
@@ -85,72 +92,24 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
-      // console.log(data.data.user)
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
-          $rootScope.contacts = vm.loadContacts()
-          vm.isDisabled = false
-          vm.simulateQuery = false
-
 
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
-              // console.log(production);
               vm.production = production
               vm.departments = production.departments
-              // console.log(vm.departments);
-              // console.log(vm.production);
-              // console.log("Production from the Factory", vm.production)
-              // splitNotes(production.notes)
-
+              var roles = vm.departments.map(function(d){
+                return d.roles
+              })
+              vm.roles = roles[0]
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
 
               vm.ready = true
             })
         })
   })
-
-  vm.loadContacts = function(){
-    var allContacts = vm.currentUser.contacts
-    return allContacts.map(function(contact){
-      contact.display = contact.first_name + ' ' + contact.last_name
-      contact.value = contact.first_name.toLowerCase()
-      return contact
-    })
-  }
-
-  vm.newState = function(state) {
-  alert("Sorry! You'll need to create a Constitution for " + state + " first!");
-}
-
-  vm.querySearch = function(query) {
-    var results = query ? self.states.filter( createFilterFor(query) ) : self.states, deferred;
-      if (self.simulateQuery) {
-        deferred = $q.defer();
-        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-        return deferred.promise;
-      } else {
-        return results;
-      }
-}
-
-  vm.searchTextChange = function(text) {
-  $log.info('Text changed to ' + text);
-  }
-
-  vm.selectedItemChange = function(item) {
-      $log.info('Item changed to ' + JSON.stringify(item));
-  }
-
-  vm.createFilterFor = function(query) {
-  var lowercaseQuery = angular.lowercase(query);
-
-  return function filterFn(contact) {
-    return (contact.value.indexOf(lowercaseQuery) === 0);
-  };
-
-}
 
     vm.editProduction = function(){
       // if a location is deleted
@@ -285,11 +244,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.assignRoleUsers = function(){
-      vm.roleNumber = Number(vm.roleNumber)
-
-
-      // make strips with that role and number of positions
-
+      vm.number = Number(vm.roleNumber)
     }
 
 
@@ -421,30 +376,37 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         })
     }
 
-    vm.createTask = function(){
+    vm.createRole = function(){
+      // console.log($('.contact-input'));
+
       const
-        position = $('#task-title').val()
-        count = parseInt($('#task-select').val()),
-        taskData = {
-          position: position,
-          production: $stateParams.id
-        }
+        position = $('#task-title').val(),
+        count = parseInt($('#task-select').val())
 
         for(var i=0; i<count; i++){
-          $http.post('/api/productions/newtask', taskData)
+          const roleData = {
+            position: position,
+            production: $stateParams.id,
+            department: vm.departmentId,
+            contactName: $('#' + i).val()
+            // contactId
+          }
+
+          $http.post('/api/productions/newrole', roleData)
             .success(function(data){
-              console.log(data);
+              vm.roles = data.roles
+              vm.closeRoleModal()
             })
         }
-
     }
 
-    vm.openTaskModal = function(){
-      vm.taskModal.show = true
+    vm.openRoleModal = function(id){
+      vm.departmentId = id
+      vm.roleModal.show = true
     }
 
-    vm.closeTaskModal = function(){
-      vm.taskModal.show = false
+    vm.closeRoleModal = function(){
+      vm.roleModal.show = false
     }
 
     vm.openDepartmentModal = function(){
