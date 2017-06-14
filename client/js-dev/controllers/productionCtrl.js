@@ -35,20 +35,20 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
           target.css('display', 'none')
           // after choosing a contact
           vm.editingState = true
-          var newLi = $('<li></li>')
+          var newP = $('<p></p>')
           var pencil = $('<i></i>')
           pencil.addClass('fa')
           pencil.addClass('fa-pencil')
 
-          newLi.text(ui.item.label)
-          newLi.append(pencil)
+          newP.text(ui.item.label)
+          newP.append(pencil)
           pencil.on('click', function(){
             $(this).parent().css('display', 'none')
             target.css('display', 'inline-block')
             target.val($(this).parent().text())
           })
 
-          $('#role-ul').append(newLi)
+          $('#role-list').append(newP)
           $timeout(function(){
             $(iElement).trigger('input')
           }, 0)

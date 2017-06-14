@@ -485,9 +485,7 @@
             <option value="5">5</option>
           </select>
         </p>
-        <p>
-          <ul id="role-ul"></ul>
-        </p>
+        <div id="role-list"></div>
         <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index">
           <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black" placeholder="Assign to">
 
