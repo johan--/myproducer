@@ -63,7 +63,9 @@ router.post('/', function(req, res){
                   if(err) return console.log(err);
                   department.crew.push(crew)
                   department.save()
-                  department.populate({path: 'crew', populate: {path: 'to'}}, function(err, populatedDepartment){
+                  department
+                    .populate({path: 'crew', populate: {path: 'to'}})
+                    .populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
                     if(err) return console.log(err);
                     res.json(populatedDepartment)
 
@@ -144,7 +146,9 @@ router.patch('/:id', function(req, res){
         department.crew[index] = crew
         department.save(function(err, newDepartment){
           if(err) return console.log(err);
-          newDepartment.populate({path: 'crew', populate: {path: 'to'}}, function(err, populatedDepartment){
+          newDepartment
+            .populate({path: 'crew', populate: {path: 'to'}})
+            .populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
             if(err) return console.log(err);
             res.json(populatedDepartment)
           })

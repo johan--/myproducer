@@ -125,7 +125,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               var roles = vm.departments.map(function(d){
                 return d.roles
               })
-              vm.roles = roles[0]
+              vm.roles = roles
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
 
               vm.ready = true
@@ -245,7 +245,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           for(var i=0; i<vm.departments.length; i++){
             if(vm.departments[i]._id === data._id){
               vm.departments[i] = data
-              vm.departments[i].crew = data.crew
+              // vm.departments[i].crew = data.crew
             }
           }
           vm.showModal = false

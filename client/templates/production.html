@@ -229,16 +229,15 @@
                 <img class="thumb round thumb-margin" src="./img/profile_default.png" ng-show="!role.user.picture">
                 <img class="thumb round thumb-margin" ng-show="role.user.picture" src="{{role.user.picture}}">
               </td>
-              <td class="container col-md-4">
+              <td class="container col-md-2">
                 <p>{{role.user.first_name}} {{role.user.last_name}}</p>
               </td>
-              <td ng-if="role.editing == false" class="container col-md-3">
+              <td ng-if="role.editing == false" class="container col-md-4">
                 <p>{{role.position}}</p>
               </td>
-              <td ng-if="role.editing == true">
-                <input style="color: black" ng-model="selectedContact" autocomplete>
-              </td>
-              <td class="container col-md-4" style="text-align: right;">
+              <td class="container col-md-1"></td>
+              <td class="container col-md-1"></td>
+              <td class="container col-md-3" style="text-align: right;">
                 <!-- <button ng-if="!role.user.first_name" class="btn main-btn" ng-click="productionCtrl.assignToRole(role, department._id)">Assign</button> -->
                 <a ng-click="productionCtrl.removeRole($index, role._id, department._id)"><i class="fa fa-times"></i></a>
               </td>
