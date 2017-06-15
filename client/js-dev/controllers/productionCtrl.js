@@ -8,7 +8,6 @@ autocomplete.$inject = ['$rootScope', '$timeout', 'AuthService', '$http']
 
 function autocomplete($rootScope, $timeout, AuthService, $http){
   var vm = this
-  vm.editingState = false
   $rootScope.contactsChosenIds = []
   AuthService.getUserStatus()
     .then(function(data){
@@ -31,21 +30,23 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
       $(iElement).autocomplete({
         source: vm.contacts,
         select: function(evt, ui) {
+          // after choosing a contact
+          $rootScope.contactsChosenIds.push(ui.item.value)
           var target = $(evt.target)
           target.css('display', 'none')
-          // after choosing a contact
-          vm.editingState = true
           var newP = $('<p></p>')
           var pencil = $('<i></i>')
           pencil.addClass('fa')
           pencil.addClass('fa-pencil')
-
           newP.text(ui.item.label)
           newP.append(pencil)
+
           pencil.on('click', function(){
             $(this).parent().css('display', 'none')
             target.css('display', 'inline-block')
             target.val($(this).parent().text())
+            var index = Number(target.attr('id'))
+            $rootScope.contactsChosenIds.splice(index, 1)
           })
 
           $('#role-list').append(newP)
@@ -74,6 +75,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   vm.editingState = false
   vm.googleLocation1 = ''
   vm.googleLocation2 = ''
+  vm.editingRole = false
 
   ////////////////// GOOGLE PLACES API ///////////////
 
@@ -393,28 +395,50 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.createRole = function(){
-      // console.log($('.contact-input'));
-      console.log($rootScope.contacts);
-
-      const
+      var
         position = $('#task-title').val(),
+        selectTag = $('#task-select'),
         count = parseInt($('#task-select').val())
 
         for(var i=0; i<count; i++){
-          const roleData = {
+          var roleData = {
             position: position,
-            production: $stateParams.id,
             department: vm.departmentId,
-            contactName: $('#' + i).val()
-            // contactId: $rootScope.roles[i] ?
+            contactId: $rootScope.contactsChosenIds[i]
           }
 
           $http.post('/api/productions/newrole', roleData)
             .success(function(data){
-              vm.roles = data.roles
+              for(var i=0; i<vm.departments.length; i++){
+                if(vm.departments[i]._id === vm.departmentId){
+                  vm.departments[i].roles = data.roles
+                }
+              }
+              $rootScope.contactsChosenIds = []
+              $state.go($state.current, {}, {reload: true})
               vm.closeRoleModal()
             })
         }
+    }
+
+    vm.removeRole = function(index, role, department){
+      const roleData = {
+        department: department,
+        role: role
+      }
+
+      $http.post('/api/productions/removeRole', roleData)
+        .success(function(data){
+          for(var i=0; i<vm.departments.length; i++){
+            if(vm.departments[i]._id === data._id){
+              vm.departments[i].roles = data.roles
+            }
+          }
+        })
+    }
+
+    vm.assignToRole = function(role, department){
+      role.editing = true
     }
 
     vm.openRoleModal = function(id){

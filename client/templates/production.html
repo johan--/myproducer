@@ -225,11 +225,18 @@
         <tbody>
           <tr>
             <div class="other-background container-fluid">
-              <td class="container col-md-6">
+              <td class="container col-md-4">
                 <p>{{role.position}}</p>
               </td>
-              <td class="container col-md-6">
-                <button class="btn main-btn">Edit</button>
+              <td ng-if="role.editing == false" class="container col-md-4">
+                <p>{{role.user.first_name}} {{role.user.last_name}}</p>
+              </td>
+              <td ng-if="role.editing == true">
+                <input style="color: black" autocomplete>
+              </td>
+              <td class="container col-md-4" style="text-align: right;">
+                <button ng-if="!role.user.first_name" class="btn main-btn" ng-click="productionCtrl.assignToRole(role, department._id)">Assign</button>
+                <a ng-click="productionCtrl.removeRole($index, role._id, department._id)"><i class="fa fa-times"></i></a>
               </td>
             </div>
           </tr>
@@ -488,7 +495,6 @@
         <div id="role-list"></div>
         <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index">
           <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black" placeholder="Assign to">
-
         </p>
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>

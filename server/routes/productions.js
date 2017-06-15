@@ -84,7 +84,7 @@ router.get('/:id', function show(req, res){
   .populate({path: 'by_', select: 'username first_name last_name'})
   .populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}})
   .populate({path: 'departments', populate: {path: 'production', populate: {path: 'crew', populate: {path: 'to'}}}})
-  .populate({path: 'departments', populate: {path: 'roles'}})
+  .populate({path: 'departments', populate: {path: 'roles', populate: {path: 'user'}}})
   .exec(function(err, production) {
     if(err) return console.log(err)
 
@@ -168,51 +168,33 @@ router.post('/newdepartment', function(req,res){
 })
 
 router.post('/newrole', function(req,res){
-  // if(req.body.contactName == ''){
-  //   console.log('no contact name');
-  //   // make an empty Task
-  // } else {
-  //   console.log('contact name: ', req.body.contactName);
-  //   // User.find
-  // }
-
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
-      Role.create({position: req.body.position, _creator: req.user._id}, function(err,role){
+      Role.create({position: req.body.position, _creator: req.user._id, user: req.body.contactId}, function(err,role){
         if(err) return console.log(err);
         department.roles.push(role._id)
         department.save(function(err, savedDepartment){
           if(err) return console.log(err);
-          savedDepartment.populate({path: 'roles'}, function(err, populatedDepartment){
+          savedDepartment.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
             if(err) return console.log(err);
-            console.log(populatedDepartment);
+            res.json(populatedDepartment)
           })
         })
       })
-  //
-  // Production.findById(req.params.id, function(err, production){
-  //   if(err) return console.log(err);
-  //     production.roles.push(role._id)
-  //     production.save(function(err,savedProduction){
-  //       if(err) return console.log(err);
-  //       res.json(savedProduction)
-  //     })
-  //   })
   })
-
 })
 
-//   Role.create({position: req.body.position, production: req.body.production, _creator: req.user._id}, function(err, role){
-//     if(err) return console.log(err);
-//     Production.findById(req.body.production, function(err, production){
-//       if(err) return console.log(err);
-//       production.roles.push(role._id)
-//       production.populate({path: 'roles'}, function(err, populatedProduction){
-//         if(err) return console.log(err);
-//         res.json(populatedProduction)
-//       })
-//     })
-//   })
-// })
+router.post('/removeRole', function(req,res){
+  Department.findById(req.body.department, function(err, department){
+    if(err) return console.log(err);
+    var index = department.roles.indexOf(req.body.role)
+    department.roles.splice(index, 1)
+    department.save()
+    department.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
+      if(err) return console.log(err);
+      res.json(populatedDepartment)
+    })
+  })
+})
 
 module.exports = router

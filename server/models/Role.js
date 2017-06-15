@@ -4,9 +4,10 @@ const
 
 Role = new Schema({
   position: String,
+  editing: {type: Boolean, default: false},
   _creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   production: {type: mongoose.Schema.Types.ObjectId, ref: 'Production'},
-  crew: {type: mongoose.Schema.Types.ObjectId, ref: 'Crew'}
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 })
 
 module.exports = mongoose.model('Role', Role)
