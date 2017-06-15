@@ -71,11 +71,15 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   vm.notifModal = {}
   vm.notifyCrewModal = {}
   vm.departmentModal = {}
-  vm.roleModal = {}
+  vm.roleModal = {
+    error: false,
+    errorContent: ''
+  }
   vm.editingState = false
   vm.googleLocation1 = ''
   vm.googleLocation2 = ''
   vm.editingRole = false
+  vm.number = 1
 
   ////////////////// GOOGLE PLACES API ///////////////
 
@@ -400,7 +404,21 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         selectTag = $('#task-select'),
         count = parseInt($('#task-select').val())
 
+        // input validation
+        if(position == ''){
+          return vm.roleModal.errorContent = 'Please enter a role title to proceed'
+        } else if(isNaN(count)){
+          return vm.roleModal.errorContent = 'Please choose number of positions'
+        }
+
+        // if validation passes, make role
         for(var i=0; i<count; i++){
+          // more validation for assign to input field
+          if($('#' + i).val() == ''){
+            return vm.roleModal.errorContent = 'Please assign a contact to this role'
+          }
+
+
           var roleData = {
             position: position,
             department: vm.departmentId,
@@ -442,6 +460,9 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.openRoleModal = function(id){
+      setTimeout(function(){
+        $('#task-select')[0].options[1].defaultSelected = true
+      }, 100)
       vm.departmentId = id
       vm.roleModal.show = true
     }

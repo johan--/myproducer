@@ -225,17 +225,21 @@
         <tbody>
           <tr>
             <div class="other-background container-fluid">
-              <td class="container col-md-4">
-                <p>{{role.position}}</p>
+              <td class="contaier col-md-1">
+                <img class="thumb round thumb-margin" src="./img/profile_default.png" ng-show="!role.user.picture">
+                <img class="thumb round thumb-margin" ng-show="role.user.picture" src="{{role.user.picture}}">
               </td>
-              <td ng-if="role.editing == false" class="container col-md-4">
+              <td class="container col-md-4">
                 <p>{{role.user.first_name}} {{role.user.last_name}}</p>
               </td>
+              <td ng-if="role.editing == false" class="container col-md-3">
+                <p>{{role.position}}</p>
+              </td>
               <td ng-if="role.editing == true">
-                <input style="color: black" autocomplete>
+                <input style="color: black" ng-model="selectedContact" autocomplete>
               </td>
               <td class="container col-md-4" style="text-align: right;">
-                <button ng-if="!role.user.first_name" class="btn main-btn" ng-click="productionCtrl.assignToRole(role, department._id)">Assign</button>
+                <!-- <button ng-if="!role.user.first_name" class="btn main-btn" ng-click="productionCtrl.assignToRole(role, department._id)">Assign</button> -->
                 <a ng-click="productionCtrl.removeRole($index, role._id, department._id)"><i class="fa fa-times"></i></a>
               </td>
             </div>
@@ -480,6 +484,7 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
+        <div ng-if="productionCtrl.roleModal.errorContent" class="alert alert-danger">{{productionCtrl.roleModal.errorContent}}</div>
         <p> Role
           <input id="task-title" style="color: black" type="text">
         </p>
