@@ -71,6 +71,7 @@ function postController($rootScope, $http, $stateParams, $state, AuthService, $s
 
 // when a user chooses a picture to upload
 $scope.file_changed = function(element) {
+  vm.imageFile = element.files[0]
   document.getElementById('profile-pic-preview').src = URL.createObjectURL(element.files[0]);
   vm.showSaveButton = false;
 };
@@ -243,8 +244,9 @@ vm.deleteResume = function() {
    start upload procedure by asking for a signed request from the app.
   */
   vm.initUpload = function(){
-    var files = document.getElementById('file-input').files;
-    file = files[0];
+    // console.log('init upload');
+    var file = vm.imageFile
+    // console.log(file);
     file.randomName = vm.currentUser._id + "." + file.name.split('.').pop()
     if(file == null){
       return alert('No file selected.');
@@ -258,6 +260,7 @@ vm.deleteResume = function() {
     request.
   */
   vm.getSignedRequest = function (file){
+    console.log('getting signed request');
     const xhr = new XMLHttpRequest();
     xhr.open('GET', '/uploads/sign-s3?file-name='+ file.randomName+ '&file-type=' + file.type);
     // xhr.open('GET', '/uploads/test')
