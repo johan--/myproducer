@@ -113,7 +113,7 @@
               </td>
               <!-- Name -->
               <td class="container col-md-2">
-                <p class="production-margin">{{role.user.first_name}} {{role.user.last_name}}</p>
+                <a target="_blank" href="/#/profile/{{role.user._id}}" id="production-crew-link" class="production-margin">{{role.user.first_name}} {{role.user.last_name}}</a>
               </td>
               <!-- Role Title -->
               <td ng-if="role.editing == false" class="container col-md-4">
@@ -154,7 +154,8 @@
 
         <!-- Select/Show Role-->
         <td class="container col-md-4 align-left"><div class="dropdown">
-          <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
+          <input type="text" ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" placeholder="Role" required>
+          <!-- <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
                     <option value="Actor">Actor</option>
                     <option value="Actress">Actress</option>
                     <option value="Extra">Extra</option>
@@ -180,7 +181,7 @@
                     <option value="Camera Operator">Camera Operator</option>
                     <option value="Steadicam Operator">Steadicam Operator</option>
                     <option value="Jib / Crane Operator">Jib / Crane Operator</option>
-                    <option value="Ronin / Movi Operator">Ronin / Movi Operator</option>
+                    <option value="Ronin / Movie Operator">Ronin / Movie Operator</option>
                     <option value="Drone Operator">Drone Operator</option>
                     <option value="Drone Assistant">Drone Assistant</option>
                     <option value="1st Assistant Camera Operator">1st Assistant Camera Operator</option>
@@ -212,7 +213,7 @@
                     <option value="Set Production Assistant">Set Production Assistant</option>
                     <option value="Creative Director">Creative Director</option>
                     <option value="Account Director">Account Director</option>
-                  </select>
+                  </select> -->
           <p class="production-margin" ng-show="crew.offer.position"> {{crew.offer.position}}</p>
         </div></td>
 

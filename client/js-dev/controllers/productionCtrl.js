@@ -182,7 +182,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         vm.errorMessage = "Please Provide Hours"
       } else {
         var newOffer = vm.offers[$index]
-
+        
         // setup offer object to send to back end
         vm.offer = {
           offer : {
