@@ -760,8 +760,7 @@ table td {
 }
 
 .line-item.chosen{
-  background-color: lightgrey;
-  opacity: 0.5;
+  background-color: $highlight;
 }
 
 .line-item:last-of-type {

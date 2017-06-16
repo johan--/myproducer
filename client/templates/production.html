@@ -137,6 +137,8 @@
     </div>
   </div>
 
+                    <!-- Offer strips -->
+
   <div class="other-background" ng-repeat="crew in department.crew track by $index" ng-if="crew.active && ((productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
     <table class="table table-condensed">
       <tbody>
@@ -242,7 +244,7 @@
 </div>
 </div>
 
-                            <!-- end department table -->
+                      <!-- end department table -->
 
 </div>
 
@@ -375,7 +377,7 @@
       <div class="padding20 text-center">
         <div ng-if="productionCtrl.roleModal.errorContent" class="alert alert-danger">{{productionCtrl.roleModal.errorContent}}</div>
         <p>
-          <input id="task-title" style="color: black" type="text" placeholder="Role">
+          <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
         </p>
         <p> # of positions
           <select ng-model="productionCtrl.roleNumber" ng-change="productionCtrl.assignRoleUsers()" id="task-select" style="color: black">
@@ -388,11 +390,11 @@
         </p>
         <div id="role-list"></div>
         <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index">
-          <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black" placeholder="Assign to">
+          <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">
         </p>
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
-          <button class="btn main-btn" ng-click="productionCtrl.createRole()">Create</button>
+          <button style="margin-bottom: 2px;" class="btn main-btn" ng-click="productionCtrl.createRole()">Create</button>
         </p>
       </div>
     </div>

@@ -606,8 +606,7 @@ table td {
     padding-bottom: 5px; }
 
 .line-item.chosen {
-  background-color: lightgrey;
-  opacity: 0.5; }
+  background-color: #00AEEF; }
 
 .line-item:last-of-type {
   margin-bottom: 0px; }

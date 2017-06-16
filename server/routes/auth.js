@@ -62,6 +62,7 @@ router.post('/register', function(req, res) {
         var toEmail = account.username
         var toName = account.first_name + ' '
 
+        console.log('sending welcome email');
         // send welcome email
         mailer.send(
           'welcome',
@@ -85,6 +86,7 @@ router.post('/register', function(req, res) {
       var toEmail = account.username
       var toName = account.first_name + ' '
 
+      console.log('sending welcome email');
       // send welcome email
       mailer.send(
         'welcome',

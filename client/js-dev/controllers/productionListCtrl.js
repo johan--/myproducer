@@ -66,7 +66,7 @@ angular.module('myApp')
 
                   $http.patch('/api/tag/addproduction', tagData)
                   .success(function(data){
-                    console.log(data);
+                    console.log('successfully added');
                   })
                 })
 
@@ -87,7 +87,7 @@ angular.module('myApp')
 
                     $http.patch('/api/tag/addproduction', tagData)
                       .success(function(data){
-                        console.log(data);
+                        console.log('successfully added');
                       })
                   } else {
                       var productionGroupModal = $('#directive-modal')

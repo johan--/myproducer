@@ -127,7 +127,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               })
               vm.roles = roles
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
-
               vm.ready = true
             })
         })
@@ -168,6 +167,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.makeOffer = function(id, $index, departmentId) {
+      // offer validation
       if(!vm.offers[$index]){
         vm.error = true
         vm.errorMessage = "Please Fill Out Entire Offer"
@@ -183,6 +183,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       } else {
         var newOffer = vm.offers[$index]
 
+        // setup offer object to send to back end
         vm.offer = {
           offer : {
             status : 'Pending',
@@ -192,6 +193,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           },
           department: departmentId
         }
+
         $http.patch('api/crew/' + id, vm.offer)
           .success(function(data) {
             for(var i=0; i<vm.departments.length; i++){
@@ -201,26 +203,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
                 vm.notifModal.content = 'You have successfully sent on offer to ' + vm.departments[i].crew[$index].to.username + '.'
               }
             }
-
-            // vm.production.crew[$index].offer.hours = data.offer.hours
-            // vm.production.crew[$index].offer.position = data.offer.position
-            // vm.production.crew[$index].offer.rate = data.offer.rate
-            // vm.production.crew[$index].offer.status = data.offer.status
-
-            // vm.message = {
-            //     content : 'I would like to invite you to be part of my production team.'
-            // }
-            //
-            // if(vm.message.content){
-            //   $http.post('/api/crew/' + id + '/message', vm.message)
-            //     .success(function(data) {
-            //       console.log(data);
-            //       // console.log(data);
-            //     })
-            // }
-
-            // $mixpanel.track('Hire Clicked', {"user" : vm.currentUser.username})
-
           })
           .error(function(data) {
             vm.notifModal.isFailure = true
@@ -233,6 +215,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       }
     }
 
+    // After clicking 'Add' on offer modal
     vm.addToCrew = function(id) {
       const departmentData = {
         crewId: id,
@@ -245,7 +228,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           for(var i=0; i<vm.departments.length; i++){
             if(vm.departments[i]._id === data._id){
               vm.departments[i] = data
-              // vm.departments[i].crew = data.crew
             }
           }
           vm.showModal = false
@@ -261,6 +243,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         })
     }
 
+    // to render 'Assign To' input fields based on the select tag option that is chosen
     vm.getNumber = function(num){
       return new Array(num)
     }
@@ -269,8 +252,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       vm.number = Number(vm.roleNumber)
     }
 
-
-
+    // after hitting 'Yes' in modal to remove offer
     vm.removeFromCrew = function(crew, departmentId) {
       const deleteData = {
         department: departmentId
@@ -336,7 +318,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       }
       $http.post('/api/productions/' + $stateParams.id + '/notify', emailData)
         .success(function(data) {
-          // console.log(data);
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully sent an email notification to your crew members.'
           vm.openNotifModal()
@@ -353,7 +334,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           vm.newContact.email = ''
           vm.newContact.first_name = ''
           vm.newContact.last_name = ''
-          // console.log(data);
           $mixpanel.track('Add Contact Clicked', {"user" : vm.currentUser.username})
 
           if(data) {
@@ -407,17 +387,13 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         // input validation
         if(position == ''){
           return vm.roleModal.errorContent = 'Please enter a role title to proceed'
-        } else if(isNaN(count)){
-          return vm.roleModal.errorContent = 'Please choose number of positions'
         }
 
-        // if validation passes, make role
         for(var i=0; i<count; i++){
           // more validation for assign to input field
           if($('#' + i).val() == ''){
             return vm.roleModal.errorContent = 'Please assign a contact to this role'
           }
-
 
           var roleData = {
             position: position,
@@ -455,6 +431,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         })
     }
 
+    // TODO next step with roles
     vm.assignToRole = function(role, department){
       role.editing = true
     }
