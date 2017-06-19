@@ -123,12 +123,19 @@
               <td class="container col-md-4">
                 <p class="production-margin">{{role.position}}</p>
               </td>
-              <!-- empty columns for alignment -->
+              <!-- Rate -->
               <td class="container col-md-1">
-                <p class="production-margin">${{role.rate}}</p>
+                <p ng-show="role.rate" class="production-margin">
+                  ${{role.rate}} /
+                  <span ng-if="role.basis == 'Hourly' ">hr</span>
+                  <span ng-if="role.basis == 'Daily' ">day</span>
+                  <span ng-if="role.basis == 'Weekly' ">wk</span>
+                  <span ng-if="role.basis == 'Monthly' ">mo</span>
+                </p>
               </td>
+              <!-- Hours -->
               <td class="container col-md-1">
-                <p class="production-margin">{{role.hours}} hour<span ng-if="role.hours != 1">s</span></p>
+                <p ng-show="role.hours" class="production-margin">{{role.hours}} hour<span ng-if="role.hours != 1">s</span></p>
               </td>
               <!-- Buttons -->
               <td class="container col-md-3" style="text-align: right;">
@@ -399,19 +406,20 @@
             <option value="5">5</option>
           </select>
         </p>
+        <p>
+          <input id="role-rate" type="text" style="color: black;" placeholder="Rate">
+        </p>
         <div id="role-list"></div>
         <p> Basis
           <select id="role-basis" style="color: black;" placeholder="Basis">
             <option value="Hourly">Hourly</option>
             <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
             <option value="Monthly">Monthly</option>
           </select>
         </p>
         <p>
-          <input id="role-rate" type="text" style="color: black;" placeholder="Rate">
-        </p>
-        <p>
-          <input id="role-hours" type="text" style="color: black;" placeholder="Hours">
+          <input id="role-hours" type="text" style="color: black;" placeholder="Total Hours">
         </p>
         <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index">
           <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">

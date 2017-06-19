@@ -126,6 +126,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
                 return d.roles
               })
               vm.roles = roles
+              console.log(vm.departments);
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
               vm.ready = true
             })
