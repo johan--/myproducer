@@ -394,8 +394,9 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         }
 
         for(var i=0; i<count; i++){
-          // more validation for assign to input field
-          if($('#' + i).val() == ''){
+          if($rootScope.contactsChosenIds.length != count){
+            return vm.roleModal.errorContent = 'Please assign a contact from your contact list'
+          } else if($('#' + i).val() == ''){
             return vm.roleModal.errorContent = 'Please assign a contact to this role'
           }
 
