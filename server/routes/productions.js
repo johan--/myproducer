@@ -170,7 +170,7 @@ router.post('/newdepartment', function(req,res){
 router.post('/newrole', function(req,res){
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
-      Role.create({position: req.body.position, _creator: req.user._id, user: req.body.contactId}, function(err,role){
+      Role.create({position: req.body.position, basis: req.body.basis, rate: req.body.rate, hours: req.body.hours, _creator: req.user._id, user: req.body.contactId}, function(err,role){
         if(err) return console.log(err);
         department.roles.push(role._id)
         department.save(function(err, savedDepartment){

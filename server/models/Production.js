@@ -11,6 +11,7 @@ var Production = new Schema({
   parking: String,
   date: Date,
   crewCall: Date,
+  sumif: String,
   crew: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   departments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Department'}],
   notes: String,

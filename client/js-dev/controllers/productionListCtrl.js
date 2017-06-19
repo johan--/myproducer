@@ -157,6 +157,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
+          // console.log(vm.currentUser.allProductions);
           vm.ready = true
         })
   })

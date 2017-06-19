@@ -182,7 +182,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         vm.errorMessage = "Please Provide Hours"
       } else {
         var newOffer = vm.offers[$index]
-        
+
         // setup offer object to send to back end
         vm.offer = {
           offer : {
@@ -381,8 +381,10 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     vm.createRole = function(){
       var
         position = $('#task-title').val(),
-        selectTag = $('#task-select'),
-        count = parseInt($('#task-select').val())
+        count = parseInt($('#task-select').val()),
+        basis = $('#role-basis').val(),
+        rate = $('#role-rate').val(),
+        hours = $('#role-hours').val()
 
         // input validation
         if(position == ''){
@@ -397,12 +399,16 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
           var roleData = {
             position: position,
+            basis: basis,
+            rate: rate,
+            hours: hours,
             department: vm.departmentId,
             contactId: $rootScope.contactsChosenIds[i]
           }
 
           $http.post('/api/productions/newrole', roleData)
             .success(function(data){
+              console.log(data);
               for(var i=0; i<vm.departments.length; i++){
                 if(vm.departments[i]._id === vm.departmentId){
                   vm.departments[i].roles = data.roles
