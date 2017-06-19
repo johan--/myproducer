@@ -33,6 +33,7 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
           // after choosing a contact
           $rootScope.contactsChosenIds.push(ui.item.value)
           var target = $(evt.target)
+          target.parent().css('display', 'none')
           target.css('display', 'none')
           var newP = $('<p></p>')
           var pencil = $('<i></i>')
@@ -44,6 +45,7 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
           pencil.on('click', function(){
             $(this).parent().css('display', 'none')
             target.css('display', 'inline-block')
+            target.parent().css('display', 'block')
             target.val($(this).parent().text())
             var index = Number(target.attr('id'))
             $rootScope.contactsChosenIds.splice(index, 1)
@@ -126,7 +128,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
                 return d.roles
               })
               vm.roles = roles
-              console.log(vm.departments);
               vm.isProducer = vm.production.by_._id === vm.currentUser._id
               vm.ready = true
             })

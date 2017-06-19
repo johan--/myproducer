@@ -394,8 +394,8 @@
     <div id="modal-md2" class="section">
       <div class="padding20 text-center">
         <div ng-if="productionCtrl.roleModal.errorContent" class="alert alert-danger">{{productionCtrl.roleModal.errorContent}}</div>
-        <p>
-          <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
+        <p style="position:relative; left: -1%;">
+          * <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
         </p>
         <p> # of positions
           <select ng-model="productionCtrl.roleNumber" ng-change="productionCtrl.assignRoleUsers()" id="task-select" style="color: black">
@@ -407,7 +407,7 @@
           </select>
         </p>
         <p>
-          <input id="role-rate" type="text" style="color: black;" placeholder="Rate">
+          <input id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Rate">
         </p>
         <div id="role-list"></div>
         <p> Basis
@@ -419,10 +419,10 @@
           </select>
         </p>
         <p>
-          <input id="role-hours" type="text" style="color: black;" placeholder="Total Hours">
+          <input id="role-hours" type="text" style="color: black; width: 50%;" placeholder="Total Hours">
         </p>
-        <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index">
-          <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">
+        <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index" style="position:relative; left: -1%;">
+          * <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">
         </p>
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
