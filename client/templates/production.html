@@ -120,11 +120,11 @@
                 <a target="_blank" href="/#/profile/{{role.user._id}}" id="production-crew-link" class="production-margin">{{role.user.first_name}} {{role.user.last_name}}</a>
               </td>
               <!-- Role Title -->
-              <td class="container col-md-4">
+              <td class="container col-md-3">
                 <p class="production-margin">{{role.position}}</p>
               </td>
               <!-- Rate -->
-              <td class="container col-md-1">
+              <td class="container col-md-2">
                 <p ng-show="role.rate" class="production-margin">
                   ${{role.rate}} /
                   <span ng-if="role.basis == 'Hourly' ">hr</span>
@@ -168,7 +168,7 @@
         <td class="container col-md-2"><a target="_blank" href="/#/profile/{{crew.to._id}}" id="production-crew-link" class="production-margin">{{crew.to.first_name + ' ' + crew.to.last_name || 'Crew Name'}}</a></td>
 
         <!-- Select/Show Role-->
-        <td class="container col-md-4 align-left"><div class="dropdown">
+        <td class="container col-md-3 align-left"><div class="dropdown">
           <input type="text" ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" placeholder="Role" required>
           <!-- <select ng-hide="crew.offer.position" class="form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].position" required>
                     <option value="Actor">Actor</option>
@@ -233,7 +233,7 @@
         </div></td>
 
         <!-- Offer Rate $$$ -->
-        <td class="col-md-1 container align-left"><div ng-if="productionCtrl.isProducer">
+        <td class="col-md-2 container align-left"><div ng-if="productionCtrl.isProducer">
           <input ng-hide="crew.offer.rate" class="production-input form-control bg-transparent subtle-border-2 form-margin" ng-model="productionCtrl.offers[$index].rate" placeholder="Rate" required></input>
           <p class="production-margin" ng-show="crew.offer.rate"> {{ crew.offer.rate | currency:"$":0}} </p>
         </div></td>

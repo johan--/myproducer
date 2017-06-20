@@ -2,15 +2,18 @@ angular.module('myApp')
   .controller('productionController', productionController)
   .directive('autocomplete', autocomplete)
 
-productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel', '$timeout', '$q', '$log']
+productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel', '$timeout', '$q', '$log', '$scope']
 
 autocomplete.$inject = ['$rootScope', '$timeout', 'AuthService', '$http']
 
 function autocomplete($rootScope, $timeout, AuthService, $http){
   var vm = this
+  console.log('directive instantiated');
+  vm.currentUser = $rootScope.uiUser
   $rootScope.contactsChosenIds = []
   AuthService.getUserStatus()
     .then(function(data){
+      console.log('setting user from auth service');
       vm.currentUser = data.data.user
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
       .success(function(data){
@@ -24,7 +27,7 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
     })
 
   return {
-    restrict: 'A',
+    restrict: 'AEC',
     require: 'ngModel',
     link: function(scope, iElement, iAttrs){
       $(iElement).autocomplete({
@@ -63,8 +66,10 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
 
 // PRODUCTION CONTROLLER
 
-function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $timeout, $q, $log){
+function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $timeout, $q, $log, $scope){
+  console.log('controller instatiated');
   var vm = this
+  $rootScope.uiUser = $scope.$resolve.user.data.user
   vm.offers = []
   vm.currentUser = {}
   $rootScope.activeTab = {}

@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-3 text-right no-padding">
               <p class="no-margin">
-                <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
+                <a ui-sref="production({id: production._id})" class="btn main-btn">View</a>
                 <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
               </p>
             </div>

@@ -75,7 +75,15 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$mixpanelProvider', funct
       url: '/production/:id',
       templateUrl: 'templates/production.html',
       controller: 'productionController as productionCtrl',
-      restricted: true
+      restricted: true,
+      resolve: {
+        user: ['$http', function($http){
+          return $http({
+            method: 'GET',
+            url: '/user/status'
+          })
+        }]
+      }
     })
     .state('production-list', {
       url: '/productions',
