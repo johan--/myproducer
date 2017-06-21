@@ -124,6 +124,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
+              console.log(production);
               vm.departments = production.departments
               var roles = vm.departments.map(function(d){
                 return d.roles
@@ -412,7 +413,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
           $http.post('/api/productions/newrole', roleData)
             .success(function(data){
-              console.log(data);
               for(var i=0; i<vm.departments.length; i++){
                 if(vm.departments[i]._id === vm.departmentId){
                   vm.departments[i].roles = data.roles

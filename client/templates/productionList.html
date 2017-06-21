@@ -55,17 +55,17 @@
         <div class="col-md-2">
           <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
         </div>
-        <div class="col-md-2 end-date">
+        <div class="col-md-2">
           <!-- <p class="no-margin">{{ production.productionDay ? "Day " + production.productionDay : ''}}</p> -->
-          <p>
-            <span>Rate Total: ${{production.sumif.rateTotal}}</span>
-            <span>Total Hours: {{production.sumif.hourTotal}}</span>
-          </p>
+          <p><span>Rate Total: ${{production.sumif.rateTotal}}</span></p>
         </div>
-        <div class="col-md-3 nowrap">
+        <div class="col-md-2">
+          <p><span>Total Hours: {{production.sumif.hourTotal}}</span></p>
+        </div>
+        <div class="col-md-2 nowrap">
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
-        <div class="col-md-3 text-right no-padding">
+        <div class="col-md-2 text-right no-padding">
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
             <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-  <!-- <div class="past-productions-view col-sm-12 section">
+  <div class="past-productions-view col-sm-12 section">
     <div class="">
       <div class="col-md-12"><h4>Past Productions</h4></div>
     </div>
@@ -109,22 +109,22 @@
         <div class="col-md-2 end-date">
           <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
         </div>
-        <div class="col-md-2"> -->
+        <div class="col-md-2">
           <!-- <p class="no-margin">{{ 'Day ' + production.productionDay}}</p> -->
-        <!-- </div>
+        </div>
         <div class="col-md-3">
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
         <div class="col-md-3 text-right no-padding">
           <p class="no-margin">
-            <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a> -->
-            <!-- <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a> -->
-            <!-- <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+            <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
+            <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.deleteProduction(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
+            <!-- <a ng-show="production.by_ === productionListCtrl.currentUser._id" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a> -->
           </p>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 
 <div id="modal-root" ng-if="productionListCtrl.notifModal.show">
   <div id="modal-container" ng-click="productionListCtrl.closeNotifModal()">

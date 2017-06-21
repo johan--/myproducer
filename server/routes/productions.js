@@ -1,3 +1,4 @@
+// /api/productions
 // NPM PACKAGES
 
 var express = require('express')
@@ -197,19 +198,21 @@ router.post('/removeRole', function(req,res){
   // TODO update the sumif of the production
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
-    // Production.findById(department.production, function(err, production){
+    Production.findById(department.production, function(err, production){
       if(err) return console.log(err);
       var index = department.roles.indexOf(req.body.role)
-      // console.log(department.roles[index]);
-      department.roles.splice(index, 1)
-      department.save()
       department.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
         if(err) return console.log(err);
+        production.sumif.rateTotal -= department.roles[index].rate
+        production.sumif.hourTotal -= department.roles[index].hours
+        production.save()
+        department.roles.splice(index, 1)
+        department.save()
         res.json(populatedDepartment)
       })
     })
   })
-// })
+})
 
 router.post('/makeTotal', function(req,res){
   var production = req.body
@@ -222,15 +225,12 @@ router.post('/makeTotal', function(req,res){
     productionSumIf.hourTotal = productionSumIf.hourTotal + getRoles(production.departments[i]).hourTotal
   }
 
-  // console.log(productionSumIf);
-
   Production.findById(production._id, function(err, newProduction){
     if(err) return console.log(err);
     newProduction.sumif.rateTotal = productionSumIf.rateTotal
     newProduction.sumif.hourTotal = productionSumIf.hourTotal
     newProduction.save(function(err, savedProduction){
       if(err) return console.log(err);
-      console.log(savedProduction);
       res.json(savedProduction)
     })
   })

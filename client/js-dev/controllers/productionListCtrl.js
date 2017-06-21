@@ -169,7 +169,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         for(var i=0; i<production.departments.length; i++){
           $http.post('/api/productions/makeTotal', production)
             .success(function(data){
-              console.log(data);
+              // console.log(data);
             })
         }
       }
