@@ -168,33 +168,84 @@ router.post('/newdepartment', function(req,res){
 })
 
 router.post('/newrole', function(req,res){
+  // TODO update the sumif for the production
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
-      Role.create({position: req.body.position, basis: req.body.basis, rate: req.body.rate, hours: req.body.hours, _creator: req.user._id, user: req.body.contactId}, function(err,role){
+    Production.findById(department.production, function(err, production){
+      if(err) return console.log(err);
+      Role.create({position: req.body.position, basis: req.body.basis, rate: parseInt(req.body.rate), hours: parseInt(req.body.hours), _creator: req.user._id, user: req.body.contactId}, function(err,role){
         if(err) return console.log(err);
         department.roles.push(role._id)
+        production.sumif.rateTotal += role.rate
+        production.sumif.hourTotal += role.hours
+        production.save()
         department.save(function(err, savedDepartment){
           if(err) return console.log(err);
-          savedDepartment.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
+          savedDepartment
+          .populate({path: 'roles', populate: {path: 'user'}})
+          .populate({path: 'productions'}, function(err, populatedDepartment){
             if(err) return console.log(err);
             res.json(populatedDepartment)
           })
         })
       })
+    })
   })
 })
 
 router.post('/removeRole', function(req,res){
+  // TODO update the sumif of the production
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
-    var index = department.roles.indexOf(req.body.role)
-    department.roles.splice(index, 1)
-    department.save()
-    department.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
+    // Production.findById(department.production, function(err, production){
       if(err) return console.log(err);
-      res.json(populatedDepartment)
+      var index = department.roles.indexOf(req.body.role)
+      // console.log(department.roles[index]);
+      department.roles.splice(index, 1)
+      department.save()
+      department.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
+        if(err) return console.log(err);
+        res.json(populatedDepartment)
+      })
     })
   })
+// })
+
+router.post('/makeTotal', function(req,res){
+  var production = req.body
+  var productionSumIf = {
+    rateTotal: 0,
+    hourTotal: 0
+  }
+  for(var i=0; i<production.departments.length; i++){
+    productionSumIf.rateTotal = productionSumIf.rateTotal + getRoles(production.departments[i]).rateTotal
+    productionSumIf.hourTotal = productionSumIf.hourTotal + getRoles(production.departments[i]).hourTotal
+  }
+
+  // console.log(productionSumIf);
+
+  Production.findById(production._id, function(err, newProduction){
+    if(err) return console.log(err);
+    newProduction.sumif.rateTotal = productionSumIf.rateTotal
+    newProduction.sumif.hourTotal = productionSumIf.hourTotal
+    newProduction.save(function(err, savedProduction){
+      if(err) return console.log(err);
+      console.log(savedProduction);
+      res.json(savedProduction)
+    })
+  })
+
 })
+
+function getRoles(department){
+  var departmentRateTotal = 0
+  var departmentHourTotal = 0
+
+  for(var i=0; i<department.roles.length; i++){
+    departmentRateTotal = departmentRateTotal + department.roles[i].rate
+    departmentHourTotal = departmentHourTotal + department.roles[i].hours
+  }
+  return {rateTotal: departmentRateTotal, hourTotal: departmentHourTotal}
+}
 
 module.exports = router

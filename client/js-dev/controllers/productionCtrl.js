@@ -8,21 +8,20 @@ autocomplete.$inject = ['$rootScope', '$timeout', 'AuthService', '$http']
 
 function autocomplete($rootScope, $timeout, AuthService, $http){
   var vm = this
-  vm.currentUser = $rootScope.uiUser
   $rootScope.contactsChosenIds = []
-  AuthService.getUserStatus()
-    .then(function(data){
-      vm.currentUser = data.data.user
-      $http.get('/api/users/' + vm.currentUser._id + '/contacts')
-      .success(function(data){
-        vm.contacts = data.contacts.map(function(c){
-          return {
-            label: c.first_name + ' ' + c.last_name,
-            value: c._id
-          }
-        })
+
+  $timeout(function(){
+    vm.currentUser = $rootScope.user
+    $http.get('/api/users/' + vm.currentUser._id + '/contacts')
+    .success(function(data){
+      vm.contacts = data.contacts.map(function(c){
+        return {
+          label: c.first_name + ' ' + c.last_name,
+          value: c._id
+        }
       })
     })
+  }, 0)
 
   return {
     restrict: 'AEC',
@@ -66,7 +65,7 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
 
 function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $timeout, $q, $log, $scope){
   var vm = this
-  $rootScope.uiUser = $scope.$resolve.user.data.user
+  $rootScope.user = $scope.$resolve.user.data.user
   vm.offers = []
   vm.currentUser = {}
   $rootScope.activeTab = {}

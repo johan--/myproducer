@@ -5,8 +5,8 @@ const
 Role = new Schema({
   position: String,
   basis: String,
-  rate: String,
-  hours: String,
+  rate: Number,
+  hours: Number,
   // editing: {type: Boolean, default: false},
   _creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   production: {type: mongoose.Schema.Types.ObjectId, ref: 'Production'},

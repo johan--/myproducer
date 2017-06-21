@@ -177,13 +177,17 @@ div.accordion:hover {
   top: -13px; }
 
 .accordion-img {
-  width: 20px;
+  width: 14px;
+  position: relative;
+  top: -1px;
   -ms-transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg); }
 
 .accordion-img.active {
-  width: 20px;
+  width: 14px;
+  position: relative;
+  top: -1px;
   -ms-transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg); }

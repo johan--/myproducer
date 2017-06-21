@@ -135,6 +135,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.productionsDraggable = []
   vm.productionsDroppable = []
   vm.editingTag = false
+  vm.checkedProds = []
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
@@ -157,10 +158,36 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
-          // console.log(vm.currentUser.allProductions);
           vm.ready = true
         })
   })
+
+  vm.setBudget = function(production){
+    if(vm.checkedProds.indexOf(production._id) == -1){
+      vm.checkedProds.push(production._id)
+      if(production.departments){
+        for(var i=0; i<production.departments.length; i++){
+          $http.post('/api/productions/makeTotal', production)
+            .success(function(data){
+              console.log(data);
+            })
+        }
+      }
+    }
+    return true
+  }
+
+  // vm.getRoles = function(department){
+  //   var rateTotal = 0
+  //   var hourTotal = 0
+  //   for(var i=0; i<department.roles.length; i++){
+  //     rateTotal = rateTotal + department.roles[i].rate
+  //     hourTotal = hourTotal + department.roles[i].hours
+  //     console.log(department.roles[i].basis);
+  //   }
+  //   console.log(rateTotal);
+  //   console.log(hourTotal);
+  // }
 
 // multi day productions
   vm.wholeAccordionClick = function($event){
