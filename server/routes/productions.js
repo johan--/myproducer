@@ -177,9 +177,17 @@ router.post('/newrole', function(req,res){
       Role.create({position: req.body.position, basis: req.body.basis, rate: parseInt(req.body.rate), hours: parseInt(req.body.hours), _creator: req.user._id, user: req.body.contactId}, function(err,role){
         if(err) return console.log(err);
         department.roles.push(role._id)
-        production.sumif.rateTotal += role.rate
-        production.sumif.hourTotal += role.hours
-        production.save()
+
+        if(role.basis == 'Hourly'){
+          production.sumif.rateTotal += role.rate * role.hours
+          production.sumif.hourTotal += role.hours
+          production.save()
+        } else if(role.basis == 'Daily'){
+          production.sumif.rateTotal += role.rate
+          production.sumif.hourTotal += role.hours
+          production.save()
+        }
+
         department.save(function(err, savedDepartment){
           if(err) return console.log(err);
           savedDepartment
@@ -203,9 +211,16 @@ router.post('/removeRole', function(req,res){
       var index = department.roles.indexOf(req.body.role)
       department.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
         if(err) return console.log(err);
-        production.sumif.rateTotal -= department.roles[index].rate
-        production.sumif.hourTotal -= department.roles[index].hours
-        production.save()
+        if(department.roles[index].basis == 'Hourly'){
+          production.sumif.rateTotal -= department.roles[index].rate * department.roles[index].hours
+          production.sumif.hourTotal -= department.roles[index].hours
+          production.save()
+        } else if(department.roles[index].basis == 'Daily'){
+          production.sumif.rateTotal -= department.roles[index].rate
+          production.sumif.hourTotal -= department.roles[index].hours
+          production.save()
+        }
+
         department.roles.splice(index, 1)
         department.save()
         res.json(populatedDepartment)
@@ -242,8 +257,17 @@ function getRoles(department){
   var departmentHourTotal = 0
 
   for(var i=0; i<department.roles.length; i++){
-    departmentRateTotal = departmentRateTotal + department.roles[i].rate
-    departmentHourTotal = departmentHourTotal + department.roles[i].hours
+    if(department.roles[i].basis == 'Hourly'){
+      console.log('hourly');
+      var hourlyRate = department.roles[i].rate * department.roles[i].hours
+
+      departmentRateTotal += hourlyRate
+      departmentHourTotal += department.roles[i].hours
+    } else if(department.roles[i].basis == 'Daily'){
+      console.log('daily');
+      departmentRateTotal += department.roles[i].rate
+      departmentHourTotal += department.roles[i].hours
+    }
   }
   return {rateTotal: departmentRateTotal, hourTotal: departmentHourTotal}
 }
