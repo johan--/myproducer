@@ -88,12 +88,46 @@ router.get('/:id', function show(req, res){
   .populate({path: 'departments', populate: {path: 'roles', populate: {path: 'user'}}})
   .exec(function(err, production) {
     if(err) return console.log(err)
-
-    if(production.active) {
-      res.json(production)
-    } else {
-      res.json(null)
+    var productionSumIf = {
+      rateTotal: 0,
+      hourTotal: 0
     }
+
+    for(var i=0; i<production.departments.length; i++){
+      productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal
+
+      productionSumIf.hourTotal += getRoles(production.departments[i]).hourTotal
+
+      getOffers(production.departments[i])
+        .then(function(data){
+          productionSumIf.rateTotal += data.offerRateTotal
+          productionSumIf.hourTotal += data.offerHourTotal
+        })
+        .catch(function(data){
+          productionSumIf.rateTotal += data.offerRateTotal
+          productionSumIf.hourTotal += data.offerHourTotal
+        })
+
+        if(i == production.departments.length -1){
+          setTimeout(function(){
+            // Production.findById(production._id, function(err, newProduction){
+              production.sumif.rateTotal = productionSumIf.rateTotal
+              production.sumif.hourTotal = productionSumIf.hourTotal
+              production.save(function(err, savedProduction){
+                if(err) return console.log(err);
+                if(savedProduction.active) {
+                  res.json(savedProduction)
+                } else {
+                  res.json(null)
+                }
+              })
+            // })
+
+          }, 250)
+        }
+
+    }
+
   })
 })
 
@@ -194,7 +228,7 @@ router.post('/newrole', function(req,res){
           if(err) return console.log(err);
           savedDepartment
           .populate({path: 'roles', populate: {path: 'user'}})
-          .populate({path: 'productions'}, function(err, populatedDepartment){
+          .populate({path: 'production'}, function(err, populatedDepartment){
             if(err) return console.log(err);
             res.json(populatedDepartment)
           })
@@ -258,6 +292,8 @@ router.post('/makeTotal', function(req,res){
       })
 
       if(i == production.departments.length -1){
+        // when loop is done running
+        // timeout to wait for get offers promise data
         setTimeout(function(){
           Production.findById(production._id, function(err, newProduction){
             if(err) return console.log(err);
@@ -270,6 +306,7 @@ router.post('/makeTotal', function(req,res){
           })
         }, 250)
       }
+
   }
 })
 

@@ -2,7 +2,7 @@ angular.module('myApp')
   .controller('productionController', productionController)
   .directive('autocomplete', autocomplete)
 
-productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel', '$timeout', '$q', '$log', '$scope']
+productionController.$inject = ['$rootScope', '$http', '$stateParams', '$state', 'AuthService', '$mixpanel', '$timeout', '$q', '$log', '$scope', '$window']
 
 autocomplete.$inject = ['$rootScope', '$timeout', 'AuthService', '$http']
 
@@ -63,7 +63,7 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
 
 // PRODUCTION CONTROLLER
 
-function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $timeout, $q, $log, $scope){
+function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $timeout, $q, $log, $scope, $window){
   var vm = this
   $rootScope.user = $scope.$resolve.user.data.user
   vm.offers = []
@@ -124,6 +124,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
+              console.log(vm.production);
               vm.departments = production.departments
               var roles = vm.departments.map(function(d){
                 return d.roles
@@ -393,6 +394,10 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         // input validation
         if(position == ''){
           return vm.roleModal.errorContent = 'Please enter a role title to proceed'
+        } else if(rate == ''){
+          return vm.roleModal.errorContent = 'Please enter a rate amount to proceed'
+        } else if(hours == ''){
+          return vm.roleModal.errorContent = 'Please enter the amount of hours to proceed'
         }
 
         for(var i=0; i<count; i++){
@@ -418,10 +423,13 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
                   vm.departments[i].roles = data.roles
                 }
               }
-              $rootScope.contactsChosenIds = []
-              $state.go($state.current, {}, {reload: true})
-              vm.closeRoleModal()
             })
+            if(i === count - 1){
+              $rootScope.contactsChosenIds = []
+              // $state.go($state.current, {}, {reload: true})
+              $window.location.reload()
+              vm.closeRoleModal()
+            }
         }
     }
 

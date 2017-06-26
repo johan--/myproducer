@@ -1,3 +1,4 @@
+// /api/crew
 // NPM PACKAGES
 
 var express = require('express')
@@ -121,6 +122,11 @@ router.patch('/:id', function(req, res){
       if(err) return console.log(err);
       // console.log('production that was found:');
       var productionDate = production.date.toDateString()
+
+      // update production.sumif
+      production.sumif.rateTotal += crew.offer.rate * crew.offer.hours
+      production.sumif.hourTotal += crew.offer.hours
+      production.save()
 
       // send mail
         mailer.send(
@@ -282,10 +288,20 @@ router.patch('/delete/:id', function(req, res){
       if(err) return console.log(err);
       var index = department.crew.indexOf(crew._id)
       department.crew[index] = crew._id
+      department.crew.splice(index,1)
       department.save()
-      department.populate({path: 'crew', populate: {path: 'to'}}, function(err, populatedDepartment){
+      department.populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
         if(err) return console.log(err);
-        res.json(populatedDepartment)
+        // find production and update sumif
+
+        Production.findById(department.production, function(err,production){
+          if(err) return console.log(err);
+          production.sumif.rateTotal -= crew.offer.rate * crew.offer.hours
+          production.sumif.hourTotal -= crew.offer.hours
+          production.save()
+
+          res.json(populatedDepartment)
+        })
       })
     })
   })
