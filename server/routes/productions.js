@@ -237,46 +237,26 @@ router.post('/makeTotal', function(req,res){
   }
 
   for(var i=0; i<production.departments.length; i++){
-    console.log(getOffers(production.departments[i]));
-    // productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal + getOffers(production.departments[i]).offerRateTotal
-    //
-    // productionSumIf.hourTotal += getRoles(production.departments[i]).hourTotal + getOffers(production.departments[i]).offerHourTotal
+    productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal
 
+    productionSumIf.hourTotal += getRoles(production.departments[i]).hourTotal
+
+    getOffers(production.departments[i]).then(function(data){
+      productionSumIf.rateTotal += data.offerRateTotal
+      productionSumIf.hourTotal += data.offerHourTotal
+
+      Production.findById(production._id, function(err, newProduction){
+        if(err) return console.log(err);
+        newProduction.sumif.rateTotal = productionSumIf.rateTotal
+        newProduction.sumif.hourTotal = productionSumIf.hourTotal
+        newProduction.save(function(err, savedProduction){
+          if(err) return console.log(err);
+          res.json(savedProduction)
+        })
+      })
+    })
   }
-
-  // Production.findById(production._id, function(err, newProduction){
-  //   if(err) return console.log(err);
-  //   newProduction.sumif.rateTotal = productionSumIf.rateTotal
-  //   newProduction.sumif.hourTotal = productionSumIf.hourTotal
-  //   newProduction.save(function(err, savedProduction){
-  //     if(err) return console.log(err);
-  //     res.json(savedProduction)
-  //   })
-  // })
-
 })
-
-// function getOffers(department){
-//   var offerRateTotal = 0
-//   var offerHourTotal = 0
-//
-//   if(department.crew.length > 0){
-//     Department.findById(department._id, function(err, department){
-//       if(err) return console.log(err);
-//       department.populate({path: 'crew'}, function(err, populatedDepartment){
-//         if(err) return console.log(err);
-//         for(var i=0; i<populatedDepartment.crew.length; i++){
-//           offerRateTotal = offerRateTotal + (populatedDepartment.crew[i].offer.rate * populatedDepartment.crew[i].offer.hours)
-//           offerHourTotal += populatedDepartment.crew[i].offer.hours
-//         }
-//         console.log({offerRateTotal: offerRateTotal, offerHourTotal: offerHourTotal});
-//         return {offerRateTotal: offerRateTotal, offerHourTotal: offerHourTotal}
-//       })
-//     })
-//   } else {
-//     return {offerRateTotal: 0, offerHourTotal: 0}
-//   }
-// }
 
 var getOffers = function(department){
   return new Promise(function(resolve, reject){
