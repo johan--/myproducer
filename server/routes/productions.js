@@ -235,22 +235,71 @@ router.post('/makeTotal', function(req,res){
     rateTotal: 0,
     hourTotal: 0
   }
+
   for(var i=0; i<production.departments.length; i++){
-    productionSumIf.rateTotal = productionSumIf.rateTotal + getRoles(production.departments[i]).rateTotal
-    productionSumIf.hourTotal = productionSumIf.hourTotal + getRoles(production.departments[i]).hourTotal
+    console.log(getOffers(production.departments[i]));
+    // productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal + getOffers(production.departments[i]).offerRateTotal
+    //
+    // productionSumIf.hourTotal += getRoles(production.departments[i]).hourTotal + getOffers(production.departments[i]).offerHourTotal
+
   }
 
-  Production.findById(production._id, function(err, newProduction){
-    if(err) return console.log(err);
-    newProduction.sumif.rateTotal = productionSumIf.rateTotal
-    newProduction.sumif.hourTotal = productionSumIf.hourTotal
-    newProduction.save(function(err, savedProduction){
-      if(err) return console.log(err);
-      res.json(savedProduction)
-    })
-  })
+  // Production.findById(production._id, function(err, newProduction){
+  //   if(err) return console.log(err);
+  //   newProduction.sumif.rateTotal = productionSumIf.rateTotal
+  //   newProduction.sumif.hourTotal = productionSumIf.hourTotal
+  //   newProduction.save(function(err, savedProduction){
+  //     if(err) return console.log(err);
+  //     res.json(savedProduction)
+  //   })
+  // })
 
 })
+
+// function getOffers(department){
+//   var offerRateTotal = 0
+//   var offerHourTotal = 0
+//
+//   if(department.crew.length > 0){
+//     Department.findById(department._id, function(err, department){
+//       if(err) return console.log(err);
+//       department.populate({path: 'crew'}, function(err, populatedDepartment){
+//         if(err) return console.log(err);
+//         for(var i=0; i<populatedDepartment.crew.length; i++){
+//           offerRateTotal = offerRateTotal + (populatedDepartment.crew[i].offer.rate * populatedDepartment.crew[i].offer.hours)
+//           offerHourTotal += populatedDepartment.crew[i].offer.hours
+//         }
+//         console.log({offerRateTotal: offerRateTotal, offerHourTotal: offerHourTotal});
+//         return {offerRateTotal: offerRateTotal, offerHourTotal: offerHourTotal}
+//       })
+//     })
+//   } else {
+//     return {offerRateTotal: 0, offerHourTotal: 0}
+//   }
+// }
+
+var getOffers = function(department){
+  return new Promise(function(resolve, reject){
+    var offerRateTotal = 0
+    var offerHourTotal = 0
+    Department.findById(department._id, function(err, department){
+      if(err) return console.log(err);
+      if(department.crew.length > 0){
+        department.populate({path: 'crew'}, function(err, populatedDepartment){
+          if(err) return console.log(err);
+          for(var i=0; i<populatedDepartment.crew.length; i++){
+            offerRateTotal = offerRateTotal + (populatedDepartment.crew[i].offer.rate * populatedDepartment.crew[i].offer.hours)
+            offerHourTotal += populatedDepartment.crew[i].offer.hours
+          }
+          resolve({offerRateTotal: offerRateTotal, offerHourTotal: offerHourTotal})
+        })
+      } else {
+        reject({offerRateTotal: offerRateTotal, offerHourTotal: offerHourTotal})
+      }
+    })
+  })
+}
+
 
 function getRoles(department){
   var departmentRateTotal = 0
@@ -258,13 +307,11 @@ function getRoles(department){
 
   for(var i=0; i<department.roles.length; i++){
     if(department.roles[i].basis == 'Hourly'){
-      console.log('hourly');
       var hourlyRate = department.roles[i].rate * department.roles[i].hours
 
       departmentRateTotal += hourlyRate
       departmentHourTotal += department.roles[i].hours
     } else if(department.roles[i].basis == 'Daily'){
-      console.log('daily');
       departmentRateTotal += department.roles[i].rate
       departmentHourTotal += department.roles[i].hours
     }
