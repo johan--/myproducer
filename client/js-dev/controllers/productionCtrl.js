@@ -376,6 +376,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
       $http.post('/api/productions/newdepartment', departmentData)
         .success(function(data){
+          console.log(data);
           vm.departmentModal.show = false
           vm.departments = data.departments
         })

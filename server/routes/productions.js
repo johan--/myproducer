@@ -159,10 +159,12 @@ router.post('/newdepartment', function(req,res){
       // console.log(department);
       Production.findById(req.body.production, function(err, production){
         production.departments.push(department._id)
-        production.populate({path: 'departments', populate: {path: 'crew', populate: {path: 'to'}}}, function(err){
-          production.save()
-          res.json(production)
-        })
+
+        production
+          .populate({path: 'departments', populate: [{path: 'roles', populate: {path: 'user'}}, {path: 'crew', populate: {path: 'to'}}]}, function(err){
+            production.save()
+            res.json(production)
+          })
       })
     })
   })
