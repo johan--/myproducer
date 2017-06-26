@@ -177,18 +177,6 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
     return true
   }
 
-  // vm.getRoles = function(department){
-  //   var rateTotal = 0
-  //   var hourTotal = 0
-  //   for(var i=0; i<department.roles.length; i++){
-  //     rateTotal = rateTotal + department.roles[i].rate
-  //     hourTotal = hourTotal + department.roles[i].hours
-  //     console.log(department.roles[i].basis);
-  //   }
-  //   console.log(rateTotal);
-  //   console.log(hourTotal);
-  // }
-
 // multi day productions
   vm.wholeAccordionClick = function($event){
     if($event.target.type == undefined){

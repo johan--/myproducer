@@ -237,24 +237,37 @@ router.post('/makeTotal', function(req,res){
   }
 
   for(var i=0; i<production.departments.length; i++){
+    // roles
     productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal
 
     productionSumIf.hourTotal += getRoles(production.departments[i]).hourTotal
 
-    getOffers(production.departments[i]).then(function(data){
-      productionSumIf.rateTotal += data.offerRateTotal
-      productionSumIf.hourTotal += data.offerHourTotal
-
-      Production.findById(production._id, function(err, newProduction){
-        if(err) return console.log(err);
-        newProduction.sumif.rateTotal = productionSumIf.rateTotal
-        newProduction.sumif.hourTotal = productionSumIf.hourTotal
-        newProduction.save(function(err, savedProduction){
-          if(err) return console.log(err);
-          res.json(savedProduction)
-        })
+    // offers
+    getOffers(production.departments[i])
+      .then(function(data){
+        // if department has offers
+        productionSumIf.rateTotal += data.offerRateTotal
+        productionSumIf.hourTotal += data.offerHourTotal
       })
-    })
+      .catch(function(data){
+        // if department has no offers
+        productionSumIf.rateTotal += data.offerRateTotal
+        productionSumIf.HourTotal += data.offerHourTotal
+      })
+
+      if(i == production.departments.length -1){
+        setTimeout(function(){
+          Production.findById(production._id, function(err, newProduction){
+            if(err) return console.log(err);
+            newProduction.sumif.rateTotal = productionSumIf.rateTotal
+            newProduction.sumif.hourTotal = productionSumIf.hourTotal
+            newProduction.save(function(err, savedProduction){
+              if(err) return console.log(err);
+              res.json(savedProduction)
+            })
+          })
+        }, 250)
+      }
   }
 })
 
