@@ -254,7 +254,7 @@ router.post('/makeTotal', function(req,res){
       .catch(function(data){
         // if department has no offers
         productionSumIf.rateTotal += data.offerRateTotal
-        productionSumIf.HourTotal += data.offerHourTotal
+        productionSumIf.hourTotal += data.offerHourTotal
       })
 
       if(i == production.departments.length -1){
@@ -283,9 +283,12 @@ var getOffers = function(department){
         department.populate({path: 'crew'}, function(err, populatedDepartment){
           if(err) return console.log(err);
           for(var i=0; i<populatedDepartment.crew.length; i++){
-            offerRateTotal = offerRateTotal + (populatedDepartment.crew[i].offer.rate * populatedDepartment.crew[i].offer.hours)
-            offerHourTotal += populatedDepartment.crew[i].offer.hours
+            if(populatedDepartment.crew[i].offer.rate && populatedDepartment.crew[i].offer.hours){
+              offerRateTotal += populatedDepartment.crew[i].offer.rate * populatedDepartment.crew[i].offer.hours
+
+              offerHourTotal += populatedDepartment.crew[i].offer.hours
           }
+        }
           resolve({offerRateTotal: offerRateTotal, offerHourTotal: offerHourTotal})
         })
       } else {
