@@ -93,7 +93,10 @@ router.get('/:id', function show(req, res){
       hourTotal: 0
     }
 
+
+
   if(production.departments.length > 0){
+    // make sumif for the production
     for(var i=0; i<production.departments.length; i++){
       productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal
 
@@ -114,17 +117,15 @@ router.get('/:id', function show(req, res){
               production.sumif.rateTotal = productionSumIf.rateTotal
               production.sumif.hourTotal = productionSumIf.hourTotal
 
-              console.log(production);
-
               production.save(function(err, savedProduction){
                 if(err) return console.log(err);
-                // console.log(savedProduction);
                 res.json(savedProduction)
               })
           }, 250)
         }
       }
     } else {
+      // if its a new production with no departments created yet
       res.json(production)
     }
 
@@ -272,42 +273,41 @@ router.post('/makeTotal', function(req,res){
     hourTotal: 0
   }
 
-  for(var i=0; i<production.departments.length; i++){
-    // roles
-    productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal
+    for(var i=0; i<production.departments.length; i++){
+      // roles
+      productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal
 
-    productionSumIf.hourTotal += getRoles(production.departments[i]).hourTotal
+      productionSumIf.hourTotal += getRoles(production.departments[i]).hourTotal
 
-    // offers
-    getOffers(production.departments[i])
-      .then(function(data){
-        // if department has offers
-        productionSumIf.rateTotal += data.offerRateTotal
-        productionSumIf.hourTotal += data.offerHourTotal
-      })
-      .catch(function(data){
-        // if department has no offers
-        productionSumIf.rateTotal += data.offerRateTotal
-        productionSumIf.hourTotal += data.offerHourTotal
-      })
+      // offers
+      getOffers(production.departments[i])
+        .then(function(data){
+          // if department has offers
+          productionSumIf.rateTotal += data.offerRateTotal
+          productionSumIf.hourTotal += data.offerHourTotal
+        })
+        .catch(function(data){
+          // if department has no offers
+          productionSumIf.rateTotal += data.offerRateTotal
+          productionSumIf.hourTotal += data.offerHourTotal
+        })
 
-      if(i == production.departments.length -1){
-        // when loop is done running
-        // timeout to wait for get offers promise data
-        setTimeout(function(){
-          Production.findById(production._id, function(err, newProduction){
-            if(err) return console.log(err);
-            newProduction.sumif.rateTotal = productionSumIf.rateTotal
-            newProduction.sumif.hourTotal = productionSumIf.hourTotal
-            newProduction.save(function(err, savedProduction){
+        if(i == production.departments.length -1){
+          // when loop is done running
+          // timeout to wait for get offers promise data
+          setTimeout(function(){
+            Production.findById(production._id, function(err, newProduction){
               if(err) return console.log(err);
-              res.json(savedProduction)
+              newProduction.sumif.rateTotal = productionSumIf.rateTotal
+              newProduction.sumif.hourTotal = productionSumIf.hourTotal
+              newProduction.save(function(err, savedProduction){
+                if(err) return console.log(err);
+                res.json(savedProduction)
+              })
             })
-          })
-        }, 250)
+          }, 250)
+        }
       }
-
-  }
 })
 
 var getOffers = function(department){

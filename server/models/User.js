@@ -25,7 +25,7 @@ var User = new Schema({
   contacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
   pendingContacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
   taggables: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
-  tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}],
+  // tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}],
   active: {type: Boolean, default: true},
   picture: String,
   stripePlan: Object,

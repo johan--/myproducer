@@ -120,7 +120,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
-          console.log(vm.currentUser);
 
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
@@ -146,7 +145,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       $http.patch('/api/productions/' + $stateParams.id, vm.production)
         .success(function(data) {
           vm.editingState = false
-          // console.log(data);
           data.crew = vm.production.crew
           vm.production = data
           vm.notifModal.isSuccess = true
