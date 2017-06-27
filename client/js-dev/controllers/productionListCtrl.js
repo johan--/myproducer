@@ -333,13 +333,18 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
             }
           }
 
-          vm.currentUser.allProductions = vm.currentUser.allProductions.filter(function(p, i) {
+            // deleting from past productions
+          vm.pastProductions = vm.pastProductions.filter(function(p, i){
             return p._id.toString() != id
           })
+
+          vm.currentUser.allProductions = vm.currentUser.allProductions.filter(function(p, i) {
+              return p._id.toString() != id
+            })
           vm.notifModal.isSuccess = true
           vm.notifModal.content = 'You have successfully deleted ' + name
           $mixpanel.track('Production Deleted', {"user" : vm.currentUser.username})
-        })
+    })
         .error(function(data) {
           vm.notifModal.isFailure = true
           vm.notifModal.content = 'An error has occurred. Please try again.'
