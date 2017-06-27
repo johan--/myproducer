@@ -136,6 +136,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   vm.productionsDroppable = []
   vm.editingTag = false
   vm.checkedProds = []
+  vm.pastProductions = []
 
   if($state.params.upgradeModal === true) {
     vm.upgradeModal.show = true
@@ -159,6 +160,10 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
           vm.ready = true
+
+          for(var i=vm.currentUser.allProductions.length -1; i>=0; i--){
+            vm.pastProductions.push(vm.currentUser.allProductions[i])
+          }
         })
   })
 
@@ -169,7 +174,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         for(var i=0; i<production.departments.length; i++){
           $http.post('/api/productions/makeTotal', production)
             .success(function(data){
-              console.log(data);
+              // console.log(data);
             })
         }
       }

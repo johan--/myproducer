@@ -153,6 +153,7 @@ router.patch('/:id', function(req, res){
         department.save(function(err, newDepartment){
           if(err) return console.log(err);
           newDepartment
+            .populate({path: 'production'})
             .populate({path: 'crew', populate: {path: 'to'}})
             .populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
             if(err) return console.log(err);
