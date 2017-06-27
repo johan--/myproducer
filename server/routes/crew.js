@@ -291,18 +291,16 @@ router.patch('/delete/:id', function(req, res){
       department.crew[index] = crew._id
       department.crew.splice(index,1)
       department.save()
-      department.populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
+      department.populate({path: 'crew', populate: {path: 'to'}}).populate({path: 'production'}).populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
         if(err) return console.log(err);
-        // find production and update sumif
-
-        Production.findById(department.production, function(err,production){
-          if(err) return console.log(err);
-          production.sumif.rateTotal -= crew.offer.rate * crew.offer.hours
-          production.sumif.hourTotal -= crew.offer.hours
-          production.save()
+        // Production.findById(department.production, function(err,production){
+        //   if(err) return console.log(err);
+          populatedDepartment.production.sumif.rateTotal -= crew.offer.rate * crew.offer.hours
+          populatedDepartment.production.sumif.hourTotal -= crew.offer.hours
+          populatedDepartment.save()
 
           res.json(populatedDepartment)
-        })
+        // })
       })
     })
   })

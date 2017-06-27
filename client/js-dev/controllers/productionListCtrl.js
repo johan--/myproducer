@@ -167,20 +167,20 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         })
   })
 
-  vm.setBudget = function(production){
-    if(vm.checkedProds.indexOf(production._id) == -1){
-      vm.checkedProds.push(production._id)
-      if(production.departments){
-        for(var i=0; i<production.departments.length; i++){
-          $http.post('/api/productions/makeTotal', production)
-            .success(function(data){
-              // console.log(data);
-            })
-        }
-      }
-    }
-    return true
-  }
+  // vm.setBudget = function(production){
+  //   if(vm.checkedProds.indexOf(production._id) == -1){
+  //     vm.checkedProds.push(production._id)
+  //     if(production.departments){
+  //       for(var i=0; i<production.departments.length; i++){
+  //         $http.post('/api/productions/makeTotal', production)
+  //           .success(function(data){
+  //             // console.log(data);
+  //           })
+  //       }
+  //     }
+  //   }
+  //   return true
+  // }
 
 // multi day productions
   vm.wholeAccordionClick = function($event){

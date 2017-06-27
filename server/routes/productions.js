@@ -243,29 +243,34 @@ router.post('/removeRole', function(req,res){
   // TODO update the sumif of the production
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
-    Production.findById(department.production, function(err, production){
-      if(err) return console.log(err);
+    // Production.findById(department.production, function(err, production){
+    //   if(err) return console.log(err);
       var index = department.roles.indexOf(req.body.role)
-      department.populate({path: 'roles', populate: {path: 'user'}}, function(err, populatedDepartment){
+      department
+      .populate({path: 'roles', populate: {path: 'user'}})
+      .populate({path: 'production'}, function(err, populatedDepartment){
         if(err) return console.log(err);
         if(department.roles[index].basis == 'Hourly'){
-          production.sumif.rateTotal -= department.roles[index].rate * department.roles[index].hours
-          production.sumif.hourTotal -= department.roles[index].hours
-          production.save()
+          populatedDepartment.production.sumif.rateTotal -= department.roles[index].rate * department.roles[index].hours
+
+          populatedDepartment.production.sumif.hourTotal -= department.roles[index].hours
+          populatedDepartment.save()
         } else if(department.roles[index].basis == 'Daily'){
-          production.sumif.rateTotal -= department.roles[index].rate
-          production.sumif.hourTotal -= department.roles[index].hours
-          production.save()
+          populatedDepartment.production.sumif.rateTotal -= department.roles[index].rate
+
+          populatedDepartment.production.sumif.hourTotal -= department.roles[index].hours
+          populatedDepartment.save()
         }
 
         department.roles.splice(index, 1)
         department.save()
         res.json(populatedDepartment)
       })
-    })
+    // })
   })
 })
 
+// might not need this route
 router.post('/makeTotal', function(req,res){
   var production = req.body
   var productionSumIf = {

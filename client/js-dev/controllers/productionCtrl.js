@@ -263,6 +263,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
       $http.patch('/api/crew/delete/' + crew._id, deleteData)
         .success(function(data){
+          vm.production.sumif = data.production.sumif
           for(var i=0; i<vm.departments.length; i++){
             if(vm.departments[i]._id == data._id){
               vm.departments[i] = data
@@ -376,7 +377,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
       $http.post('/api/productions/newdepartment', departmentData)
         .success(function(data){
-          console.log(data);
           vm.departmentModal.show = false
           vm.departments = data.departments
         })
@@ -440,6 +440,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
       $http.post('/api/productions/removeRole', roleData)
         .success(function(data){
+          vm.production.sumif = data.production.sumif
           for(var i=0; i<vm.departments.length; i++){
             if(vm.departments[i]._id === data._id){
               vm.departments[i].roles = data.roles
