@@ -105,7 +105,7 @@
     <div class="">
       <div class="col-md-12"><h4>Past Productions</h4></div>
     </div>
-    <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.pastProductions">
+    <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.pastProductions" style="height: 52px;">
       <div class="">
         <div class="col-md-2 start-date">
           <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
@@ -114,12 +114,15 @@
           <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
         </div>
         <div class="col-md-2">
-          <!-- <p class="no-margin">{{ 'Day ' + production.productionDay}}</p> -->
+          <p><span>Current Budget: ${{production.sumif.rateTotal}}</span></p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
+          <p><span>Total Hours: {{production.sumif.hourTotal}}</span></p>
+        </div>
+        <div class="col-md-2">
           <p class="no-margin">{{ production.location[0] || 'No Location'}}</p>
         </div>
-        <div class="col-md-3 text-right no-padding">
+        <div class="col-md-2 text-right no-padding">
           <p class="no-margin">
             <a ng-href="/#/production/{{production._id}}" class="btn main-btn">View</a>
             <a ng-show="productionListCtrl.currentUser.role === 'producer'" ng-click="productionListCtrl.openDeleteProductionModal(production.name, production._id, $index)"><i class="fa fa-times"></i></a>
