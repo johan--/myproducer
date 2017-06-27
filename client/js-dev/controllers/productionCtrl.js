@@ -120,11 +120,11 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       $http.get('/api/users/' + vm.currentUser._id + '/contacts')
         .success(function(data){
           vm.currentUser = data
+          console.log(vm.currentUser);
 
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
-              console.log(vm.production);
               vm.departments = production.departments
               var roles = vm.departments.map(function(d){
                 return d.roles

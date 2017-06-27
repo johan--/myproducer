@@ -93,6 +93,7 @@ router.get('/:id', function show(req, res){
       hourTotal: 0
     }
 
+  if(production.departments.length > 0){
     for(var i=0; i<production.departments.length; i++){
       productionSumIf.rateTotal += getRoles(production.departments[i]).rateTotal
 
@@ -108,24 +109,23 @@ router.get('/:id', function show(req, res){
           productionSumIf.hourTotal += data.offerHourTotal
         })
 
-        if(i == production.departments.length -1){
+        if(i == production.departments.length - 1){
           setTimeout(function(){
-            // Production.findById(production._id, function(err, newProduction){
               production.sumif.rateTotal = productionSumIf.rateTotal
               production.sumif.hourTotal = productionSumIf.hourTotal
+
+              console.log(production);
+
               production.save(function(err, savedProduction){
                 if(err) return console.log(err);
-                if(savedProduction.active) {
-                  res.json(savedProduction)
-                } else {
-                  res.json(null)
-                }
+                // console.log(savedProduction);
+                res.json(savedProduction)
               })
-            // })
-
           }, 250)
         }
-
+      }
+    } else {
+      res.json(production)
     }
 
   })
