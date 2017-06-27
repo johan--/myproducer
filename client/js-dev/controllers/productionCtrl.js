@@ -29,6 +29,10 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
     link: function(scope, iElement, iAttrs){
       $(iElement).autocomplete({
         source: vm.contacts,
+        focus: function(evt, ui){
+          evt.preventDefault()
+          this.value = ui.item.label
+        },
         select: function(evt, ui) {
           // after choosing a contact
           $rootScope.contactsChosenIds.push(ui.item.value)
