@@ -32,14 +32,41 @@ router.get('/', function(req, res){
   })
 })
 
+router.post('/newProject', function(req,res){
+  User.findById(req.user._id, function(err, user){
+    if(err) return console.log(err);
+
+    var to = req.body.to
+    var from = req.body.from
+    var newProject = {
+      name: req.body.name,
+      by_: req.user._id,
+      date: moment(to),
+      startDate: moment(from),
+      endDate: moment(to)
+    }
+
+    Production.create(newProject, function(err,project){
+      if(err) return console.log(err);
+      user.productions.push(project)
+      user.projects.push(project)
+      user.save(function(err){
+        if(err) return console.log(err);
+        res.json(project)
+      })
+    })
+
+  })
+})
+
 // create a new production
 router.post('/', function(req, res){
   // find it by the user
   User.findById(req.user._id, function(err, user){
     if (err) return console.log(err)
 
-    var to = req.body.to  // prod start date (user input)
-    var from = req.body.from // prod end date (user input)
+    var to = req.body.to  // prod end date (user input)
+    var from = req.body.from // prod start date (user input)
     var days = moment(to).diff(moment(from), 'days') + 1 // number of prod days
 
     var productions = [] // init a array for mongo batch create

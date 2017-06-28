@@ -10,6 +10,10 @@ var Production = new Schema({
   hospital: String,
   parking: String,
   date: Date,
+  // will determine if a production is a project
+  startDate: Date,
+  endDate: Date,
+  //
   crewCall: Date,
   sumif: {
     rateTotal: {type: Number, default: 0},
