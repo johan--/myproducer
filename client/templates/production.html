@@ -82,7 +82,7 @@
   </div>
 
   <!-- for single day productions -->
-<div class="crew-view col-sm-9" ng-if="productionCtrl.production.departments.length == 0" style="padding-top: 20px">
+<div class="crew-view col-sm-9" ng-if="productionCtrl.production.departments.length == 0" style="padding-top: 20px; border-radius: 10px;">
       <div ng-repeat="crew in productionCtrl.production.crew">
         <div class="other-background">
           <table class="table table-condensed">
@@ -149,10 +149,10 @@
       </div>
     </div>
 
-                      <!-- Role Strips-->
+                      <!-- Department Role Strips-->
 
   <div ng-if="productionCtrl.roles.length > 0" ng-repeat="role in department.roles">
-    <div class="other-background">
+    <div class="other-background" style="border-radius: 10px;">
       <table class="production-table table table-condensed">
         <tbody>
           <tr>
@@ -201,7 +201,7 @@
 
                     <!-- Offer strips -->
 
-  <div class="other-background" ng-repeat="crew in department.crew track by $index" ng-if="crew.active && ((productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)">
+  <div class="other-background" ng-repeat="crew in department.crew track by $index" ng-if="crew.active && ((productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)) || crew.offer.position)" style="border-radius: 10px;">
     <table class="production-table table table-condensed">
       <tbody>
         <tr>

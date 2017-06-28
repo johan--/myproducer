@@ -126,6 +126,7 @@ angular.module('myApp')
 function productionListController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel){
   var vm = this
   vm.hoverCreate = false
+  vm.createProjectProductionModal = {}
   vm.upgradeModal = {}
   vm.upgradeModalMessage = {}
   vm.notifModal = {}
@@ -262,6 +263,19 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       vm.notifModal.content = 'Please check the production dates!'
       vm.notifModal.show = true
     }
+  }
+
+  vm.addProject = function(){
+
+    var newProject = {
+      name: vm.newProject.name,
+      by_: vm.currentUser
+    }
+
+    $http.get('/api/projects')
+      .success(function(data){
+        console.log(data);
+      })
   }
 
   vm.addProduction = function(){
@@ -438,6 +452,8 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
   }
 
   vm.openCreateProdModal = function(){
+    vm.createProjectProductionModal.show = false
+
     if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount){
       // check if they have an active production day
       if(vm.currentUser.productions.length > 0){
@@ -459,6 +475,24 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       vm.showCreateProdModal = true
     }
 
+  }
+
+  // handle validation here
+  vm.openCreateProjectModal = function(){
+    vm.createProjectProductionModal.show = false
+    vm.showCreateProjectModal = true
+  }
+
+  vm.closeCreateProjectModal = function(){
+    vm.showCreateProjectModal = false
+  }
+
+  vm.closeCreateProjectProductionModal = function(){
+    vm.createProjectProductionModal.show = false
+  }
+
+  vm.openCreateProjectProductionModal = function(){
+    vm.createProjectProductionModal.show = true
   }
 
   vm.closeCreateProdModal = function(){

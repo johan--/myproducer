@@ -4,7 +4,7 @@
     <div class="header-row">
       <div class="col-sm-3 class="no-margin""><h4>Productions</h4></div>
       <div class="col-sm-9" ng-show="productionListCtrl.currentUser.role === 'producer'">
-        <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" ng-click="productionListCtrl.openCreateProdModal()" type="submit" class="create-new-prod btn default-btn">+ Create New</button>
+        <button ng-mouseover="productionListCtrl.hoverCreate = true" ng-mouseleave="productionListCtrl.hoverCreate = false" ng-click="productionListCtrl.openCreateProjectProductionModal()" type="submit" class="create-new-prod btn default-btn">+ Create New</button>
       </div>
     </div>
 
@@ -213,6 +213,33 @@
   </div>
 </div>
 
+<!-- create project modal -->
+
+<div id="modal-root" ng-if="productionListCtrl.showCreateProjectModal">
+  <div id="modal-container">
+    <div id="modal-md" class="section">
+      <div class="padding20 text-center">
+        <form class="text-right" ng-submit="productionListCtrl.addProject()">
+          <h4 style="float: left;">Project Name</h4>
+        <input id="prod-name-input" class="bg-transparent subtle-border padding5 top-margin2 form-control" ng-model="productionListCtrl.newProject.name" type="text" required>
+        <br>
+        <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
+        <h5 class="prod-date-from">Start</h5>
+        <input ng-init="productionListCtrl.updateMinDateTo()" class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
+        <h5 class="prod-date-to">End</h5>
+        <div class="create-one-message" ng-if="productionListCtrl.createOneProdModalMessage">
+          <p>You are using a free account which only includes 1 Active Production Day. Please <a class="upgrade-link" ng-click="productionListCtrl.openUpgradeModal()">upgrade</a> to add more Production days</p>
+        </div>
+      <div class="align-center">
+        <button ng-click="productionListCtrl.closeCreateProjectModal()" class="btn btn-danger">Cancel</button>
+        <button type="submit" class=" btn main-btn">Create</button>
+      </div>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="directive-modal" class="directive-modal">
   <div id="modal-container">
     <div id="modal-md" class="section">
@@ -249,6 +276,36 @@
         <div>
         <button class="btn upgrade-btn2" ng-click="productionListCtrl.openUpgradeModal()">Upgrade</button>
       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionListCtrl.createProjectProductionModal.show" >
+  <div id="modal-container">
+    <div id="modal-md3" class="section">
+      <div class="padding-20 text-center">
+        <div class="col-md-6">
+          <h3>Project</h3>
+          <br>
+          <img src="./img/project.png" ng-click="productionListCtrl.openCreateProjectModal()" class="project-production-img">
+          <p> </p>
+          <br>
+          <p>For when staffing stays the same across a date range</p>
+        </div>
+        <div class="col-md-6">
+          <h3>Project Days</h3>
+          <br>
+          <img src="./img/production.png" ng-click="productionListCtrl.openCreateProdModal()" class="project-production-img">
+          <p> </p>
+          <br>
+          <p>For when staffing may vary day-to-day</p>
+        </div>
+        <div class="col-md-12">
+          <p> </p>
+          <br>
+          <button class="btn btn-danger" ng-click="productionListCtrl.closeCreateProjectProductionModal()">Cancel</button>
+        </div>
       </div>
     </div>
   </div>

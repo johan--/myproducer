@@ -20,6 +20,7 @@ var User = new Schema({
   resume: String,
   bio: String,
   productions: [{type: mongoose.Schema.Types.ObjectId, ref:'Production'}],
+  projects: [{type: mongoose.Schema.Types.ObjectId, ref: 'Project'}],
   offersSent: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   offersReceived: [{type: mongoose.Schema.Types.ObjectId, ref:'Crew'}],
   contacts: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],

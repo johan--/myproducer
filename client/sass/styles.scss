@@ -751,11 +751,21 @@ table td {
   margin-left: 11px;
 }
 
+.project-production-img {
+  height:100px;
+  width: 100px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  cursor: hand;
+}
+
 .line-item {
   background-color: $line-item;
   padding: 10px;
   overflow: hidden;
   margin-bottom: 5px;
+  border-radius: 10px;
+  margin: 5px;
 
   p{
     padding-top: 5px;
@@ -1197,12 +1207,23 @@ img.profile {
   float: none;
   padding-bottom: 20px;
 }
+
 #modal-md2{
   color: #FFF;
   width: 500px;
   margin: 0 auto;
   background: $section;
   float: none;
+}
+
+#modal-md3{
+  color: #FFF;
+  width: 500px;
+  margin: 0 auto;
+  background: $section;
+  float: none;
+  padding-bottom: 20px;
+  padding: 20px
 }
 
 #modal-lg{

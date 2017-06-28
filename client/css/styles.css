@@ -600,11 +600,20 @@ table td {
 #csv-btn-text {
   margin-left: 11px; }
 
+.project-production-img {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  cursor: hand; }
+
 .line-item {
   background-color: #595959;
   padding: 10px;
   overflow: hidden;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  border-radius: 10px;
+  margin: 5px; }
   .line-item p {
     padding-top: 5px;
     padding-bottom: 5px; }
@@ -957,6 +966,15 @@ img.profile {
   margin: 0 auto;
   background: #333333;
   float: none; }
+
+#modal-md3 {
+  color: #FFF;
+  width: 500px;
+  margin: 0 auto;
+  background: #333333;
+  float: none;
+  padding-bottom: 20px;
+  padding: 20px; }
 
 #modal-lg {
   color: #FFF;
