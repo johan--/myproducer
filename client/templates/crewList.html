@@ -105,7 +105,8 @@
       </div>
       <div class="line-item y-padding" ng-if="production.active && crewListCtrl.compareDate(production.date)" ng-repeat="production in crewListCtrl.currentUser.productions | filter:prodFilter">
         <div class="col-sm-2">
-          <p class="strong no-margin">{{ production.date | date : "shortDate" }}</p>
+          <p ng-if="!production.startDate && !production.endDate" class="strong no-margin">{{ production.date | date : "shortDate" }}</p>
+          <p ng-if="production.startDate && production.endDate" class="strong no-margin">{{ production.startDate | date : "shortDate" }} - {{production.endDate | date : 'shortDate'}}</p>
         </div>
         <div class="col-sm-4">
           <p class="strong no-margin">{{ production.name + ' - Day ' + production.productionDay }}</p>

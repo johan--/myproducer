@@ -280,7 +280,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
       if( Number(newProject.to) == Number(newProject.from) ){
         $http.post('/api/productions/newProject', newProject)
           .success(function(data){
-            vm.currentUser.allProjects = vm.currentUser.allProjects.concat(data)
+            vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
             vm.closeCreateProjectModal()
           })
       } else {
@@ -305,7 +305,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
       $http.post('/api/productions/newProject', newProject)
         .success(function(data){
-          vm.currentUser.allProjects = vm.currentUser.allProjects.concat(data)
+          vm.currentUser.allProductions = vm.currentUser.productions.concat(data)
           vm.closeCreateProjectModal()
         })
     }

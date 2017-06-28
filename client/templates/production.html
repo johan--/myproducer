@@ -5,7 +5,8 @@
         <h3 class="no-margin">
           PRODUCTION
         </h3>
-        <p id="date-title" class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}} <span style="float: right;">Current Budget: ${{productionCtrl.production.sumif.rateTotal}}</span></p>
+        <p ng-if="!productionCtrl.production.startDate && !productionCtrl.production.endDate" id="date-title" class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}} <span style="float: right;">Current Budget: ${{productionCtrl.production.sumif.rateTotal}}</span></p>
+        <p ng-if="productionCtrl.production.startDate && productionCtrl.production.endDate" id="date-title" class="bottom-border">{{ productionCtrl.production.startDate | date:'shortDate'}} - {{productionCtrl.production.endDate | date: 'shortDate'}}<span style="float: right;">Current Budget: ${{productionCtrl.production.sumif.rateTotal}}</span></p>
         <form ng-submit="productionCtrl.editProduction()">
           <div class="production-name form-group">
             <label for="productionName">Title</label>
@@ -82,7 +83,7 @@
   </div>
 
   <!-- for single day productions -->
-<div class="crew-view col-sm-9" ng-if="productionCtrl.production.departments.length == 0" style="padding-top: 20px; border-radius: 10px;">
+<div class="crew-view col-sm-9" ng-if="productionCtrl.production.departments.length == 0" style="padding-top: 20px; ">
       <div ng-repeat="crew in productionCtrl.production.crew">
         <div class="other-background">
           <table class="table table-condensed">

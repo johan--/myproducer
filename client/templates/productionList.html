@@ -21,7 +21,8 @@
             <p>{{tag.taggables.length}} Production Days</p> -->
           <div class="line-item accordion-panel droppable" ng-repeat="production in tag.taggables | orderBy: 'date'" ng-if="production.active" style="height: 52px;">
             <div class="col-md-2 start-date">
-              <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+              <p ng-if="!production.startDate && !production.endDate" class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+              <p ng-if="production.startDate && production.endDate" class="no-margin">{{production.startDate | date:'shortDate' || 'mm/dd/yyyy'}} - {{production.endDate | date: 'shortDate' || 'mm/dd/yyyy'}}</p>
             </div>
             <div class="col-md-2">
               <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
@@ -52,7 +53,8 @@
         <!-- when dropped, make a new group with a dropdown -->
       <div id="{{production._id}}">
         <div class="col-md-2 start-date">
-          <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+          <p ng-if="!production.startDate && !production.endDate" class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+          <p ng-if="production.startDate && production.endDate" class="no-margin">{{production.startDate | date: 'shortDate' || 'mm/dd/yyy'}} - {{production.endDate | date: 'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
         <div class="col-md-2">
           <p class="no-margin">{{ production.name || "Name Not Found" }}</p>
@@ -108,7 +110,8 @@
     <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.pastProductions" style="height: 52px;">
       <div class="">
         <div class="col-md-2 start-date">
-          <p class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+          <p ng-if="!production.startDate && !production.endDate" class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>
+          <p ng-if="production.startDate && production.endDate" class="no-margin">{{production.startDate | date: 'shortDate' || 'mm/dd/yyy'}} - {{production.endDate | date: 'shortDate' || 'mm/dd/yyyy'}}</p>
         </div>
         <div class="col-md-2 end-date">
           <p class="no-margin">{{ production.name || "Name Not Found" }}</p>

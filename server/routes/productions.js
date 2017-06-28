@@ -55,7 +55,6 @@ router.post('/newProject', function(req,res){
         res.json(project)
       })
     })
-
   })
 })
 
