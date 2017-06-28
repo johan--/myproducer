@@ -160,11 +160,13 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
           // combine my productions and other productions where I am crew member
           vm.currentUser.allProductions = data.productions.concat(otherProductions)
-          vm.ready = true
+          vm.currentUser.allProjects = data.projects
 
+          // create reverse array to print past productions from most recent date
           for(var i=vm.currentUser.allProductions.length -1; i>=0; i--){
             vm.pastProductions.push(vm.currentUser.allProductions[i])
           }
+          vm.ready = true
         })
   })
 
@@ -267,15 +269,46 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
 
   vm.addProject = function(){
 
-    var newProject = {
-      name: vm.newProject.name,
-      by_: vm.currentUser
+    if(!vm.currentUser.stripePlan && !vm.currentUser.stripeAccount){
+      var newProject = {
+        from: new Date(vm.dateFrom),
+        to: new Date(vm.dateTo),
+        name: vm.newProject.name,
+        by_: vm.currentUser
+      }
+
+      if( Number(newProject.to) == Number(newProject.from) ){
+        $http.post('/api/projects', newProject)
+          .success(function(data){
+            vm.currentUser.allProjects = vm.currentUser.allProjects.concat(data)
+            vm.closeCreateProjectModal()
+          })
+      } else {
+        vm.createOneProdModalMessage = "You are using a free account which only includes 1 Active Project Day. Please upgrade to add more Project days"
+      }
+      return
     }
 
-    $http.get('/api/projects')
-      .success(function(data){
-        console.log(data);
-      })
+    if( (new Date(vm.dateFrom)) > (new Date(vm.dateTo)) ){
+      vm.dateTo = undefined
+      vm.notifModal.isFailure = true
+      vm.notifModal.content = 'Please check the project dates! Your project end date is before its start date'
+      vm.notifModal.show = true
+    } else {
+
+      var newProject = {
+        from: new Date(vm.dateFrom),
+        to: new Date(vm.dateTo),
+        name: vm.newProject.name,
+        by_: vm.currentUser
+      }
+
+      $http.post('/api/projects', newProject)
+        .success(function(data){
+          vm.currentUser.allProjects = vm.currentUser.allProjects.concat(data)
+          vm.closeCreateProjectModal()
+        })
+    }
   }
 
   vm.addProduction = function(){
@@ -302,7 +335,7 @@ function productionListController($rootScope, $http, $stateParams, $state, AuthS
         // vm.showCreateProdModal = false
         // vm.upgradeModalMessage.isFailure = true
         // vm.upgradeModalMessage.content = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
-        vm.createOneProdModalMessage = "You are using a free account which only includes 1 Active Production Day. Please upgrade to add more Production days"
+        vm.createOneProdModalMessage = "You are using a free account which only includes 1 Active Project Day. Please upgrade to add more Project days"
       }
       return
     }
