@@ -48,7 +48,7 @@
     </div>
 
 <!-- SINGLE DAY PRODUCTIONS -->
-    <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions track by $index | orderBy: 'date' " ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" ng-click="productionListCtrl.addToGroup($event)" my-repeat-directive style="height: 52px;">
+    <div class="line-item draggable droppable" ng-repeat="production in productionListCtrl.currentUser.allProductions track by $index | orderBy: 'date' " ng-if="production.active && productionListCtrl.compareDate(production.date) && !productionListCtrl.checkIfTagged(production)" ng-click="productionListCtrl.addToGroup($event)" my-repeat-directive style="height: 52px; margin-bottom: 5px;">
         <!-- make each production draggable and droppable -->
         <!-- when dropped, make a new group with a dropdown -->
       <div id="{{production._id}}">
@@ -107,7 +107,7 @@
     <div class="">
       <div class="col-md-12"><h4>Past Projects</h4></div>
     </div>
-    <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.pastProductions" style="height: 52px;">
+    <div ng-if="production.active && !productionListCtrl.compareDate(production.date)" class="line-item" ng-repeat="production in productionListCtrl.pastProductions" style="height: 52px; margin-bottom: 5px;">
       <div class="">
         <div class="col-md-2 start-date">
           <p ng-if="!production.startDate && !production.endDate" class="no-margin">{{production.date | date:'shortDate' || 'mm/dd/yyyy'}}</p>

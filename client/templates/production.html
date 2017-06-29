@@ -63,7 +63,7 @@
 
                 <!-- Cast & Crew entire table-->
 
-  <div id="production-header" class="crew-view col-sm-9" ng-init="showModal=false">
+  <div id="production-header" class="crew-view col-sm-9" ng-init="showModal=false" style="border-radius: 10px;">
     <div class="container-fluid no-padding">
       <div class="col-sm-6 no-padding section">
         <h3 id="crew-title" class="thumb-margin stick-bottom title">STAFFING</h3>
@@ -82,11 +82,11 @@
     </div>
   </div>
 
-  <!-- for single day productions -->
-<div class="crew-view col-sm-9" ng-if="productionCtrl.production.departments.length == 0" style="padding-top: 20px; ">
+  <!-- for past productions -->
+<div class="crew-view col-sm-9" ng-if="!productionCtrl.production.departments.length" style="padding: 10px; margin-top: 10px; border-radius: 10px; padding-top: 15px;">
       <div ng-repeat="crew in productionCtrl.production.crew">
-        <div class="other-background">
-          <table class="table table-condensed">
+        <div class="other-background" style="border-radius: 10px;">
+          <table class="table table-condensed" style="margin-bottom: 5px; margin-top: 5px;">
             <tbody>
               <tr>
                 <div class="other-background container-fluid">
@@ -135,7 +135,7 @@
 
                     <!-- DEPARTMENT TABLE -->
 
-  <div class="crew-view col-sm-9 production-department" ng-if="productionCtrl.departments.length > 0" ng-repeat="department in productionCtrl.departments">
+  <div class="crew-view col-sm-9 production-department section" style="padding: 5px;" ng-if="productionCtrl.departments.length > 0" ng-repeat="department in productionCtrl.departments">
 
     <div class="container-fluid no-padding">
       <div class="col-sm-6 no-padding section">

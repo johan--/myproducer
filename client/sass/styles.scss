@@ -192,11 +192,12 @@ div.accordion {
     background-color: #e3e3e3;
     color: white;
     cursor: pointer;
-    width: 99.99%;
+    // width: 99.99%;
     text-align: left;
     border: none;
     margin-bottom: -3px;
     outline: none;
+    margin: 5px;
 }
 
 div.accordion.active {
@@ -707,6 +708,7 @@ table td {
   overflow: auto;
   padding: 0;
   margin-bottom: 15px;
+  border-radius: 10px;
 
   .title{
     padding: 15px;
@@ -780,7 +782,7 @@ table td {
 }
 
 .line-item:last-of-type {
-  margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 
 .logo a img{
