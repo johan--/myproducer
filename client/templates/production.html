@@ -440,7 +440,7 @@
 <div id="modal-root" ng-if="productionCtrl.roleModal.show">
   <div id="modal-container">
     <div id="modal-md2" class="section">
-      <div class="padding20 text-center">
+      <div class="padding20 text-center" style="height: 415px;">
         <div ng-if="productionCtrl.roleModal.errorContent" class="alert alert-danger">{{productionCtrl.roleModal.errorContent}}</div>
         <p style="position:relative; left: -1%;">
           * <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
@@ -465,11 +465,18 @@
           </select>
         </p>
         <p>
-          <input id="role-hours" type="text" style="color: black; width: 50%;" placeholder="Total Hours">
+          <input id="role-hours" type="text" style="color: black; width: 50%;" placeholder="Total Hours a Day">
         </p>
         <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index" style="position:relative; left: -1%;">
           * <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">
         </p>
+        <!-- dates -->
+          <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-from" ng-model="productionCtrl.dateFrom" ng-change="productionCtrl.updateMinDateTo()" min={{productionCtrl.minDateFrom}}>
+          <h5 class="role-date-from">Start</h5>
+
+          <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-to" ng-init="productionCtrl.updateMinDateTo()" ng-model="productionCtrl.dateTo">
+          <h5 class="role-date-to">End</h5>
+        <!-- buttons -->
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
           <button style="margin-bottom: 2px;" class="btn main-btn" ng-click="productionCtrl.createRole()">Create</button>

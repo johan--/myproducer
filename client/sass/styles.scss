@@ -328,6 +328,32 @@ a, a:hover, a:link{
   cursor: pointer;
 }
 
+#role-date-from {
+  position: relative;
+  top: 7px;
+  left: -21%;
+}
+
+.role-date-from {
+  position: relative;
+  width: 50px;
+  left: 23%;
+  top: 7px;
+}
+
+#role-date-to {
+  position: relative;
+  top: -56px;
+  left: 22%;
+}
+
+.role-date-to {
+  position: relative;
+  width: 50px;
+  left: 67%;
+  top: -57px;
+}
+
 #prod-date-from {
   position: relative;
   left: -55%;
@@ -1241,7 +1267,7 @@ img.profile {
 
 .message-buttons {
   position: relative;
-  top: 7px;
+  top: -40px;
 }
 
 .production-btn {
