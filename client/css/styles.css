@@ -1118,6 +1118,9 @@ nav ul li ul li {
 .round {
   border-radius: 50%; }
 
+.round-corner {
+  border-radius: 10px; }
+
 .hand {
   cursor: pointer; }
 

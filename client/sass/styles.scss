@@ -759,6 +759,8 @@ table td {
   cursor: hand;
 }
 
+
+
 .line-item {
   background-color: $line-item;
   padding: 10px;
@@ -1397,6 +1399,10 @@ nav ul li ul li {
 
 .round {
   border-radius: 50%;
+}
+
+.round-corner {
+  border-radius: 10px;
 }
 
 .hand {

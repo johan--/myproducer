@@ -132,7 +132,7 @@
   <div class="production-quick-view col-sm-4">
     <div class="section">
       <div class="productions-pending">
-        <h4 class="title">Pending Productions <img src="./img/question-mark.png" class="onboard-question-up onboard-question-mark" ng-mouseover="postCtrl.hoverPending = true" ng-mouseleave="postCtrl.hoverPending = false"/><div ng-if="postCtrl.hoverPending" class="onboard-box onboard-pending"><p>Offers for positions on upcoming productions will appear here</p></div></h4>
+        <h4 class="title">Pending Projects <img src="./img/question-mark.png" class="onboard-question-up onboard-question-mark" ng-mouseover="postCtrl.hoverPending = true" ng-mouseleave="postCtrl.hoverPending = false"/><div ng-if="postCtrl.hoverPending" class="onboard-box onboard-pending"><p>Offers for positions on upcoming productions will appear here</p></div></h4>
         <!-- <p>{{ postCtrl.currentUser.offersReceived }}</p> -->
         <div class="group">
           <div class="line-item" ng-repeat="offer in postCtrl.currentUser.offersReceived" ng-if="offer.offer.status == 'Pending' && postCtrl.compareDate(offer.production.date)">
@@ -145,7 +145,7 @@
     </div>
     <div class="section">
       <div class="productions-current">
-        <h4 class="title">Current Productions <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-up" ng-mouseover="postCtrl.hoverCurrent = true" ng-mouseleave="postCtrl.hoverCurrent = false"/><div ng-if="postCtrl.hoverCurrent" class="onboard-box onboard-current"><p>Positions you have accepted will appear here</p></div></h4>
+        <h4 class="title">Current Projects <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-up" ng-mouseover="postCtrl.hoverCurrent = true" ng-mouseleave="postCtrl.hoverCurrent = false"/><div ng-if="postCtrl.hoverCurrent" class="onboard-box onboard-current"><p>Positions you have accepted will appear here</p></div></h4>
         <div class="group">
           <!-- If they're a producer show their productions -->
           <div class="line-item" ng-repeat="production in postCtrl.currentUser.allProductions" ng-if="production.active && postCtrl.compareDate(production.date)">
@@ -162,7 +162,7 @@
     </div>
     <div class="section">
       <div class="productions-past">
-        <h4 class="title">Past Productions <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-up" ng-mouseover="postCtrl.hoverPast = true" ng-mouseleave="postCtrl.hoverPast = false"/><div ng-if="postCtrl.hoverPast" class="onboard-box onboard-past"><p>Positions you worked on in the past will appear here</p></div></h4>
+        <h4 class="title">Past Projects <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-up" ng-mouseover="postCtrl.hoverPast = true" ng-mouseleave="postCtrl.hoverPast = false"/><div ng-if="postCtrl.hoverPast" class="onboard-box onboard-past"><p>Positions you worked on in the past will appear here</p></div></h4>
         <div>
           <div class="line-item" ng-repeat=" production in postCtrl.currentUser.allProductions" ng-if="production.active && !postCtrl.compareDate(production.date)">
             <p ng-if="!production.startDate && !production.endDate" class="float-left no-margin strong">{{ production.name + ' - ' }} {{ production.date | date:'shortDate' }}</p>

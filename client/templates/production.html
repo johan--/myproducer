@@ -3,7 +3,7 @@
     <div class="section">
       <div class="col-sm-12 title">
         <h3 class="no-margin">
-          PRODUCTION
+          PROJECT
         </h3>
         <p ng-if="!productionCtrl.production.startDate && !productionCtrl.production.endDate" id="date-title" class="bottom-border">{{ productionCtrl.production.date | date:'shortDate'}} <span style="float: right;">Current Budget: ${{productionCtrl.production.sumif.rateTotal}}</span></p>
         <p ng-if="productionCtrl.production.startDate && productionCtrl.production.endDate" id="date-title" class="bottom-border">{{ productionCtrl.production.startDate | date:'shortDate'}} - {{productionCtrl.production.endDate | date: 'shortDate'}}<span style="float: right;">Current Budget: ${{productionCtrl.production.sumif.rateTotal}}</span></p>
