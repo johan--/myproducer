@@ -183,7 +183,7 @@
       <div class="padding20 text-center">
         <h1><i class="fa fa-times-circle"></i></h1>
         <p>Are you sure you want to delete this group?</p>
-        <p>(The Productions will NOT be deleted)</p>
+        <p>(The Projects will NOT be deleted)</p>
         <br>
         <p><a class="btn approval-btn" ng-click="productionListCtrl.deleteTag(productionListCtrl.tagName, productionListCtrl.tagID, productionListCtrl.tagIndex)">Yes</a> <a class="btn error-btn" ng-click="productionListCtrl.closeDeleteTagModal()">Cancel</a></p>
       </div>
@@ -196,7 +196,7 @@
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
         <form class="text-right" ng-submit="productionListCtrl.addProduction()">
-          <h4 style="float: left;">Production Name</h4>
+          <h4 style="float: left;">Project Name</h4>
         <input id="prod-name-input" class="bg-transparent subtle-border padding5 top-margin2 form-control" ng-model="productionListCtrl.newProduction.name" type="text" required>
         <br>
         <input class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-from" type="date" ng-model="productionListCtrl.dateFrom" ng-change="productionListCtrl.updateMinDateTo()" min="{{ productionListCtrl.minDateFrom }}" required>
@@ -204,7 +204,7 @@
         <input ng-init="productionListCtrl.updateMinDateTo()" class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
         <h5 class="prod-date-to">End</h5>
         <div class="create-one-message" ng-if="productionListCtrl.createOneProdModalMessage">
-          <p>You are using a free account which only includes 1 Active Production Day. Please <a class="upgrade-link" ng-click="productionListCtrl.openUpgradeModal()">upgrade</a> to add more Production days</p>
+          <p>You are using a free account which only includes 1 Active Project Day. Please <a class="upgrade-link" ng-click="productionListCtrl.openUpgradeModal()">upgrade</a> to add more Project days</p>
         </div>
       <div class="align-center">
         <button ng-click="productionListCtrl.closeCreateProdModal()" class="btn btn-danger">Cancel</button>
@@ -231,7 +231,7 @@
         <input ng-init="productionListCtrl.updateMinDateTo()" class="bg-transparent subtle-border padding5 top-margin2" id="prod-date-to" type="date" ng-model="productionListCtrl.dateTo" required>
         <h5 class="prod-date-to">End</h5>
         <div class="create-one-message" ng-if="productionListCtrl.createOneProdModalMessage">
-          <p>You are using a free account which only includes 1 Active Production Day. Please <a class="upgrade-link" ng-click="productionListCtrl.openUpgradeModal()">upgrade</a> to add more Production days</p>
+          <p>You are using a free account which only includes 1 Active Project Day. Please <a class="upgrade-link" ng-click="productionListCtrl.openUpgradeModal()">upgrade</a> to add more Project days</p>
         </div>
       <div class="align-center">
         <button ng-click="productionListCtrl.closeCreateProjectModal()" class="btn btn-danger">Cancel</button>
@@ -247,7 +247,7 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
-        <h4>You Are Creating A Production Group</h4>
+        <h4>You Are Creating A Project Group</h4>
         <input id="directive-modal-input" type="text" placeholder="Name" style="color: black">
         <button style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Create</button>
         <br>
@@ -260,7 +260,7 @@
   <div id="modal-container">
     <div id="modal-md" class="section">
       <div class="padding20 text-center">
-        <h4>Rename Your Production Group</h4>
+        <h4>Rename Your Project Group</h4>
         <input id="editTag-modal-input" type="text" value="{{productionListCtrl.editingTagName}}" style="color: black">
         <button ng-click="productionListCtrl.renameTag()" style="margin-bottom: 4px;" id="directive-modal-button" class="btn main-btn">Save</button>
         <br>
