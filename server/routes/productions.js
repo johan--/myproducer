@@ -237,19 +237,37 @@ router.post('/newrole', function(req,res){
     if(err) return console.log(err);
     Production.findById(department.production, function(err, production){
       if(err) return console.log(err);
-      Role.create({position: req.body.position, basis: req.body.basis, rate: parseInt(req.body.rate), hours: parseInt(req.body.hours), _creator: req.user._id, user: req.body.contactId}, function(err,role){
+      Role.create({position: req.body.position, basis: req.body.basis, rate: parseInt(req.body.rate), hours: parseInt(req.body.hours), _creator: req.user._id, user: req.body.contactId, startDate: moment(req.body.startDate), endDate: moment(req.body.endDate), daysInWeek: req.body.daysInWeek}, function(err,role){
         if(err) return console.log(err);
         department.roles.push(role._id)
+        // algorithm for finding out number of weeks
+        var oneDay = 24*60*60*1000
+        var daysInDateRange = Math.abs((role.endDate.getTime() - role.startDate.getTime())/(oneDay));
+        var weeks = Math.round(daysInDateRange/7)
 
-        if(role.basis == 'Hourly'){
-          production.sumif.rateTotal += role.rate * role.hours
-          production.sumif.hourTotal += role.hours
-          production.save()
-        } else if(role.basis == 'Daily'){
-          production.sumif.rateTotal += role.rate
-          production.sumif.hourTotal += role.hours
-          production.save()
+        if(weeks == 0){
+          if(role.basis == 'Hourly'){
+            production.sumif.rateTotal += (role.rate * role.hours) * req.body.daysInWeek
+            production.sumif.hourTotal += role.hours * req.body.daysInWeek
+            production.save()
+          } else if(role.basis == 'Daily'){
+            production.sumif.rateTotal += role.rate * req.body.daysInWeek
+            production.sumif.hourTotal += role.hours * req.body.daysInWeek
+            production.save()
+          }
+        } else {
+          if(role.basis == 'Hourly'){
+            production.sumif.rateTotal += role.rate * role.hours * (req.body.daysInWeek * weeks)
+            production.sumif.hourTotal += (role.hours * req.body.daysInWeek) * weeks
+            production.save()
+          } else if(role.basis == 'Daily'){
+            production.sumif.rateTotal += role.rate * (req.body.daysInWeek * weeks)
+            production.sumif.hourTotal += (role.hours * req.body.daysInWeek) * weeks
+            production.save()
+          }
         }
+
+        console.log(production.sumif);
 
         department.save(function(err, savedDepartment){
           if(err) return console.log(err);
@@ -269,30 +287,44 @@ router.post('/removeRole', function(req,res){
   // TODO update the sumif of the production
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
-    // Production.findById(department.production, function(err, production){
-    //   if(err) return console.log(err);
       var index = department.roles.indexOf(req.body.role)
       department
       .populate({path: 'roles', populate: {path: 'user'}})
       .populate({path: 'production'}, function(err, populatedDepartment){
         if(err) return console.log(err);
-        if(department.roles[index].basis == 'Hourly'){
-          populatedDepartment.production.sumif.rateTotal -= department.roles[index].rate * department.roles[index].hours
+        var oneDay = 24*60*60*1000
+        var daysInDateRange = Math.abs((department.roles[index].endDate.getTime() - department.roles[index].startDate.getTime())/(oneDay));
+        var weeks = Math.round(daysInDateRange/7)
+        var rate = department.roles[index].rate
+        var hours = department.roles[index].hours
+        var daysInWeek = department.roles[index].daysInWeek
 
-          populatedDepartment.production.sumif.hourTotal -= department.roles[index].hours
-          populatedDepartment.save()
+        if(weeks == 0){
+          if(department.roles[index].basis == 'Hourly'){
+            populatedDepartment.production.sumif.rateTotal -= (rate * hours) * daysInWeek
+            populatedDepartment.production.sumif.hourTotal -= hours * daysInWeek
+            populatedDepartment.save()
+          } else if(department.roles[index].basis == 'Daily'){
+            populatedDepartment.production.sumif.rateTotal -= rate * daysInWeek
+            populatedDepartment.production.sumif.hourTotal -= hours * daysInWeek
+            populatedDepartment.save()
+          }
+        } else {
+          if(department.roles[index].basis == 'Hourly'){
+            populatedDepartment.production.sumif.rateTotal -= rate * hours * (daysInWeek * weeks)
+            populatedDepartment.production.sumif.hourTotal -= (hours * daysInWeek) * weeks
+            populatedDepartment.save()
         } else if(department.roles[index].basis == 'Daily'){
-          populatedDepartment.production.sumif.rateTotal -= department.roles[index].rate
-
-          populatedDepartment.production.sumif.hourTotal -= department.roles[index].hours
-          populatedDepartment.save()
+            populatedDepartment.production.sumif.rateTotal -= rate * (daysInWeek * weeks)
+            populatedDepartment.production.sumif.hourTotal -= (hours * daysInWeek) * weeks
+            populatedDepartment.save()
+          }
         }
 
         department.roles.splice(index, 1)
         department.save()
         res.json(populatedDepartment)
       })
-    // })
   })
 })
 
@@ -372,15 +404,31 @@ function getRoles(department){
   var departmentHourTotal = 0
 
   for(var i=0; i<department.roles.length; i++){
-    if(department.roles[i].basis == 'Hourly'){
-      var hourlyRate = department.roles[i].rate * department.roles[i].hours
+    var oneDay = 24*60*60*1000
+    var daysInDateRange = Math.abs((department.roles[i].endDate.getTime() - department.roles[i].startDate.getTime())/(oneDay));
+    var weeks = Math.round(daysInDateRange/7)
+    var rate = department.roles[i].rate
+    var hours = department.roles[i].hours
+    var daysInWeek = department.roles[i].daysInWeek
 
-      departmentRateTotal += hourlyRate
-      departmentHourTotal += department.roles[i].hours
-    } else if(department.roles[i].basis == 'Daily'){
-      departmentRateTotal += department.roles[i].rate
-      departmentHourTotal += department.roles[i].hours
+    if(weeks == 0){
+      if(department.roles[i].basis == 'Hourly'){
+        departmentRateTotal += (rate * hours) * daysInWeek
+        departmentHourTotal += hours * daysInWeek
+      } else if(department.roles[i].basis == 'Daily'){
+        departmentRateTotal += rate * daysInWeek
+        departmentHourTotal += hours * daysInWeek
+      }
+    } else {
+      if(department.roles[i].basis == 'Hourly'){
+        departmentRateTotal += rate * hours * (daysInWeek * weeks)
+        departmentHourTotal += (hours * daysInWeek) * weeks
+      } else if(department.roles[i].basis == 'Daily'){
+        departmentRateTotal += rate * (daysInWeek * weeks)
+        departmentHourTotal += (hours * daysInWeek) * weeks
+      }
     }
+
   }
   return {rateTotal: departmentRateTotal, hourTotal: departmentHourTotal}
 }

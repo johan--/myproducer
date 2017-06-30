@@ -414,7 +414,10 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         count = parseInt($('#task-select').val()),
         basis = $('#role-basis').val(),
         rate = $('#role-rate').val(),
-        hours = $('#role-hours').val()
+        hours = $('#role-hours').val(),
+        startDate = new Date($('#role-date-from').val()),
+        endDate = new Date($('#role-date-to').val()),
+        daysInWeek = Number($('#role-days').val())
 
         // input validation
         if(position == ''){
@@ -438,11 +441,15 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             rate: rate,
             hours: hours,
             department: vm.departmentId,
-            contactId: $rootScope.contactsChosenIds[i]
+            contactId: $rootScope.contactsChosenIds[i],
+            startDate: startDate,
+            endDate: endDate,
+            daysInWeek: daysInWeek
           }
 
           $http.post('/api/productions/newrole', roleData)
             .success(function(data){
+              console.log(data);
               for(var i=0; i<vm.departments.length; i++){
                 if(vm.departments[i]._id === vm.departmentId){
                   vm.departments[i].roles = data.roles
@@ -483,6 +490,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     vm.openRoleModal = function(id){
       setTimeout(function(){
         $('#task-select')[0].options[1].defaultSelected = true
+        $('#role-days')[0].options[1].defaultSelected = true
       }, 100)
       vm.departmentId = id
       vm.roleModal.show = true

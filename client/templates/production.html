@@ -83,7 +83,7 @@
   </div>
 
   <!-- for past productions -->
-<div class="crew-view col-sm-9" ng-if="!productionCtrl.production.departments.length" style="padding: 10px; margin-top: 10px; border-radius: 10px; padding-top: 15px;">
+<div class="crew-view col-sm-9" ng-if="productionCtrl.production.departments.length == 0 && !productionCtrl.compareDate(productionCtrl.production.date)" style="padding: 10px; margin-top: 10px; border-radius: 10px; padding-top: 15px;">
       <div ng-repeat="crew in productionCtrl.production.crew">
         <div class="other-background" style="border-radius: 10px;">
           <table class="table table-condensed" style="margin-bottom: 5px; margin-top: 5px;">
@@ -440,7 +440,7 @@
 <div id="modal-root" ng-if="productionCtrl.roleModal.show">
   <div id="modal-container">
     <div id="modal-md2" class="section">
-      <div class="padding20 text-center" style="height: 415px;">
+      <div class="padding20 text-center" style="height: 444px;">
         <div ng-if="productionCtrl.roleModal.errorContent" class="alert alert-danger">{{productionCtrl.roleModal.errorContent}}</div>
         <p style="position:relative; left: -1%;">
           * <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
@@ -471,11 +471,23 @@
           * <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">
         </p>
         <!-- dates -->
-          <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-from" ng-model="productionCtrl.dateFrom" ng-change="productionCtrl.updateMinDateTo()" min={{productionCtrl.minDateFrom}}>
+          <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-from" ng-model="productionCtrl.dateFrom" ng-change="productionCtrl.updateMinDateTo()" min={{productionCtrl.minDateFrom}} style="width: 30%;">
           <h5 class="role-date-from">Start</h5>
 
-          <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-to" ng-init="productionCtrl.updateMinDateTo()" ng-model="productionCtrl.dateTo">
+          <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-to" ng-init="productionCtrl.updateMinDateTo()" ng-model="productionCtrl.dateTo" style="width: 30%;">
           <h5 class="role-date-to">End</h5>
+
+          <p style="position: relative; top: -47px;"> # days in week
+            <select ng-model="productionCtrl.roleDays" id="role-days" style="color: black">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select>
+          </p>
         <!-- buttons -->
         <p class="message-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
