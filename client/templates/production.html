@@ -144,7 +144,7 @@
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer" class="align-right title">
           <!-- <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message Department</a> -->
-          <a class="btn contact-btn production-btn" ng-click="productionCtrl.openRoleModal(department._id)">+ Role</a>
+          <a class="btn contact-btn production-btn" ng-click="productionCtrl.openRoleBasisModal(department._id)">+ Role</a>
           <a class="btn default-btn production-btn" ng-click="productionCtrl.openModal(department._id)">+ Offer</a>
         </div>
       </div>
@@ -442,6 +442,7 @@
     <div id="modal-md2" class="section">
       <div class="padding20 text-center" style="height: 444px;">
         <div ng-if="productionCtrl.roleModal.errorContent" class="alert alert-danger">{{productionCtrl.roleModal.errorContent}}</div>
+        <!-- keep -->
         <p style="position:relative; left: -1%;">
           * <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
         </p>
@@ -455,18 +456,14 @@
           </select>
         </p>
         <p>
-          <input id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Rate">
-        </p>
-        <div id="role-list"></div>
-        <p> Rate Basis
-          <select id="role-basis" style="color: black;" placeholder="Basis">
-            <option value="Hourly">Hourly</option>
-            <option value="Daily">Daily</option>
-          </select>
+          <input ng-if="productionCtrl.basisChosen == 'Daily'" id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Rate Per Day">
+          <input ng-if="productionCtrl.basisChosen == 'Hourly'" id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Rate Per Hour">
+          <input ng-if="productionCtrl.basisChosen == 'Fixed'" id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Amount">
         </p>
         <p>
-          <input id="role-hours" type="text" style="color: black; width: 50%;" placeholder="Total Hours a Day">
+          <input ng-if="productionCtrl.basisChosen == 'Hourly'" id="role-hours" type="text" style="color: black; width: 50%;" placeholder="Total Hours a Day">
         </p>
+        <div id="role-list"></div>
         <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index" style="position:relative; left: -1%;">
           * <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">
         </p>
@@ -477,7 +474,7 @@
           <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-to" ng-init="productionCtrl.updateMinDateTo()" ng-model="productionCtrl.dateTo" style="width: 30%;">
           <h5 class="role-date-to">End</h5>
 
-          <p style="position: relative; top: -47px;"> # days in week
+          <p ng-if="productionCtrl.basisChosen == 'Hourly' || productionCtrl.basisChosen == 'Daily' " style="position: relative; top: -47px;"> Total # of Days
             <select ng-model="productionCtrl.roleDays" id="role-days" style="color: black">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -493,6 +490,19 @@
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
           <button style="margin-bottom: 2px;" class="btn main-btn" ng-click="productionCtrl.createRole()">Create</button>
         </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root" ng-if="productionCtrl.roleBasisModal.show" >
+  <div id="modal-container">
+    <div id="modal-md3" class="section">
+      <div class="padding-20 text-center">
+        <h3>Choose Rate Type</h3>
+        <button ng-click="productionCtrl.openRoleModal('Fixed')" style="color: black;">Fixed</button>
+        <button ng-click="productionCtrl.openRoleModal('Hourly')" style="color: black;">Hourly</button>
+        <button ng-click="productionCtrl.openRoleModal('Daily')" style="color: black;">Daily</button>
       </div>
     </div>
   </div>

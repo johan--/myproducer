@@ -87,6 +87,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
   vm.googleLocation2 = ''
   vm.editingRole = false
   vm.number = 1
+  vm.roleBasisModal = {}
 
   ////////////////// GOOGLE PLACES API ///////////////
 
@@ -412,20 +413,31 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       var
         position = $('#task-title').val(),
         count = parseInt($('#task-select').val()),
-        basis = $('#role-basis').val(),
         rate = $('#role-rate').val(),
         hours = $('#role-hours').val(),
         startDate = new Date($('#role-date-from').val()),
-        endDate = new Date($('#role-date-to').val()),
-        daysInWeek = Number($('#role-days').val())
+        endDate = new Date($('#role-date-to').val())
 
-        // input validation
+        // basic input validation - title / rate
         if(position == ''){
           return vm.roleModal.errorContent = 'Please enter a role title to proceed'
         } else if(rate == ''){
           return vm.roleModal.errorContent = 'Please enter a rate amount to proceed'
-        } else if(hours == ''){
-          return vm.roleModal.errorContent = 'Please enter the amount of hours to proceed'
+        } else if(endDate == 'Invalid Date'){
+          return vm.roleModal.errorContent = 'Please enter the end date'
+        } // need validation for dates chosen
+
+        // validation based on basis
+        if(vm.basisChosen == 'Hourly'){
+          var days = Number($('#role-days').val())
+          if(hours == ''){
+            return vm.roleModal.errorContent = 'Please enter the amount of hours to proceed'
+          }
+        } else if(vm.basisChosen == 'Daily'){
+          var days = Number($('#role-days').val())
+          if(hours == ''){
+            return vm.roleModal.errorContent = 'Please enter the amount of hours to proceed'
+          }
         }
 
         for(var i=0; i<count; i++){
@@ -435,21 +447,43 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             return vm.roleModal.errorContent = 'Please assign a contact to this role'
           }
 
-          var roleData = {
-            position: position,
-            basis: basis,
-            rate: rate,
-            hours: hours,
-            department: vm.departmentId,
-            contactId: $rootScope.contactsChosenIds[i],
-            startDate: startDate,
-            endDate: endDate,
-            daysInWeek: daysInWeek
+          if(vm.basisChosen == 'Fixed'){
+            var roleData = {
+              position: position,
+              basis: vm.basisChosen,
+              rate: rate,
+              department: vm.departmentId,
+              contactId: $rootScope.contactsChosenIds[i],
+              startDate: startDate,
+              endDate: endDate
+            }
+          } else if(vm.basisChosen == 'Hourly'){
+            var roleData = {
+              position: position,
+              basis: vm.basisChosen,
+              rate: rate,
+              hours: hours,
+              department: vm.departmentId,
+              contactId: $rootScope.contactsChosenIds[i],
+              days: days,
+              startDate: startDate,
+              endDate: endDate
+            }
+          } else { // Daily
+            var roleData = {
+              position: position,
+              basis: vm.basisChosen,
+              rate: rate,
+              department: vm.departmentId,
+              contactId: $rootScope.contactsChosenIds[i],
+              days: days,
+              startDate: startDate,
+              endDate: endDate
+            }
           }
 
           $http.post('/api/productions/newrole', roleData)
             .success(function(data){
-              console.log(data);
               for(var i=0; i<vm.departments.length; i++){
                 if(vm.departments[i]._id === vm.departmentId){
                   vm.departments[i].roles = data.roles
@@ -487,12 +521,23 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       role.editing = true
     }
 
-    vm.openRoleModal = function(id){
+    vm.openRoleModal = function(basis){
+      if(basis == 'Fixed'){
+        vm.basisChosen = 'Fixed'
+      } else if(basis == 'Hourly'){
+        vm.basisChosen = 'Hourly'
+      } else if(basis == 'Daily'){
+        vm.basisChosen = 'Daily'
+      }
+
       setTimeout(function(){
         $('#task-select')[0].options[1].defaultSelected = true
-        $('#role-days')[0].options[1].defaultSelected = true
+        if(vm.basisChosen != 'Fixed'){
+          $('#role-days')[0].options[1].defaultSelected = true
+        }
       }, 100)
-      vm.departmentId = id
+
+      vm.roleBasisModal.show = false
       vm.roleModal.show = true
     }
 
@@ -524,6 +569,15 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
     vm.closeDeleteContactModal = function(){
       vm.showDeleteContactModal = false;
+    }
+
+    vm.openRoleBasisModal = function(id){
+      vm.roleBasisModal.show = true
+      vm.departmentId = id
+    }
+
+    vm.closeRoleBasisModal = function(){
+      vm.roleBasisModal.show = false
     }
 
     vm.deleteContact = function(contact){
