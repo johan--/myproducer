@@ -119,8 +119,6 @@ router.get('/:id', function show(req, res){
       hourTotal: 0
     }
 
-
-
   if(production.departments.length > 0){
     // make sumif for the production
     for(var i=0; i<production.departments.length; i++){
@@ -286,8 +284,6 @@ router.post('/newrole', function(req,res){
 
             //////////////////////////////////////////
 
-            console.log('role', role);
-
           var rate = role.rate
           var basis = role.basis
 
@@ -357,7 +353,10 @@ router.post('/removeRole', function(req,res){
             populatedDepartment.save()
         } else if(basis == 'Daily'){
             populatedDepartment.production.sumif.rateTotal -= rate * days
-            populatedDepartment.production.sumif.hourTotal -= hours * days
+            // populatedDepartment.production.sumif.hourTotal -= hours * days
+            populatedDepartment.save()
+          } else if(basis == 'Fixed'){
+            populatedDepartment.production.sumif.rateTotal -= rate
             populatedDepartment.save()
           }
         // }
