@@ -168,25 +168,27 @@
                 <a target="_blank" href="/#/profile/{{role.user._id}}" id="production-crew-link" class="production-margin">{{role.user.first_name}} {{role.user.last_name}}</a>
               </td>
               <!-- Role Title -->
-              <td class="container col-md-3">
+              <td class="container col-md-2">
                 <p class="production-margin">{{role.position}}</p>
               </td>
               <!-- Rate -->
               <td class="container col-md-2">
                 <p ng-show="role.rate" class="production-margin">
-                  ${{role.rate}} /
-                  <span ng-if="role.basis == 'Hourly' ">hr</span>
-                  <span ng-if="role.basis == 'Daily' ">day</span>
-                  <span ng-if="role.basis == 'Weekly' ">wk</span>
-                  <span ng-if="role.basis == 'Monthly' ">mo</span>
+                  ${{role.rate}}
+                  <span ng-if="role.basis == 'Hourly' "> / hr</span>
+                  <span ng-if="role.basis == 'Daily' "> / day</span>
+                  <span ng-if="role.basis == 'Fixed' "> Fixed</span>
                 </p>
               </td>
               <!-- Hours -->
-              <td class="container col-md-1">
-                <p ng-show="role.hours" class="production-margin">{{role.hours}} hour<span ng-if="role.hours != 1">s</span></p>
+              <td class="container col-md-2">
+                <p ng-show="role.basis == 'Hourly'" class="production-margin">{{role.hours}} hour<span ng-if="role.hours != 1">s</span> / day</p>
               </td>
               <!-- Buttons -->
-              <td class="container col-md-3" style="text-align: right;">
+              <td class="container col-md-2">
+                <p class="production-margin">{{role.startDate | date: 'shortDate'}} - {{role.endDate | date: 'shortDate'}}</p>
+              </td>
+              <td class="container col-md-1" style="text-align: right;">
 
                 <!-- TODO assign contacts to empty roles -->
                 <!-- <button ng-if="!role.user.first_name" class="btn main-btn" ng-click="productionCtrl.assignToRole(role, department._id)">Assign</button> -->

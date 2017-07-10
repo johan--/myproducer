@@ -242,6 +242,8 @@ router.post('/newrole', function(req,res){
         newRole.rate = parseInt(req.body.rate)
         newRole._creator = req.user._id
         newRole.user = req.body.contactId
+        newRole.startDate = req.body.startDate
+        newRole.endDate = req.body.endDate
       } else if(req.body.basis == 'Hourly'){
         newRole.position = req.body.position
         newRole.basis = req.body.basis
@@ -250,6 +252,8 @@ router.post('/newrole', function(req,res){
         newRole._creator = req.user._id
         newRole.user = req.body.contactId
         newRole.days = req.body.days
+        newRole.startDate = req.body.startDate
+        newRole.endDate = req.body.endDate
       } else if(req.body.basis == 'Daily'){
         newRole.position = req.body.position
         newRole.basis = req.body.basis
@@ -258,6 +262,8 @@ router.post('/newrole', function(req,res){
         newRole.user = req.body.contactId
         newRole.days = req.body.days
         newRole.hours = req.body.hours
+        newRole.startDate = req.body.startDate
+        newRole.endDate = req.body.endDate
       }
 
       Role.create(newRole, function(err,role){
