@@ -435,9 +435,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           }
         } else if(vm.basisChosen == 'Daily'){
           var days = Number($('#role-days').val())
-          if(hours == ''){
-            return vm.roleModal.errorContent = 'Please enter the amount of hours to proceed'
-          }
+          // default 8 hours for now
+          hours = 8
         }
 
         for(var i=0; i<count; i++){
@@ -477,6 +476,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               department: vm.departmentId,
               contactId: $rootScope.contactsChosenIds[i],
               days: days,
+              hours: hours,
               startDate: startDate,
               endDate: endDate
             }

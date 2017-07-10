@@ -242,6 +242,18 @@ a, a:hover, a:link {
   top: 7px;
   left: -21%; }
 
+.role-basis-img {
+  width: 100px;
+  margin: 10px; }
+
+.role-basis-img:hover {
+  cursor: pointer;
+  cursor: hand; }
+
+.role-basis-text {
+  display: inline-block;
+  position: relative; }
+
 .role-date-from {
   position: relative;
   width: 50px;

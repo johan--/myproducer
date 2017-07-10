@@ -257,6 +257,7 @@ router.post('/newrole', function(req,res){
         newRole._creator = req.user._id
         newRole.user = req.body.contactId
         newRole.days = req.body.days
+        newRole.hours = req.body.hours
       }
 
       Role.create(newRole, function(err,role){
@@ -295,14 +296,15 @@ router.post('/newrole', function(req,res){
             production.save()
           } else if(basis == 'Daily'){
             var days = role.days
+            var hours = role.hours
             production.sumif.rateTotal += rate * days
+            production.sumif.hourTotal += hours
             production.save()
           } else if(basis == 'Fixed'){
             production.sumif.rateTotal += rate
             production.save()
           }
         // }
-        console.log('sumif', production.sumif);
 
         department.save(function(err, savedDepartment){
           if(err) return console.log(err);
@@ -470,7 +472,9 @@ function getRoles(department){
         departmentHourTotal += hours * days
       } else if(basis == 'Daily'){
         var days = department.roles[i].days
+        var hours = department.roles[i].hours
         departmentRateTotal += rate * days
+        departmentHourTotal += hours * days
       } else if(basis == 'Fixed'){
         departmentRateTotal += rate
       }

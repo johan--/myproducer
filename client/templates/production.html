@@ -500,9 +500,16 @@
     <div id="modal-md3" class="section">
       <div class="padding-20 text-center">
         <h3>Choose Rate Type</h3>
-        <button ng-click="productionCtrl.openRoleModal('Fixed')" style="color: black;">Fixed</button>
-        <button ng-click="productionCtrl.openRoleModal('Hourly')" style="color: black;">Hourly</button>
-        <button ng-click="productionCtrl.openRoleModal('Daily')" style="color: black;">Daily</button>
+        <div>
+          <img src="./img/fixed.png" ng-click="productionCtrl.openRoleModal('Fixed')" class="role-basis-img">
+          <img src="./img/hourly.png" ng-click="productionCtrl.openRoleModal('Hourly')" class="role-basis-img">
+          <img src="./img/daily.png" ng-click="productionCtrl.openRoleModal('Daily')" class="role-basis-img">
+        </div>
+        <div>
+          <h3 class="role-basis-text" style="left: -52px;">Fixed</h3>
+          <h3 class="role-basis-text">Hourly</h3>
+          <h3 class="role-basis-text" style="left: 52px;">Daily</h3>
+        </div>
       </div>
     </div>
   </div>
