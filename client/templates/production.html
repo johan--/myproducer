@@ -436,16 +436,20 @@
     </div>
   </div>
 </div>
-
+<!-- TODO need to make 3 modals based on basis chosen -->
+<!-- Hourly -->
 <div id="modal-root" ng-if="productionCtrl.roleModal.show">
   <div id="modal-container">
     <div id="modal-md2" class="section">
-      <div class="padding20 text-center" style="height: 444px;">
+      <div class="padding20 text-center" style="min-height: 333px; overflow: hidden;">
+        <!-- error message -->
+        <div ng-show="!productionCtrl.roleModal.errorContent" style="height: 62px;"></div>
         <div ng-if="productionCtrl.roleModal.errorContent" class="alert alert-danger">{{productionCtrl.roleModal.errorContent}}</div>
-        <!-- keep -->
-        <p style="position:relative; left: -1%;">
-          * <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
+        <!-- role position -->
+        <p>
+          <input id="task-title" style="color: black; width: 50%" type="text" placeholder="Role">
         </p>
+        <!-- select tag number of positions -->
         <p> # of positions
           <select ng-model="productionCtrl.roleNumber" ng-change="productionCtrl.assignRoleUsers()" id="task-select" style="color: black">
             <option value="1">1</option>
@@ -455,17 +459,20 @@
             <option value="5">5</option>
           </select>
         </p>
+        <!-- Contacts -->
+        <div id="role-list"></div>
+        <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index" >
+          <input id={{$index}} autocomplete ng-model="selectedContact" style="color: black; width: 50%;" placeholder="Assign to">
+        </p>
+        <!-- Rate $$$ -->
         <p>
           <input ng-if="productionCtrl.basisChosen == 'Daily'" id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Rate Per Day">
           <input ng-if="productionCtrl.basisChosen == 'Hourly'" id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Rate Per Hour">
           <input ng-if="productionCtrl.basisChosen == 'Fixed'" id="role-rate" type="text" style="color: black; width: 50%;" placeholder="Amount">
         </p>
+        <!-- Hours -->
         <p>
           <input ng-if="productionCtrl.basisChosen == 'Hourly'" id="role-hours" type="text" style="color: black; width: 50%;" placeholder="Total Hours a Day">
-        </p>
-        <div id="role-list"></div>
-        <p ng-if="productionCtrl.number" ng-repeat="i in productionCtrl.getNumber(productionCtrl.number) track by $index" style="position:relative; left: -1%;">
-          * <input id={{$index}} class="contact-input" autocomplete ng-model="selectedContact" style="color: black; width: 50%" placeholder="Assign to">
         </p>
         <!-- dates -->
           <input class="bg-transparent subtle-border padding-5 top-margin2" type="date" id="role-date-from" ng-model="productionCtrl.dateFrom" ng-change="productionCtrl.updateMinDateTo()" min={{productionCtrl.minDateFrom}} style="width: 30%;">
@@ -486,7 +493,7 @@
             </select>
           </p>
         <!-- buttons -->
-        <p class="message-buttons">
+        <p class="role-basis-buttons">
           <button class="btn btn-danger" ng-click="productionCtrl.closeRoleModal()">Cancel</button>
           <button style="margin-bottom: 2px;" class="btn main-btn" ng-click="productionCtrl.createRole()">Create</button>
         </p>
@@ -496,7 +503,7 @@
 </div>
 
 <div id="modal-root" ng-if="productionCtrl.roleBasisModal.show" >
-  <div id="modal-container">
+  <div id="modal-container" class="container" ng-click="productionCtrl.closeRoleBasisModal()">
     <div id="modal-md3" class="section">
       <div class="padding-20 text-center">
         <h3>Choose Rate Type</h3>
@@ -508,7 +515,7 @@
         <div>
           <h3 class="role-basis-text" style="left: -52px;">Fixed</h3>
           <h3 class="role-basis-text">Hourly</h3>
-          <h3 class="role-basis-text" style="left: 52px;">Daily</h3>
+          <h3 class="role-basis-text" style="left: 52px">Daily</h3>
         </div>
       </div>
     </div>

@@ -542,6 +542,12 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     }
 
     vm.closeRoleModal = function(){
+      vm.number = 1
+      $('#task-select')[0].options[1].defaultSelected = true
+      if(vm.basisChosen != 'Fixed'){
+        $('#role-days')[0].options[1].defaultSelected = true
+      }
+      vm.roleModal.errorContent = false
       vm.roleModal.show = false
     }
 
