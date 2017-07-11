@@ -415,17 +415,21 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         count = parseInt($('#task-select').val()),
         rate = $('#role-rate').val(),
         hours = $('#role-hours').val(),
-        startDate = new Date($('#role-date-from').val()),
-        endDate = new Date($('#role-date-to').val())
+        startDate = new Date($('#role-date-from').val() + 'T00:00:00'),
+        endDate = new Date($('#role-date-to').val() + 'T00:00:00')
 
-        // basic input validation - title / rate
+        // input validation - title, rate, dates
         if(position == ''){
           return vm.roleModal.errorContent = 'Please enter a role title to proceed'
         } else if(rate == ''){
           return vm.roleModal.errorContent = 'Please enter a rate amount to proceed'
         } else if(endDate == 'Invalid Date'){
           return vm.roleModal.errorContent = 'Please enter the end date'
-        } // need validation for dates chosen
+        } else if(Number(startDate) < Number(new Date(vm.production.startDate))){
+          return vm.roleModal.errorContent = 'Please double check your start date'
+        } else if(Number(endDate) > Number(new Date(vm.production.endDate))){
+          return vm.roleModal.errorContent = 'Please double check your end date'
+        }
 
         // validation based on basis
         if(vm.basisChosen == 'Hourly'){
@@ -492,7 +496,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
             })
             if(i === count - 1){
               $rootScope.contactsChosenIds = []
-              // $state.go($state.current, {}, {reload: true})
               $window.location.reload()
               vm.closeRoleModal()
             }
