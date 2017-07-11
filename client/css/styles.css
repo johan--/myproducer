@@ -252,7 +252,8 @@ a, a:hover, a:link {
 
 .role-basis-text {
   display: inline-block;
-  position: relative; }
+  position: relative;
+  font-size: 17px; }
 
 .role-date-from {
   position: relative;
