@@ -424,11 +424,11 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         } else if(rate == ''){
           return vm.roleModal.errorContent = 'Please enter a rate amount to proceed'
         } else if(endDate == 'Invalid Date'){
-          return vm.roleModal.errorContent = 'Please enter the end date'
-        } else if(Number(startDate) < Number(new Date(vm.production.startDate))){
-          return vm.roleModal.errorContent = 'Please double check your start date'
-        } else if(Number(endDate) > Number(new Date(vm.production.endDate))){
-          return vm.roleModal.errorContent = 'Please double check your end date'
+          return vm.roleModal.errorContent = 'Please choose the end date'
+        } else if( startDate.getTime() < new Date(vm.production.startDate).getTime() || startDate.getTime() > new Date(vm.production.endDate).getTime()){
+          return vm.roleModal.errorContent = 'Start date chosen is conflicting with your project dates'
+        } else if( endDate.getTime() > new Date(vm.production.endDate).getTime() || endDate.getTime() < new Date(vm.production.startDate).getTime()){
+          return vm.roleModal.errorContent = 'End date chosen is conflicting with your project dates'
         }
 
         // validation based on basis
