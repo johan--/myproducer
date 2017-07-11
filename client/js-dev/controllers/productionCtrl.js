@@ -444,6 +444,9 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         }
 
         for(var i=0; i<count; i++){
+
+          console.log();
+
           if($rootScope.contactsChosenIds.length != count){
             return vm.roleModal.errorContent = 'Please assign a contact from your contact list'
           } else if($('#' + i).val() == ''){
@@ -550,6 +553,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
       if(vm.basisChosen != 'Fixed'){
         $('#role-days')[0].options[1].defaultSelected = true
       }
+      $rootScope.contactsChosenIds = []
       vm.roleModal.errorContent = false
       vm.roleModal.show = false
     }
