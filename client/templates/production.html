@@ -66,8 +66,8 @@
   <div id="production-header" class="crew-view col-sm-9" ng-init="showModal=false" style="border-radius: 10px;">
     <div class="container-fluid no-padding">
       <div class="col-sm-6 no-padding section">
-        <h3 id="crew-title" class="thumb-margin stick-bottom title">STAFFING</h3>
-        <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-down margin-top-question" ng-mouseover="productionCtrl.hoverHire = true" ng-mouseleave="productionCtrl.hoverHire = false"/>
+        <h3 id="crew-title" class="thumb-margin stick-bottom title" style="left: -13px;">STAFFING</h3>
+        <img src="./img/question-mark.png" class="onboard-question-mark onboard-question-down margin-top-question" ng-mouseover="productionCtrl.hoverHire = true" ng-mouseleave="productionCtrl.hoverHire = false" style="left: -13px;"/>
         <div class="container-fluid cast-crew-table">
           <p id="production-error" ng-show="productionCtrl.error" class="alert alert-danger">{{ productionCtrl.errorMessage }}</p>
         </div>
@@ -75,8 +75,8 @@
       </div>
       <div class="col-sm-6 no-padding section">
         <div ng-if="productionCtrl.isProducer && productionCtrl.compareDate(productionCtrl.production.date)" class="align-right title">
-          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn">Message</a>
-          <a class="btn approval-btn production-btn" ng-click="productionCtrl.openDepartmentModal()">New Department</a>
+          <a ng-click="productionCtrl.openNotifyCrewModal()" class="btn main-btn production-btn" style="position: relative; left: 12px;">Message</a>
+          <a class="btn approval-btn production-btn" ng-click="productionCtrl.openDepartmentModal()" style="position: relative; left: 12px;">New Department</a>
         </div>
       </div>
     </div>
