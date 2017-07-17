@@ -317,7 +317,7 @@ router.post('/newrole', function(req,res){
         if(checkbox == true){
           User.findById(req.body.contactId, function(err, user){
             if(err) return console.log(err);
-            var offerURL // need to make template and url
+            var offerURL = 'https://app.myproducer.io/#/production/' + production._id
             var fromEmail  = req.user.username
             var fromName = req.user.first_name + ' ' + req.user.last_name
             var fromFirstName = req.user.first_name

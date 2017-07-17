@@ -67,6 +67,8 @@ function autocomplete($rootScope, $timeout, AuthService, $http){
 
 // PRODUCTION CONTROLLER
 
+// if user is not the owner of the production, only show the rate of the role/offer he/she was offered
+
 function productionController($rootScope, $http, $stateParams, $state, AuthService, $mixpanel, $timeout, $q, $log, $scope, $window){
   var vm = this
   $rootScope.user = $scope.$resolve.user.data.user
@@ -129,7 +131,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
-              console.log(vm.production);
               vm.departments = production.departments
               var roles = vm.departments.map(function(d){
                 return d.roles
@@ -599,7 +600,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
     vm.deleteContact = function(contact){
       $http.patch('/api/users/delete-contact', {contact: contact, currentUser: vm.currentUser, department: vm.department})
       .success(function(data){
-        console.log(data);
+        // console.log(data);
         // vm.currentUser.contacts = data.user.contacts
       })
     }
