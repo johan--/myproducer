@@ -129,6 +129,7 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
           $http.get('/api/productions/' + $stateParams.id)
             .success(function(production) {
               vm.production = production
+              console.log(vm.production);
               vm.departments = production.departments
               var roles = vm.departments.map(function(d){
                 return d.roles
@@ -416,7 +417,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
         rate = $('#role-rate').val(),
         hours = $('#role-hours').val(),
         startDate = new Date($('#role-date-from').val() + 'T00:00:00'),
-        endDate = new Date($('#role-date-to').val() + 'T00:00:00')
+        endDate = new Date($('#role-date-to').val() + 'T00:00:00'),
+        checkbox = document.getElementById('role-checkbox').checked
 
         // input validation - title, rate, dates
         if(position == ''){
@@ -445,8 +447,6 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
 
         for(var i=0; i<count; i++){
 
-          console.log();
-
           if($rootScope.contactsChosenIds.length != count){
             return vm.roleModal.errorContent = 'Please assign a contact from your contact list'
           } else if($('#' + i).val() == ''){
@@ -461,7 +461,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               department: vm.departmentId,
               contactId: $rootScope.contactsChosenIds[i],
               startDate: startDate,
-              endDate: endDate
+              endDate: endDate,
+              checkbox: checkbox
             }
           } else if(vm.basisChosen == 'Hourly'){
             var roleData = {
@@ -473,7 +474,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               contactId: $rootScope.contactsChosenIds[i],
               days: days,
               startDate: startDate,
-              endDate: endDate
+              endDate: endDate,
+              checkbox: checkbox
             }
           } else { // Daily
             var roleData = {
@@ -485,7 +487,8 @@ function productionController($rootScope, $http, $stateParams, $state, AuthServi
               days: days,
               hours: hours,
               startDate: startDate,
-              endDate: endDate
+              endDate: endDate,
+              checkbox: checkbox
             }
           }
 

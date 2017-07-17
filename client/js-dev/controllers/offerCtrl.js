@@ -26,7 +26,6 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
           $http.get('/api/crew/' + $stateParams.id)
             .success(function(crew) {
               // console.log(crew.message[0]._by.picture);
-              console.log(crew);
               vm.crew = crew
               vm.isCrew = vm.crew.to
               vm.isProducer = vm.crew.production.by_._id === vm.currentUser._id
@@ -52,7 +51,6 @@ function offerController($rootScope, AuthService, $http, $stateParams, $state, $
     if(vm.message.content){
       $http.post('/api/crew/' + vm.crew._id + '/message?crew=' + vm.crew.to.username + '&producer=' + vm.crew.production.by_.username, vm.message)
         .success(function(data) {
-          console.log(data);
           vm.crew.message = data
           vm.newMessage = ''
           vm.messageBox.focus()

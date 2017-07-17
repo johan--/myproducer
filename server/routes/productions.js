@@ -230,12 +230,12 @@ router.post('/newdepartment', function(req,res){
 })
 
 router.post('/newrole', function(req,res){
-  // TODO update the sumif for the production
   Department.findById(req.body.department, function(err, department){
     if(err) return console.log(err);
     Production.findById(department.production, function(err, production){
       if(err) return console.log(err);
       var newRole = {}
+      var checkbox = req.body.checkbox
       if(req.body.basis == 'Fixed'){
         newRole.position = req.body.position
         newRole.basis = req.body.basis
@@ -291,6 +291,7 @@ router.post('/newrole', function(req,res){
 
             //////////////////////////////////////////
 
+          // update production sumif
           var rate = role.rate
           var basis = role.basis
 
@@ -311,6 +312,36 @@ router.post('/newrole', function(req,res){
             production.save()
           }
         // }
+
+        // if checkbox is true, send email to role user
+        if(checkbox == true){
+          User.findById(req.body.contactId, function(err, user){
+            if(err) return console.log(err);
+            var offerURL // need to make template and url
+            var fromEmail  = req.user.username
+            var fromName = req.user.first_name + ' ' + req.user.last_name
+            var fromFirstName = req.user.first_name
+            var toEmail = user.username
+            var toName = user.first_name
+            var productionDate = role.startDate
+
+            mailer.send(
+              'offer',
+              {
+                recipient: toName,
+                sender: fromName,
+                senderFirstName: fromFirstName,
+                offerURL: offerURL,
+                productionDate: productionDate
+              },
+              {
+                to: toEmail,
+                subject: 'New offer from myproducer.io'
+              }
+            )
+
+          })
+        }
 
         department.save(function(err, savedDepartment){
           if(err) return console.log(err);
