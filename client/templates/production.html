@@ -172,7 +172,7 @@
                 <p class="production-margin">{{role.position}}</p>
               </td>
               <!-- Rate -->
-              <td class="container col-md-2"><div ng-if="productionCtrl.isProducer">
+              <td class="container col-md-2"><div ng-if="productionCtrl.currentUser._id == role.user._id || productionCtrl.isProducer">
                 <p ng-show="role.rate" class="production-margin">
                   ${{role.rate}}
                   <span ng-if="role.basis == 'Hourly' "> / hr</span>
